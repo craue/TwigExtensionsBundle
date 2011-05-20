@@ -11,8 +11,9 @@ class FormatDateTimeExtension extends \Twig_Extension {
 	protected $locale = 'en-US';
 	protected $datetype = \IntlDateFormatter::MEDIUM;
 	protected $timetype = \IntlDateFormatter::MEDIUM;
+	protected $prefix = 'craue_';
 
-	public function __construct($locale = null, $datetype = null, $timetype = null) {
+	public function __construct($locale = null, $datetype = null, $timetype = null, $prefix = null) {
 		if ($locale !== null) {
 			$this->locale = $locale;
 		}
@@ -22,13 +23,16 @@ class FormatDateTimeExtension extends \Twig_Extension {
 		if ($timetype !== null) {
 			$this->timetype = $this->getDateFormatterFormat($timetype);
 		}
+		if ($prefix !== null) {
+			$this->prefix = $prefix;
+		}
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	public function getName() {
-		return 'formatDateTime';
+		return 'craue_formatDateTime';
 	}
 
 	/**
@@ -36,9 +40,9 @@ class FormatDateTimeExtension extends \Twig_Extension {
 	 */
 	public function getFilters() {
 		return array(
-			'date' => new \Twig_Filter_Method($this, 'formatDate'),
-			'time' => new \Twig_Filter_Method($this, 'formatTime'),
-			'datetime' => new \Twig_Filter_Method($this, 'formatDateTime'),
+			$this->prefix.'date' => new \Twig_Filter_Method($this, 'formatDate'),
+			$this->prefix.'time' => new \Twig_Filter_Method($this, 'formatTime'),
+			$this->prefix.'datetime' => new \Twig_Filter_Method($this, 'formatDateTime'),
 		);
 	}
 
