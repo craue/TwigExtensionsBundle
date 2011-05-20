@@ -3,7 +3,7 @@
 namespace Craue\TwigExtensionsBundle\Twig\Extension;
 
 /**
- * Twig Extension providing Twig filters to locale-aware format date, time, and date/time values.
+ * Twig Extension providing filters for locale-aware formatting of date, time, and date/time values.
  * @author Christian Raue <christian.raue@gmail.com>
  */
 class FormatDateTimeExtension extends \Twig_Extension {
