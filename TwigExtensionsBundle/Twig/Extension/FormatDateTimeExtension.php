@@ -8,7 +8,7 @@ namespace Craue\TwigExtensionsBundle\Twig\Extension;
  */
 class FormatDateTimeExtension extends \Twig_Extension {
 
-	protected $locale = 'de';
+	protected $locale = 'en-US';
 	protected $datetype = \IntlDateFormatter::MEDIUM;
 	protected $timetype = \IntlDateFormatter::MEDIUM;
 
@@ -22,7 +22,7 @@ class FormatDateTimeExtension extends \Twig_Extension {
 		if ($timetype !== null) {
 			$this->timetype = $this->getDateFormatterFormat($timetype);
 		}
-			}
+	}
 
 	/**
 	 * {@inheritDoc}
