@@ -17,12 +17,12 @@ class FormatDateTimeExtension extends \Twig_Extension {
 			$this->locale = $locale;
 		}
 		if ($datetype !== null) {
-			$this->datetype = $datetype;
+			$this->datetype = $this->getDateFormatterFormat($datetype);
 		}
 		if ($timetype !== null) {
-			$this->timetype = $timetype;
+			$this->timetype = $this->getDateFormatterFormat($timetype);
 		}
-	}
+			}
 
 	/**
 	 * {@inheritDoc}
@@ -58,6 +58,23 @@ class FormatDateTimeExtension extends \Twig_Extension {
 		$localeToUse = !empty($locale) ? $locale : $this->locale;
 		$formatter = new \IntlDateFormatter($localeToUse, $datetype, $timetype);
 		return $formatter->format($value);
+	}
+
+	protected function getDateFormatterFormat($value) {
+		switch (strtoupper($value)) {
+			case 'NONE':
+				return \IntlDateFormatter::NONE;
+			case 'FULL':
+				return \IntlDateFormatter::FULL;
+			case 'LONG':
+				return \IntlDateFormatter::LONG;
+			case 'MEDIUM':
+				return \IntlDateFormatter::MEDIUM;
+			case 'SHORT':
+				return \IntlDateFormatter::SHORT;
+			default:
+				throw new \InvalidArgumentException(sprintf('A value of "%s" is not supported.', $value));
+		}
 	}
 
 }
