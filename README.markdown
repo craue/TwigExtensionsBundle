@@ -26,21 +26,10 @@ TwigExtensionsBundle is just a collection of Twig Extensions i find useful.
 		'Craue' => __DIR__.'/../vendor',
 	));
 
-### Make the Twig functions available
+### Make the Twig Extension available by updating your configuration
 
-	<parameters>
-		<parameter key="twig.extension.formatDateTime.class">Craue\TwigExtensionsBundle\Twig\Extension\FormatDateTimeExtension</parameter>
-	</parameters>
-
-	<services>
-		<service id="twig.extension.formatDateTime" class="%twig.extension.formatDateTime.class%">
-			<tag name="twig.extension" />
-			<argument>%locale%</argument><!-- locale -->
-			<argument>medium</argument><!-- date format -->
-			<argument>medium</argument><!-- time format -->
-			<argument>null</argument><!-- prefix (null = keep default. Can be empty but be aware that this will override the default date filter.) -->
-		</service>
-	</services>
+    // app/config/config.yml
+    craue_twig_extensions: ~
 
 ### Use the filters in your Twig template
 
