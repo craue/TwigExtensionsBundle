@@ -2,6 +2,8 @@
 
 TwigExtensionsBundle is just a collection of Twig Extensions i find useful.
 
+  - FormatDateTimeExtension provides filters for locale-aware formatting of date, time, and date/time values.
+
 ## Installation
 
 ### Add TwigExtensionsBundle to your vendor/Craue directory
