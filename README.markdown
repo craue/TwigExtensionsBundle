@@ -14,10 +14,11 @@ TwigExtensionsBundle is just a collection of Twig Extensions i find useful.
 
 	// app/AppKernel.php
 	public function registerBundles() {
-		return array(
+		$bundles = array(
 			// ...
 			new Craue\TwigExtensionsBundle\CraueTwigExtensionsBundle(),
 		);
+		// ...
 	}
 
 ### Register the Craue namespace
@@ -36,7 +37,16 @@ TwigExtensionsBundle is just a collection of Twig Extensions i find useful.
 ### Use the filters in your Twig template
 
 	<ul>
-		<li>date: {{ someDateTimeVariable | date }}</li>
-		<li>time: {{ someDateTimeVariable | time }}</li>
-		<li>both: {{ someDateTimeVariable | datetime('de-DE') }}</li>
+		<li>date: {{ someDateTimeVariable | craue_date }}</li>
+		<li>time: {{ someDateTimeVariable | craue_time }}</li>
+		<li>both: {{ someDateTimeVariable | craue_datetime('de-DE') }}</li>
 	</ul>
+
+### Override default values
+
+	; parameters.ini
+	locale="de-DE"
+	craue_twig_extensions.formatDateTime.datetype="full"
+	craue_twig_extensions.formatDateTime.timetype="short"
+	; Prefix can be empty but be aware that this will override the default date filter.
+	; craue_twig_extensions.formatDateTime.prefix=""
