@@ -36,11 +36,14 @@ TwigExtensionsBundle is just a collection of Twig Extensions i find useful.
 
 ### Use the filters in your Twig template
 
-	<ul>
-		<li>date: {{ someDateTimeVariable | craue_date }}</li>
-		<li>time: {{ someDateTimeVariable | craue_time }}</li>
-		<li>both: {{ someDateTimeVariable | craue_datetime('de-DE') }}</li>
-	</ul>
+	<h2>with default locale</h2>
+	date: {{ someDateTimeVariable | craue_date }}<br/>
+	time: {{ someDateTimeVariable | craue_time }}<br/>
+	both: {{ someDateTimeVariable | craue_datetime }}
+	<h2>with specific locales</h2>
+	date: {{ someDateTimeVariable | craue_date('de-DE') }}<br/>
+	time: {{ someDateTimeVariable | craue_time('de') }}<br/>
+	both: {{ someDateTimeVariable | craue_datetime('en-GB') }}
 
 ### Override default values
 
