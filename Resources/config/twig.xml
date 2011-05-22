@@ -23,7 +23,9 @@
 		<service id="twig.extension.craue_decorateEmptyValue" class="%craue_twig_extensions.decorateEmptyValue.class%">
 			<tag name="twig.extension" />
 			<argument>%craue_twig_extensions.decorateEmptyValue.placeholder%</argument>
-			<argument>%craue_twig_extensions.decorateEmptyValue.filterAlias%</argument>
+			<call method="setAlias">
+				<argument>%craue_twig_extensions.decorateEmptyValue.filterAlias%</argument>
+			</call>
 		</service>
 
 		<!-- FormatDateTimeExtension -->
@@ -31,11 +33,13 @@
 			<tag name="twig.extension" />
 			<argument>%craue_twig_extensions.formatDateTime.datetype%</argument>
 			<argument>%craue_twig_extensions.formatDateTime.timetype%</argument>
-			<argument>%craue_twig_extensions.formatDateTime.dateFilterAlias%</argument>
-			<argument>%craue_twig_extensions.formatDateTime.timeFilterAlias%</argument>
-			<argument>%craue_twig_extensions.formatDateTime.dateTimeFilterAlias%</argument>
 			<call method="setLocaleFromSession">
 				<argument type="service" id="session" on-invalid="ignore" />
+			</call>
+			<call method="setAliases">
+				<argument>%craue_twig_extensions.formatDateTime.dateFilterAlias%</argument>
+				<argument>%craue_twig_extensions.formatDateTime.timeFilterAlias%</argument>
+				<argument>%craue_twig_extensions.formatDateTime.dateTimeFilterAlias%</argument>
 			</call>
 		</service>
 	</services>

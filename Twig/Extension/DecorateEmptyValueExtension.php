@@ -15,12 +15,17 @@ class DecorateEmptyValueExtension extends \Twig_Extension {
 
 	/**
 	 * @param mixed $placeholder Placeholder to use instead of empty values.
-	 * @param string $filterAlias Alias for the filter.
 	 */
-	public function __construct($placeholder = null, $filterAlias = null) {
+	public function __construct($placeholder = null) {
 		if ($placeholder !== null) {
 			$this->placeholder = $placeholder;
 		}
+	}
+
+	/**
+	 * @param string $filterAlias Alias for the filter.
+	 */
+	public function setAlias($filterAlias = null) {
 		if ($filterAlias !== null) {
 			$this->filterAlias = $filterAlias;
 		}

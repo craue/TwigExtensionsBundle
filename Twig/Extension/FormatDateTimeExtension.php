@@ -21,18 +21,22 @@ class FormatDateTimeExtension extends \Twig_Extension {
 	/**
 	 * @param string $datetype Date format. Valid values are "none", "full", "long", "medium", or "short" (case insensitive).
 	 * @param string $timetype Time format. Valid values are "none", "full", "long", "medium", or "short" (case insensitive).
-	 * @param string $dateFilterAlias Alias for the date filter.
-	 * @param string $timeFilterAlias Alias for the time filter.
-	 * @param string $dateTimeFilterAlias Alias for the date/time filter.
 	 */
-	public function __construct($datetype = null, $timetype = null, $dateFilterAlias = null,
-			$timeFilterAlias = null, $dateTimeFilterAlias = null) {
+	public function __construct($datetype = null, $timetype = null) {
 		if ($datetype !== null) {
 			$this->datetype = $this->getDateFormatterFormat($datetype);
 		}
 		if ($timetype !== null) {
 			$this->timetype = $this->getDateFormatterFormat($timetype);
 		}
+	}
+
+	/**
+	 * @param string $dateFilterAlias Alias for the date filter.
+	 * @param string $timeFilterAlias Alias for the time filter.
+	 * @param string $dateTimeFilterAlias Alias for the date/time filter.
+	 */
+	public function setAliases($dateFilterAlias = null, $timeFilterAlias = null, $dateTimeFilterAlias = null) {
 		if ($dateFilterAlias !== null) {
 			$this->dateFilterAlias = $dateFilterAlias;
 		}
