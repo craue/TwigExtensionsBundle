@@ -5,6 +5,7 @@
 
 	<parameters>
 		<parameter key="craue_twig_extensions.formatDateTime.class">Craue\TwigExtensionsBundle\Twig\Extension\FormatDateTimeExtension</parameter>
+		<parameter key="locale">null</parameter>
 		<parameter key="craue_twig_extensions.formatDateTime.locale">%locale%</parameter>
 		<parameter key="craue_twig_extensions.formatDateTime.datetype">medium</parameter>
 		<parameter key="craue_twig_extensions.formatDateTime.timetype">medium</parameter>
