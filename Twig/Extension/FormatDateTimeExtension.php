@@ -11,15 +11,21 @@ class FormatDateTimeExtension extends \Twig_Extension {
 	protected $locale = 'en-US';
 	protected $datetype = \IntlDateFormatter::MEDIUM;
 	protected $timetype = \IntlDateFormatter::MEDIUM;
-	protected $prefix = 'craue_';
+
+	protected $dateFilterAlias = null;
+	protected $timeFilterAlias = null;
+	protected $dateTimeFilterAlias = null;
 
 	/**
 	 * @param string $locale Locale to be used with {@see http://www.php.net/manual/class.intldateformatter.php}.
 	 * @param string $datetype Date format. Valid values are "none", "full", "long", "medium", or "short" (case insensitive).
 	 * @param string $timetype Time format. Valid values are "none", "full", "long", "medium", or "short" (case insensitive).
-	 * @param string $prefix Prefix to use for Twig filters.
+	 * @param string $dateFilterAlias Alias for the date filter.
+	 * @param string $timeFilterAlias Alias for the time filter.
+	 * @param string $dateTimeFilterAlias Alias for the date/time filter.
 	 */
-	public function __construct($locale = null, $datetype = null, $timetype = null, $prefix = null) {
+	public function __construct($locale = null, $datetype = null, $timetype = null, $dateFilterAlias = null,
+			$timeFilterAlias = null, $dateTimeFilterAlias = null) {
 		if ($locale !== null) {
 			$this->locale = $locale;
 		}
@@ -29,8 +35,14 @@ class FormatDateTimeExtension extends \Twig_Extension {
 		if ($timetype !== null) {
 			$this->timetype = $this->getDateFormatterFormat($timetype);
 		}
-		if ($prefix !== null) {
-			$this->prefix = $prefix;
+		if ($dateFilterAlias !== null) {
+			$this->dateFilterAlias = $dateFilterAlias;
+		}
+		if ($timeFilterAlias !== null) {
+			$this->timeFilterAlias = $timeFilterAlias;
+		}
+		if ($dateTimeFilterAlias !== null) {
+			$this->dateTimeFilterAlias = $dateTimeFilterAlias;
 		}
 	}
 
@@ -45,16 +57,32 @@ class FormatDateTimeExtension extends \Twig_Extension {
 	 * {@inheritDoc}
 	 */
 	public function getFilters() {
-		return array(
-			$this->prefix.'date' => new \Twig_Filter_Method($this, 'formatDate'),
-			$this->prefix.'time' => new \Twig_Filter_Method($this, 'formatTime'),
-			$this->prefix.'datetime' => new \Twig_Filter_Method($this, 'formatDateTime'),
-		);
+		$filters = array();
+
+		$formatDateMethod = new \Twig_Filter_Method($this, 'formatDate');
+		$filters['craue_date'] = $formatDateMethod;
+		if ($this->dateFilterAlias !== null) {
+			$filters[$this->dateFilterAlias] = $formatDateMethod;
+		}
+
+		$formatTimeMethod = new \Twig_Filter_Method($this, 'formatTime');
+		$filters['craue_time'] = $formatTimeMethod;
+		if ($this->timeFilterAlias !== null) {
+			$filters[$this->timeFilterAlias] = $formatTimeMethod;
+		}
+
+		$formatDateTimeMethod = new \Twig_Filter_Method($this, 'formatDateTime');
+		$filters['craue_datetime'] = $formatDateTimeMethod;
+		if ($this->dateTimeFilterAlias !== null) {
+			$filters[$this->dateTimeFilterAlias] = $formatDateTimeMethod;
+		}
+
+		return $filters;
 	}
 
 	/**
 	 * Formats a timestamp as date.
-	 * @param mixed $value The date to be formatted.
+	 * @param mixed $value Date value to be formatted.
 	 * @param string $locale Locale to be used with {@see http://www.php.net/manual/class.intldateformatter.php}.
 	 * @return string Formatted date.
 	 */
@@ -64,7 +92,7 @@ class FormatDateTimeExtension extends \Twig_Extension {
 
 	/**
 	 * Formats a timestamp as time.
-	 * @param mixed $value The time to be formatted.
+	 * @param mixed $value Time value to be formatted.
 	 * @param string $locale Locale to be used with {@see http://www.php.net/manual/class.intldateformatter.php}.
 	 * @return string Formatted time.
 	 */
@@ -74,7 +102,7 @@ class FormatDateTimeExtension extends \Twig_Extension {
 
 	/**
 	 * Formats a timestamp as date and time.
-	 * @param mixed $value The date/time to be formatted.
+	 * @param mixed $value Date/time value to be formatted.
 	 * @param string $locale Locale to be used with {@see http://www.php.net/manual/class.intldateformatter.php}.
 	 * @return string Formatted date and time.
 	 */
@@ -84,7 +112,7 @@ class FormatDateTimeExtension extends \Twig_Extension {
 
 	/**
 	 * Formats a date/time value.
-	 * @param mixed $value The date/time to be formatted.
+	 * @param mixed $value Date/time value to be formatted.
 	 * @param string $locale Locale to be used with {@see http://www.php.net/manual/class.intldateformatter.php}.
 	 * @param string $datetype Date format. Valid values are "none", "full", "long", "medium", or "short" (case insensitive).
 	 * @param string $timetype Time format. Valid values are "none", "full", "long", "medium", or "short" (case insensitive).
@@ -97,12 +125,12 @@ class FormatDateTimeExtension extends \Twig_Extension {
 	}
 
 	/**
-	 * @param string $value Date/time format. Valid values are "none", "full", "long", "medium", or "short" (case insensitive).
+	 * @param string $format Date/time format. Valid values are "none", "full", "long", "medium", or "short" (case insensitive).
 	 * @return int Appropriate value of {@see http://www.php.net/manual/en/class.intldateformatter.php#intl.intldateformatter-constants}.
 	 * @throws InvalidArgumentException
 	 */
-	protected function getDateFormatterFormat($value) {
-		switch (strtoupper($value)) {
+	protected function getDateFormatterFormat($format) {
+		switch (strtoupper($format)) {
 			case 'NONE':
 				return \IntlDateFormatter::NONE;
 			case 'FULL':
@@ -114,7 +142,7 @@ class FormatDateTimeExtension extends \Twig_Extension {
 			case 'SHORT':
 				return \IntlDateFormatter::SHORT;
 			default:
-				throw new \InvalidArgumentException(sprintf('A value of "%s" is not supported.', $value));
+				throw new \InvalidArgumentException(sprintf('A value of "%s" is not supported.', $format));
 		}
 	}
 

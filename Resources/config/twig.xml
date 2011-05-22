@@ -4,21 +4,40 @@
 	xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
 	<parameters>
+		<!-- DecorateEmptyValueExtension -->
+		<parameter key="craue_twig_extensions.decorateEmptyValue.class">Craue\TwigExtensionsBundle\Twig\Extension\DecorateEmptyValueExtension</parameter>
+		<parameter key="craue_twig_extensions.decorateEmptyValue.placeholder"><![CDATA[&mdash;]]></parameter>
+		<parameter key="craue_twig_extensions.decorateEmptyValue.filterAlias">null</parameter>
+
+		<!-- FormatDateTimeExtension -->
 		<parameter key="craue_twig_extensions.formatDateTime.class">Craue\TwigExtensionsBundle\Twig\Extension\FormatDateTimeExtension</parameter>
 		<parameter key="locale">null</parameter>
 		<parameter key="craue_twig_extensions.formatDateTime.locale">%locale%</parameter>
 		<parameter key="craue_twig_extensions.formatDateTime.datetype">medium</parameter>
 		<parameter key="craue_twig_extensions.formatDateTime.timetype">medium</parameter>
-		<parameter key="craue_twig_extensions.formatDateTime.prefix">craue_</parameter>
+		<parameter key="craue_twig_extensions.formatDateTime.dateFilterAlias">null</parameter>
+		<parameter key="craue_twig_extensions.formatDateTime.timeFilterAlias">null</parameter>
+		<parameter key="craue_twig_extensions.formatDateTime.dateTimeFilterAlias">null</parameter>
 	</parameters>
 
 	<services>
+		<!-- DecorateEmptyValueExtension -->
+		<service id="twig.extension.craue_decorateEmptyValue" class="%craue_twig_extensions.decorateEmptyValue.class%">
+			<tag name="twig.extension" />
+			<argument>%craue_twig_extensions.decorateEmptyValue.placeholder%</argument>
+			<argument>%craue_twig_extensions.decorateEmptyValue.filterAlias%</argument>
+		</service>
+
+		<!-- FormatDateTimeExtension -->
 		<service id="twig.extension.craue_formatDateTime" class="%craue_twig_extensions.formatDateTime.class%">
 			<tag name="twig.extension" />
 			<argument>%craue_twig_extensions.formatDateTime.locale%</argument>
 			<argument>%craue_twig_extensions.formatDateTime.datetype%</argument>
 			<argument>%craue_twig_extensions.formatDateTime.timetype%</argument>
-			<argument>%craue_twig_extensions.formatDateTime.prefix%</argument>
+			<argument>%craue_twig_extensions.formatDateTime.dateFilterAlias%</argument>
+			<argument>%craue_twig_extensions.formatDateTime.timeFilterAlias%</argument>
+			<argument>%craue_twig_extensions.formatDateTime.dateTimeFilterAlias%</argument>
 		</service>
 	</services>
+
 </container>
