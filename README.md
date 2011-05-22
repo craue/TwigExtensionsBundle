@@ -2,7 +2,7 @@
 
 TwigExtensionsBundle is just a collection of Twig Extensions i find useful.
 
-### DecorateEmptyValueExtension
+## DecorateEmptyValueExtension
 
 Provides an enhanced "default" filter to decorate empty values with a placeholder which can be even an HTML entity.
 
@@ -17,7 +17,7 @@ to make it render properly. With this extension you can write
 
 instead.
 
-### FormatDateTimeExtension
+## FormatDateTimeExtension
 
 Provides filters for locale-aware formatting of date, time, and date/time values.
 
@@ -86,11 +86,11 @@ Provides filters for locale-aware formatting of date, time, and date/time values
 	craue_twig_extensions.formatDateTime.datetype="full"
 	craue_twig_extensions.formatDateTime.timetype="short"
 
-## Advanced stuff
+# Advanced stuff
 
-### DecorateEmptyValueExtension
+## DecorateEmptyValueExtension
 
-#### Alias
+### Alias
 
 You can define an alias for the filter if you don't like to write
 
@@ -108,9 +108,9 @@ allows you to write
 in your Twig Template. But pay attention to not accidentally override built-in filters, although you can do it
 intentionally, e.g. by setting the alias to "default".
 
-### FormatDateTimeExtension
+## FormatDateTimeExtension
 
-#### Aliases
+### Aliases
 
 Similar to the DecorateEmptyValueExtension you can define an alias for each filter:
 
