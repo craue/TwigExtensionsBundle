@@ -62,7 +62,7 @@ Provides filters for locale-aware formatting of date, time, and date/time values
 
 ## FormatDateTimeExtension
 
-	<h2>with default locale</h2>
+	<h2>with current locale</h2>
 	date: {{ someDateTimeVariable | craue_date }}<br />
 	time: {{ someDateTimeVariable | craue_time }}<br />
 	both: {{ someDateTimeVariable | craue_datetime }}
@@ -82,7 +82,6 @@ Provides filters for locale-aware formatting of date, time, and date/time values
 ## FormatDateTimeExtension
 
 	; app/config/parameters.ini
-	locale="de-DE"
 	craue_twig_extensions.formatDateTime.datetype="full"
 	craue_twig_extensions.formatDateTime.timetype="short"
 

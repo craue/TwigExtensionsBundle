@@ -2,6 +2,8 @@
 
 namespace Craue\TwigExtensionsBundle\Twig\Extension;
 
+use Symfony\Component\HttpFoundation\Session;
+
 /**
  * Twig Extension providing filters for locale-aware formatting of date, time, and date/time values.
  * @author Christian Raue <christian.raue@gmail.com>
@@ -17,18 +19,14 @@ class FormatDateTimeExtension extends \Twig_Extension {
 	protected $dateTimeFilterAlias = null;
 
 	/**
-	 * @param string $locale Locale to be used with {@see http://www.php.net/manual/class.intldateformatter.php}.
 	 * @param string $datetype Date format. Valid values are "none", "full", "long", "medium", or "short" (case insensitive).
 	 * @param string $timetype Time format. Valid values are "none", "full", "long", "medium", or "short" (case insensitive).
 	 * @param string $dateFilterAlias Alias for the date filter.
 	 * @param string $timeFilterAlias Alias for the time filter.
 	 * @param string $dateTimeFilterAlias Alias for the date/time filter.
 	 */
-	public function __construct($locale = null, $datetype = null, $timetype = null, $dateFilterAlias = null,
+	public function __construct($datetype = null, $timetype = null, $dateFilterAlias = null,
 			$timeFilterAlias = null, $dateTimeFilterAlias = null) {
-		if ($locale !== null) {
-			$this->locale = $locale;
-		}
 		if ($datetype !== null) {
 			$this->datetype = $this->getDateFormatterFormat($datetype);
 		}
@@ -43,6 +41,16 @@ class FormatDateTimeExtension extends \Twig_Extension {
 		}
 		if ($dateTimeFilterAlias !== null) {
 			$this->dateTimeFilterAlias = $dateTimeFilterAlias;
+		}
+	}
+
+	/**
+	 * Applies the current session's locale.
+	 * @param Session $session
+	 */
+	public function setLocaleFromSession(Session $session = null) {
+		if ($session !== null) {
+			$this->locale = $session->getLocale();
 		}
 	}
 

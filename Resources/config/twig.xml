@@ -11,8 +11,6 @@
 
 		<!-- FormatDateTimeExtension -->
 		<parameter key="craue_twig_extensions.formatDateTime.class">Craue\TwigExtensionsBundle\Twig\Extension\FormatDateTimeExtension</parameter>
-		<parameter key="locale">null</parameter>
-		<parameter key="craue_twig_extensions.formatDateTime.locale">%locale%</parameter>
 		<parameter key="craue_twig_extensions.formatDateTime.datetype">medium</parameter>
 		<parameter key="craue_twig_extensions.formatDateTime.timetype">medium</parameter>
 		<parameter key="craue_twig_extensions.formatDateTime.dateFilterAlias">null</parameter>
@@ -31,12 +29,14 @@
 		<!-- FormatDateTimeExtension -->
 		<service id="twig.extension.craue_formatDateTime" class="%craue_twig_extensions.formatDateTime.class%">
 			<tag name="twig.extension" />
-			<argument>%craue_twig_extensions.formatDateTime.locale%</argument>
 			<argument>%craue_twig_extensions.formatDateTime.datetype%</argument>
 			<argument>%craue_twig_extensions.formatDateTime.timetype%</argument>
 			<argument>%craue_twig_extensions.formatDateTime.dateFilterAlias%</argument>
 			<argument>%craue_twig_extensions.formatDateTime.timeFilterAlias%</argument>
 			<argument>%craue_twig_extensions.formatDateTime.dateTimeFilterAlias%</argument>
+			<call method="setLocaleFromSession">
+				<argument type="service" id="session" on-invalid="ignore" />
+			</call>
 		</service>
 	</services>
 
