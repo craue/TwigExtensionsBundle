@@ -112,7 +112,7 @@ intentionally, e.g. by setting the alias to "default".
 
 #### Aliases
 
-Similar to the DecorateEmptyValueExtension you can an alias for each filter:
+Similar to the DecorateEmptyValueExtension you can define an alias for each filter:
 
 	; app/config/parameters.ini
 	craue_twig_extensions.formatDateTime.dateFilterAlias="date"
