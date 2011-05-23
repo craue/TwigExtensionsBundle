@@ -6,7 +6,10 @@ use Symfony\Component\HttpFoundation\Session;
 
 /**
  * Twig Extension providing filters for locale-aware formatting of date, time, and date/time values.
+ *
  * @author Christian Raue <christian.raue@gmail.com>
+ * @copyright 2011 Christian Raue
+ * @license http://www.opensource.org/licenses/mit-license.php MIT License
  */
 class FormatDateTimeExtension extends \Twig_Extension {
 

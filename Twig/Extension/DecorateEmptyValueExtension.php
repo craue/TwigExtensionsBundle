@@ -5,7 +5,10 @@ namespace Craue\TwigExtensionsBundle\Twig\Extension;
 /**
  * Twig Extension providing an enhanced "default" filter to decorate empty values with a placeholder which can even be
  * an HTML entity.
+ *
  * @author Christian Raue <christian.raue@gmail.com>
+ * @copyright 2011 Christian Raue
+ * @license http://www.opensource.org/licenses/mit-license.php MIT License
  */
 class DecorateEmptyValueExtension extends \Twig_Extension {
 

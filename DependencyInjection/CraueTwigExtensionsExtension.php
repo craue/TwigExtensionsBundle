@@ -8,7 +8,11 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
+ * Registration of the Extension via DI.
+ *
  * @author Christian Raue <christian.raue@gmail.com>
+ * @copyright 2011 Christian Raue
+ * @license http://www.opensource.org/licenses/mit-license.php MIT License
  */
 class CraueTwigExtensionsExtension extends Extension {
 

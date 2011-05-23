@@ -51,7 +51,7 @@ Provides filters for locale-aware formatting of date, time, and date/time values
 	// app/config/config.yml
 	craue_twig_extensions: ~
 
-# Examples to use the filters in your Twig template
+# Examples to use the Extensions in your Twig template
 
 ## DecorateEmptyValueExtension
 
