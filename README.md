@@ -4,10 +4,10 @@ TwigExtensionsBundle is just a collection of Twig Extensions i find useful.
 
 ## DecorateEmptyValueExtension
 
-Provides an enhanced "default" filter to decorate empty values with a placeholder which can be even an HTML entity.
+Provides an enhanced "default" filter to decorate empty values with a placeholder which can even be HTML.
 
-Usually, if you want to use HTML, e.g. "&mdash;", as value for the default filter in an HTML Twig template you have to
-do cumbersome
+Usually, if you want to use HTML, e.g. the HTML entity "&mdash;", as value for the default filter in an HTML Twig
+template you have to do cumbersome
 
 	{{ somevalue | e | default('&mdash;') | raw }}
 
