@@ -13,12 +13,34 @@ use Symfony\Component\HttpFoundation\Session;
  */
 class FormatDateTimeExtension extends \Twig_Extension {
 
+	/**
+	 * @var string
+	 */
 	protected $locale = 'en-US';
+
+	/**
+	 * @var integer
+	 */
 	protected $datetype = \IntlDateFormatter::MEDIUM;
+
+	/**
+	 * @var integer
+	 */
 	protected $timetype = \IntlDateFormatter::MEDIUM;
 
+	/**
+	 * @var string
+	 */
 	protected $dateFilterAlias = null;
+
+	/**
+	 * @var string
+	 */
 	protected $timeFilterAlias = null;
+
+	/**
+	 * @var string
+	 */
 	protected $dateTimeFilterAlias = null;
 
 	/**

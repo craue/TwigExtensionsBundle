@@ -12,8 +12,14 @@ namespace Craue\TwigExtensionsBundle\Twig\Extension;
  */
 class DecorateEmptyValueExtension extends \Twig_Extension {
 
+	/**
+	 * @var string
+	 */
 	protected $placeholder = '&mdash;';
 
+	/**
+	 * @var string
+	 */
 	protected $filterAlias = null;
 
 	/**
