@@ -120,7 +120,7 @@ class FormatDateTimeExtension extends \Twig_Extension {
 	/**
 	 * Formats a timestamp as date.
 	 * @param mixed $value Date value to be formatted.
-	 * @param string $locale Locale to be used with {@see http://www.php.net/manual/class.intldateformatter.php}.
+	 * @param string $locale Locale to be used with {@see http://php.net/manual/class.intldateformatter.php}.
 	 * @return string Formatted date.
 	 */
 	public function formatDate($value, $locale = null) {
@@ -130,7 +130,7 @@ class FormatDateTimeExtension extends \Twig_Extension {
 	/**
 	 * Formats a timestamp as time.
 	 * @param mixed $value Time value to be formatted.
-	 * @param string $locale Locale to be used with {@see http://www.php.net/manual/class.intldateformatter.php}.
+	 * @param string $locale Locale to be used with {@see http://php.net/manual/class.intldateformatter.php}.
 	 * @return string Formatted time.
 	 */
 	public function formatTime($value, $locale = null) {
@@ -140,7 +140,7 @@ class FormatDateTimeExtension extends \Twig_Extension {
 	/**
 	 * Formats a timestamp as date and time.
 	 * @param mixed $value Date/time value to be formatted.
-	 * @param string $locale Locale to be used with {@see http://www.php.net/manual/class.intldateformatter.php}.
+	 * @param string $locale Locale to be used with {@see http://php.net/manual/class.intldateformatter.php}.
 	 * @return string Formatted date and time.
 	 */
 	public function formatDateTime($value, $locale = null) {
@@ -150,7 +150,7 @@ class FormatDateTimeExtension extends \Twig_Extension {
 	/**
 	 * Formats a date/time value.
 	 * @param mixed $value Date/time value to be formatted.
-	 * @param string $locale Locale to be used with {@see http://www.php.net/manual/class.intldateformatter.php}.
+	 * @param string $locale Locale to be used with {@see http://php.net/manual/class.intldateformatter.php}.
 	 * @param string $datetype Date format. Valid values are "none", "full", "long", "medium", or "short" (case insensitive).
 	 * @param string $timetype Time format. Valid values are "none", "full", "long", "medium", or "short" (case insensitive).
 	 * @return string Formatted date/time.
@@ -163,7 +163,7 @@ class FormatDateTimeExtension extends \Twig_Extension {
 
 	/**
 	 * @param string $format Date/time format. Valid values are "none", "full", "long", "medium", or "short" (case insensitive).
-	 * @return int Appropriate value of {@see http://www.php.net/manual/en/class.intldateformatter.php#intl.intldateformatter-constants}.
+	 * @return int Appropriate value of {@see http://php.net/manual/class.intldateformatter.php#intl.intldateformatter-constants}.
 	 * @throws InvalidArgumentException
 	 */
 	protected function getDateFormatterFormat($format) {
