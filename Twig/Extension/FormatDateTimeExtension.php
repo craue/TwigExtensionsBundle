@@ -62,13 +62,13 @@ class FormatDateTimeExtension extends \Twig_Extension {
 	 * @param string $dateTimeFilterAlias Alias for the date/time filter.
 	 */
 	public function setAliases($dateFilterAlias = null, $timeFilterAlias = null, $dateTimeFilterAlias = null) {
-		if ($dateFilterAlias !== null) {
+		if (!empty($dateFilterAlias)) {
 			$this->dateFilterAlias = $dateFilterAlias;
 		}
-		if ($timeFilterAlias !== null) {
+		if (!empty($timeFilterAlias)) {
 			$this->timeFilterAlias = $timeFilterAlias;
 		}
-		if ($dateTimeFilterAlias !== null) {
+		if (!empty($dateTimeFilterAlias)) {
 			$this->dateTimeFilterAlias = $dateTimeFilterAlias;
 		}
 	}
@@ -98,19 +98,19 @@ class FormatDateTimeExtension extends \Twig_Extension {
 
 		$formatDateMethod = new \Twig_Filter_Method($this, 'formatDate');
 		$filters['craue_date'] = $formatDateMethod;
-		if ($this->dateFilterAlias !== null) {
+		if (!empty($this->dateFilterAlias)) {
 			$filters[$this->dateFilterAlias] = $formatDateMethod;
 		}
 
 		$formatTimeMethod = new \Twig_Filter_Method($this, 'formatTime');
 		$filters['craue_time'] = $formatTimeMethod;
-		if ($this->timeFilterAlias !== null) {
+		if (!empty($this->timeFilterAlias)) {
 			$filters[$this->timeFilterAlias] = $formatTimeMethod;
 		}
 
 		$formatDateTimeMethod = new \Twig_Filter_Method($this, 'formatDateTime');
 		$filters['craue_datetime'] = $formatDateTimeMethod;
-		if ($this->dateTimeFilterAlias !== null) {
+		if (!empty($this->dateTimeFilterAlias)) {
 			$filters[$this->dateTimeFilterAlias] = $formatDateTimeMethod;
 		}
 

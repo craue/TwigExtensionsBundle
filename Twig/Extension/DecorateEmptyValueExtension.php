@@ -35,7 +35,7 @@ class DecorateEmptyValueExtension extends \Twig_Extension {
 	 * @param string $filterAlias Alias for the filter.
 	 */
 	public function setAlias($filterAlias = null) {
-		if ($filterAlias !== null) {
+		if (!empty($filterAlias)) {
 			$this->filterAlias = $filterAlias;
 		}
 	}
@@ -58,7 +58,7 @@ class DecorateEmptyValueExtension extends \Twig_Extension {
 			'is_safe' => array('html'),
 		));
 		$filters['craue_default'] = $decorateEmptyValueMethod;
-		if ($this->filterAlias !== null) {
+		if (!empty($this->filterAlias)) {
 			$filters[$this->filterAlias] = $decorateEmptyValueMethod;
 		}
 
