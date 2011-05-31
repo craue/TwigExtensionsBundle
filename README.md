@@ -1,6 +1,6 @@
 # Information
 
-TwigExtensionsBundle is just a collection of Twig Extensions i find useful.
+TwigExtensionsBundle is just a collection of Twig extensions i find useful.
 
 ## DecorateEmptyValueExtension
 
@@ -50,12 +50,12 @@ Providing helpers for implementing a language change mechanism and handling loca
 		'Craue' => __DIR__.'/../vendor',
 	));
 
-## Make the Twig Extensions available by updating your configuration
+## Make the Twig extensions available by updating your configuration
 
 	// app/config/config.yml
 	craue_twig_extensions: ~
 
-# Examples to use the Extensions in your Twig template
+# Examples to use the extensions in your Twig template
 
 ## DecorateEmptyValueExtension
 
@@ -175,10 +175,10 @@ setting the dateFilterAlias to "date".
 Again, you can define aliases:
 
 	; app/config/parameters.ini
-	;craue_twig_extensions.changeLanguage.languageNameAlias=
+	craue_twig_extensions.changeLanguage.languageNameAlias=
 	craue_twig_extensions.changeLanguage.localizedPathAlias="path"
-	;craue_twig_extensions.changeLanguage.cleanRouteParametersAlias=
-	;craue_twig_extensions.changeLanguage.availableLocalesAlias=
+	craue_twig_extensions.changeLanguage.cleanRouteParametersAlias=
+	craue_twig_extensions.changeLanguage.availableLocalesAlias=
 
 Don't accidentally override built-in filters/functions/globals, although you can do it intentionally, e.g. by setting
 the localizedPathAlias to "path".

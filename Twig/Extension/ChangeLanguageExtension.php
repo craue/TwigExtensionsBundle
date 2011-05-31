@@ -6,7 +6,7 @@ use Symfony\Component\HttpFoundation\Session;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
- * Twig Extension providing helpers for implementing a language change mechanism and handling localized routes.
+ * Twig extension providing helpers for implementing a language change mechanism and handling localized routes.
  *
  * @author Christian Raue <christian.raue@gmail.com>
  * @author Christophe Coevoet
@@ -196,7 +196,7 @@ class ChangeLanguageExtension extends \Twig_Extension {
 
 		if ($this->showFirstUppercase === true) {
 			if (!extension_loaded('mbstring')) {
-				throw new \RuntimeException('PHP Extension "mbstring" is not loaded. Either load it or disable the "showFirstUpper" option.');
+				throw new \RuntimeException('PHP extension "mbstring" is not loaded. Either load it or disable the "showFirstUppercase" option.');
 			}
 			$encoding = mb_detect_encoding($languageName);
 			$languageName = mb_strtoupper(mb_substr($languageName, 0, 1, $encoding), $encoding)

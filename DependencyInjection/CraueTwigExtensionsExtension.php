@@ -8,7 +8,7 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
- * Registration of the Extension via DI.
+ * Registration of the extension via DI.
  *
  * @author Christian Raue <christian.raue@gmail.com>
  * @copyright 2011 Christian Raue

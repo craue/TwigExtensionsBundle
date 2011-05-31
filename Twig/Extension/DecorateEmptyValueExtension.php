@@ -3,7 +3,7 @@
 namespace Craue\TwigExtensionsBundle\Twig\Extension;
 
 /**
- * Twig Extension providing an enhanced "default" filter to decorate empty values with a placeholder which can even be
+ * Twig extension providing an enhanced "default" filter to decorate empty values with a placeholder which can even be
  * an HTML entity.
  *
  * @author Christian Raue <christian.raue@gmail.com>
