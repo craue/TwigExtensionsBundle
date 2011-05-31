@@ -25,7 +25,7 @@ class DecorateEmptyValueExtension extends \Twig_Extension {
 	/**
 	 * @param mixed $placeholder Placeholder to use instead of empty values.
 	 */
-	public function __construct($placeholder = null) {
+	public function setPlaceholder($placeholder = null) {
 		if ($placeholder !== null) {
 			$this->placeholder = $placeholder;
 		}

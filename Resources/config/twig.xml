@@ -22,7 +22,9 @@
 		<!-- DecorateEmptyValueExtension -->
 		<service id="twig.extension.craue_decorateEmptyValue" class="%craue_twig_extensions.decorateEmptyValue.class%">
 			<tag name="twig.extension" />
-			<argument>%craue_twig_extensions.decorateEmptyValue.placeholder%</argument>
+			<call method="setPlaceholder">
+				<argument>%craue_twig_extensions.decorateEmptyValue.placeholder%</argument>
+			</call>
 			<call method="setAlias">
 				<argument>%craue_twig_extensions.decorateEmptyValue.filterAlias%</argument>
 			</call>
@@ -31,8 +33,10 @@
 		<!-- FormatDateTimeExtension -->
 		<service id="twig.extension.craue_formatDateTime" class="%craue_twig_extensions.formatDateTime.class%">
 			<tag name="twig.extension" />
-			<argument>%craue_twig_extensions.formatDateTime.datetype%</argument>
-			<argument>%craue_twig_extensions.formatDateTime.timetype%</argument>
+			<call method="setDateTimeTypes">
+				<argument>%craue_twig_extensions.formatDateTime.datetype%</argument>
+				<argument>%craue_twig_extensions.formatDateTime.timetype%</argument>
+			</call>
 			<call method="setLocaleFromSession">
 				<argument type="service" id="session" on-invalid="ignore" />
 			</call>

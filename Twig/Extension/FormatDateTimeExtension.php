@@ -47,7 +47,7 @@ class FormatDateTimeExtension extends \Twig_Extension {
 	 * @param string $datetype Date format. Valid values are "none", "full", "long", "medium", or "short" (case insensitive).
 	 * @param string $timetype Time format. Valid values are "none", "full", "long", "medium", or "short" (case insensitive).
 	 */
-	public function __construct($datetype = null, $timetype = null) {
+	public function setDateTimeTypes($datetype = null, $timetype = null) {
 		if ($datetype !== null) {
 			$this->datetype = $this->getDateFormatterFormat($datetype);
 		}
