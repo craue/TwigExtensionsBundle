@@ -63,14 +63,14 @@ Provides filters for locale-aware formatting of date, time, and date/time values
 ## FormatDateTimeExtension
 
 	<h2>with current locale</h2>
-	date: {{ someDateTimeVariable | craue_date }}<br />
-	time: {{ someDateTimeVariable | craue_time }}<br />
-	both: {{ someDateTimeVariable | craue_datetime }}
+	date: {{ someDateTimeValue | craue_date }}<br />
+	time: {{ someDateTimeValue | craue_time }}<br />
+	both: {{ someDateTimeValue | craue_datetime }}
 
 	<h2>with specific locales</h2>
-	date: {{ someDateTimeVariable | craue_date('de-DE') }}<br />
-	time: {{ someDateTimeVariable | craue_time('de') }}<br />
-	both: {{ someDateTimeVariable | craue_datetime('en-GB') }}
+	date: {{ someDateTimeValue | craue_date('de-DE') }}<br />
+	time: {{ someDateTimeValue | craue_time('de') }}<br />
+	both: {{ someDateTimeValue | craue_datetime('en-GB') }}
 
 # Set/override default values
 
