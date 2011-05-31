@@ -190,7 +190,14 @@ class ChangeLanguageExtension extends \Twig_Extension {
 	 * @return string
 	 */
 	public function getLanguageName($locale) {
-		$localeToUse = $this->showForeignLanguageNames === true ? $locale : $this->session->getLocale();
+		if ($this->showForeignLanguageNames === true) {
+			$localeToUse = $locale;
+		} else {
+			if ($this->session === null) {
+				throw new \RuntimeException('No session available.');
+			}
+			$localeToUse = $this->session->getLocale();
+		}
 
 		$languageName = \Locale::getDisplayLanguage($locale, $localeToUse);
 
@@ -214,6 +221,12 @@ class ChangeLanguageExtension extends \Twig_Extension {
 	 * @return string Path for the route.
 	 */
 	public function getLocalizedPath($routeName, array $parameters = array(), $absolute = false) {
+		if ($this->router === null) {
+			throw new \RuntimeException('No router available.');
+		}
+		if ($this->session === null) {
+			throw new \RuntimeException('No session available.');
+		}
 		$parameters = array_merge($parameters, array('_locale' => $this->session->getLocale()));
 		return $this->router->generate($routeName, $parameters, $absolute);
 	}
