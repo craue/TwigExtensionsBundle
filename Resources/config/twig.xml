@@ -16,6 +16,16 @@
 		<parameter key="craue_twig_extensions.formatDateTime.dateFilterAlias">null</parameter>
 		<parameter key="craue_twig_extensions.formatDateTime.timeFilterAlias">null</parameter>
 		<parameter key="craue_twig_extensions.formatDateTime.dateTimeFilterAlias">null</parameter>
+
+		<!-- ChangeLanguageExtension -->
+		<parameter key="craue_twig_extensions.changeLanguage.class">Craue\TwigExtensionsBundle\Twig\Extension\ChangeLanguageExtension</parameter>
+		<parameter key="craue_twig_extensions.changeLanguage.availableLocales" type="collection" />
+		<parameter key="craue_twig_extensions.changeLanguage.showForeignLanguageNames">true</parameter>
+		<parameter key="craue_twig_extensions.changeLanguage.showFirstUppercase">false</parameter>
+		<parameter key="craue_twig_extensions.changeLanguage.languageNameAlias">null</parameter>
+		<parameter key="craue_twig_extensions.changeLanguage.localizedPathAlias">null</parameter>
+		<parameter key="craue_twig_extensions.changeLanguage.cleanRouteParametersAlias">null</parameter>
+		<parameter key="craue_twig_extensions.changeLanguage.availableLocalesAlias">null</parameter>
 	</parameters>
 
 	<services>
@@ -44,6 +54,32 @@
 				<argument>%craue_twig_extensions.formatDateTime.dateFilterAlias%</argument>
 				<argument>%craue_twig_extensions.formatDateTime.timeFilterAlias%</argument>
 				<argument>%craue_twig_extensions.formatDateTime.dateTimeFilterAlias%</argument>
+			</call>
+		</service>
+
+		<!-- ChangeLanguageExtension -->
+		<service id="twig.extension.craue_changeLanguage" class="%craue_twig_extensions.changeLanguage.class%">
+			<tag name="twig.extension" />
+			<call method="setAvailableLocales">
+				<argument>%craue_twig_extensions.changeLanguage.availableLocales%</argument>
+			</call>
+			<call method="setRouter">
+				<argument type="service" id="router" on-invalid="ignore" />
+			</call>
+			<call method="setSession">
+				<argument type="service" id="session" on-invalid="ignore" />
+			</call>
+			<call method="setShowForeignLanguageNames">
+				<argument>%craue_twig_extensions.changeLanguage.showForeignLanguageNames%</argument>
+			</call>
+			<call method="setShowFirstUppercase">
+				<argument>%craue_twig_extensions.changeLanguage.showFirstUppercase%</argument>
+			</call>
+			<call method="setAliases">
+				<argument>%craue_twig_extensions.changeLanguage.languageNameAlias%</argument>
+				<argument>%craue_twig_extensions.changeLanguage.localizedPathAlias%</argument>
+				<argument>%craue_twig_extensions.changeLanguage.cleanRouteParametersAlias%</argument>
+				<argument>%craue_twig_extensions.changeLanguage.availableLocalesAlias%</argument>
 			</call>
 		</service>
 	</services>
