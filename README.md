@@ -4,7 +4,7 @@ TwigExtensionsBundle is just a collection of Twig extensions i find useful.
 
 ## DecorateEmptyValueExtension
 
-Provides an enhanced "default" filter to decorate empty values with a placeholder which can even be HTML.
+Provides an enhanced `default` filter to decorate empty values with a placeholder which can even be HTML.
 
 Usually, if you want to use HTML, e.g. the HTML entity "&mdash;", as value for the default filter in an HTML Twig
 template you have to do cumbersome
@@ -19,7 +19,7 @@ instead.
 
 ## ArrayHelperExtension
 
-Provides a "without" filter to use the functionality of "array_diff".
+Provides a `without` filter wrapping PHP's `array_diff` function.
 
 ## FormatDateTimeExtension
 
@@ -154,7 +154,7 @@ You can define an alias for the filter if you don't like to write
 
 	{{ somevalue | craue_default }}
 
-all the time. Setting this to "d" for example with
+all the time. Setting this to `"d"` for example with
 
 	; app/config/parameters.ini
 	craue_twig_extensions.decorateEmptyValue.filterAlias="d"
@@ -164,7 +164,7 @@ allows you to write
 	{{ somevalue | d }}
 
 in your Twig Template. But pay attention to not accidentally override built-in filters, although you can do it
-intentionally, e.g. by setting the alias to "default".
+intentionally, e.g. by setting the alias to `"default"`.
 
 ## ArrayHelperExtension
 
@@ -189,7 +189,7 @@ Again, you can define an alias for each filter:
 	craue_twig_extensions.formatDateTime.dateTimeFilterAlias="datetime"
 
 Don't accidentally override built-in filters, although you can do it intentionally, e.g. by setting the
-dateFilterAlias to "date".
+dateFilterAlias to `"date"`.
 
 ## ChangeLanguageExtension
 
@@ -204,4 +204,4 @@ Again, you can define aliases:
 	craue_twig_extensions.changeLanguage.availableLocalesAlias=
 
 Don't accidentally override built-in filters/functions/globals, although you can do it intentionally, e.g. by setting
-the localizedPathAlias to "path".
+the localizedPathAlias to `"path"`.
