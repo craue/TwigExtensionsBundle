@@ -9,6 +9,10 @@
 		<parameter key="craue_twig_extensions.decorateEmptyValue.placeholder"><![CDATA[&mdash;]]></parameter>
 		<parameter key="craue_twig_extensions.decorateEmptyValue.filterAlias">null</parameter>
 
+		<!-- ArrayHelperExtension -->
+		<parameter key="craue_twig_extensions.arrayHelper.class">Craue\TwigExtensionsBundle\Twig\Extension\ArrayHelperExtension</parameter>
+		<parameter key="craue_twig_extensions.arrayHelper.withoutAlias">null</parameter>
+
 		<!-- FormatDateTimeExtension -->
 		<parameter key="craue_twig_extensions.formatDateTime.class">Craue\TwigExtensionsBundle\Twig\Extension\FormatDateTimeExtension</parameter>
 		<parameter key="craue_twig_extensions.formatDateTime.datetype">medium</parameter>
@@ -37,6 +41,14 @@
 			</call>
 			<call method="setAlias">
 				<argument>%craue_twig_extensions.decorateEmptyValue.filterAlias%</argument>
+			</call>
+		</service>
+
+		<!-- ArrayHelperExtension -->
+		<service id="twig.extension.craue_arrayHelper" class="%craue_twig_extensions.arrayHelper.class%">
+			<tag name="twig.extension" />
+			<call method="setAlias">
+				<argument>%craue_twig_extensions.arrayHelper.withoutAlias%</argument>
 			</call>
 		</service>
 
