@@ -24,11 +24,4 @@ class CraueTwigExtensionsExtension extends Extension {
 		$loader->load('twig.xml');
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public function getAlias() {
-		return 'craue_twig_extensions';
-	}
-
 }
