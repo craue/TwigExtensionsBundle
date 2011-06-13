@@ -13,6 +13,10 @@
 		<parameter key="craue_twig_extensions.arrayHelper.class">Craue\TwigExtensionsBundle\Twig\Extension\ArrayHelperExtension</parameter>
 		<parameter key="craue_twig_extensions.arrayHelper.withoutAlias">null</parameter>
 
+		<!-- StringHelperExtension -->
+		<parameter key="craue_twig_extensions.stringHelper.class">Craue\TwigExtensionsBundle\Twig\Extension\StringHelperExtension</parameter>
+		<parameter key="craue_twig_extensions.stringHelper.trailingDotAlias">null</parameter>
+
 		<!-- FormatDateTimeExtension -->
 		<parameter key="craue_twig_extensions.formatDateTime.class">Craue\TwigExtensionsBundle\Twig\Extension\FormatDateTimeExtension</parameter>
 		<parameter key="craue_twig_extensions.formatDateTime.datetype">medium</parameter>
@@ -49,6 +53,14 @@
 			<tag name="twig.extension" />
 			<call method="setAlias">
 				<argument>%craue_twig_extensions.arrayHelper.withoutAlias%</argument>
+			</call>
+		</service>
+
+		<!-- StringHelperExtension -->
+		<service id="twig.extension.craue_stringHelper" class="%craue_twig_extensions.stringHelper.class%">
+			<tag name="twig.extension" />
+			<call method="setAlias">
+				<argument>%craue_twig_extensions.stringHelper.trailingDotAlias%</argument>
 			</call>
 		</service>
 

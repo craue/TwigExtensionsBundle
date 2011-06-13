@@ -21,6 +21,12 @@ instead.
 
 Provides a `without` filter wrapping PHP's `array_diff` function.
 
+## StringHelperExtension
+
+Provides a `trailingDot` filter for ensuring that a text ends with a dot. This comes in handy when using error messages
+(e.g. for validation) of vendor bundles (which are written like sentences but are missing the trailing dots) together
+with your own ones (which should include the trailing dot).
+
 ## FormatDateTimeExtension
 
 Provides filters for locale-aware formatting of date, time, and date/time values.
@@ -73,6 +79,12 @@ Providing helpers for implementing a language change mechanism and handling loca
 	{{ anArray | craue_without(aValueOrAnArray) | join(', ') }}<br/ >
 	{{ ['red', 'green', 'yellow', 'blue'] | craue_without('yellow') | join(', ') }} will print "red, green, blue"<br/ >
 	{{ ['red', 'green', 'yellow', 'blue'] | craue_without(['yellow', 'black', 'red']) | join(', ') }} will print "green, blue"
+
+## StringHelperExtension
+
+	{{ aString | craue_trailingDot }}<br/ >
+	{{ 'This text should end with a dot' | craue_trailingDot }}<br/ >
+	{{ 'This text should end with exactly one dot.' | craue_trailingDot }}
 
 ## FormatDateTimeExtension
 
@@ -174,6 +186,17 @@ Similar to the DecorateEmptyValueExtension you can define an alias:
 
 	; app/config/parameters.ini
 	craue_twig_extensions.arrayHelper.withoutAlias="without"
+
+But, again, pay attention to not accidentally override built-in filters, although you can do it intentionally.
+
+## StringHelperExtension
+
+### Alias
+
+Similar to the DecorateEmptyValueExtension you can define an alias:
+
+	; app/config/parameters.ini
+	craue_twig_extensions.stringHelper.trailingDotAlias="trailingDot"
 
 But, again, pay attention to not accidentally override built-in filters, although you can do it intentionally.
 
