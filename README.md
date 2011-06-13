@@ -33,7 +33,7 @@ Providing helpers for implementing a language change mechanism and handling loca
 
 ## Add TwigExtensionsBundle to your vendor/Craue directory
 
-	git submodule add git://github.com/craue/TwigExtensionsBundle.git vendor/Craue/TwigExtensionsBundle
+	git submodule add git://github.com/craue/TwigExtensionsBundle.git vendor/bundles/Craue/TwigExtensionsBundle
 
 ## Add TwigExtensionsBundle to your application kernel
 
@@ -51,7 +51,7 @@ Providing helpers for implementing a language change mechanism and handling loca
 	// app/autoload.php
 	$loader->registerNamespaces(array(
 		// ...
-		'Craue' => __DIR__.'/../vendor',
+		'Craue' => __DIR__.'/../vendor/bundles',
 	));
 
 ## Make the Twig extensions available by updating your configuration
