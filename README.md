@@ -39,7 +39,7 @@ Providing helpers for implementing a language change mechanism and handling loca
 
 ## Add TwigExtensionsBundle to your vendor directory
 
-	git submodule add git://github.com/craue/TwigExtensionsBundle.git vendor/bundles/Craue/TwigExtensionsBundle
+	git submodule add https://github.com/craue/TwigExtensionsBundle.git vendor/bundles/Craue/TwigExtensionsBundle
 
 ## Add TwigExtensionsBundle to your application kernel
 
