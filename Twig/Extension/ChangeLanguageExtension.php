@@ -98,7 +98,7 @@ class ChangeLanguageExtension extends \Twig_Extension {
 
 	/**
 	 * Sets whether all language names will be shown with a leading uppercase character.
-	 * This requires the mbstring extension {@see http://php.net/manual/book.mbstring.php} to be loaded.
+	 * This requires the mbstring extension {@link http://php.net/manual/book.mbstring.php} to be loaded.
 	 * @param boolean $showFirstUppercase
 	 */
 	public function setShowFirstUppercase($showFirstUppercase) {
@@ -186,7 +186,7 @@ class ChangeLanguageExtension extends \Twig_Extension {
 
 	/**
 	 * Get the language name.
-	 * @param string $locale Locale to be used with {@see http://php.net/manual/locale.getdisplaylanguage.php}.
+	 * @param string $locale Locale to be used with {@link http://php.net/manual/locale.getdisplaylanguage.php}.
 	 * @return string
 	 */
 	public function getLanguageName($locale) {
