@@ -100,21 +100,12 @@ Providing helpers for implementing a language change mechanism and handling loca
 
 ## ChangeLanguageExtension
 
-Rendering links for some kind of "change language" menu:
+There's a Twig template included which you can use to render a "change language" menu like this:
 
-	<ul>
-		{% for locale in craue_availableLocales %}
-			<li>
-				{% if locale == app.session.locale %}
-					{{ craue_languageName(locale) }}
-				{% else %}
-					<a href="{{ path(app.request.attributes.get('_route'), app.request.attributes.all
-							| craue_cleanRouteParameters | merge({'_locale': locale})) }}"
-						>{{ craue_languageName(locale) }}</a>
-				{% endif %}
-			</li>
-		{% endfor %}
-	</ul>
+	{% include 'CraueTwigExtensionsBundle:ChangeLanguage:changeLanguage.html.twig' %}
+
+This will render a list of links to the current route in all defined languages. Wrap it in a div to style it via CSS.
+Take a look at the template if you want to customize it.
 
 Additionally, instead of
 
