@@ -1,15 +1,19 @@
-{% block craue_language_list %}
-	<ul>
-		{% for locale in craue_availableLocales %}
-			<li>
-				{% if locale == app.session.locale %}
-					{{ craue_languageName(locale) }}
-				{% else %}
-					<a href="{{ path(app.request.attributes.get('_route'), app.request.attributes.all
-							| craue_cleanRouteParameters | merge({'_locale': locale})) }}"
-						>{% block craue_language_linktext %}{{ craue_languageName(locale) }}{% endblock %}</a>
-				{% endif %}
-			</li>
-		{% endfor %}
-	</ul>
-{% endblock %}
+{% use 'CraueTwigExtensionsBundle:ChangeLanguage:changeLanguage_blocks.html.twig' %}
+
+{% spaceless %}
+<ul>
+	{% for locale in craue_availableLocales %}
+		<li>
+			{%- if locale == app.session.locale -%}
+				{%- set craue_language_iscurrent = true -%}
+				{{- block('craue_language_link_text') -}}
+			{%- else -%}
+				<a href="{{ block('craue_language_link_target') }}">
+					{%- set craue_language_iscurrent = false -%}
+					{{- block('craue_language_link_text') -}}
+				</a>
+			{%- endif -%}
+		</li>
+	{% endfor %}
+</ul>
+{% endspaceless %}

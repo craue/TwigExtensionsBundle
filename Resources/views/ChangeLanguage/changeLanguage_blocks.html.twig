@@ -1,0 +1,8 @@
+{% block craue_language_link_target %}
+	{{- path(app.request.attributes.get('_route'),
+		app.request.attributes.all | craue_cleanRouteParameters | merge({'_locale': locale})) -}}
+{% endblock %}
+
+{% block craue_language_link_text %}
+	{{- craue_languageName(locale) -}}
+{% endblock %}
