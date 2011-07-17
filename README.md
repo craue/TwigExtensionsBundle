@@ -23,7 +23,8 @@ Provides a `without` filter wrapping PHP's `array_diff` function.
 
 ## FormExtension
 
-Provides a mechanism to render a form several times on one page. This is done by cloning the form prior to rendering.
+Provides a mechanism to render a form several times on one page. This is done by cloning the form prior to rendering
+using the `cloneForm` function.
 
 ## StringHelperExtension
 
