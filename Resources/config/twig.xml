@@ -18,6 +18,9 @@
 		<parameter key="craue_twig_extensions.arrayHelper.class">Craue\TwigExtensionsBundle\Twig\Extension\ArrayHelperExtension</parameter>
 		<parameter key="craue_twig_extensions.arrayHelper.withoutAlias">null</parameter>
 
+		<!-- FormExtension -->
+		<parameter key="craue_twig_extensions.form.class">Craue\TwigExtensionsBundle\Twig\Extension\FormExtension</parameter>
+
 		<!-- StringHelperExtension -->
 		<parameter key="craue_twig_extensions.stringHelper.class">Craue\TwigExtensionsBundle\Twig\Extension\StringHelperExtension</parameter>
 		<parameter key="craue_twig_extensions.stringHelper.trailingDotAlias">null</parameter>
@@ -58,6 +61,14 @@
 			<tag name="twig.extension" />
 			<call method="setAlias">
 				<argument>%craue_twig_extensions.arrayHelper.withoutAlias%</argument>
+			</call>
+		</service>
+
+		<!-- FormExtension -->
+		<service id="twig.extension.craue_form" class="%craue_twig_extensions.form.class%">
+			<tag name="twig.extension" />
+			<call method="setFormFactory">
+				<argument type="service" id="form.factory" />
 			</call>
 		</service>
 

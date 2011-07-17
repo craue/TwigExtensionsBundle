@@ -21,6 +21,10 @@ instead.
 
 Provides a `without` filter wrapping PHP's `array_diff` function.
 
+## FormExtension
+
+Provides a mechanism to render a form several times on one page. This is done by cloning the form prior to rendering.
+
 ## StringHelperExtension
 
 Provides a `trailingDot` filter for ensuring that a text ends with a dot. This comes in handy when using error messages
@@ -79,6 +83,16 @@ Providing helpers for implementing a language change mechanism and handling loca
 	{{ anArray | craue_without(aValueOrAnArray) | join(', ') }}<br/ >
 	{{ ['red', 'green', 'yellow', 'blue'] | craue_without('yellow') | join(', ') }} will print "red, green, blue"<br/ >
 	{{ ['red', 'green', 'yellow', 'blue'] | craue_without(['yellow', 'black', 'red']) | join(', ') }} will print "green, blue"
+
+## FormExtension
+
+	{% for myEntity in myEntities %}
+		{% set myFormInstance = craue_cloneForm(myForm) %}
+		<form action={{ path('my_route', {'id': myEntity.getId()}) }} method="post" {{ form_enctype(myFormInstance) }}>
+			{{ form_widget(myFormInstance) }}
+			<input type="submit" />
+		</form
+	{% endfor %}
 
 ## StringHelperExtension
 
@@ -179,6 +193,17 @@ Similar to the DecorateEmptyValueExtension you can define an alias:
 	craue_twig_extensions.arrayHelper.withoutAlias="without"
 
 But, again, pay attention to not accidentally override built-in filters, although you can do it intentionally.
+
+## FormExtension
+
+### Alias
+
+Similar to the DecorateEmptyValueExtension you can define an alias:
+
+	; app/config/parameters.ini
+	craue_twig_extensions.form.cloneFormAlias="cloneForm"
+
+But, again, pay attention to not accidentally override built-in functions, although you can do it intentionally.
 
 ## StringHelperExtension
 
