@@ -73,6 +73,9 @@ class FormExtension extends \Twig_Extension {
 		} elseif ($value instanceof FormInterface) {
 			return $value->createView();
 		} elseif ($value instanceof AbstractType) {
+			if ($this->formFactory === null) {
+				throw new \RuntimeException('No form factory available.');
+			}
 			return $this->formFactory->create($value)->createView();
 		}
 

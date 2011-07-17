@@ -69,7 +69,7 @@
 		<service id="twig.extension.craue_form" class="%craue_twig_extensions.form.class%">
 			<tag name="twig.extension" />
 			<call method="setFormFactory">
-				<argument type="service" id="form.factory" />
+				<argument type="service" id="form.factory" on-invalid="ignore" />
 			</call>
 			<call method="setAlias">
 				<argument>%craue_twig_extensions.form.cloneFormAlias%</argument>
