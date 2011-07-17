@@ -20,6 +20,7 @@
 
 		<!-- FormExtension -->
 		<parameter key="craue_twig_extensions.form.class">Craue\TwigExtensionsBundle\Twig\Extension\FormExtension</parameter>
+		<parameter key="craue_twig_extensions.form.cloneFormAlias">null</parameter>
 
 		<!-- StringHelperExtension -->
 		<parameter key="craue_twig_extensions.stringHelper.class">Craue\TwigExtensionsBundle\Twig\Extension\StringHelperExtension</parameter>
@@ -69,6 +70,9 @@
 			<tag name="twig.extension" />
 			<call method="setFormFactory">
 				<argument type="service" id="form.factory" />
+			</call>
+			<call method="setAlias">
+				<argument>%craue_twig_extensions.form.cloneFormAlias%</argument>
 			</call>
 		</service>
 
