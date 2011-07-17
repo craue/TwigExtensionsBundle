@@ -12,37 +12,37 @@
 		<!-- DecorateEmptyValueExtension -->
 		<parameter key="craue_twig_extensions.decorateEmptyValue.class">Craue\TwigExtensionsBundle\Twig\Extension\DecorateEmptyValueExtension</parameter>
 		<parameter key="craue_twig_extensions.decorateEmptyValue.placeholder"><![CDATA[&mdash;]]></parameter>
-		<parameter key="craue_twig_extensions.decorateEmptyValue.filterAlias">null</parameter>
+		<parameter key="craue_twig_extensions.decorateEmptyValue.filterAlias" />
 
 		<!-- ArrayHelperExtension -->
 		<parameter key="craue_twig_extensions.arrayHelper.class">Craue\TwigExtensionsBundle\Twig\Extension\ArrayHelperExtension</parameter>
-		<parameter key="craue_twig_extensions.arrayHelper.withoutAlias">null</parameter>
+		<parameter key="craue_twig_extensions.arrayHelper.withoutAlias" />
 
 		<!-- FormExtension -->
 		<parameter key="craue_twig_extensions.form.class">Craue\TwigExtensionsBundle\Twig\Extension\FormExtension</parameter>
-		<parameter key="craue_twig_extensions.form.cloneFormAlias">null</parameter>
+		<parameter key="craue_twig_extensions.form.cloneFormAlias" />
 
 		<!-- StringHelperExtension -->
 		<parameter key="craue_twig_extensions.stringHelper.class">Craue\TwigExtensionsBundle\Twig\Extension\StringHelperExtension</parameter>
-		<parameter key="craue_twig_extensions.stringHelper.trailingDotAlias">null</parameter>
+		<parameter key="craue_twig_extensions.stringHelper.trailingDotAlias" />
 
 		<!-- FormatDateTimeExtension -->
 		<parameter key="craue_twig_extensions.formatDateTime.class">Craue\TwigExtensionsBundle\Twig\Extension\FormatDateTimeExtension</parameter>
 		<parameter key="craue_twig_extensions.formatDateTime.datetype">medium</parameter>
 		<parameter key="craue_twig_extensions.formatDateTime.timetype">medium</parameter>
-		<parameter key="craue_twig_extensions.formatDateTime.dateFilterAlias">null</parameter>
-		<parameter key="craue_twig_extensions.formatDateTime.timeFilterAlias">null</parameter>
-		<parameter key="craue_twig_extensions.formatDateTime.dateTimeFilterAlias">null</parameter>
+		<parameter key="craue_twig_extensions.formatDateTime.dateFilterAlias" />
+		<parameter key="craue_twig_extensions.formatDateTime.timeFilterAlias" />
+		<parameter key="craue_twig_extensions.formatDateTime.dateTimeFilterAlias" />
 
 		<!-- ChangeLanguageExtension -->
 		<parameter key="craue_twig_extensions.changeLanguage.class">Craue\TwigExtensionsBundle\Twig\Extension\ChangeLanguageExtension</parameter>
 		<parameter key="craue_twig_extensions.changeLanguage.availableLocales" type="collection" />
 		<parameter key="craue_twig_extensions.changeLanguage.showForeignLanguageNames">true</parameter>
 		<parameter key="craue_twig_extensions.changeLanguage.showFirstUppercase">false</parameter>
-		<parameter key="craue_twig_extensions.changeLanguage.languageNameAlias">null</parameter>
-		<parameter key="craue_twig_extensions.changeLanguage.localizedPathAlias">null</parameter>
-		<parameter key="craue_twig_extensions.changeLanguage.cleanRouteParametersAlias">null</parameter>
-		<parameter key="craue_twig_extensions.changeLanguage.availableLocalesAlias">null</parameter>
+		<parameter key="craue_twig_extensions.changeLanguage.languageNameAlias" />
+		<parameter key="craue_twig_extensions.changeLanguage.localizedPathAlias" />
+		<parameter key="craue_twig_extensions.changeLanguage.cleanRouteParametersAlias" />
+		<parameter key="craue_twig_extensions.changeLanguage.availableLocalesAlias" />
 	</parameters>
 
 	<services>
