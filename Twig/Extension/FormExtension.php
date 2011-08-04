@@ -2,9 +2,9 @@
 
 namespace Craue\TwigExtensionsBundle\Twig\Extension;
 
-use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\Form\FormView;
 
 /**
@@ -63,7 +63,7 @@ class FormExtension extends \Twig_Extension {
 
 	/**
 	 * @param mixed $value
-	 * @param array $formOptions Options to pass to the form type (only valid if $value is a AbstractType, ignored otherwise).
+	 * @param array $formOptions Options to pass to the form type (only valid if $value is a FormTypeInterface, ignored otherwise).
 	 * @return FormView
 	 * @throws \RuntimeException
 	 */
@@ -73,7 +73,7 @@ class FormExtension extends \Twig_Extension {
 			return unserialize(serialize($value));
 		} elseif ($value instanceof FormInterface) {
 			return $value->createView();
-		} elseif ($value instanceof AbstractType) {
+		} elseif ($value instanceof FormTypeInterface) {
 			if ($this->formFactory === null) {
 				throw new \RuntimeException('No form factory available.');
 			}
@@ -81,7 +81,7 @@ class FormExtension extends \Twig_Extension {
 		}
 
 		throw new \RuntimeException(sprintf('Expected argument of either type "%s", "%s", or "%s", but "%s" given.',
-				'Symfony\Component\Form\AbstractType',
+				'Symfony\Component\Form\FormTypeInterface',
 				'Symfony\Component\Form\FormInterface',
 				'Symfony\Component\Form\FormView',
 				is_object($value) ? get_class($value) : gettype($value)
