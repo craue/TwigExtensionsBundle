@@ -63,10 +63,11 @@ class FormExtension extends \Twig_Extension {
 
 	/**
 	 * @param mixed $value
+	 * @param array $formOptions Options to pass to the form type (only valid if $value is a AbstractType, ignored otherwise).
 	 * @return FormView
 	 * @throws \RuntimeException
 	 */
-	public function cloneForm($value) {
+	public function cloneForm($value, array $formOptions = array()) {
 		if ($value instanceof FormView) {
 			// doesn't work: return clone $value;
 			return unserialize(serialize($value));
@@ -76,7 +77,7 @@ class FormExtension extends \Twig_Extension {
 			if ($this->formFactory === null) {
 				throw new \RuntimeException('No form factory available.');
 			}
-			return $this->formFactory->create($value)->createView();
+			return $this->formFactory->create($value, null, $formOptions)->createView();
 		}
 
 		throw new \RuntimeException(sprintf('Expected argument of either type "%s", "%s", or "%s", but "%s" given.',
