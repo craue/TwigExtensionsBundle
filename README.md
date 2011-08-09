@@ -2,6 +2,8 @@
 
 TwigExtensionsBundle is just a collection of Twig extensions i find useful.
 
+This bundle should be used in conjunction with Symfony2.
+
 ## DecorateEmptyValueExtension
 
 Provides an enhanced `default` filter to decorate empty values with a placeholder which can even be HTML.

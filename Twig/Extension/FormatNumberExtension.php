@@ -143,12 +143,12 @@ class FormatNumberExtension extends \Twig_Extension {
 	}
 
 	/**
-	 * Formats a number.
+	 * Formats a currency.
 	 * If the value is null also null will be returned.
-	 * @param mixed $value Number to be formatted using {@link http://php.net/manual/numberformatter.formatcurrency.php}.
+	 * @param mixed $value Currency to be formatted using {@link http://php.net/manual/numberformatter.formatcurrency.php}.
 	 * @param string $locale Locale to be used with {@link http://php.net/manual/class.numberformatter.php}.
 	 * @param string $currency Currency. See {@link http://php.net/manual/numberformatter.formatcurrency.php}.
-	 * @return string Formatted number.
+	 * @return string Formatted currency.
 	 */
 	protected function getFormattedCurrency($value, $locale, $currency) {
 		if ($value === null) {
