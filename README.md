@@ -36,6 +36,10 @@ with your own ones (which should include the trailing dot).
 
 Provides filters for locale-aware formatting of date, time, and date/time values.
 
+## FormatNumberExtension
+
+Provides filters for locale-aware formatting of numbers and currencies.
+
 ## ChangeLanguageExtension
 
 Providing helpers for implementing a language change mechanism and handling localized routes.
@@ -103,15 +107,27 @@ Providing helpers for implementing a language change mechanism and handling loca
 
 ## FormatDateTimeExtension
 
-	<h2>with current locale</h2>
+	<h2>with the current locale</h2>
 	date: {{ someDateTimeValue | craue_date }}<br />
 	time: {{ someDateTimeValue | craue_time }}<br />
 	both: {{ someDateTimeValue | craue_datetime }}
 
-	<h2>with specific locales</h2>
+	<h2>with a specific locale</h2>
 	date: {{ someDateTimeValue | craue_date('de-DE') }}<br />
 	time: {{ someDateTimeValue | craue_time('de') }}<br />
 	both: {{ someDateTimeValue | craue_datetime('en-GB') }}
+
+## FormatNumberExtension
+
+	<h2>with the current locale</h2>
+	thousands separator: {{ someNumber | craue_number }}<br />
+	currency: {{ someNumber | craue_currency('USD') }}<br />
+	spelled out number: {{ someNumber | craue_spellout }}
+
+	<h2>with a specific locale</h2>
+	thousands separator: {{ someNumber | craue_number('de-DE') }}<br />
+	currency: {{ someNumber | craue_currency('EUR', 'de-DE') }}<br />
+	spelled out number: {{ someNumber | craue_spellout('de-DE') }}
 
 ## ChangeLanguageExtension
 
@@ -230,6 +246,19 @@ Again, you can define an alias for each filter:
 
 Don't accidentally override built-in filters, although you can do it intentionally, e.g. by setting the
 dateFilterAlias to `"date"`.
+
+## FormatNumberExtension
+
+### Aliases
+
+Again, you can define an alias for each filter:
+
+	; app/config/parameters.ini
+	craue_twig_extensions.formatNumber.numberFilterAlias="number"
+	craue_twig_extensions.formatNumber.currencyFilterAlias="currency"
+	craue_twig_extensions.formatNumber.spelloutFilterAlias="spellout"
+
+Don't accidentally override built-in filters, although you can do it intentionally.
 
 ## ChangeLanguageExtension
 
