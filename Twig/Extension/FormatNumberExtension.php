@@ -21,6 +21,11 @@ class FormatNumberExtension extends \Twig_Extension {
 	/**
 	 * @var string
 	 */
+	protected $currency;
+
+	/**
+	 * @var string
+	 */
 	protected $numberFilterAlias = null;
 
 	/**
@@ -32,6 +37,15 @@ class FormatNumberExtension extends \Twig_Extension {
 	 * @var string
 	 */
 	protected $spelloutFilterAlias = null;
+
+	/**
+	 * @param string $currency Currency. See {@link http://php.net/manual/numberformatter.formatcurrency.php} for valid values.
+	 */
+	public function setCurrency($currency = null) {
+		if (!empty($currency)) {
+			$this->currency = $currency;
+		}
+	}
 
 	/**
 	 * @param string $numberFilterAlias Alias for the number filter.
@@ -106,7 +120,7 @@ class FormatNumberExtension extends \Twig_Extension {
 	 * Formats a currency.
 	 * @return string Formatted currency.
 	 */
-	public function formatCurrency($value, $currency, $locale = null) {
+	public function formatCurrency($value, $currency = null, $locale = null) {
 		return $this->getFormattedCurrency($value, $locale, $currency);
 	}
 
@@ -150,7 +164,7 @@ class FormatNumberExtension extends \Twig_Extension {
 	 * @param string $currency Currency. See {@link http://php.net/manual/numberformatter.formatcurrency.php}.
 	 * @return string Formatted currency.
 	 */
-	protected function getFormattedCurrency($value, $locale, $currency) {
+	protected function getFormattedCurrency($value, $locale = null, $currency = null) {
 		if ($value === null) {
 			return null;
 		}
@@ -158,7 +172,12 @@ class FormatNumberExtension extends \Twig_Extension {
 		$localeToUse = !empty($locale) ? $locale : $this->locale;
 		$formatter = new \NumberFormatter($localeToUse, \NumberFormatter::CURRENCY);
 
-		$result = $formatter->formatCurrency($value, $currency);
+		$currencyToUse = !empty($currency) ? $currency : $this->currency;
+		if (empty($currencyToUse)) {
+			throw new \InvalidArgumentException('No currency has been set.');
+		}
+
+		$result = $formatter->formatCurrency($value, $currencyToUse);
 		if ($result === false) {
 			throw new \InvalidArgumentException(sprintf('The value "%s" of type %s cannot be formatted.', $value, gettype($value)));
 		}

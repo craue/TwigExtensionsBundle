@@ -123,12 +123,14 @@ Providing helpers for implementing a language change mechanism and handling loca
 
 	<h2>with the current locale</h2>
 	thousands separator: {{ someNumber | craue_number }}<br />
-	currency: {{ someNumber | craue_currency('USD') }}<br />
+	default currency: {{ someNumber | craue_currency }}<br />
+	specific currency: {{ someNumber | craue_currency('EUR') }}<br />
 	spelled out number: {{ someNumber | craue_spellout }}
 
 	<h2>with a specific locale</h2>
 	thousands separator: {{ someNumber | craue_number('de-DE') }}<br />
-	currency: {{ someNumber | craue_currency('EUR', 'de-DE') }}<br />
+	default currency: {{ someNumber | craue_currency(null, 'de-DE') }}<br />
+	specific currency: {{ someNumber | craue_currency('EUR', 'de-DE') }}<br />
 	spelled out number: {{ someNumber | craue_spellout('de-DE') }}
 
 ## ChangeLanguageExtension
@@ -162,6 +164,11 @@ to build links containing the current locale.
 	; app/config/parameters.ini
 	craue_twig_extensions.formatDateTime.datetype="full"
 	craue_twig_extensions.formatDateTime.timetype="short"
+
+## FormatNumberExtension
+
+	; app/config/parameters.ini
+	craue_twig_extensions.formatNumber.currency="EUR"
 
 ## ChangeLanguageExtension
 

@@ -36,6 +36,7 @@
 
 		<!-- FormatNumberExtension -->
 		<parameter key="craue_twig_extensions.formatNumber.class">Craue\TwigExtensionsBundle\Twig\Extension\FormatNumberExtension</parameter>
+		<parameter key="craue_twig_extensions.formatNumber.currency" />
 		<parameter key="craue_twig_extensions.formatNumber.numberFilterAlias" />
 		<parameter key="craue_twig_extensions.formatNumber.currencyFilterAlias" />
 		<parameter key="craue_twig_extensions.formatNumber.spelloutFilterAlias" />
@@ -112,6 +113,9 @@
 			<tag name="twig.extension" />
 			<call method="setLocaleFromSession">
 				<argument type="service" id="session" on-invalid="ignore" />
+			</call>
+			<call method="setCurrency">
+				<argument>%craue_twig_extensions.formatNumber.currency%</argument>
 			</call>
 			<call method="setAliases">
 				<argument>%craue_twig_extensions.formatNumber.numberFilterAlias%</argument>
