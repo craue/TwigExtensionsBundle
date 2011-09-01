@@ -152,8 +152,8 @@ class FormatDateTimeExtension extends \Twig_Extension {
 	 * If the value is null also null will be returned.
 	 * @param mixed $value Date/time value to be formatted using {@link http://php.net/manual/intldateformatter.format.php}.
 	 * @param string $locale Locale to be used with {@link http://php.net/manual/class.intldateformatter.php}.
-	 * @param string $datetype Date format. Valid values are "none", "full", "long", "medium", or "short" (case insensitive).
-	 * @param string $timetype Time format. Valid values are "none", "full", "long", "medium", or "short" (case insensitive).
+	 * @param int $datetype Date format. See {@link http://php.net/manual/class.intldateformatter.php#intl.intldateformatter-constants} for valid values.
+	 * @param int $timetype Time format. See {@link http://php.net/manual/class.intldateformatter.php#intl.intldateformatter-constants} for valid values.
 	 * @return string Formatted date/time.
 	 */
 	protected function getFormattedDateTime($value, $locale, $datetype, $timetype) {
@@ -161,10 +161,9 @@ class FormatDateTimeExtension extends \Twig_Extension {
 			return null;
 		}
 
+		$valueToUse = $value;
 		$localeToUse = !empty($locale) ? $locale : $this->locale;
 		$formatter = new \IntlDateFormatter($localeToUse, $datetype, $timetype);
-
-		$valueToUse = $value;
 
 		// IntlDateFormatter#format() doesn't support DateTime objects prior to PHP 5.3.4 (http://php.net/manual/intldateformatter.format.php)
 		if ($valueToUse instanceof \DateTime) {
