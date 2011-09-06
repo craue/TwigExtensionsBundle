@@ -17,6 +17,7 @@
 		<!-- ArrayHelperExtension -->
 		<parameter key="craue_twig_extensions.arrayHelper.class">Craue\TwigExtensionsBundle\Twig\Extension\ArrayHelperExtension</parameter>
 		<parameter key="craue_twig_extensions.arrayHelper.withoutAlias" />
+		<parameter key="craue_twig_extensions.arrayHelper.translateArrayAlias" />
 
 		<!-- FormExtension -->
 		<parameter key="craue_twig_extensions.form.class">Craue\TwigExtensionsBundle\Twig\Extension\FormExtension</parameter>
@@ -67,8 +68,12 @@
 		<!-- ArrayHelperExtension -->
 		<service id="twig.extension.craue_arrayHelper" class="%craue_twig_extensions.arrayHelper.class%">
 			<tag name="twig.extension" />
-			<call method="setAlias">
+			<call method="setTranslator">
+				<argument type="service" id="translator" on-invalid="ignore" />
+			</call>
+			<call method="setAliases">
 				<argument>%craue_twig_extensions.arrayHelper.withoutAlias%</argument>
+				<argument>%craue_twig_extensions.arrayHelper.translateArrayAlias%</argument>
 			</call>
 		</service>
 

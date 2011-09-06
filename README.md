@@ -21,7 +21,8 @@ instead.
 
 ## ArrayHelperExtension
 
-Provides a `without` filter wrapping PHP's `array_diff` function.
+Provides a `without` filter wrapping PHP's `array_diff` function and a `translateArray` filter which translates all
+entries in an array.
 
 ## FormExtension
 
@@ -90,6 +91,8 @@ Providing helpers for implementing a language change mechanism and handling loca
 	{{ anArray | craue_without(aValueOrAnArray) | join(', ') }}<br/ >
 	{{ ['red', 'green', 'yellow', 'blue'] | craue_without('yellow') | join(', ') }} will print "red, green, blue"<br/ >
 	{{ ['red', 'green', 'yellow', 'blue'] | craue_without(['yellow', 'black', 'red']) | join(', ') }} will print "green, blue"
+
+	{{ anArray | craue_translateArray() | join(', ') }}<br/ >
 
 ## FormExtension
 
@@ -217,6 +220,7 @@ Similar to the DecorateEmptyValueExtension you can define an alias:
 
 	; app/config/parameters.ini
 	craue_twig_extensions.arrayHelper.withoutAlias="without"
+	craue_twig_extensions.arrayHelper.translateArrayAlias="translateArray"
 
 But, again, pay attention to not accidentally override built-in filters, although you can do it intentionally.
 
