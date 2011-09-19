@@ -31,7 +31,9 @@ using the `cloneForm` function.
 
 ## StringHelperExtension
 
-Provides a `trailingDot` filter for ensuring that a text ends with a dot. This comes in handy when using error messages
+Provides a `substr` function wrapping PHP's `substr` function.
+
+Also provides a `trailingDot` filter for ensuring that a text ends with a dot. This comes in handy when using error messages
 (e.g. for validation) of vendor bundles (which are written like sentences but are missing the trailing dots) together
 with your own ones (which should include the trailing dot).
 
@@ -105,6 +107,11 @@ Providing helpers for implementing a language change mechanism and handling loca
 	{% endfor %}
 
 ## StringHelperExtension
+
+	{{ craue_substr('bla', 2) }} will print "a"<br/ >
+	{{ craue_substr('bla', 0, 1) }} will print "b"<br/ >
+	{{ craue_substr('bla', 1, 1) }} will print "l"<br/ >
+	{{ craue_substr('bla', 1, 2) }} will print "la"
 
 	{{ aString | craue_trailingDot }}<br/ >
 	{{ 'This text should end with a dot' | craue_trailingDot }}<br/ >
@@ -237,14 +244,16 @@ But, again, pay attention to not accidentally override built-in functions, altho
 
 ## StringHelperExtension
 
-### Alias
+### Aliases
 
-Similar to the DecorateEmptyValueExtension you can define an alias:
+Similar to the DecorateEmptyValueExtension you can define aliases:
 
 	; app/config/parameters.ini
+	craue_twig_extensions.stringHelper.substrAlias="substr"
 	craue_twig_extensions.stringHelper.trailingDotAlias="trailingDot"
 
-But, again, pay attention to not accidentally override built-in filters, although you can do it intentionally.
+But, again, pay attention to not accidentally override built-in filters/functions, although you can do it
+intentionally.
 
 ## FormatDateTimeExtension
 

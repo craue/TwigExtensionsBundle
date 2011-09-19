@@ -22,11 +22,20 @@ class StringHelperExtension extends \Twig_Extension {
 	protected $trailingDotAlias = null;
 
 	/**
-	 * @param string $trailingDotAlias Alias for the trailingDot filter.
+	 * @var string
 	 */
-	public function setAlias($trailingDotAlias = null) {
+	protected $substrAlias = null;
+
+	/**
+	 * @param string $trailingDotAlias Alias for the trailingDot filter.
+	 * @param string $substrAlias Alias for the substr filter.
+	 */
+	public function setAliases($trailingDotAlias = null, $substrAlias = null) {
 		if (!empty($trailingDotAlias)) {
 			$this->trailingDotAlias = $trailingDotAlias;
+		}
+		if (!empty($substrAlias)) {
+			$this->substrAlias = $substrAlias;
 		}
 	}
 
@@ -50,6 +59,21 @@ class StringHelperExtension extends \Twig_Extension {
 		}
 
 		return $filters;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public function getFunctions() {
+		$functions = array();
+
+		$substrFunction = new \Twig_Filter_Function('substr');
+		$functions['craue_substr'] = $substrFunction;
+		if (!empty($this->substrAlias)) {
+			$functions[$this->substrAlias] = $substrFunction;
+		}
+
+		return $functions;
 	}
 
 	/**

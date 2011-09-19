@@ -26,6 +26,7 @@
 		<!-- StringHelperExtension -->
 		<parameter key="craue_twig_extensions.stringHelper.class">Craue\TwigExtensionsBundle\Twig\Extension\StringHelperExtension</parameter>
 		<parameter key="craue_twig_extensions.stringHelper.trailingDotAlias" />
+		<parameter key="craue_twig_extensions.stringHelper.substrAlias" />
 
 		<!-- FormatDateTimeExtension -->
 		<parameter key="craue_twig_extensions.formatDateTime.class">Craue\TwigExtensionsBundle\Twig\Extension\FormatDateTimeExtension</parameter>
@@ -91,8 +92,9 @@
 		<!-- StringHelperExtension -->
 		<service id="twig.extension.craue_stringHelper" class="%craue_twig_extensions.stringHelper.class%">
 			<tag name="twig.extension" />
-			<call method="setAlias">
+			<call method="setAliases">
 				<argument>%craue_twig_extensions.stringHelper.trailingDotAlias%</argument>
+				<argument>%craue_twig_extensions.stringHelper.substrAlias%</argument>
 			</call>
 		</service>
 
