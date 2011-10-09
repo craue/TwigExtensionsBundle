@@ -4,7 +4,7 @@
 <ul>
 	{% for locale in craue_availableLocales %}
 		<li>
-			{%- if locale == app.session.locale -%}
+			{%- if locale == app.request.locale -%}
 				{%- set craue_language_iscurrent = true -%}
 				{{- block('craue_language_link_text') -}}
 			{%- else -%}

@@ -104,8 +104,8 @@
 				<argument>%craue_twig_extensions.formatDateTime.datetype%</argument>
 				<argument>%craue_twig_extensions.formatDateTime.timetype%</argument>
 			</call>
-			<call method="setLocaleFromSession">
-				<argument type="service" id="session" on-invalid="ignore" />
+			<call method="setCurrentLocale">
+				<argument type="service" id="service_container" />
 			</call>
 			<call method="setAliases">
 				<argument>%craue_twig_extensions.formatDateTime.dateFilterAlias%</argument>
@@ -117,8 +117,8 @@
 		<!-- FormatNumberExtension -->
 		<service id="twig.extension.craue_formatNumber" class="%craue_twig_extensions.formatNumber.class%">
 			<tag name="twig.extension" />
-			<call method="setLocaleFromSession">
-				<argument type="service" id="session" on-invalid="ignore" />
+			<call method="setCurrentLocale">
+				<argument type="service" id="service_container" />
 			</call>
 			<call method="setCurrency">
 				<argument>%craue_twig_extensions.formatNumber.currency%</argument>
@@ -136,8 +136,8 @@
 			<call method="setAvailableLocales">
 				<argument>%craue_twig_extensions.changeLanguage.availableLocales%</argument>
 			</call>
-			<call method="setSession">
-				<argument type="service" id="session" on-invalid="ignore" />
+			<call method="setCurrentLocale">
+				<argument type="service" id="service_container" />
 			</call>
 			<call method="setShowForeignLanguageNames">
 				<argument>%craue_twig_extensions.changeLanguage.showForeignLanguageNames%</argument>

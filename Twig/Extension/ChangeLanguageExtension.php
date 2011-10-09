@@ -2,8 +2,6 @@
 
 namespace Craue\TwigExtensionsBundle\Twig\Extension;
 
-use Symfony\Component\HttpFoundation\Session;
-
 /**
  * Twig extension providing helpers for implementing a language change mechanism and handling localized routes.
  *
@@ -12,17 +10,12 @@ use Symfony\Component\HttpFoundation\Session;
  * @copyright 2011 Christian Raue
  * @license http://www.opensource.org/licenses/mit-license.php MIT License
  */
-class ChangeLanguageExtension extends \Twig_Extension {
+class ChangeLanguageExtension extends AbstractLocaleAwareExtension {
 
 	/**
 	 * @var array
 	 */
 	protected $availableLocales = array();
-
-	/**
-	 * @var Session
-	 */
-	protected $session;
 
 	/**
 	 * @var boolean
@@ -55,16 +48,6 @@ class ChangeLanguageExtension extends \Twig_Extension {
 	 */
 	public function setAvailableLocales(array $availableLocales = array()) {
 		$this->availableLocales = $availableLocales;
-	}
-
-	/**
-	 * Sets the current session.
-	 * @param Session $session
-	 */
-	public function setSession(Session $session = null) {
-		if ($session !== null) {
-			$this->session = $session;
-		}
 	}
 
 	/**
@@ -159,14 +142,7 @@ class ChangeLanguageExtension extends \Twig_Extension {
 	 * @return string
 	 */
 	public function getLanguageName($locale) {
-		if ($this->showForeignLanguageNames === true) {
-			$localeToUse = $locale;
-		} else {
-			if ($this->session === null) {
-				throw new \RuntimeException('No session available.');
-			}
-			$localeToUse = $this->session->getLocale();
-		}
+		$localeToUse = $this->showForeignLanguageNames === true ? $locale : $this->getLocale();
 
 		$languageName = \Locale::getDisplayLanguage($locale, $localeToUse);
 

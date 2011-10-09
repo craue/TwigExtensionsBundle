@@ -2,8 +2,6 @@
 
 namespace Craue\TwigExtensionsBundle\Twig\Extension;
 
-use Symfony\Component\HttpFoundation\Session;
-
 /**
  * Twig extension providing filters for locale-aware formatting of date, time, and date/time values.
  *
@@ -11,12 +9,7 @@ use Symfony\Component\HttpFoundation\Session;
  * @copyright 2011 Christian Raue
  * @license http://www.opensource.org/licenses/mit-license.php MIT License
  */
-class FormatDateTimeExtension extends \Twig_Extension {
-
-	/**
-	 * @var string
-	 */
-	protected $locale = 'en-US';
+class FormatDateTimeExtension extends AbstractLocaleAwareExtension {
 
 	/**
 	 * @var integer
@@ -70,16 +63,6 @@ class FormatDateTimeExtension extends \Twig_Extension {
 		}
 		if (!empty($dateTimeFilterAlias)) {
 			$this->dateTimeFilterAlias = $dateTimeFilterAlias;
-		}
-	}
-
-	/**
-	 * Applies the current session's locale.
-	 * @param Session $session
-	 */
-	public function setLocaleFromSession(Session $session = null) {
-		if ($session !== null) {
-			$this->locale = $session->getLocale();
 		}
 	}
 
@@ -162,7 +145,7 @@ class FormatDateTimeExtension extends \Twig_Extension {
 		}
 
 		$valueToUse = $value;
-		$localeToUse = !empty($locale) ? $locale : $this->locale;
+		$localeToUse = !empty($locale) ? $locale : $this->getLocale();
 		$formatter = new \IntlDateFormatter($localeToUse, $datetype, $timetype);
 
 		// IntlDateFormatter#format() doesn't support DateTime objects prior to PHP 5.3.4 (http://php.net/manual/intldateformatter.format.php)

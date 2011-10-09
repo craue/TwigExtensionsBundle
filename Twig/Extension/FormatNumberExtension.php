@@ -2,8 +2,6 @@
 
 namespace Craue\TwigExtensionsBundle\Twig\Extension;
 
-use Symfony\Component\HttpFoundation\Session;
-
 /**
  * Twig extension providing filters for locale-aware formatting of numbers and currencies.
  *
@@ -11,12 +9,7 @@ use Symfony\Component\HttpFoundation\Session;
  * @copyright 2011 Christian Raue
  * @license http://www.opensource.org/licenses/mit-license.php MIT License
  */
-class FormatNumberExtension extends \Twig_Extension {
-
-	/**
-	 * @var string
-	 */
-	protected $locale = 'en-US';
+class FormatNumberExtension extends AbstractLocaleAwareExtension {
 
 	/**
 	 * @var string
@@ -61,16 +54,6 @@ class FormatNumberExtension extends \Twig_Extension {
 		}
 		if (!empty($spelloutFilterAlias)) {
 			$this->spelloutFilterAlias = $spelloutFilterAlias;
-		}
-	}
-
-	/**
-	 * Applies the current session's locale.
-	 * @param Session $session
-	 */
-	public function setLocaleFromSession(Session $session = null) {
-		if ($session !== null) {
-			$this->locale = $session->getLocale();
 		}
 	}
 
@@ -145,7 +128,7 @@ class FormatNumberExtension extends \Twig_Extension {
 			return null;
 		}
 
-		$localeToUse = !empty($locale) ? $locale : $this->locale;
+		$localeToUse = !empty($locale) ? $locale : $this->getLocale();
 		$formatter = new \NumberFormatter($localeToUse, $style);
 
 		$result = $formatter->format($value);
@@ -169,7 +152,7 @@ class FormatNumberExtension extends \Twig_Extension {
 			return null;
 		}
 
-		$localeToUse = !empty($locale) ? $locale : $this->locale;
+		$localeToUse = !empty($locale) ? $locale : $this->getLocale();
 		$formatter = new \NumberFormatter($localeToUse, \NumberFormatter::CURRENCY);
 
 		$currencyToUse = !empty($currency) ? $currency : $this->currency;
