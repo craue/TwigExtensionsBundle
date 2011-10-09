@@ -160,16 +160,6 @@ There's a Twig template included which you can use to render a "change language"
 This will render a list of links to the current route in all defined languages. Wrap it in a div to style it via CSS.
 Take a look at the template if you want to customize it.
 
-Additionally, instead of
-
-	<a href="{{ path('route', {'_locale': app.session.locale}) }}">text</a>
-
-you can use
-
-	<a href="{{ craue_localizedPath('route') }}">text</a>
-
-to build links containing the current locale.
-
 # Set/override default values
 
 ## DecorateEmptyValueExtension
@@ -298,9 +288,7 @@ Again, you can define aliases:
 
 	; app/config/parameters.ini
 	craue_twig_extensions.changeLanguage.languageNameAlias=
-	craue_twig_extensions.changeLanguage.localizedPathAlias="path"
 	craue_twig_extensions.changeLanguage.cleanRouteParametersAlias=
 	craue_twig_extensions.changeLanguage.availableLocalesAlias=
 
-Don't accidentally override built-in filters/functions/globals, although you can do it intentionally, e.g. by setting
-the localizedPathAlias to `"path"`.
+Don't accidentally override built-in filters/functions/globals, although you can do it intentionally.

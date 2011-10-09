@@ -49,7 +49,6 @@
 		<parameter key="craue_twig_extensions.changeLanguage.showForeignLanguageNames">true</parameter>
 		<parameter key="craue_twig_extensions.changeLanguage.showFirstUppercase">false</parameter>
 		<parameter key="craue_twig_extensions.changeLanguage.languageNameAlias" />
-		<parameter key="craue_twig_extensions.changeLanguage.localizedPathAlias" />
 		<parameter key="craue_twig_extensions.changeLanguage.cleanRouteParametersAlias" />
 		<parameter key="craue_twig_extensions.changeLanguage.availableLocalesAlias" />
 	</parameters>
@@ -137,9 +136,6 @@
 			<call method="setAvailableLocales">
 				<argument>%craue_twig_extensions.changeLanguage.availableLocales%</argument>
 			</call>
-			<call method="setRouter">
-				<argument type="service" id="router" on-invalid="ignore" />
-			</call>
 			<call method="setSession">
 				<argument type="service" id="session" on-invalid="ignore" />
 			</call>
@@ -151,7 +147,6 @@
 			</call>
 			<call method="setAliases">
 				<argument>%craue_twig_extensions.changeLanguage.languageNameAlias%</argument>
-				<argument>%craue_twig_extensions.changeLanguage.localizedPathAlias%</argument>
 				<argument>%craue_twig_extensions.changeLanguage.cleanRouteParametersAlias%</argument>
 				<argument>%craue_twig_extensions.changeLanguage.availableLocalesAlias%</argument>
 			</call>
