@@ -22,7 +22,7 @@ abstract class AbstractLocaleAwareExtension extends \Twig_Extension {
 	/**
 	 * @param mixed $requestOrServiceContainer Can be a locale string, the request, or the service container.
 	 */
-	public function setCurrentLocale($value) {
+	public function setLocale($value) {
 		if ($value === null) {
 			return;
 		}
