@@ -20,7 +20,7 @@ abstract class AbstractLocaleAwareExtension extends \Twig_Extension {
 	protected $locale = 'en-US';
 
 	/**
-	 * @param mixed $requestOrServiceContainer Can be a locale string, the request, or the service container.
+	 * @param mixed $value Can be a locale string, the request, or the service container.
 	 */
 	public function setLocale($value) {
 		if ($value === null) {
