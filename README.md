@@ -98,11 +98,11 @@ Or by using the `deps` file:
 
 ## ArrayHelperExtension
 
-	{{ anArray | craue_without(aValueOrAnArray) | join(', ') }}<br/ >
-	{{ ['red', 'green', 'yellow', 'blue'] | craue_without('yellow') | join(', ') }} will print "red, green, blue"<br/ >
+	{{ anArray | craue_without(aValueOrAnArray) | join(', ') }}<br />
+	{{ ['red', 'green', 'yellow', 'blue'] | craue_without('yellow') | join(', ') }} will print "red, green, blue"<br />
 	{{ ['red', 'green', 'yellow', 'blue'] | craue_without(['yellow', 'black', 'red']) | join(', ') }} will print "green, blue"
 
-	{{ anArray | craue_translateArray() | join(', ') }}<br/ >
+	{{ anArray | craue_translateArray() | join(', ') }}<br />
 
 ## FormExtension
 
@@ -111,18 +111,18 @@ Or by using the `deps` file:
 		<form action={{ path('my_route', {'id': myEntity.getId()}) }} method="post" {{ form_enctype(myFormInstance) }}>
 			{{ form_widget(myFormInstance) }}
 			<input type="submit" />
-		</form
+		</form>
 	{% endfor %}
 
 ## StringHelperExtension
 
-	{{ craue_substr('bla', 2) }} will print "a"<br/ >
-	{{ craue_substr('bla', 0, 1) }} will print "b"<br/ >
-	{{ craue_substr('bla', 1, 1) }} will print "l"<br/ >
+	{{ craue_substr('bla', 2) }} will print "a"<br />
+	{{ craue_substr('bla', 0, 1) }} will print "b"<br />
+	{{ craue_substr('bla', 1, 1) }} will print "l"<br />
 	{{ craue_substr('bla', 1, 2) }} will print "la"
 
-	{{ aString | craue_trailingDot }}<br/ >
-	{{ 'This text should end with a dot' | craue_trailingDot }}<br/ >
+	{{ aString | craue_trailingDot }}<br />
+	{{ 'This text should end with a dot' | craue_trailingDot }}<br />
 	{{ 'This text should end with exactly one dot.' | craue_trailingDot }}
 
 ## FormatDateTimeExtension
