@@ -166,6 +166,7 @@ class ChangeLanguageExtension extends AbstractLocaleAwareExtension {
 	public function cleanRouteParameters(array $parameters) {
 		unset($parameters['_controller']);
 		unset($parameters['_route']);
+		unset($parameters['_route_params']);
 		unset($parameters['_locale']);
 		unset($parameters['_template']);
 		unset($parameters['_template_vars']);
