@@ -4,12 +4,11 @@
 <ul>
 	{% for locale in craue_availableLocales %}
 		<li>
-			{%- if locale == app.request.locale -%}
-				{%- set craue_language_iscurrent = true -%}
+			{%- set craue_language_iscurrent = locale == app.request.locale -%}
+			{%- if craue_language_iscurrent -%}
 				{{- block('craue_language_link_text') -}}
 			{%- else -%}
 				<a href="{{ block('craue_language_link_target') }}">
-					{%- set craue_language_iscurrent = false -%}
 					{{- block('craue_language_link_text') -}}
 				</a>
 			{%- endif -%}
