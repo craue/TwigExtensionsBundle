@@ -288,7 +288,6 @@ Again, you can define aliases:
 
 	; app/config/parameters.ini
 	craue_twig_extensions.changeLanguage.languageNameAlias=
-	craue_twig_extensions.changeLanguage.cleanRouteParametersAlias=
 	craue_twig_extensions.changeLanguage.availableLocalesAlias=
 
-Don't accidentally override built-in filters/functions/globals, although you can do it intentionally.
+Don't accidentally override built-in functions or globals, although you can do it intentionally.

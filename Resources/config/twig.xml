@@ -49,7 +49,6 @@
 		<parameter key="craue_twig_extensions.changeLanguage.showForeignLanguageNames">true</parameter>
 		<parameter key="craue_twig_extensions.changeLanguage.showFirstUppercase">false</parameter>
 		<parameter key="craue_twig_extensions.changeLanguage.languageNameAlias" />
-		<parameter key="craue_twig_extensions.changeLanguage.cleanRouteParametersAlias" />
 		<parameter key="craue_twig_extensions.changeLanguage.availableLocalesAlias" />
 	</parameters>
 
@@ -147,7 +146,6 @@
 			</call>
 			<call method="setAliases">
 				<argument>%craue_twig_extensions.changeLanguage.languageNameAlias%</argument>
-				<argument>%craue_twig_extensions.changeLanguage.cleanRouteParametersAlias%</argument>
 				<argument>%craue_twig_extensions.changeLanguage.availableLocalesAlias%</argument>
 			</call>
 		</service>

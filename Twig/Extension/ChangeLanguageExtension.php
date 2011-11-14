@@ -35,11 +35,6 @@ class ChangeLanguageExtension extends AbstractLocaleAwareExtension {
 	/**
 	 * @var string
 	 */
-	protected $cleanRouteParametersAlias = null;
-
-	/**
-	 * @var string
-	 */
 	protected $availableLocalesAlias = null;
 
 	/**
@@ -69,16 +64,11 @@ class ChangeLanguageExtension extends AbstractLocaleAwareExtension {
 
 	/**
 	 * @param string $languageNameAlias Alias for the languageName function.
-	 * @param string $cleanRouteParametersAlias Alias for the cleanRouteParameters filter.
 	 * @param string $availableLocalesAlias Alias for the availableLocales global variable.
 	 */
-	public function setAliases($languageNameAlias = null, $cleanRouteParametersAlias = null,
-			$availableLocalesAlias = null) {
+	public function setAliases($languageNameAlias = null, $availableLocalesAlias = null) {
 		if (!empty($languageNameAlias)) {
 			$this->languageNameAlias = $languageNameAlias;
-		}
-		if (!empty($cleanRouteParametersAlias)) {
-			$this->cleanRouteParametersAlias = $cleanRouteParametersAlias;
 		}
 		if (!empty($availableLocalesAlias)) {
 			$this->availableLocalesAlias = $availableLocalesAlias;
@@ -98,21 +88,6 @@ class ChangeLanguageExtension extends AbstractLocaleAwareExtension {
 		}
 
 		return $functions;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	public function getFilters() {
-		$filters = array();
-
-		$cleanRouteParametersMethod = new \Twig_Filter_Method($this, 'cleanRouteParameters');
-		$filters['craue_cleanRouteParameters'] = $cleanRouteParametersMethod;
-		if (!empty($this->cleanRouteParametersAlias)) {
-			$filters[$this->cleanRouteParametersAlias] = $cleanRouteParametersMethod;
-		}
-
-		return $filters;
 	}
 
 	/**
@@ -156,22 +131,6 @@ class ChangeLanguageExtension extends AbstractLocaleAwareExtension {
 		}
 
 		return $languageName;
-	}
-
-	/**
-	 * Removes some special request attributes from the current route.
-	 * @param array $parameters Current route parameters.
-	 * @return array Filtered route parameters.
-	 */
-	public function cleanRouteParameters(array $parameters) {
-		unset($parameters['_controller']);
-		unset($parameters['_route']);
-		unset($parameters['_route_params']);
-		unset($parameters['_locale']);
-		unset($parameters['_template']);
-		unset($parameters['_template_vars']);
-		unset($parameters['_template_default_vars']);
-		return $parameters;
 	}
 
 }
