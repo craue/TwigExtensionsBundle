@@ -112,16 +112,21 @@ class ChangeLanguageExtension extends AbstractLocaleAwareExtension {
 	}
 
 	/**
-	 * Get the language name.
-	 * @param string $locale Locale to be used with {@link http://php.net/manual/locale.getdisplaylanguage.php}.
+	 * Get the corresponding language name for a locale.
+	 * If the given locale contains a region code the name of that region will be appended in parentheses.
+	 * @param string $locale Locale to be used with {@link http://php.net/manual/locale.getdisplayname.php}.
 	 * @return string
 	 */
 	public function getLanguageName($locale) {
-		$localeToUse = $this->showForeignLanguageNames === true ? $locale : $this->getLocale();
+		if (empty($locale)) {
+			return null;
+		}
 
-		$languageName = \Locale::getDisplayLanguage($locale, $localeToUse);
+		$localeToUse = $this->showForeignLanguageNames ? $locale : $this->getLocale();
 
-		if ($this->showFirstUppercase === true) {
+		$languageName = \Locale::getDisplayName($locale, $localeToUse);
+
+		if ($this->showFirstUppercase) {
 			if (!extension_loaded('mbstring')) {
 				throw new \RuntimeException('PHP extension "mbstring" is not loaded. Either load it or disable the "showFirstUppercase" option.');
 			}
