@@ -1,0 +1,7 @@
+red: rot
+green: grün
+yellow: gelb
+
+thing.red: ein rotes %thing%
+thing.green: ein grünes %thing%
+thing.yellow: ein gelbes %thing%
