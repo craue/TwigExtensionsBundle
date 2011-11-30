@@ -46,6 +46,36 @@ class ArrayHelperExtensionTest extends \PHPUnit_Framework_TestCase {
 		$this->ext->translateArray($case['entries']);
 	}
 
+	public function testWithout_withoutArray() {
+		$case = array(
+			'entries' => array('red', 'green', 'yellow', 'blue'),
+			'without' => array('yellow', 'black', 'red'),
+		);
+
+		$this->assertSame(array_diff($case['entries'], $case['without']),
+				$this->ext->without($case['entries'], $case['without']));
+	}
+
+	public function testWithout_withoutScalar() {
+		$case = array(
+			'entries' => array('red', 'green', 'yellow', 'blue'),
+			'without' => 'yellow',
+		);
+
+		$this->assertSame(array_diff($case['entries'], array($case['without'])),
+				$this->ext->without($case['entries'], $case['without']));
+	}
+
+	public function testWithout_keepIndexes() {
+		$case = array(
+			'entries' => array('red', 'green', 'yellow', 'blue'),
+			'without' => 'yellow',
+			'wrongResult' => array('red', 'green', 'blue'),
+		);
+
+		$this->assertNotSame($case['wrongResult'], $this->ext->without($case['entries'], $case['without']));
+	}
+
 	protected function getMockedTranslator(array $case) {
 		$translator = $this->getMock('Symfony\Component\Translation\TranslatorInterface');
 		$translator
