@@ -47,7 +47,7 @@ Provides filters for locale-aware formatting of numbers and currencies.
 
 ## ChangeLanguageExtension
 
-Providing helpers for implementing a language change mechanism and handling localized routes.
+Providing helpers for implementing a language change mechanism.
 
 # Installation
 
@@ -153,7 +153,7 @@ Or by using the `deps` file:
 
 ## ChangeLanguageExtension
 
-There's a Twig template included which you can use to render a "change language" menu like this:
+There's a Twig template provided which you can use to render a "change language" menu like this:
 
 	{% include 'CraueTwigExtensionsBundle:ChangeLanguage:changeLanguage.html.twig' %}
 
