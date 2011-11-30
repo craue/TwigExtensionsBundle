@@ -23,6 +23,13 @@ class ArrayHelperExtensionIntegrationTest extends TwigBasedTestCase {
 	public function testTranslateArray() {
 		$cases = array(
 			array(
+				'entries' => array(),
+				'parameters' => array(),
+				'domain' => null,
+				'locale' => null,
+				'result' => '',
+			),
+			array(
 				'entries' => array('red', 'green', 'yellow'),
 				'parameters' => array(),
 				'domain' => null,

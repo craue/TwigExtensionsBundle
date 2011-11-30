@@ -22,30 +22,39 @@ class ArrayHelperExtensionTest extends \PHPUnit_Framework_TestCase {
 		$this->ext = new ArrayHelperExtension();
 	}
 
-	public function testTranslateArray() {
-		$cases = array(
-			array(
-				'entries' => array('red', 'green', 'yellow'),
-				'parameters' => array(),
-				'domain' => null,
-				'locale' => null,
-				'result' => array('red', 'green', 'yellow'),
-			),
+	public function testTranslateArray_passedArgument() {
+		$case = array(
+			'entries' => array('red', 'green', 'yellow'),
+			'parameters' => array('%thing%' => 'Haus'),
+			'domain' => 'messages',
+			'locale' => 'de',
 		);
 
-		foreach ($cases as $index => $case) {
-			$translator = $this->getMock('Symfony\Component\Translation\TranslatorInterface');
-			$translator
-				->expects($this->exactly(count($case['entries'])))
-				->method('trans')
-				->will($this->returnArgument(0))
-			;
-			$this->ext->setTranslator($translator);
+		$this->ext->setTranslator($this->getMockedTranslator($case));
+		$this->ext->translateArray($case['entries'], $case['parameters'], $case['domain'], $case['locale']);
+	}
 
-			$this->assertSame($case['result'],
-					$this->ext->translateArray($case['entries'], $case['parameters'], $case['domain'], $case['locale']),
-					'test case with index '.$index);
-		}
+	public function testTranslateArray_defaultArguments() {
+		$case = array(
+			'entries' => array('red', 'green', 'yellow'),
+			'parameters' => array(),
+			'domain' => 'messages',
+			'locale' => null,
+		);
+
+		$this->ext->setTranslator($this->getMockedTranslator($case));
+		$this->ext->translateArray($case['entries']);
+	}
+
+	protected function getMockedTranslator(array $case) {
+		$translator = $this->getMock('Symfony\Component\Translation\TranslatorInterface');
+		$translator
+			->expects($this->exactly(count($case['entries'])))
+			->method('trans')
+			->with($this->anything(), $case['parameters'], $case['domain'], $case['locale'])
+		;
+
+		return $translator;
 	}
 
 }
