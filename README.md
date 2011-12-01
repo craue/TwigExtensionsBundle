@@ -6,7 +6,8 @@ This bundle should be used in conjunction with Symfony2.
 
 ## DecorateEmptyValueExtension
 
-Provides an enhanced `default` filter to decorate empty values with a placeholder which can even be HTML.
+Provides an enhanced `default` filter, `craue_default`, to decorate empty values with a placeholder which can even be
+HTML.
 
 Usually, if you want to use HTML, e.g. the HTML entity "&mdash;", as value for the default filter in an HTML Twig
 template you have to do cumbersome
@@ -21,33 +22,38 @@ instead.
 
 ## ArrayHelperExtension
 
-Provides a `without` filter wrapping PHP's `array_diff` function and a `translateArray` filter which translates all
-entries in an array.
+Provides the filters
+
+ - `craue_without` wrapping PHP's `array_diff` function and
+ - `craue_translateArray` which translates all entries in an array.
 
 ## FormExtension
 
 Provides a mechanism to render a form several times on one page. This is done by cloning the form prior to rendering
-using the `cloneForm` function.
+using the `craue_cloneForm` function.
 
 ## StringHelperExtension
 
-Provides a `substr` function wrapping PHP's `substr` function.
+Provides the `craue_substr` function wrapping PHP's `substr` function.
 
-Also provides a `trailingDot` filter for ensuring that a text ends with a dot. This comes in handy when using error messages
-(e.g. for validation) of vendor bundles (which are written like sentences but are missing the trailing dots) together
-with your own ones (which should include the trailing dot).
+Also provides the `craue_trailingDot` filter for ensuring that a text ends with a dot.
+This comes in handy when using error messages (e.g. for validation) of vendor bundles (which are written like sentences
+but are missing the trailing dots) together with your own ones (which should include the trailing dot).
 
 ## FormatDateTimeExtension
 
-Provides filters for locale-aware formatting of date, time, and date/time values.
+Provides the filters `craue_date`, `craue_time`, and `craue_datetime` for locale-aware formatting of date, time, and
+date/time values.
 
 ## FormatNumberExtension
 
-Provides filters for locale-aware formatting of numbers and currencies.
+Provides the filters `craue_number`, `craue_currency`, and `craue_spellout` for locale-aware formatting of numbers and
+currencies.
 
 ## ChangeLanguageExtension
 
-Providing helpers for implementing a language change mechanism.
+Provides helpers (function `craue_languageName`, global `craue_availableLocales`) and templates for implementing a
+language change mechanism.
 
 # Installation
 
