@@ -27,6 +27,11 @@ class ArrayHelperExtension extends \Twig_Extension {
 	/**
 	 * @var string
 	 */
+	protected $replaceKeyAlias = null;
+
+	/**
+	 * @var string
+	 */
 	protected $translateArrayAlias = null;
 
 	public function setTranslator(TranslatorInterface $translator) {
@@ -35,11 +40,15 @@ class ArrayHelperExtension extends \Twig_Extension {
 
 	/**
 	 * @param string $withoutAlias Alias for the without filter.
+	 * @param string $replaceKeyAlias Alias for the replaceKey filter.
 	 * @param string $translateArrayAlias Alias for the translateArray filter.
 	 */
-	public function setAliases($withoutAlias = null, $translateArrayAlias = null) {
+	public function setAliases($withoutAlias = null, $replaceKeyAlias = null, $translateArrayAlias = null) {
 		if (!empty($withoutAlias)) {
 			$this->withoutAlias = $withoutAlias;
+		}
+		if (!empty($replaceKeyAlias)) {
+			$this->replaceKeyAlias = $replaceKeyAlias;
 		}
 		if (!empty($translateArrayAlias)) {
 			$this->translateArrayAlias = $translateArrayAlias;
@@ -65,6 +74,12 @@ class ArrayHelperExtension extends \Twig_Extension {
 			$filters[$this->withoutAlias] = $withoutMethod;
 		}
 
+		$replaceKeyMethod = new \Twig_Filter_Method($this, 'replaceKey');
+		$filters['craue_replaceKey'] = $replaceKeyMethod;
+		if (!empty($this->replaceKeyAlias)) {
+			$filters[$this->replaceKeyAlias] = $replaceKeyMethod;
+		}
+
 		$translateArrayMethod = new \Twig_Filter_Method($this, 'translateArray');
 		$filters['craue_translateArray'] = $translateArrayMethod;
 		if (!empty($this->translateArrayAlias)) {
@@ -77,7 +92,7 @@ class ArrayHelperExtension extends \Twig_Extension {
 	/**
 	 * @param mixed $entries All entries.
 	 * @param mixed $without Entries to be removed.
-	 * @return array Remaining entries of {@code $value} after removing the entries of {@code $without}.
+	 * @return array Remaining entries of {@code $entries} after removing the entries of {@code $without}.
 	 */
 	public function without($entries, $without) {
 		if (!is_array($without)) {
@@ -85,6 +100,16 @@ class ArrayHelperExtension extends \Twig_Extension {
 		}
 
 		return array_diff($this->convertToArray($entries), $without);
+	}
+
+	/**
+	 * @param mixed $entries All entries.
+	 * @param mixed $key Key of the entry to be merged.
+	 * @param mixed $value Value of the entry to be merged.
+	 * @return array Entries of {@code $entries} merged with an entry built from {@code $key} and {@code $value}.
+	 */
+	public function replaceKey($entries, $key, $value) {
+		return array_merge($this->convertToArray($entries), array($key => $value));
 	}
 
 	/**

@@ -24,7 +24,8 @@ instead.
 
 Provides the filters
 
- - `craue_without` wrapping PHP's `array_diff` function and
+ - `craue_without` wrapping PHP's `array_diff` function,
+ - `craue_replaceKey` which adds/replaces an array entry (whereupon the key can be a variable), and
  - `craue_translateArray` which translates all entries in an array.
 
 ## FormExtension
@@ -107,6 +108,10 @@ Or by using the `deps` file:
 	{{ anArray | craue_without(aValueOrAnArray) | join(', ') }}<br />
 	{{ ['red', 'green', 'yellow', 'blue'] | craue_without('yellow') | join(', ') }} will print "red, green, blue"<br />
 	{{ ['red', 'green', 'yellow', 'blue'] | craue_without(['yellow', 'black', 'red']) | join(', ') }} will print "green, blue"
+
+	{{ anArray | craue_replaceKey(key, value) | join(', ') }}<br />
+	{% set newKey = 'key3' %}
+	{{ {'key1': 'value1', 'key2': 'value2'} | craue_replaceKey(newKey, 'value3') | join(', ') }} will print "value1, value2, value3"
 
 	{{ anArray | craue_translateArray() | join(', ') }}<br />
 
@@ -231,6 +236,7 @@ Similar to the DecorateEmptyValueExtension you can define an alias:
 
 	; app/config/parameters.ini
 	craue_twig_extensions.arrayHelper.withoutAlias="without"
+	craue_twig_extensions.arrayHelper.replaceKeyAlias="replaceKey"
 	craue_twig_extensions.arrayHelper.translateArrayAlias="translateArray"
 
 But, again, pay attention to not accidentally override built-in filters, although you can do it intentionally.

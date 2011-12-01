@@ -88,4 +88,31 @@ class ArrayHelperExtensionIntegrationTest extends TwigBasedTestCase {
 		}
 	}
 
+	public function testReplaceKey() {
+		$cases = array(
+			array(
+				'entries' => array('key1' => 'value1', 'key2' => 'value2'),
+				'key' => 'key3',
+				'value' => 'value3',
+				'result' => 'value1, value2, value3',
+			),
+			array(
+				'entries' => array('key1' => 'value1', 'key2' => 'value2'),
+				'key' => 'key1',
+				'value' => 'value3',
+				'result' => 'value3, value2',
+			),
+		);
+
+		foreach ($cases as $index => $case) {
+			$this->assertSame($case['result'],
+					$this->getTwig()->render('IntegrationTestBundle:ArrayHelper:replaceKey.html.twig', array(
+						'entries' => $case['entries'],
+						'key' => $case['key'],
+						'value' => $case['value'],
+					)),
+					'test case with index '.$index);
+		}
+	}
+
 }
