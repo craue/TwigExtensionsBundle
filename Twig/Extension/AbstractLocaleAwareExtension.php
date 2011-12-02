@@ -3,7 +3,6 @@
 namespace Craue\TwigExtensionsBundle\Twig\Extension;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Common base class for Twig extensions dealing with the current locale.
@@ -20,7 +19,13 @@ abstract class AbstractLocaleAwareExtension extends \Twig_Extension {
 	protected $locale = 'en-US';
 
 	/**
-	 * @param mixed $value Can be a locale string, the request, or the service container.
+	 * @var ContainerInterface
+	 */
+	protected $container;
+
+	/**
+	 * @param mixed $value The service container or a locale string.
+	 * @throws \InvalidArgumentException
 	 */
 	public function setLocale($value) {
 		if ($value === null) {
@@ -32,19 +37,26 @@ abstract class AbstractLocaleAwareExtension extends \Twig_Extension {
 			return;
 		}
 
-		if ($value instanceof ContainerInterface && $value->isScopeActive('request') && $value->has('request')) {
-			$value = $value->get('request');
+		if ($value instanceof ContainerInterface) {
+			$this->container = $value;
+			return;
 		}
 
-		if ($value instanceof Request) {
-			$this->locale = $value->getLocale();
-		}
+		throw new \InvalidArgumentException(sprintf(
+				'Expected argument of either type "string" or "%s", but "%s" given.',
+				'Symfony\Component\DependencyInjection\ContainerInterface',
+				is_object($value) ? get_class($value) : gettype($value)
+		));
 	}
 
 	/**
 	 * @return string
 	 */
 	public function getLocale() {
+		if ($this->container !== null && $this->container->isScopeActive('request')) {
+			return $this->container->get('request')->getLocale();
+		}
+
 		return $this->locale;
 	}
 
