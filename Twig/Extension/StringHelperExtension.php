@@ -67,7 +67,7 @@ class StringHelperExtension extends \Twig_Extension {
 	public function getFunctions() {
 		$functions = array();
 
-		$substrFunction = new \Twig_Filter_Function('substr');
+		$substrFunction = new \Twig_Function_Function('substr');
 		$functions['craue_substr'] = $substrFunction;
 		if (!empty($this->substrAlias)) {
 			$functions[$this->substrAlias] = $substrFunction;
