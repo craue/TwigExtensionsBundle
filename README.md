@@ -208,98 +208,59 @@ With XML for example you can also set the keys to be more specific about the loc
 
 # Advanced stuff
 
-## DecorateEmptyValueExtension
+## Aliases
 
-### Alias
-
-You can define an alias for the filter if you don't like to write
+Optionally, you can define aliases for all provided filters/functions/globals to be used within your project.
+This allows you to use names you prefer instead of the pre-defined ones. E.g., if you don't like to write
 
 	{{ somevalue | craue_default }}
 
-all the time. Setting this to `"d"` for example with
+all the time, you may define an alias of `"d"` for the `craue_default` filter which allows you to write
+
+	{{ somevalue | d }}
+
+in your Twig templates. But pay attention to not accidentally override built-in filters/functions/globals, although you
+can do it intentionally.
+
+### DecorateEmptyValueExtension
 
 	; app/config/parameters.ini
 	craue_twig_extensions.decorateEmptyValue.filterAlias="d"
 
-allows you to write
-
-	{{ somevalue | d }}
-
-in your Twig Template. But pay attention to not accidentally override built-in filters, although you can do it
-intentionally, e.g. by setting the alias to `"default"`.
-
-## ArrayHelperExtension
-
-### Alias
-
-Similar to the DecorateEmptyValueExtension you can define an alias:
+### ArrayHelperExtension
 
 	; app/config/parameters.ini
 	craue_twig_extensions.arrayHelper.withoutAlias="without"
 	craue_twig_extensions.arrayHelper.replaceKeyAlias="replaceKey"
 	craue_twig_extensions.arrayHelper.translateArrayAlias="translateArray"
 
-But, again, pay attention to not accidentally override built-in filters, although you can do it intentionally.
-
-## FormExtension
-
-### Alias
-
-Similar to the DecorateEmptyValueExtension you can define an alias:
+### FormExtension
 
 	; app/config/parameters.ini
 	craue_twig_extensions.form.cloneFormAlias="cloneForm"
 
-But, again, pay attention to not accidentally override built-in functions, although you can do it intentionally.
-
-## StringHelperExtension
-
-### Aliases
-
-Similar to the DecorateEmptyValueExtension you can define aliases:
+### StringHelperExtension
 
 	; app/config/parameters.ini
 	craue_twig_extensions.stringHelper.substrAlias="substr"
 	craue_twig_extensions.stringHelper.trailingDotAlias="trailingDot"
 
-But, again, pay attention to not accidentally override built-in filters/functions, although you can do it
-intentionally.
-
-## FormatDateTimeExtension
-
-### Aliases
-
-Again, you can define an alias for each filter:
+### FormatDateTimeExtension
 
 	; app/config/parameters.ini
 	craue_twig_extensions.formatDateTime.dateFilterAlias="date"
 	craue_twig_extensions.formatDateTime.timeFilterAlias="time"
 	craue_twig_extensions.formatDateTime.dateTimeFilterAlias="datetime"
 
-Don't accidentally override built-in filters, although you can do it intentionally, e.g. by setting the
-dateFilterAlias to `"date"`.
-
-## FormatNumberExtension
-
-### Aliases
-
-Again, you can define an alias for each filter:
+### FormatNumberExtension
 
 	; app/config/parameters.ini
 	craue_twig_extensions.formatNumber.numberFilterAlias="number"
 	craue_twig_extensions.formatNumber.currencyFilterAlias="currency"
 	craue_twig_extensions.formatNumber.spelloutFilterAlias="spellout"
 
-Don't accidentally override built-in filters, although you can do it intentionally.
-
-## ChangeLanguageExtension
-
-### Aliases
-
-Again, you can define aliases:
+### ChangeLanguageExtension
 
 	; app/config/parameters.ini
-	craue_twig_extensions.changeLanguage.languageNameAlias=
-	craue_twig_extensions.changeLanguage.availableLocalesAlias=
-
-Don't accidentally override built-in functions or globals, although you can do it intentionally.
+	craue_twig_extensions.changeLanguage.languageNameAlias="languageName"
+	craue_twig_extensions.changeLanguage.availableLocalesAlias="availableLocales"
