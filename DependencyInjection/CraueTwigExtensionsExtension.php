@@ -43,7 +43,7 @@ class CraueTwigExtensionsExtension extends Extension {
 			if (in_array($ext, $availableExtensions)) {
 				$loader->load(sprintf('twig/%s.xml', $ext));
 			} else {
-                throw new \InvalidArgumentException(sprintf('Extension with name "%s" is invalid.', $ext));
+				throw new \InvalidArgumentException(sprintf('Extension with name "%s" is invalid.', $ext));
 			}
 		}
 	}
