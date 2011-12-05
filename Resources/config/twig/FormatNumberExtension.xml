@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+	Author: Christian Raue <christian.raue@gmail.com>
+	Copyright: 2011 Christian Raue
+	License: http://www.opensource.org/licenses/mit-license.php MIT License
+-->
+<container xmlns="http://symfony.com/schema/dic/services"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+	<parameters>
+		<parameter key="craue_twig_extensions.formatNumber.class">Craue\TwigExtensionsBundle\Twig\Extension\FormatNumberExtension</parameter>
+		<parameter key="craue_twig_extensions.formatNumber.currency" />
+		<parameter key="craue_twig_extensions.formatNumber.numberFilterAlias" />
+		<parameter key="craue_twig_extensions.formatNumber.currencyFilterAlias" />
+		<parameter key="craue_twig_extensions.formatNumber.spelloutFilterAlias" />
+	</parameters>
+
+	<services>
+		<service id="twig.extension.craue_formatNumber" class="%craue_twig_extensions.formatNumber.class%">
+			<tag name="twig.extension" />
+			<call method="setLocale">
+				<argument type="service" id="service_container" />
+			</call>
+			<call method="setCurrency">
+				<argument>%craue_twig_extensions.formatNumber.currency%</argument>
+			</call>
+			<call method="setAliases">
+				<argument>%craue_twig_extensions.formatNumber.numberFilterAlias%</argument>
+				<argument>%craue_twig_extensions.formatNumber.currencyFilterAlias%</argument>
+				<argument>%craue_twig_extensions.formatNumber.spelloutFilterAlias%</argument>
+			</call>
+		</service>
+	</services>
+
+</container>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+	Author: Christian Raue <christian.raue@gmail.com>
+	Copyright: 2011 Christian Raue
+	License: http://www.opensource.org/licenses/mit-license.php MIT License
+-->
+<container xmlns="http://symfony.com/schema/dic/services"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+	<parameters>
+		<parameter key="craue_twig_extensions.changeLanguage.class">Craue\TwigExtensionsBundle\Twig\Extension\ChangeLanguageExtension</parameter>
+		<parameter key="craue_twig_extensions.changeLanguage.availableLocales" type="collection" />
+		<parameter key="craue_twig_extensions.changeLanguage.showForeignLanguageNames">true</parameter>
+		<parameter key="craue_twig_extensions.changeLanguage.showFirstUppercase">false</parameter>
+		<parameter key="craue_twig_extensions.changeLanguage.languageNameAlias" />
+		<parameter key="craue_twig_extensions.changeLanguage.availableLocalesAlias" />
+	</parameters>
+
+	<services>
+		<service id="twig.extension.craue_changeLanguage" class="%craue_twig_extensions.changeLanguage.class%">
+			<tag name="twig.extension" />
+			<call method="setAvailableLocales">
+				<argument>%craue_twig_extensions.changeLanguage.availableLocales%</argument>
+			</call>
+			<call method="setLocale">
+				<argument type="service" id="service_container" />
+			</call>
+			<call method="setShowForeignLanguageNames">
+				<argument>%craue_twig_extensions.changeLanguage.showForeignLanguageNames%</argument>
+			</call>
+			<call method="setShowFirstUppercase">
+				<argument>%craue_twig_extensions.changeLanguage.showFirstUppercase%</argument>
+			</call>
+			<call method="setAliases">
+				<argument>%craue_twig_extensions.changeLanguage.languageNameAlias%</argument>
+				<argument>%craue_twig_extensions.changeLanguage.availableLocalesAlias%</argument>
+			</call>
+		</service>
+	</services>
+
+</container>

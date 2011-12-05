@@ -264,3 +264,19 @@ can do it intentionally.
 	; app/config/parameters.ini
 	craue_twig_extensions.changeLanguage.languageNameAlias="languageName"
 	craue_twig_extensions.changeLanguage.availableLocalesAlias="availableLocales"
+
+## Enabling only specific extensions
+
+By default, all provided extensions are enabled. If you're using only one or some of them, you may want to disable the
+others. The following enables them all, so remove the ones you don't need:
+
+	// app/config.yml
+	craue_twig_extensions:
+	  enable_only:
+	    - ArrayHelperExtension
+	    - ChangeLanguageExtension
+	    - DecorateEmptyValueExtension
+	    - FormatDateTimeExtension
+	    - FormatNumberExtension
+	    - FormExtension
+	    - StringHelperExtension

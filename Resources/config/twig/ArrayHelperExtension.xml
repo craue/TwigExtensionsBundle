@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+	Author: Christian Raue <christian.raue@gmail.com>
+	Copyright: 2011 Christian Raue
+	License: http://www.opensource.org/licenses/mit-license.php MIT License
+-->
+<container xmlns="http://symfony.com/schema/dic/services"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+	<parameters>
+		<parameter key="craue_twig_extensions.arrayHelper.class">Craue\TwigExtensionsBundle\Twig\Extension\ArrayHelperExtension</parameter>
+		<parameter key="craue_twig_extensions.arrayHelper.withoutAlias" />
+		<parameter key="craue_twig_extensions.arrayHelper.replaceKeyAlias" />
+		<parameter key="craue_twig_extensions.arrayHelper.translateArrayAlias" />
+	</parameters>
+
+	<services>
+		<service id="twig.extension.craue_arrayHelper" class="%craue_twig_extensions.arrayHelper.class%">
+			<tag name="twig.extension" />
+			<call method="setTranslator">
+				<argument type="service" id="translator" on-invalid="ignore" />
+			</call>
+			<call method="setAliases">
+				<argument>%craue_twig_extensions.arrayHelper.withoutAlias%</argument>
+				<argument>%craue_twig_extensions.arrayHelper.replaceKeyAlias%</argument>
+				<argument>%craue_twig_extensions.arrayHelper.translateArrayAlias%</argument>
+			</call>
+		</service>
+	</services>
+
+</container>
