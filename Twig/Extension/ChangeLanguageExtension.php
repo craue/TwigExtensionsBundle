@@ -3,7 +3,7 @@
 namespace Craue\TwigExtensionsBundle\Twig\Extension;
 
 /**
- * Twig extension providing helpers for implementing a language change mechanism and handling localized routes.
+ * Twig extension providing helpers for implementing a language change mechanism.
  *
  * @author Christian Raue <christian.raue@gmail.com>
  * @copyright 2011 Christian Raue
