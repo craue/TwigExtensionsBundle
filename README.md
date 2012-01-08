@@ -33,6 +33,9 @@ Provides the filters
 Provides a mechanism to render a form several times on one page. This is done by cloning the form prior to rendering
 using the `craue_cloneForm` function.
 
+It also provides the `craue_hasFormDeepErrors` function to check if a form (while taking into account all of its
+children) has any errors.
+
 ## StringHelperExtension
 
 Provides the `craue_substr` function wrapping PHP's `substr` function.

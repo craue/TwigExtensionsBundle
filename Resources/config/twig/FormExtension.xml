@@ -11,6 +11,7 @@
 	<parameters>
 		<parameter key="craue_twig_extensions.form.class">Craue\TwigExtensionsBundle\Twig\Extension\FormExtension</parameter>
 		<parameter key="craue_twig_extensions.form.cloneFormAlias" />
+		<parameter key="craue_twig_extensions.form.hasFormDeepErrorsAlias" />
 	</parameters>
 
 	<services>
@@ -19,8 +20,9 @@
 			<call method="setFormFactory">
 				<argument type="service" id="form.factory" on-invalid="ignore" />
 			</call>
-			<call method="setAlias">
+			<call method="setAliases">
 				<argument>%craue_twig_extensions.form.cloneFormAlias%</argument>
+				<argument>%craue_twig_extensions.form.hasFormDeepErrorsAlias%</argument>
 			</call>
 		</service>
 	</services>
