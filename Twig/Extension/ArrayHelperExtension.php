@@ -2,7 +2,6 @@
 
 namespace Craue\TwigExtensionsBundle\Twig\Extension;
 
-use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Translation\TranslatorInterface;
 
 /**
@@ -136,7 +135,7 @@ class ArrayHelperExtension extends \Twig_Extension {
 
 	/**
 	 * Tries to convert {@code $source} to an array.
-	 * @param mixed $source Variable to be converted.
+	 * @param array|Traversable $source Variable to be converted.
 	 * @throws \Twig_Error_Runtime If no array representation is available.
 	 */
 	protected function convertToArray($source) {
@@ -144,8 +143,8 @@ class ArrayHelperExtension extends \Twig_Extension {
 			return $source;
 		}
 
-		if ($source instanceof Collection) {
-			return $source->toArray();
+		if ($source instanceof Traversable) {
+			return iterator_to_array($source, true);
 		}
 
 		throw new \Twig_Error_Runtime('The filter can be applied to arrays only.');
