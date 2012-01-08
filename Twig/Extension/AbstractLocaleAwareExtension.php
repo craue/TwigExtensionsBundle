@@ -8,7 +8,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * Common base class for Twig extensions dealing with the current locale.
  *
  * @author Christian Raue <christian.raue@gmail.com>
- * @copyright 2011 Christian Raue
+ * @copyright 2011-2012 Christian Raue
  * @license http://www.opensource.org/licenses/mit-license.php MIT License
  */
 abstract class AbstractLocaleAwareExtension extends \Twig_Extension {
