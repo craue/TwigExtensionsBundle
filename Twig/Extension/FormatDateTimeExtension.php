@@ -146,17 +146,18 @@ class FormatDateTimeExtension extends AbstractLocaleAwareExtension {
 		}
 
 		$valueToUse = $value;
-		$localeToUse = !empty($locale) ? $locale : $this->getLocale();
-		$formatter = new \IntlDateFormatter($localeToUse, $datetype, $timetype, date_default_timezone_get());
 
 		// IntlDateFormatter#format() doesn't support \DateTime objects prior to PHP 5.3.4 (http://php.net/manual/intldateformatter.format.php)
 		if ($valueToUse instanceof \DateTime) {
 			$valueToUse = $valueToUse->getTimestamp();
 		}
 
+		$localeToUse = !empty($locale) ? $locale : $this->getLocale();
+		$formatter = new \IntlDateFormatter($localeToUse, $datetype, $timetype, date_default_timezone_get());
+
 		$result = $formatter->format($valueToUse);
 		if ($result === false) {
-			throw new \InvalidArgumentException(sprintf('The value "%s" of type %s cannot be formatted.', $value, gettype($value)));
+			throw new \InvalidArgumentException(sprintf('The value "%s" of type %s cannot be formatted. Error: "%s".', $value, gettype($value), $formatter->getErrorMessage()));
 		}
 
 		return $result;
