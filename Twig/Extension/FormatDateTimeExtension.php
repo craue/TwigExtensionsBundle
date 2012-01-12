@@ -146,7 +146,7 @@ class FormatDateTimeExtension extends AbstractLocaleAwareExtension {
 
 		$valueToUse = $value;
 		$localeToUse = !empty($locale) ? $locale : $this->getLocale();
-		$formatter = new \IntlDateFormatter($localeToUse, $datetype, $timetype);
+		$formatter = new \IntlDateFormatter($localeToUse, $datetype, $timetype, date_default_timezone_get());
 
 		// IntlDateFormatter#format() doesn't support DateTime objects prior to PHP 5.3.4 (http://php.net/manual/intldateformatter.format.php)
 		if ($valueToUse instanceof \DateTime) {
