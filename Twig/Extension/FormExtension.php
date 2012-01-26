@@ -80,7 +80,7 @@ class FormExtension extends \Twig_Extension {
 	 * @param mixed $value
 	 * @param array $formOptions Options to pass to the form type (only valid if $value is a FormTypeInterface, ignored otherwise).
 	 * @return FormView
-	 * @throws \RuntimeException
+	 * @throws \InvalidArgumentException
 	 */
 	public function cloneForm($value, array $formOptions = array()) {
 		if ($value instanceof FormView) {
@@ -95,7 +95,7 @@ class FormExtension extends \Twig_Extension {
 			return $this->formFactory->create($value, null, $formOptions)->createView();
 		}
 
-		throw new \RuntimeException(sprintf('Expected argument of either type "%s", "%s", or "%s", but "%s" given.',
+		throw new \InvalidArgumentException(sprintf('Expected argument of either type "%s", "%s", or "%s", but "%s" given.',
 				'Symfony\Component\Form\FormTypeInterface',
 				'Symfony\Component\Form\FormInterface',
 				'Symfony\Component\Form\FormView',
