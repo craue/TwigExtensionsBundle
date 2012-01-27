@@ -149,8 +149,8 @@ class FormatDateTimeExtension extends AbstractLocaleAwareExtension {
 
 		// IntlDateFormatter#format() doesn't support \DateTime objects prior to PHP 5.3.4 (http://php.net/manual/intldateformatter.format.php)
 		if ($valueToUse instanceof \DateTime) {
-			// \DateTime::getTimestamp() would return false for year > 2038 on 32-bit systems
-			$valueToUse = intval($valueToUse->format('U'));
+			// \DateTime::getTimestamp() would return false for year > 2038 on 32-bit systems (https://bugs.php.net/bug.php?id=50590)
+			$valueToUse = floatval($valueToUse->format('U'));
 		}
 
 		$localeToUse = !empty($locale) ? $locale : $this->getLocale();
