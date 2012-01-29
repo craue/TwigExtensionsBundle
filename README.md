@@ -38,7 +38,8 @@ children) has any errors.
 
 ## StringHelperExtension
 
-Provides the `craue_substr` function wrapping PHP's `substr` function.
+Provides the `craue_substr` function wrapping PHP's `substr` function. (As of Twig 1.6, there's a `slice` filter you
+should use instead.)
 
 Also provides the `craue_trailingDot` filter for ensuring that a text ends with a dot.
 This comes in handy when using error messages (e.g. for validation) of vendor bundles (which are written like sentences
