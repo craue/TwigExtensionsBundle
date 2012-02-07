@@ -114,14 +114,16 @@ class ChangeLanguageExtension extends AbstractLocaleAwareExtension {
 	 * Get the corresponding language name for a locale.
 	 * If the given locale contains a region code the name of that region will be appended in parentheses.
 	 * @param string $locale Locale to be used with {@link http://php.net/manual/locale.getdisplayname.php}.
+	 * @param string|null $forceLocaleForDisplay Locale to be used for displaying. Ignores showForeignLanguageNames.
 	 * @return string
 	 */
-	public function getLanguageName($locale) {
+	public function getLanguageName($locale, $forceLocaleForDisplay = null) {
 		if (empty($locale)) {
 			return null;
 		}
 
-		$localeToUse = $this->showForeignLanguageNames ? $locale : $this->getLocale();
+		$localeToUse = !empty($forceLocaleForDisplay) ? $forceLocaleForDisplay :
+				($this->showForeignLanguageNames ? $locale : $this->getLocale());
 
 		$languageName = \Locale::getDisplayName($locale, $localeToUse);
 
