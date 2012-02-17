@@ -1,5 +1,0 @@
-{%- if length | default(null) is not null -%}
-	{{- craue_substr(value, start, length) -}}
-{%- else -%}
-	{{- craue_substr(value, start) -}}
-{%- endif -%}

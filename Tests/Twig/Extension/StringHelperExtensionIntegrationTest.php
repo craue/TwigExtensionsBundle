@@ -34,43 +34,4 @@ class StringHelperExtensionIntegrationTest extends TwigBasedTestCase {
 		}
 	}
 
-	public function testSubstr() {
-		$cases = array(
-			array(
-				'value' => 'bla',
-				'start' => 2,
-				'length' => null,
-				'result' => 'a',
-			),
-			array(
-				'value' => 'bla',
-				'start' => 0,
-				'length' => 1,
-				'result' => 'b',
-			),
-			array(
-				'value' => 'bla',
-				'start' => 1,
-				'length' => 1,
-				'result' => 'l',
-			),
-			array(
-				'value' => 'bla',
-				'start' => 1,
-				'length' => 2,
-				'result' => 'la',
-			),
-		);
-
-		foreach ($cases as $index => $case) {
-			$this->assertSame($case['result'],
-					$this->getTwig()->render('IntegrationTestBundle:StringHelper:substr.html.twig', array(
-						'value' => $case['value'],
-						'start' => $case['start'],
-						'length' => $case['length'],
-					)),
-					'test case with index '.$index);
-		}
-	}
-
 }

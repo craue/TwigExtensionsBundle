@@ -40,10 +40,7 @@ children) has any errors.
 
 ## StringHelperExtension
 
-Provides the `craue_substr` function wrapping PHP's `substr` function. (As of Twig 1.6, there's a `slice` filter you
-should use instead.)
-
-Also provides the `craue_trailingDot` filter for ensuring that a text ends with a dot.
+Provides the `craue_trailingDot` filter for ensuring that a text ends with a dot.
 This comes in handy when using error messages (e.g. for validation) of vendor bundles (which are written like sentences
 but are missing the trailing dots) together with your own ones (which should include the trailing dot).
 
@@ -132,11 +129,6 @@ Or by using the `deps` file:
 	{% endfor %}
 
 ## StringHelperExtension
-
-	{{ craue_substr('bla', 2) }} will print "a"<br />
-	{{ craue_substr('bla', 0, 1) }} will print "b"<br />
-	{{ craue_substr('bla', 1, 1) }} will print "l"<br />
-	{{ craue_substr('bla', 1, 2) }} will print "la"
 
 	{{ aString | craue_trailingDot }}<br />
 	{{ 'This text should end with a dot' | craue_trailingDot }}<br />
@@ -248,7 +240,6 @@ can do it intentionally.
 ### StringHelperExtension
 
 	; app/config/parameters.ini
-	craue_twig_extensions.stringHelper.substrAlias="substr"
 	craue_twig_extensions.stringHelper.trailingDotAlias="trailingDot"
 
 ### FormatDateTimeExtension
