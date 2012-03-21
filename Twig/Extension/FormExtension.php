@@ -86,9 +86,13 @@ class FormExtension extends \Twig_Extension {
 		if ($value instanceof FormView) {
 			// doesn't work: return clone $value;
 			return unserialize(serialize($value));
-		} elseif ($value instanceof FormInterface) {
+		}
+
+		if ($value instanceof FormInterface) {
 			return $value->createView();
-		} elseif ($value instanceof FormTypeInterface) {
+		}
+
+		if ($value instanceof FormTypeInterface) {
 			if ($this->formFactory === null) {
 				throw new \RuntimeException('No form factory available.');
 			}
