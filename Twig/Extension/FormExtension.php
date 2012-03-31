@@ -109,7 +109,7 @@ class FormExtension extends \Twig_Extension {
 
 	/**
 	 * @param FormView $form A form.
-	 * @return bool If the form (taking into account all of its children) has errors.
+	 * @return boolean If the form (taking into account all of its children) has errors.
 	 */
 	public function hasFormDeepErrors(FormView $form) {
 		if (count($form->get('errors')) > 0) {

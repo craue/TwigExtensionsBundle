@@ -135,8 +135,8 @@ class FormatDateTimeExtension extends AbstractLocaleAwareExtension {
 	 * If the value is null also null will be returned.
 	 * @param mixed $value Date/time value to be formatted using {@link http://php.net/manual/intldateformatter.format.php}.
 	 * @param string $locale Locale to be used with {@link http://php.net/manual/class.intldateformatter.php}.
-	 * @param int $datetype Date format. See {@link http://php.net/manual/class.intldateformatter.php#intl.intldateformatter-constants} for valid values.
-	 * @param int $timetype Time format. See {@link http://php.net/manual/class.intldateformatter.php#intl.intldateformatter-constants} for valid values.
+	 * @param integer $datetype Date format. See {@link http://php.net/manual/class.intldateformatter.php#intl.intldateformatter-constants} for valid values.
+	 * @param integer $timetype Time format. See {@link http://php.net/manual/class.intldateformatter.php#intl.intldateformatter-constants} for valid values.
 	 * @return string Formatted date/time.
 	 * @throws \InvalidArgumentException
 	 */
@@ -166,7 +166,7 @@ class FormatDateTimeExtension extends AbstractLocaleAwareExtension {
 
 	/**
 	 * @param string $format Date/time format. Valid values are "none", "full", "long", "medium", or "short" (case insensitive).
-	 * @return int Appropriate value of {@link http://php.net/manual/class.intldateformatter.php#intl.intldateformatter-constants}.
+	 * @return integer Appropriate value of {@link http://php.net/manual/class.intldateformatter.php#intl.intldateformatter-constants}.
 	 * @throws \InvalidArgumentException
 	 */
 	protected function getDateFormatterFormat($format) {
