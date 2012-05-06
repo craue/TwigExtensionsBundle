@@ -12,7 +12,7 @@ namespace Craue\TwigExtensionsBundle\Twig\Extension;
 class ChangeLanguageExtension extends AbstractLocaleAwareExtension {
 
 	/**
-	 * @var array
+	 * @var string[]
 	 */
 	protected $availableLocales = array();
 
@@ -38,7 +38,7 @@ class ChangeLanguageExtension extends AbstractLocaleAwareExtension {
 
 	/**
 	 * Sets the available locales.
-	 * @param array $availableLocales
+	 * @param string[] $availableLocales
 	 */
 	public function setAvailableLocales(array $availableLocales = array()) {
 		$this->availableLocales = $availableLocales;
