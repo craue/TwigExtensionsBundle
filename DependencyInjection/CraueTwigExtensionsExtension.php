@@ -36,15 +36,20 @@ class CraueTwigExtensionsExtension extends Extension {
 			'StringHelperExtension',
 		);
 
-		$loadExtensions = empty($config['enable_only']) ? $availableExtensions : $config['enable_only'];
-
-		// load only specified ones
-		foreach ($loadExtensions as $ext) {
-			if (in_array($ext, $availableExtensions)) {
-				$loader->load(sprintf('twig/%s.xml', $ext));
-			} else {
-				throw new \InvalidArgumentException(sprintf('Extension with name "%s" is invalid.', $ext));
+		if (!empty($config['enable_only'])) {
+			$loadExtensions = array();
+			foreach ($config['enable_only'] as $ext) {
+				if (!in_array($ext, $availableExtensions)) {
+					throw new \InvalidArgumentException(sprintf('Extension with name "%s" is invalid.', $ext));
+				}
+				$loadExtensions[] = $ext;
 			}
+		} else {
+			$loadExtensions = $availableExtensions;
+		}
+
+		foreach ($loadExtensions as $ext) {
+			$loader->load(sprintf('twig/%s.xml', $ext));
 		}
 	}
 
