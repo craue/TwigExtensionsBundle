@@ -106,8 +106,13 @@ class FormatDateTimeExtension extends AbstractLocaleAwareExtension {
 	 * @param string $locale Locale to be used with {@link http://php.net/manual/class.intldateformatter.php}.
 	 * @return string Formatted date.
 	 */
-	public function formatDate($value, $locale = null) {
-		return $this->getFormattedDateTime($value, $locale, $this->datetype, \IntlDateFormatter::NONE);
+	public function formatDate($value, $locale = null, $dateType = null) {
+		if ($dateType === null) {
+			$dateType = $this->datetype;
+		} else {
+			$dateType = $this->getDateFormatterFormat($dateType);
+		}
+		return $this->getFormattedDateTime($value, $locale, $dateType, \IntlDateFormatter::NONE);
 	}
 
 	/**
@@ -116,7 +121,12 @@ class FormatDateTimeExtension extends AbstractLocaleAwareExtension {
 	 * @param string $locale Locale to be used with {@link http://php.net/manual/class.intldateformatter.php}.
 	 * @return string Formatted time.
 	 */
-	public function formatTime($value, $locale = null) {
+	public function formatTime($value, $locale = null, $timeType = null) {
+		if ($timeType === null) {
+			$timeType = $this->timeType;
+		} else {
+			$timeType = $this->getDateFormatterFormat($timeType);
+		}
 		return $this->getFormattedDateTime($value, $locale, \IntlDateFormatter::NONE, $this->timetype);
 	}
 
@@ -126,8 +136,18 @@ class FormatDateTimeExtension extends AbstractLocaleAwareExtension {
 	 * @param string $locale Locale to be used with {@link http://php.net/manual/class.intldateformatter.php}.
 	 * @return string Formatted date and time.
 	 */
-	public function formatDateTime($value, $locale = null) {
-		return $this->getFormattedDateTime($value, $locale, $this->datetype, $this->timetype);
+	public function formatDateTime($value, $locale = null, $dateType = null, $timeType = null) {
+		if ($dateType === null) {
+			$dateType = $this->datetype;
+		} else {
+			$dateType = $this->getDateFormatterFormat($dateType);
+		}
+		if ($timeType === null) {
+			$timeType = $this->timeType;
+		} else {
+			$timeType = $this->getDateFormatterFormat($timeType);
+		}
+		return $this->getFormattedDateTime($value, $locale, $dateType, $timeType);
 	}
 
 	/**
