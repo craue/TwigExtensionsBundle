@@ -14,12 +14,12 @@ class FormatDateTimeExtension extends AbstractLocaleAwareExtension {
 	/**
 	 * @var integer
 	 */
-	protected $datetype = \IntlDateFormatter::MEDIUM;
+	protected $dateType = \IntlDateFormatter::MEDIUM;
 
 	/**
 	 * @var integer
 	 */
-	protected $timetype = \IntlDateFormatter::MEDIUM;
+	protected $timeType = \IntlDateFormatter::MEDIUM;
 
 	/**
 	 * @var string
@@ -37,15 +37,15 @@ class FormatDateTimeExtension extends AbstractLocaleAwareExtension {
 	protected $dateTimeFilterAlias = null;
 
 	/**
-	 * @param string $datetype Date format. Valid values are "none", "full", "long", "medium", or "short" (case insensitive).
-	 * @param string $timetype Time format. Valid values are "none", "full", "long", "medium", or "short" (case insensitive).
+	 * @param string $dateType Date format. Valid values are "none", "full", "long", "medium", or "short" (case insensitive).
+	 * @param string $timeType Time format. Valid values are "none", "full", "long", "medium", or "short" (case insensitive).
 	 */
-	public function setDateTimeTypes($datetype = null, $timetype = null) {
-		if ($datetype !== null) {
-			$this->datetype = $this->getDateFormatterFormat($datetype);
+	public function setDateTimeTypes($dateType = null, $timeType = null) {
+		if ($dateType !== null) {
+			$this->dateType = $this->getDateFormatterFormat($dateType);
 		}
-		if ($timetype !== null) {
-			$this->timetype = $this->getDateFormatterFormat($timetype);
+		if ($timeType !== null) {
+			$this->timeType = $this->getDateFormatterFormat($timeType);
 		}
 	}
 
@@ -104,30 +104,38 @@ class FormatDateTimeExtension extends AbstractLocaleAwareExtension {
 	 * Formats a timestamp as date.
 	 * @param mixed $value Date value to be formatted.
 	 * @param string $locale Locale to be used with {@link http://php.net/manual/class.intldateformatter.php}.
+	 * @param string $dateType Date format. Valid values are "none", "full", "long", "medium", or "short" (case insensitive).
 	 * @return string Formatted date.
 	 */
-	public function formatDate($value, $locale = null) {
-		return $this->getFormattedDateTime($value, $locale, $this->datetype, \IntlDateFormatter::NONE);
+	public function formatDate($value, $locale = null, $dateType = null) {
+		$dateType = ($dateType === null) ? $this->dateType : $this->getDateFormatterFormat($dateType);
+		return $this->getFormattedDateTime($value, $locale, $dateType, \IntlDateFormatter::NONE);
 	}
 
 	/**
 	 * Formats a timestamp as time.
 	 * @param mixed $value Time value to be formatted.
 	 * @param string $locale Locale to be used with {@link http://php.net/manual/class.intldateformatter.php}.
+	 * @param string $timeType Time format. Valid values are "none", "full", "long", "medium", or "short" (case insensitive).
 	 * @return string Formatted time.
 	 */
-	public function formatTime($value, $locale = null) {
-		return $this->getFormattedDateTime($value, $locale, \IntlDateFormatter::NONE, $this->timetype);
+	public function formatTime($value, $locale = null, $timeType = null) {
+		$timeType = ($timeType === null) ? $this->timeType : $this->getDateFormatterFormat($timeType);
+		return $this->getFormattedDateTime($value, $locale, \IntlDateFormatter::NONE, $timeType);
 	}
 
 	/**
 	 * Formats a timestamp as date and time.
 	 * @param mixed $value Date/time value to be formatted.
 	 * @param string $locale Locale to be used with {@link http://php.net/manual/class.intldateformatter.php}.
+	 * @param string $dateType Date format. Valid values are "none", "full", "long", "medium", or "short" (case insensitive).
+	 * @param string $timeType Time format. Valid values are "none", "full", "long", "medium", or "short" (case insensitive).
 	 * @return string Formatted date and time.
 	 */
-	public function formatDateTime($value, $locale = null) {
-		return $this->getFormattedDateTime($value, $locale, $this->datetype, $this->timetype);
+	public function formatDateTime($value, $locale = null, $dateType = null, $timeType = null) {
+		$dateType = ($dateType === null) ? $this->dateType : $this->getDateFormatterFormat($dateType);
+		$timeType = ($timeType === null) ? $this->timeType : $this->getDateFormatterFormat($timeType);
+		return $this->getFormattedDateTime($value, $locale, $dateType, $timeType);
 	}
 
 	/**
@@ -135,12 +143,12 @@ class FormatDateTimeExtension extends AbstractLocaleAwareExtension {
 	 * If the value is null also null will be returned.
 	 * @param mixed $value Date/time value to be formatted using {@link http://php.net/manual/intldateformatter.format.php}.
 	 * @param string $locale Locale to be used with {@link http://php.net/manual/class.intldateformatter.php}.
-	 * @param integer $datetype Date format. See {@link http://php.net/manual/class.intldateformatter.php#intl.intldateformatter-constants} for valid values.
-	 * @param integer $timetype Time format. See {@link http://php.net/manual/class.intldateformatter.php#intl.intldateformatter-constants} for valid values.
+	 * @param integer $dateType Date format. See {@link http://php.net/manual/class.intldateformatter.php#intl.intldateformatter-constants} for valid values.
+	 * @param integer $timeType Time format. See {@link http://php.net/manual/class.intldateformatter.php#intl.intldateformatter-constants} for valid values.
 	 * @return string Formatted date/time.
 	 * @throws \InvalidArgumentException
 	 */
-	protected function getFormattedDateTime($value, $locale, $datetype, $timetype) {
+	protected function getFormattedDateTime($value, $locale, $dateType, $timeType) {
 		if ($value === null) {
 			return null;
 		}
@@ -156,7 +164,7 @@ class FormatDateTimeExtension extends AbstractLocaleAwareExtension {
 		}
 
 		$localeToUse = !empty($locale) ? $locale : $this->getLocale();
-		$formatter = new \IntlDateFormatter($localeToUse, $datetype, $timetype, date_default_timezone_get());
+		$formatter = new \IntlDateFormatter($localeToUse, $dateType, $timeType, date_default_timezone_get());
 
 		$result = $formatter->format($valueToUse);
 		if ($result === false) {
