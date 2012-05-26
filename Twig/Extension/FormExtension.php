@@ -26,25 +26,16 @@ class FormExtension extends \Twig_Extension {
 	 */
 	protected $cloneFormAlias = null;
 
-	/**
-	 * @var string
-	 */
-	protected $hasFormDeepErrorsAlias = null;
-
 	public function setFormFactory(FormFactoryInterface $formFactory) {
 		$this->formFactory = $formFactory;
 	}
 
 	/**
 	 * @param string $cloneFormAlias Alias for the cloneForm function.
-	 * @param string $hasFormDeepErrorsAlias Alias for the hasFormDeepErrors function.
 	 */
-	public function setAliases($cloneFormAlias = null, $hasFormDeepErrorsAlias = null) {
+	public function setAliases($cloneFormAlias = null) {
 		if (!empty($cloneFormAlias)) {
 			$this->cloneFormAlias = $cloneFormAlias;
-		}
-		if (!empty($hasFormDeepErrorsAlias)) {
-			$this->hasFormDeepErrorsAlias = $hasFormDeepErrorsAlias;
 		}
 	}
 
@@ -65,12 +56,6 @@ class FormExtension extends \Twig_Extension {
 		$functions['craue_cloneForm'] = $getCloneFormMethod;
 		if (!empty($this->cloneFormAlias)) {
 			$functions[$this->cloneFormAlias] = $getCloneFormMethod;
-		}
-
-		$hasFormDeepErrorsMethod = new \Twig_Function_Method($this, 'hasFormDeepErrors');
-		$functions['craue_hasFormDeepErrors'] = $hasFormDeepErrorsMethod;
-		if (!empty($this->hasFormDeepErrorsAlias)) {
-			$functions[$this->hasFormDeepErrorsAlias] = $hasFormDeepErrorsMethod;
 		}
 
 		return $functions;
@@ -105,24 +90,6 @@ class FormExtension extends \Twig_Extension {
 				'Symfony\Component\Form\FormView',
 				is_object($value) ? get_class($value) : gettype($value)
 		));
-	}
-
-	/**
-	 * @param FormView $form A form.
-	 * @return boolean If the form (taking into account all of its children) has errors.
-	 */
-	public function hasFormDeepErrors(FormView $form) {
-		if (count($form->get('errors')) > 0) {
-			return true;
-		}
-
-		foreach ($form->getChildren() as $child) {
-			if ($this->hasFormDeepErrors($child)) {
-				return true;
-			}
-		}
-
-		return false;
 	}
 
 }
