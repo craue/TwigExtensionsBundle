@@ -1,6 +1,6 @@
 # Information
 
-TwigExtensionsBundle is just a collection of Twig extensions i find useful.
+TwigExtensionsBundle is just a collection of useful Twig extensions.
 
 A live demo with code examples can be found at http://craue.de/sf2playground/en/CraueTwigExtensions/.
 
