@@ -12,6 +12,7 @@
 		<parameter key="craue_twig_extensions.formatDateTime.class">Craue\TwigExtensionsBundle\Twig\Extension\FormatDateTimeExtension</parameter>
 		<parameter key="craue_twig_extensions.formatDateTime.datetype">medium</parameter>
 		<parameter key="craue_twig_extensions.formatDateTime.timetype">medium</parameter>
+		<parameter key="craue_twig_extensions.formatDateTime.timeZone" />
 		<parameter key="craue_twig_extensions.formatDateTime.dateFilterAlias" />
 		<parameter key="craue_twig_extensions.formatDateTime.timeFilterAlias" />
 		<parameter key="craue_twig_extensions.formatDateTime.dateTimeFilterAlias" />
@@ -23,6 +24,9 @@
 			<call method="setDateTimeTypes">
 				<argument>%craue_twig_extensions.formatDateTime.datetype%</argument>
 				<argument>%craue_twig_extensions.formatDateTime.timetype%</argument>
+			</call>
+			<call method="setTimeZone">
+				<argument>%craue_twig_extensions.formatDateTime.timeZone%</argument>
 			</call>
 			<call method="setLocale">
 				<argument type="service" id="service_container" />

@@ -22,6 +22,11 @@ class FormatDateTimeExtension extends AbstractLocaleAwareExtension {
 	protected $timeType = \IntlDateFormatter::MEDIUM;
 
 	/**
+	 * @var string|null
+	 */
+	protected $timeZone = null;
+
+	/**
 	 * @var string
 	 */
 	protected $dateFilterAlias = null;
@@ -46,6 +51,15 @@ class FormatDateTimeExtension extends AbstractLocaleAwareExtension {
 		}
 		if ($timeType !== null) {
 			$this->timeType = $this->getDateFormatterFormat($timeType);
+		}
+	}
+
+	/**
+	 * @param string $timeZone Time zone from {@link http://php.net/manual/timezones.php}.
+	 */
+	public function setTimeZone($timeZone = null) {
+		if ($timeZone !== null) {
+			$this->timeZone = $timeZone;
 		}
 	}
 
@@ -105,14 +119,16 @@ class FormatDateTimeExtension extends AbstractLocaleAwareExtension {
 	 * @param mixed $value Date value to be formatted.
 	 * @param string $locale Locale to be used with {@link http://php.net/manual/class.intldateformatter.php}.
 	 * @param string $dateType Date format. Valid values are "full", "long", "medium", or "short" (case insensitive).
+	 * @param string $timeZone Time zone from {@link http://php.net/manual/timezones.php}.
 	 * @return string Formatted date.
+	 * @throws \InvalidArgumentException
 	 */
-	public function formatDate($value, $locale = null, $dateType = null) {
+	public function formatDate($value, $locale = null, $dateType = null, $timeZone = null) {
 		if ($dateType === 'none') {
 			throw new \InvalidArgumentException('Cannot apply a date formatting of "none". What did you expect?');
 		}
 
-		return $this->getFormattedDateTime($value, $locale, $dateType, 'none');
+		return $this->getFormattedDateTime($value, $locale, $dateType, 'none', $timeZone);
 	}
 
 	/**
@@ -120,14 +136,16 @@ class FormatDateTimeExtension extends AbstractLocaleAwareExtension {
 	 * @param mixed $value Time value to be formatted.
 	 * @param string $locale Locale to be used with {@link http://php.net/manual/class.intldateformatter.php}.
 	 * @param string $timeType Time format. Valid values are "full", "long", "medium", or "short" (case insensitive).
+	 * @param string $timeZone Time zone from {@link http://php.net/manual/timezones.php}.
 	 * @return string Formatted time.
+	 * @throws \InvalidArgumentException
 	 */
-	public function formatTime($value, $locale = null, $timeType = null) {
+	public function formatTime($value, $locale = null, $timeType = null, $timeZone = null) {
 		if ($timeType === 'none') {
 			throw new \InvalidArgumentException('Cannot apply a time formatting of "none". What did you expect?');
 		}
 
-		return $this->getFormattedDateTime($value, $locale, 'none', $timeType);
+		return $this->getFormattedDateTime($value, $locale, 'none', $timeType, $timeZone);
 	}
 
 	/**
@@ -136,14 +154,16 @@ class FormatDateTimeExtension extends AbstractLocaleAwareExtension {
 	 * @param string $locale Locale to be used with {@link http://php.net/manual/class.intldateformatter.php}.
 	 * @param string $dateType Date format. Valid values are "none", "full", "long", "medium", or "short" (case insensitive).
 	 * @param string $timeType Time format. Valid values are "none", "full", "long", "medium", or "short" (case insensitive).
+	 * @param string $timeZone Time zone from {@link http://php.net/manual/timezones.php}.
 	 * @return string Formatted date and time.
+	 * @throws \InvalidArgumentException
 	 */
-	public function formatDateTime($value, $locale = null, $dateType = null, $timeType = null) {
+	public function formatDateTime($value, $locale = null, $dateType = null, $timeType = null, $timeZone = null) {
 		if ($dateType === 'none' && $timeType === 'none') {
 			throw new \InvalidArgumentException('Cannot apply a date/time formatting of "none". What did you expect?');
 		}
 
-		return $this->getFormattedDateTime($value, $locale, $dateType, $timeType);
+		return $this->getFormattedDateTime($value, $locale, $dateType, $timeType, $timeZone);
 	}
 
 	/**
@@ -153,10 +173,11 @@ class FormatDateTimeExtension extends AbstractLocaleAwareExtension {
 	 * @param string $locale Locale to be used with {@link http://php.net/manual/class.intldateformatter.php}.
 	 * @param string $dateType Date format. Valid values are "none", "full", "long", "medium", or "short" (case insensitive).
 	 * @param string $timeType Time format. Valid values are "none", "full", "long", "medium", or "short" (case insensitive).
+	 * @param string $timeZone Time zone from {@link http://php.net/manual/timezones.php}.
 	 * @return string Formatted date/time.
 	 * @throws \InvalidArgumentException
 	 */
-	protected function getFormattedDateTime($value, $locale, $dateType, $timeType) {
+	protected function getFormattedDateTime($value, $locale, $dateType, $timeType, $timeZone = null) {
 		if ($value === null) {
 			return null;
 		}
@@ -174,8 +195,9 @@ class FormatDateTimeExtension extends AbstractLocaleAwareExtension {
 		$localeToUse = !empty($locale) ? $locale : $this->getLocale();
 		$dateTypeToUse = $dateType === null ? $this->dateType : $this->getDateFormatterFormat($dateType);
 		$timeTypeToUse = $timeType === null ? $this->timeType : $this->getDateFormatterFormat($timeType);
+		$timeZoneToUse = $this->getEffectiveTimeZone($timeZone);
 
-		$formatter = new \IntlDateFormatter($localeToUse, $dateTypeToUse, $timeTypeToUse, date_default_timezone_get());
+		$formatter = new \IntlDateFormatter($localeToUse, $dateTypeToUse, $timeTypeToUse, $timeZoneToUse);
 
 		$result = $formatter->format($valueToUse);
 		if ($result === false) {
@@ -204,6 +226,37 @@ class FormatDateTimeExtension extends AbstractLocaleAwareExtension {
 				return \IntlDateFormatter::SHORT;
 			default:
 				throw new \InvalidArgumentException(sprintf('A value of "%s" is not supported.', $format));
+		}
+	}
+
+	/**
+	 * @param string $timeZone Time zone from {@link http://php.net/manual/timezones.php}.
+	 * @return string
+	 * @throws \InvalidArgumentException
+	 */
+	protected function getEffectiveTimeZone($timeZone = null) {
+		if ($timeZone !== null) {
+			return $this->validateTimeZone($timeZone);
+		}
+
+		if ($this->timeZone !== null) {
+			return $this->validateTimeZone($this->timeZone);
+		}
+
+		return date_default_timezone_get();
+	}
+
+	/**
+	 * @param string $timeZone Name of a time zone to be validated.
+	 * @return string Valid name of that time zone.
+	 * @throws \InvalidArgumentException
+	 */
+	protected function validateTimeZone($timeZone) {
+		try {
+			$instance = new \DateTimeZone($timeZone);
+			return $instance->getName();
+		} catch (\Exception $e) {
+			throw new \InvalidArgumentException(sprintf('A value of "%s" is not a supported time zone.', $timeZone));
 		}
 	}
 

@@ -178,6 +178,7 @@ Take a look at the template if you want to customize it.
 	; app/config/parameters.ini
 	craue_twig_extensions.formatDateTime.datetype="full"
 	craue_twig_extensions.formatDateTime.timetype="short"
+	craue_twig_extensions.formatDateTime.timeZone="Europe/Berlin"
 
 ## FormatNumberExtension
 
