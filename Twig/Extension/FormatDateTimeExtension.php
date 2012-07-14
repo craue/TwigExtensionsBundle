@@ -104,10 +104,14 @@ class FormatDateTimeExtension extends AbstractLocaleAwareExtension {
 	 * Formats a timestamp as date.
 	 * @param mixed $value Date value to be formatted.
 	 * @param string $locale Locale to be used with {@link http://php.net/manual/class.intldateformatter.php}.
-	 * @param string $dateType Date format. Valid values are "none", "full", "long", "medium", or "short" (case insensitive).
+	 * @param string $dateType Date format. Valid values are "full", "long", "medium", or "short" (case insensitive).
 	 * @return string Formatted date.
 	 */
 	public function formatDate($value, $locale = null, $dateType = null) {
+		if ($dateType === 'none') {
+			throw new \InvalidArgumentException('Cannot apply a date formatting of "none". What did you expect?');
+		}
+
 		return $this->getFormattedDateTime($value, $locale, $dateType, 'none');
 	}
 
@@ -115,10 +119,14 @@ class FormatDateTimeExtension extends AbstractLocaleAwareExtension {
 	 * Formats a timestamp as time.
 	 * @param mixed $value Time value to be formatted.
 	 * @param string $locale Locale to be used with {@link http://php.net/manual/class.intldateformatter.php}.
-	 * @param string $timeType Time format. Valid values are "none", "full", "long", "medium", or "short" (case insensitive).
+	 * @param string $timeType Time format. Valid values are "full", "long", "medium", or "short" (case insensitive).
 	 * @return string Formatted time.
 	 */
 	public function formatTime($value, $locale = null, $timeType = null) {
+		if ($timeType === 'none') {
+			throw new \InvalidArgumentException('Cannot apply a time formatting of "none". What did you expect?');
+		}
+
 		return $this->getFormattedDateTime($value, $locale, 'none', $timeType);
 	}
 
@@ -131,6 +139,10 @@ class FormatDateTimeExtension extends AbstractLocaleAwareExtension {
 	 * @return string Formatted date and time.
 	 */
 	public function formatDateTime($value, $locale = null, $dateType = null, $timeType = null) {
+		if ($dateType === 'none' && $timeType === 'none') {
+			throw new \InvalidArgumentException('Cannot apply a date/time formatting of "none". What did you expect?');
+		}
+
 		return $this->getFormattedDateTime($value, $locale, $dateType, $timeType);
 	}
 
