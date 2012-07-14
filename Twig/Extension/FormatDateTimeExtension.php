@@ -58,7 +58,7 @@ class FormatDateTimeExtension extends AbstractLocaleAwareExtension {
 	 * @param string $timeZone Time zone from {@link http://php.net/manual/timezones.php}.
 	 */
 	public function setTimeZone($timeZone = null) {
-		if ($timeZone !== null) {
+		if (!empty($timeZone)) {
 			$this->timeZone = $timeZone;
 		}
 	}
