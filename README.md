@@ -119,7 +119,7 @@ Or by using the `deps` file:
 
 	{% for myEntity in myEntities %}
 		{% set myFormInstance = craue_cloneForm(myForm) %}
-		<form action={{ path('my_route', {'id': myEntity.getId()}) }} method="post" {{ form_enctype(myFormInstance) }}>
+		<form action="{{ path('my_route', {'id': myEntity.getId()}) }}" method="post" {{ form_enctype(myFormInstance) }}>
 			{{ form_widget(myFormInstance) }}
 			<input type="submit" />
 		</form>
