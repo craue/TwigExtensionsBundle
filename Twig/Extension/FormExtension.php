@@ -68,7 +68,7 @@ class FormExtension extends \Twig_Extension {
 	 * @throws \InvalidArgumentException
 	 */
 	public function cloneForm($value, array $formOptions = array()) {
-		if ($value instanceof FormView) {
+		if ($value instanceof FormView) { // don't use FormViewInterface for Symfony 2.0 compatibility
 			// doesn't work: return clone $value;
 			return unserialize(serialize($value));
 		}
