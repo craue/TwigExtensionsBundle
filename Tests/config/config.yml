@@ -1,6 +1,7 @@
 craue_twig_extensions: ~
 
 framework:
+  form: ~
   router:
     resource: ~
   secret: whatever
