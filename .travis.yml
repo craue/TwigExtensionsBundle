@@ -1,6 +1,5 @@
 language: php
 php:
-  - 5.3.2
   - 5.3.3
   - 5.3
   - 5.4
@@ -9,7 +8,7 @@ env:
   - SYMFONY_VERSION=origin/master
 before_script:
   - wget http://getcomposer.org/composer.phar
-  - php composer.phar install
+  - php composer.phar install --dev
 notifications:
   email:
     - christian.raue@gmail.com
