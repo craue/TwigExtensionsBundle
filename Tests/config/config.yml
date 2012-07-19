@@ -3,7 +3,7 @@ craue_twig_extensions: ~
 framework:
 #  default_locale: en
 #  form: ~
-#  secret: whatever
+  secret: whatever
 #  session: ~
   templating:
     engines: ['twig']

@@ -8,7 +8,7 @@ env:
   - SYMFONY_VERSION=dev-master
 before_script:
   - wget http://getcomposer.org/composer.phar
-  - php composer.phar --no-interaction require --dev symfony/symfony:${SYMFONY_VERSION}
+  - php composer.phar --no-interaction require --dev symfony/twig-bundle:${SYMFONY_VERSION} symfony/symfony:${SYMFONY_VERSION}
 notifications:
   email:
     - christian.raue@gmail.com

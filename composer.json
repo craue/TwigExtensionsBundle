@@ -22,6 +22,7 @@
 	"require-dev": {
 		"symfony/symfony": ">=2.0-dev,<2.2-dev"
 	},
+	"minimum-stability": "dev",
 	"autoload": {
 		"psr-0": {
 			"Craue\\TwigExtensionsBundle": ""
