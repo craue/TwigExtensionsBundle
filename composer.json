@@ -20,7 +20,8 @@
 		"symfony/twig-bundle": ">=2.0-dev,<2.2-dev"
 	},
 	"require-dev": {
-		"symfony/framework-bundle": ">=2.0-dev,<2.2-dev"
+		"symfony/framework-bundle": ">=2.0-dev,<2.2-dev",
+		"symfony/finder": ">=2.0-dev,<2.2-dev"
 	},
 	"autoload": {
 		"psr-0": {
