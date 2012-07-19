@@ -1,0 +1,11 @@
+framework:
+  default_locale: en
+  templating:
+    engines: ['twig']
+  test: ~
+
+twig:
+  debug: %kernel.debug%
+  strict_variables: %kernel.debug%
+
+craue_twig_extensions: ~
