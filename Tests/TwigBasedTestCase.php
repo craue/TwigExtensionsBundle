@@ -11,6 +11,9 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
  */
 abstract class TwigBasedTestCase extends WebTestCase {
 
+	/**
+	 * @var \Twig_Environment
+	 */
 	protected $twig;
 
 	protected static function createKernel(array $options = array()) {

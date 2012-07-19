@@ -11,7 +11,6 @@ before_script:
   - php composer.phar --no-interaction --no-update require symfony/symfony:${SYMFONY_VERSION} symfony/twig-bundle:${SYMFONY_VERSION}
   - php composer.phar --no-interaction --no-update require --dev symfony/symfony:${SYMFONY_VERSION}
   - php composer.phar --no-interaction update --dev
-script: phpunit --coverage-text
 notifications:
   email:
     - christian.raue@gmail.com

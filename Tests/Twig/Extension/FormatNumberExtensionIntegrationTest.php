@@ -70,13 +70,13 @@ class FormatNumberExtensionIntegrationTest extends TwigBasedTestCase {
 				'value' => 12345.67,
 				'currency' => 'EUR',
 				'locale' => 'de',
-				'result' => '12.345,67'.utf8_encode(html_entity_decode('&nbsp;')).'€',
+				'result' => html_entity_decode('12.345,67&nbsp;€', null, $this->getTwig()->getCharset()),
 			),
 			array(
 				'value' => 12345.67,
 				'currency' => 'USD',
 				'locale' => 'de',
-				'result' => '12.345,67'.utf8_encode(html_entity_decode('&nbsp;')).'$',
+				'result' => html_entity_decode('12.345,67&nbsp;$', null, $this->getTwig()->getCharset()),
 			),
 			array(
 				'value' => 12345.67,
