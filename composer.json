@@ -21,6 +21,7 @@
 	},
 	"require-dev": {
 		"symfony/framework-bundle": ">=2.0-dev,<2.2-dev",
+		"symfony/class-loader": ">=2.0-dev,<2.2-dev",
 		"symfony/finder": ">=2.0-dev,<2.2-dev"
 	},
 	"autoload": {
