@@ -1,15 +1,14 @@
 craue_twig_extensions: ~
 
 framework:
-#  default_locale: en
-#  form: ~
+  router:
+    resource: ~
   secret: whatever
-#  session: ~
   templating:
     engines: ['twig']
   test: ~
-#  translator:
-#    fallback: en
+  translator:
+    fallback: en
 
 twig:
   debug: %kernel.debug%
