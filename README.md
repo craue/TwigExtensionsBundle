@@ -58,36 +58,39 @@ language change mechanism.
 
 # Installation
 
-## Add TwigExtensionsBundle to your vendor directory
+## Get the bundle
 
-Either by using a Git submodule:
+Let Composer download and install the bundle by first adding it to your composer.json
 
-	git submodule add https://github.com/craue/TwigExtensionsBundle.git vendor/bundles/Craue/TwigExtensionsBundle
-
-Or by using the `deps` file:
-
-	[CraueTwigExtensionsBundle]
-	git=https://github.com/craue/TwigExtensionsBundle.git
-	target=bundles/Craue/TwigExtensionsBundle
-
-## Add TwigExtensionsBundle to your application kernel
-
-	// app/AppKernel.php
-	public function registerBundles() {
-		$bundles = array(
-			// ...
-			new Craue\TwigExtensionsBundle\CraueTwigExtensionsBundle(),
-		);
-		// ...
+```json
+{
+	"require": {
+		"craue/twigextensions-bundle": "dev-master"
 	}
+}
+```
 
-## Register the Craue namespace
+and then running
 
-	// app/autoload.php
-	$loader->registerNamespaces(array(
+```sh
+php composer.phar update craue/twigextensions-bundle
+```
+
+in a shell.
+
+## Enable the bundle
+
+```php
+<?php
+// in app/AppKernel.php
+public function registerBundles() {
+	$bundles = array(
 		// ...
-		'Craue' => __DIR__.'/../vendor/bundles',
-	));
+		new Craue\TwigExtensionsBundle\CraueTwigExtensionsBundle(),
+	);
+	// ...
+}
+```
 
 ## Make the Twig extensions available by updating your configuration
 
@@ -265,7 +268,7 @@ can do it intentionally.
 By default, all provided extensions are enabled. If you're using only one or some of them, you may want to disable the
 others. The following enables them all, so remove the ones you don't need:
 
-	// app/config.yml
+	// in app/config.yml
 	craue_twig_extensions:
 	  enable_only:
 	    - ArrayHelperExtension
