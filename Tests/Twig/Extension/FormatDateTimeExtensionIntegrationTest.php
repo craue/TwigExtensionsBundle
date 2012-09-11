@@ -249,35 +249,35 @@ class FormatDateTimeExtensionIntegrationTest extends TwigBasedTestCase {
 		$cases = array(
 			array(
 				'value' => new \DateTime('2124-11-22 12:34:56'),
-				'locale' => 'de-DE',
+				'locale' => 'en-US',
 				'timeType' => 'full',
 				'systemTimeZone' => null,
 				'timeZone' => 'Europe/Berlin',
-				'result' => '12:34:56 Mitteleuropäische Zeit',
+				'result' => '12:34:56 PM Central European Time',
 			),
 			array(
 				'value' => new \DateTime('2124-11-22 12:34:56'),
-				'locale' => 'de-DE',
+				'locale' => 'en-US',
 				'timeType' => 'full',
 				'systemTimeZone' => null,
 				'timeZone' => 'US/Hawaii',
-				'result' => '01:34:56 GMT-10:00',
+				'result' => '1:34:56 AM Hawaii-Aleutian Standard Time',
 			),
 			array(
 				'value' => new \DateTime('2124-11-22 12:34:56'),
-				'locale' => 'de-DE',
+				'locale' => 'en-US',
 				'timeType' => 'full',
 				'systemTimeZone' => 'US/Hawaii',
 				'timeZone' => null,
-				'result' => '01:34:56 GMT-10:00',
+				'result' => '1:34:56 AM Hawaii-Aleutian Standard Time',
 			),
 			array(
 				'value' => new \DateTime('2124-11-22 12:34:56'),
-				'locale' => 'de-DE',
+				'locale' => 'en-US',
 				'timeType' => 'full',
 				'systemTimeZone' => 'Europe/Berlin',
 				'timeZone' => 'UTC',
-				'result' => '11:34:56 GMT+00:00',
+				'result' => '11:34:56 AM GMT+00:00',
 			),
 		);
 
