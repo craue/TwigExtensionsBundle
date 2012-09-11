@@ -246,38 +246,43 @@ class FormatDateTimeExtensionIntegrationTest extends TwigBasedTestCase {
 	}
 
 	public function testFormatTime_timeZone() {
+		/*
+		 * don't use a time type of 'long' or 'full' here as its output seems to be system-dependend,
+		 * see http://travis-ci.org/#!/craue/TwigExtensionsBundle/jobs/2410874
+		 * and http://travis-ci.org/#!/craue/TwigExtensionsBundle/jobs/2411373
+		 */
 		$cases = array(
 			array(
 				'value' => new \DateTime('2124-11-22 12:34:56'),
-				'locale' => 'en-US',
-				'timeType' => 'full',
+				'locale' => 'de-DE',
+				'timeType' => 'medium',
 				'systemTimeZone' => null,
 				'timeZone' => 'Europe/Berlin',
-				'result' => '12:34:56 PM Central European Time',
+				'result' => '12:34:56',
 			),
 			array(
 				'value' => new \DateTime('2124-11-22 12:34:56'),
-				'locale' => 'en-US',
-				'timeType' => 'full',
+				'locale' => 'de-DE',
+				'timeType' => 'medium',
 				'systemTimeZone' => null,
 				'timeZone' => 'US/Hawaii',
-				'result' => '1:34:56 AM Hawaii-Aleutian Standard Time',
+				'result' => '01:34:56',
 			),
 			array(
 				'value' => new \DateTime('2124-11-22 12:34:56'),
-				'locale' => 'en-US',
-				'timeType' => 'full',
+				'locale' => 'de-DE',
+				'timeType' => 'medium',
 				'systemTimeZone' => 'US/Hawaii',
 				'timeZone' => null,
-				'result' => '1:34:56 AM Hawaii-Aleutian Standard Time',
+				'result' => '01:34:56',
 			),
 			array(
 				'value' => new \DateTime('2124-11-22 12:34:56'),
-				'locale' => 'en-US',
-				'timeType' => 'full',
+				'locale' => 'de-DE',
+				'timeType' => 'medium',
 				'systemTimeZone' => 'Europe/Berlin',
 				'timeZone' => 'UTC',
-				'result' => '11:34:56 AM GMT+00:00',
+				'result' => '11:34:56',
 			),
 		);
 
