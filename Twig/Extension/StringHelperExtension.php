@@ -56,14 +56,16 @@ class StringHelperExtension extends \Twig_Extension {
 	 * This will NOT remove any trailing dots, i.e. won't change "There must be something more...".
 	 * @param string $value Text possibly containing a trailing dot.
 	 * @return string Text with trailing dot added if there was none before.
+	 * @throws \InvalidArgumentException If {@code $value} is not a string.
 	 */
 	public function addTrailingDot($value) {
 		if (!is_string($value)) {
-			throw new \Twig_Error_Runtime('The filter can be applied to strings only.');
+			throw new \ InvalidArgumentException('The filter can be applied to strings only.');
 		}
 		if (strrpos($value, $this->dot) + strlen($this->dot) !== strlen($value)) {
 			$value .= $this->dot;
 		}
+
 		return $value;
 	}
 
