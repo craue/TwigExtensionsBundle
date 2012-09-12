@@ -184,21 +184,23 @@ class FormatDateTimeExtension extends AbstractLocaleAwareExtension {
 
 		$valueToUse = $value;
 
+		if (is_string($valueToUse)) {
+			if (ctype_digit($valueToUse)) {
+				$valueToUse = floatval($valueToUse);
+			} else {
+				// strtotime() doesn't work well with far future dates on 32-bit systems, so use a work-around here
+				try {
+					$valueToUse = new \DateTime($valueToUse);
+				} catch (\Exception $e) {
+					throw new \InvalidArgumentException(sprintf('The value "%s" of type %s is invalid. Error: "%s".', $value, gettype($value), $e->getMessage()));
+				}
+			}
+		}
+
 		// IntlDateFormatter#format() doesn't support \DateTime objects prior to PHP 5.3.4 (http://php.net/manual/intldateformatter.format.php)
 		if ($valueToUse instanceof \DateTime) {
-			// \DateTime::getTimestamp() would return false for year > 2038 on 32-bit systems (https://bugs.php.net/bug.php?id=50590)
+			// \DateTime::getTimestamp() would return false for far future dates on 32-bit systems (https://bugs.php.net/bug.php?id=50590)
 			$valueToUse = floatval($valueToUse->format('U'));
-		} elseif (is_string($valueToUse) && is_numeric($valueToUse)) {
-			$valueToUse = floatval($valueToUse);
-		} elseif (is_string($valueToUse) && !is_numeric($valueToUse)) {
-			$asString = (string)$valueToUse;
-			if (ctype_digit($asString) || (!empty($asString) && '-' === $asString[0] && ctype_digit(substr($asString, 1)))) {
-				$date = new \DateTime('@'.$valueToUse);
-			} else {
-				$date = new \DateTime($valueToUse);
-			}
-			$date->setTimezone(new \DateTimeZone($this->getEffectiveTimeZone(null)));
-			$valueToUse = floatval($date->format('U'));
 		}
 
 		$localeToUse = !empty($locale) ? $locale : $this->getLocale();

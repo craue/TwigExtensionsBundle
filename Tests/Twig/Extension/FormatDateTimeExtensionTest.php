@@ -39,6 +39,13 @@ class FormatDateTimeExtensionTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @expectedException \InvalidArgumentException
 	 */
+	public function testFormatDate_valueInvalid() {
+		$this->ext->formatDate('blah');
+	}
+
+	/**
+	 * @expectedException \InvalidArgumentException
+	 */
 	public function testFormatTime_timeTypeNone() {
 		$this->ext->formatTime(0, null, 'none');
 	}
