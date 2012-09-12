@@ -188,6 +188,8 @@ class FormatDateTimeExtension extends AbstractLocaleAwareExtension {
 		if ($valueToUse instanceof \DateTime) {
 			// \DateTime::getTimestamp() would return false for year > 2038 on 32-bit systems (https://bugs.php.net/bug.php?id=50590)
 			$valueToUse = floatval($valueToUse->format('U'));
+		} elseif (is_string($valueToUse) && is_numeric($valueToUse)) {
+			$valueToUse = floatval($valueToUse);
 		} elseif (is_string($valueToUse) && ($tmpValue = strtotime($valueToUse)) !== false) {
 			$valueToUse = $tmpValue;
 		}
