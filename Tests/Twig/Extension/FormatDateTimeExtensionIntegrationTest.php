@@ -52,7 +52,7 @@ class FormatDateTimeExtensionIntegrationTest extends TwigBasedTestCase {
 				'result' => 'Jan 1, 1970',
 			),
 			
-			// strtotime tests
+			// datetime expressions
 			array(
 				'value' => '1970-01-01',
 				'locale' => null,
@@ -61,11 +61,32 @@ class FormatDateTimeExtensionIntegrationTest extends TwigBasedTestCase {
 				'result' => 'Jan 1, 1970',
 			),
 			array(
+				'value' => '3377-01-01 +1year',
+				'locale' => null,
+				'dateType' => null,
+				'timeZone' => null,
+				'result' => 'Jan 1, 3378',
+			),
+			array(
 				'value' => 'January 1, 1970',
 				'locale' => null,
 				'dateType' => null,
 				'timeZone' => null,
 				'result' => 'Jan 1, 1970',
+			),
+			array(
+				'value' => '1970-01-01 + 1000years',
+				'locale' => null,
+				'dateType' => null,
+				'timeZone' => null,
+				'result' => 'Jan 1, 2970',
+			),
+			array(
+				'value' => '1970-01-01 - 50years',
+				'locale' => null,
+				'dateType' => null,
+				'timeZone' => null,
+				'result' => 'Jan 1, 1920',
 			),
 			array(
 				'value' => 'today +1day',
@@ -206,12 +227,18 @@ class FormatDateTimeExtensionIntegrationTest extends TwigBasedTestCase {
 				'result' => '1:00:00 AM',
 			),
 			
-			// strtotime tests
+			// datetime expressions
 			array(
 				'value' => '01:00 AM',
 				'locale' => null,
 				'timeType' => null,
 				'result' => '1:00:00 AM',
+			),
+			array(
+				'value' => '01:00 AM + 1hour',
+				'locale' => null,
+				'timeType' => null,
+				'result' => '2:00:00 AM',
 			),
 			array(
 				'value' => 'today +1day',
@@ -367,7 +394,7 @@ class FormatDateTimeExtensionIntegrationTest extends TwigBasedTestCase {
 				'result' => 'Jan 1, 1970 1:00:00 AM',
 			),
 			
-			// strtotime tests
+			// datetime expressions
 			array(
 				'value' => '1970-01-01 01:00 AM',
 				'locale' => null,
@@ -383,6 +410,22 @@ class FormatDateTimeExtensionIntegrationTest extends TwigBasedTestCase {
 				'timeType' => null,
 				'timeZone' => null,
 				'result' => 'Jan 1, 1970 1:00:00 AM',
+			),
+			array(
+				'value' => 'January 1, 1970 01:00 AM - 50years',
+				'locale' => null,
+				'dateType' => null,
+				'timeType' => null,
+				'timeZone' => null,
+				'result' => 'Jan 1, 1920 1:00:00 AM',
+			),
+			array(
+				'value' => 'January 1, 1970 01:00 AM + 1000years',
+				'locale' => null,
+				'dateType' => null,
+				'timeType' => null,
+				'timeZone' => null,
+				'result' => 'Jan 1, 2970 1:00:00 AM',
 			),
 			array(
 				'value' => 'today +1day',
