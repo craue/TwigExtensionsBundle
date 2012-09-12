@@ -60,7 +60,7 @@ class StringHelperExtension extends \Twig_Extension {
 	 */
 	public function addTrailingDot($value) {
 		if (!is_string($value)) {
-			throw new \ InvalidArgumentException('The filter can be applied to strings only.');
+			throw new \InvalidArgumentException('The filter can be applied to strings only.');
 		}
 		if (strrpos($value, $this->dot) + strlen($this->dot) !== strlen($value)) {
 			$value .= $this->dot;

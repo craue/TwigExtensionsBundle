@@ -50,9 +50,9 @@ class ArrayHelperExtensionTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider dataTranslateArray_invalidArguments
 	 * @expectedException \InvalidArgumentException
 	 */
-	public function testTranslateArray_invalidArguments($entries, array $parameters, $domain, $locale, $result) {
+	public function testTranslateArray_invalidArguments($entries, array $parameters, $domain, $locale) {
 		$this->ext->setTranslator($this->getMockedTranslator());
-		$this->ext->translateArray($entries, $parameters, $domain, $locale, $result);
+		$this->ext->translateArray($entries, $parameters, $domain, $locale);
 	}
 
 	public function dataTranslateArray_invalidArguments() {
@@ -89,6 +89,25 @@ class ArrayHelperExtensionTest extends \PHPUnit_Framework_TestCase {
 		);
 
 		$this->assertNotSame($case['wrongResult'], $this->ext->without($case['entries'], $case['without']));
+	}
+
+	/**
+	 * @dataProvider dataWithout_invalidArguments
+	 * @expectedException \InvalidArgumentException
+	 */
+	public function testWithout_invalidArguments($entries, $without) {
+		$this->ext->without($entries, $without);
+	}
+
+	public function dataWithout_invalidArguments() {
+		return array(
+			array(null, null),
+			array('', null),
+			array(null, ''),
+			array('', ''),
+			array(null, array()),
+			array('', array()),
+		);
 	}
 
 	protected function getMockedTranslator(array $case = array()) {

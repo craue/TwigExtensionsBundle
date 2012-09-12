@@ -28,472 +28,156 @@ class FormatDateTimeExtensionIntegrationTest extends TwigBasedTestCase {
 		parent::tearDown();
 	}
 
-	public function testFormatDate() {
-		$cases = array(
-			array(
-				'value' => null,
-				'locale' => null,
-				'dateType' => null,
-				'timeZone' => null,
-				'result' => '',
-			),
-			array(
-				'value' => 0,
-				'locale' => null,
-				'dateType' => null,
-				'timeZone' => null,
-				'result' => 'Jan 1, 1970',
-			),
-			array(
-				'value' => '0',
-				'locale' => null,
-				'dateType' => null,
-				'timeZone' => null,
-				'result' => 'Jan 1, 1970',
-			),
+	/**
+	 * @dataProvider dataFormatDate
+	 */
+	public function testFormatDate($value, $locale, $dateType, $timeZone, $result) {
+		$this->assertSame($result,
+				$this->getTwig()->render('IntegrationTestBundle:FormatDateTime:date.html.twig', array(
+					'value' => $value,
+					'locale' => $locale,
+					'dateType' => $dateType,
+					'timeZone' => $timeZone,
+				)));
+	}
 
+	public function dataFormatDate() {
+		return array(
+			array(null, null, null, null, ''),
+			array(0, null, null, null, 'Jan 1, 1970'),
+			array('0', null, null, null, 'Jan 1, 1970'),
 			// descriptive format
-			array(
-				'value' => '1970-01-01',
-				'locale' => null,
-				'dateType' => null,
-				'timeZone' => null,
-				'result' => 'Jan 1, 1970',
-			),
-			array(
-				'value' => 'January 1, 1970',
-				'locale' => null,
-				'dateType' => null,
-				'timeZone' => null,
-				'result' => 'Jan 1, 1970',
-			),
-			array(
-				'value' => '1970-01-01 - 50years',
-				'locale' => null,
-				'dateType' => null,
-				'timeZone' => null,
-				'result' => 'Jan 1, 1920',
-			),
-			array(
-				'value' => 'last day of February 2012',
-				'locale' => null,
-				'dateType' => null,
-				'timeZone' => null,
-				'result' => 'Feb 29, 2012',
-			),
-
+			array('1970-01-01', null, null, null, 'Jan 1, 1970'),
+			array('January 1, 1970', null, null, null, 'Jan 1, 1970'),
+			array('1970-01-01 - 50years', null, null, null, 'Jan 1, 1920'),
+			array('last day of February 2012', null, null, null, 'Feb 29, 2012'),
 			// far future date in descriptive format
-			array(
-				'value' => '3377-01-01 +1year',
-				'locale' => null,
-				'dateType' => null,
-				'timeZone' => null,
-				'result' => 'Jan 1, 3378',
-			),
-			array(
-				'value' => '1970-01-01 + 1000years',
-				'locale' => null,
-				'dateType' => null,
-				'timeZone' => null,
-				'result' => 'Jan 1, 2970',
-			),
-			array(
-				'value' => 'last day of February 4500',
-				'locale' => null,
-				'dateType' => null,
-				'timeZone' => null,
-				'result' => 'Feb 28, 4500',
-			),
-
+			array('3377-01-01 +1year', null, null, null, 'Jan 1, 3378'),
+			array('1970-01-01 + 1000years', null, null, null, 'Jan 1, 2970'),
+			array('last day of February 4500', null, null, null, 'Feb 28, 4500'),
 			// German format in all variations
-			array(
-				'value' => new \DateTime('2000-01-01'),
-				'locale' => 'de-DE',
-				'dateType' => 'short',
-				'timeZone' => null,
-				'result' => '01.01.00',
-			),
-			array(
-				'value' => new \DateTime('2000-01-01'),
-				'locale' => 'de-DE',
-				'dateType' => 'medium',
-				'timeZone' => null,
-				'result' => '01.01.2000',
-			),
-			array(
-				'value' => new \DateTime('2000-01-01'),
-				'locale' => 'de-DE',
-				'dateType' => 'long',
-				'timeZone' => null,
-				'result' => '1. Januar 2000',
-			),
-			array(
-				'value' => new \DateTime('2000-01-01'),
-				'locale' => 'de-DE',
-				'dateType' => 'full',
-				'timeZone' => null,
-				'result' => 'Samstag, 1. Januar 2000',
-			),
-
+			array(new \DateTime('2000-01-01'), 'de-DE', 'short', null, '01.01.00'),
+			array(new \DateTime('2000-01-01'), 'de-DE', 'medium', null, '01.01.2000'),
+			array(new \DateTime('2000-01-01'), 'de-DE', 'long', null, '1. Januar 2000'),
+			array(new \DateTime('2000-01-01'), 'de-DE', 'full', null, 'Samstag, 1. Januar 2000'),
 			// US format in all variations
-			array(
-				'value' => new \DateTime('2000-01-01'),
-				'locale' => 'en-US',
-				'dateType' => 'short',
-				'timeZone' => null,
-				'result' => '1/1/00',
-			),
-			array(
-				'value' => new \DateTime('2000-01-01'),
-				'locale' => 'en-US',
-				'dateType' => 'medium',
-				'timeZone' => null,
-				'result' => 'Jan 1, 2000',
-			),
-			array(
-				'value' => new \DateTime('2000-01-01'),
-				'locale' => 'en-US',
-				'dateType' => 'long',
-				'timeZone' => null,
-				'result' => 'January 1, 2000',
-			),
-			array(
-				'value' => new \DateTime('2000-01-01'),
-				'locale' => 'en-US',
-				'dateType' => 'full',
-				'timeZone' => null,
-				'result' => 'Saturday, January 1, 2000',
-			),
-
+			array(new \DateTime('2000-01-01'), 'en-US', 'short', null, '1/1/00'),
+			array(new \DateTime('2000-01-01'), 'en-US', 'medium', null, 'Jan 1, 2000'),
+			array(new \DateTime('2000-01-01'), 'en-US', 'long', null, 'January 1, 2000'),
+			array(new \DateTime('2000-01-01'), 'en-US', 'full', null, 'Saturday, January 1, 2000'),
 			// far future date
-			array(
-				'value' => 44417974000,
-				'locale' => null,
-				'dateType' => null,
-				'timeZone' => null,
-				'result' => 'Jul 20, 3377',
-			),
+			array(44417974000, null, null, null, 'Jul 20, 3377'),
 			// far future date as string value
-			array(
-				'value' => '44417974000',
-				'locale' => null,
-				'dateType' => null,
-				'timeZone' => null,
-				'result' => 'Jul 20, 3377',
-			),
-
+			array('44417974000', null, null, null, 'Jul 20, 3377'),
 			// far past date
-			array(
-				'value' => -16417974000,
-				'locale' => null,
-				'dateType' => null,
-				'timeZone' => null,
-				'result' => 'Sep 17, 1449',
-			),
-
+			array(-16417974000, null, null, null, 'Sep 17, 1449'),
 			// time zone
-			array(
-				'value' => 44417974000,
-				'locale' => null,
-				'dateType' => null,
-				'timeZone' => 'US/Hawaii',
-				'result' => 'Jul 19, 3377',
-			),
+			array(44417974000, null, null, 'US/Hawaii', 'Jul 19, 3377'),
 		);
-
-		foreach ($cases as $index => $case) {
-			$this->assertSame($case['result'],
-					$this->getTwig()->render('IntegrationTestBundle:FormatDateTime:date.html.twig', array(
-						'value' => $case['value'],
-						'locale' => $case['locale'],
-						'dateType' => $case['dateType'],
-						'timeZone' => $case['timeZone'],
-					)),
-					'test case with index '.$index);
-		}
 	}
 
-	public function testFormatTime() {
-		$cases = array(
-			array(
-				'value' => null,
-				'locale' => null,
-				'timeType' => null,
-				'result' => '',
-			),
-			array(
-				'value' => 0,
-				'locale' => null,
-				'timeType' => null,
-				'result' => '1:00:00 AM',
-			),
-			array(
-				'value' => '0',
-				'locale' => null,
-				'timeType' => null,
-				'result' => '1:00:00 AM',
-			),
+	/**
+	 * @dataProvider dataFormatTime
+	 */
+	public function testFormatTime($value, $locale, $timeType, $result) {
+		$this->assertSame($result,
+				$this->getTwig()->render('IntegrationTestBundle:FormatDateTime:time.html.twig', array(
+					'value' => $value,
+					'locale' => $locale,
+					'timeType' => $timeType,
+				)));
+	}
 
+	public function dataFormatTime() {
+		return array(
+			array(null, null, null, ''),
+			array(0, null, null, '1:00:00 AM'),
+			array('0', null, null, '1:00:00 AM'),
 			// descriptive format
-			array(
-				'value' => '01:00 AM',
-				'locale' => null,
-				'timeType' => null,
-				'result' => '1:00:00 AM',
-			),
-			array(
-				'value' => '01:00 AM + 1hour',
-				'locale' => null,
-				'timeType' => null,
-				'result' => '2:00:00 AM',
-			),
-
+			array('01:00 AM', null, null, '1:00:00 AM'),
+			array('01:00 AM + 1hour', null, null, '2:00:00 AM'),
 			// German format in all variations
-			array(
-				'value' => new \DateTime('2000-01-01 12:34:56'),
-				'locale' => 'de-DE',
-				'timeType' => 'short',
-				'result' => '12:34',
-			),
-			array(
-				'value' => new \DateTime('2000-01-01 12:34:56'),
-				'locale' => 'de-DE',
-				'timeType' => 'medium',
-				'result' => '12:34:56',
-			),
-			array(
-				'value' => new \DateTime('2000-01-01 12:34:56'),
-				'locale' => 'de-DE',
-				'timeType' => 'long',
-				'result' => '12:34:56 MEZ',
-			),
-			array(
-				'value' => new \DateTime('2000-01-01 12:34:56'),
-				'locale' => 'de-DE',
-				'timeType' => 'full',
-				'result' => '12:34:56 Mitteleuropäische Zeit',
-			),
-
+			array(new \DateTime('2000-01-01 12:34:56'), 'de-DE', 'short', '12:34'),
+			array(new \DateTime('2000-01-01 12:34:56'), 'de-DE', 'medium', '12:34:56'),
+			array(new \DateTime('2000-01-01 12:34:56'), 'de-DE', 'long', '12:34:56 MEZ'),
+			array(new \DateTime('2000-01-01 12:34:56'), 'de-DE', 'full', '12:34:56 Mitteleuropäische Zeit'),
 			// US format in all variations
-			array(
-				'value' => new \DateTime('2000-01-01 12:34:56'),
-				'locale' => 'en-US',
-				'timeType' => 'short',
-				'result' => '12:34 PM',
-			),
-			array(
-				'value' => new \DateTime('2000-01-01 12:34:56'),
-				'locale' => 'en-US',
-				'timeType' => 'medium',
-				'result' => '12:34:56 PM',
-			),
-			array(
-				'value' => new \DateTime('2000-01-01 12:34:56'),
-				'locale' => 'en-US',
-				'timeType' => 'long',
-				'result' => '12:34:56 PM GMT+01:00',
-			),
-			array(
-				'value' => new \DateTime('2000-01-01 12:34:56'),
-				'locale' => 'en-US',
-				'timeType' => 'full',
-				'result' => '12:34:56 PM Central European Time',
-			),
+			array(new \DateTime('2000-01-01 12:34:56'), 'en-US', 'short', '12:34 PM'),
+			array(new \DateTime('2000-01-01 12:34:56'), 'en-US', 'medium', '12:34:56 PM'),
+			array(new \DateTime('2000-01-01 12:34:56'), 'en-US', 'long', '12:34:56 PM GMT+01:00'),
+			array(new \DateTime('2000-01-01 12:34:56'), 'en-US', 'full', '12:34:56 PM Central European Time'),
 		);
-
-		foreach ($cases as $index => $case) {
-			$this->assertSame($case['result'],
-					$this->getTwig()->render('IntegrationTestBundle:FormatDateTime:time.html.twig', array(
-						'value' => $case['value'],
-						'locale' => $case['locale'],
-						'timeType' => $case['timeType'],
-					)),
-					'test case with index '.$index);
-		}
 	}
 
-	public function testFormatTime_timeZone() {
+	/**
+	 * @dataProvider dataFormatTime_timeZone
+	 */
+	public function testFormatTime_timeZone($value, $locale, $timeType, $systemTimeZone, $timeZone, $result) {
+		$currentTimezone = date_default_timezone_get();
+
+		if ($systemTimeZone !== null) {
+			date_default_timezone_set($systemTimeZone);
+		}
+
+		$this->assertSame($result,
+				$this->getTwig()->render('IntegrationTestBundle:FormatDateTime:time.html.twig', array(
+					'value' => $value,
+					'locale' => $locale,
+					'timeType' => $timeType,
+					'timeZone' => $timeZone,
+				)));
+
+		date_default_timezone_set($currentTimezone);
+	}
+
+	public function dataFormatTime_timeZone() {
 		/*
 		 * don't use a time type of 'long' or 'full' here as its output seems to be system-dependend,
 		 * see http://travis-ci.org/#!/craue/TwigExtensionsBundle/jobs/2410874
 		 * and http://travis-ci.org/#!/craue/TwigExtensionsBundle/jobs/2411373
 		 */
-		$cases = array(
-			array(
-				'value' => new \DateTime('2124-11-22 12:34:56'),
-				'locale' => 'de-DE',
-				'timeType' => 'medium',
-				'systemTimeZone' => null,
-				'timeZone' => 'Europe/Berlin',
-				'result' => '12:34:56',
-			),
-			array(
-				'value' => new \DateTime('2124-11-22 12:34:56'),
-				'locale' => 'de-DE',
-				'timeType' => 'medium',
-				'systemTimeZone' => null,
-				'timeZone' => 'US/Hawaii',
-				'result' => '01:34:56',
-			),
-			array(
-				'value' => new \DateTime('2124-11-22 12:34:56'),
-				'locale' => 'de-DE',
-				'timeType' => 'medium',
-				'systemTimeZone' => 'US/Hawaii',
-				'timeZone' => null,
-				'result' => '01:34:56',
-			),
-			array(
-				'value' => new \DateTime('2124-11-22 12:34:56'),
-				'locale' => 'de-DE',
-				'timeType' => 'medium',
-				'systemTimeZone' => 'Europe/Berlin',
-				'timeZone' => 'UTC',
-				'result' => '11:34:56',
-			),
+		return array(
+			array(new \DateTime('2124-11-22 12:34:56'), 'de-DE', 'medium', null, 'Europe/Berlin', '12:34:56'),
+			array(new \DateTime('2124-11-22 12:34:56'), 'de-DE', 'medium', null, 'US/Hawaii', '01:34:56'),
+			array(new \DateTime('2124-11-22 12:34:56'), 'de-DE', 'medium', 'US/Hawaii', null, '01:34:56'),
+			array(new \DateTime('2124-11-22 12:34:56'), 'de-DE', 'medium', 'Europe/Berlin', 'UTC', '11:34:56'),
 		);
-
-		foreach ($cases as $index => $case) {
-			$currentTimezone = date_default_timezone_get();
-
-			if ($case['systemTimeZone'] !== null) {
-				date_default_timezone_set($case['systemTimeZone']);
-			}
-
-			$this->assertSame($case['result'],
-					$this->getTwig()->render('IntegrationTestBundle:FormatDateTime:time.html.twig', array(
-						'value' => $case['value'],
-						'locale' => $case['locale'],
-						'timeType' => $case['timeType'],
-						'timeZone' => $case['timeZone'],
-					)),
-					'test case with index '.$index);
-
-			date_default_timezone_set($currentTimezone);
-		}
 	}
 
-	public function testFormatDateTime() {
-		$cases = array(
-			array(
-				'value' => null,
-				'locale' => null,
-				'dateType' => null,
-				'timeType' => null,
-				'timeZone' => null,
-				'result' => '',
-			),
-			array(
-				'value' => 0,
-				'locale' => null,
-				'dateType' => null,
-				'timeType' => null,
-				'timeZone' => null,
-				'result' => 'Jan 1, 1970 1:00:00 AM',
-			),
-			array(
-				'value' => '0',
-				'locale' => null,
-				'dateType' => null,
-				'timeType' => null,
-				'timeZone' => null,
-				'result' => 'Jan 1, 1970 1:00:00 AM',
-			),
+	/**
+	 * @dataProvider dataFormatDateTime
+	 */
+	public function testFormatDateTime($value, $locale, $dateType, $timeType, $timeZone, $result) {
+		$this->assertSame($result,
+				$this->getTwig()->render('IntegrationTestBundle:FormatDateTime:dateTime.html.twig', array(
+					'value' => $value,
+					'locale' => $locale,
+					'dateType' => $dateType,
+					'timeType' => $timeType,
+					'timeZone' => $timeZone,
+				)));
+	}
 
+	public function dataFormatDateTime() {
+		return array(
+			array(null, null, null, null, null, ''),
+			array(0, null, null, null, null, 'Jan 1, 1970 1:00:00 AM'),
+			array('0', null, null, null, null, 'Jan 1, 1970 1:00:00 AM'),
 			// descriptive format
-			array(
-				'value' => '1970-01-01 01:00 AM',
-				'locale' => null,
-				'dateType' => null,
-				'timeType' => null,
-				'timeZone' => null,
-				'result' => 'Jan 1, 1970 1:00:00 AM',
-			),
-			array(
-				'value' => 'January 1, 1970 01:00 AM',
-				'locale' => null,
-				'dateType' => null,
-				'timeType' => null,
-				'timeZone' => null,
-				'result' => 'Jan 1, 1970 1:00:00 AM',
-			),
-			array(
-				'value' => 'January 1, 1970 01:00 AM - 50years',
-				'locale' => null,
-				'dateType' => null,
-				'timeType' => null,
-				'timeZone' => null,
-				'result' => 'Jan 1, 1920 1:00:00 AM',
-			),
-
+			array('1970-01-01 01:00 AM', null, null, null, null, 'Jan 1, 1970 1:00:00 AM'),
+			array('January 1, 1970 01:00 AM', null, null, null, null, 'Jan 1, 1970 1:00:00 AM'),
+			array('January 1, 1970 01:00 AM - 50years', null, null, null, null, 'Jan 1, 1920 1:00:00 AM'),
 			// far future date in descriptive format
-			array(
-				'value' => 'January 1, 1970 01:00 AM + 1000years',
-				'locale' => null,
-				'dateType' => null,
-				'timeType' => null,
-				'timeZone' => null,
-				'result' => 'Jan 1, 2970 1:00:00 AM',
-			),
-
+			array('January 1, 1970 01:00 AM + 1000years', null, null, null, null, 'Jan 1, 2970 1:00:00 AM'),
 			// short+short/full+full variations
-			array(
-				'value' => new \DateTime('2124-11-22 12:34:56'),
-				'locale' => 'de-DE',
-				'dateType' => 'short',
-				'timeType' => 'short',
-				'timeZone' => null,
-				'result' => '22.11.24 12:34',
-			),
-			array(
-				'value' => new \DateTime('2124-11-22 12:34:56'),
-				'locale' => 'de-DE',
-				'dateType' => 'full',
-				'timeType' => 'full',
-				'timeZone' => null,
-				'result' => 'Mittwoch, 22. November 2124 12:34:56 Mitteleuropäische Zeit',
-			),
-
+			array(new \DateTime('2124-11-22 12:34:56'), 'de-DE', 'short', 'short', null, '22.11.24 12:34'),
+			array(new \DateTime('2124-11-22 12:34:56'), 'de-DE', 'full', 'full', null, 'Mittwoch, 22. November 2124 12:34:56 Mitteleuropäische Zeit'),
 			// variations with "none"
-			array(
-				'value' => new \DateTime('2124-11-22 12:34:56'),
-				'locale' => 'de-DE',
-				'dateType' => 'none',
-				'timeType' => 'medium',
-				'timeZone' => null,
-				'result' => '12:34:56',
-			),
-			array(
-				'value' => new \DateTime('2124-11-22 12:34:56'),
-				'locale' => 'de-DE',
-				'dateType' => 'medium',
-				'timeType' => 'none',
-				'timeZone' => null,
-				'result' => '22.11.2124',
-			),
-
+			array(new \DateTime('2124-11-22 12:34:56'), 'de-DE', 'none', 'medium', null, '12:34:56'),
+			array(new \DateTime('2124-11-22 12:34:56'), 'de-DE', 'medium', 'none', null, '22.11.2124'),
 			// time zone
-			array(
-				'value' => 44417974000,
-				'locale' => null,
-				'dateType' => 'full',
-				'timeType' => 'full',
-				'timeZone' => 'US/Hawaii',
-				'result' => 'Saturday, July 19, 3377 12:06:40 PM Hawaii-Aleutian Standard Time',
-			),
+			array(44417974000, null, 'full', 'full', 'US/Hawaii', 'Saturday, July 19, 3377 12:06:40 PM Hawaii-Aleutian Standard Time'),
 		);
-
-		foreach ($cases as $index => $case) {
-			$this->assertSame($case['result'],
-					$this->getTwig()->render('IntegrationTestBundle:FormatDateTime:dateTime.html.twig', array(
-						'value' => $case['value'],
-						'locale' => $case['locale'],
-						'dateType' => $case['dateType'],
-						'timeType' => $case['timeType'],
-						'timeZone' => $case['timeZone'],
-					)),
-					'test case with index '.$index);
-		}
 	}
 
 }

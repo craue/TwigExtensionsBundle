@@ -25,62 +25,29 @@ class ChangeLanguageExtensionIntegrationTest extends TwigBasedTestCase {
 		$this->ext = self::$kernel->getContainer()->get('twig.extension.craue_changeLanguage');
 	}
 
-	public function testGetLanguageName() {
-		$cases = array(
-			array(
-				'showForeignLanguageNames' => true,
-				'showFirstUppercase' => false,
-				'locale' => null,
-				'result' => '',
-			),
-			array(
-				'showForeignLanguageNames' => true,
-				'showFirstUppercase' => false,
-				'locale' => '',
-				'result' => '',
-			),
-			array(
-				'showForeignLanguageNames' => true,
-				'showFirstUppercase' => false,
-				'locale' => 'de',
-				'result' => 'Deutsch',
-			),
-			array(
-				'showForeignLanguageNames' => true,
-				'showFirstUppercase' => false,
-				'locale' => 'de_DE',
-				'result' => 'Deutsch (Deutschland)',
-			),
-			array(
-				'showForeignLanguageNames' => true,
-				'showFirstUppercase' => false,
-				'locale' => 'ru',
-				'result' => 'русский',
-			),
-			array(
-				'showForeignLanguageNames' => false,
-				'showFirstUppercase' => false,
-				'locale' => 'de',
-				'result' => 'German',
-			),
-			array(
-				'showForeignLanguageNames' => true,
-				'showFirstUppercase' => true,
-				'locale' => 'ru',
-				'result' => 'Русский',
-			),
+	/**
+	 * @dataProvider dataGetLanguageName
+	 */
+	public function testGetLanguageName($showForeignLanguageNames, $showFirstUppercase, $locale, $result) {
+		$this->ext->setShowForeignLanguageNames($showForeignLanguageNames);
+		$this->ext->setShowFirstUppercase($showFirstUppercase);
+
+		$this->assertSame($result,
+				$this->getTwig()->render('IntegrationTestBundle:ChangeLanguage:languageName.html.twig', array(
+					'locale' => $locale,
+				)));
+	}
+
+	public function dataGetLanguageName() {
+		return array(
+			array(true, false, null, ''),
+			array(true, false, '', ''),
+			array(true, false, 'de', 'Deutsch'),
+			array(true, false, 'de_DE', 'Deutsch (Deutschland)'),
+			array(true, false, 'ru', 'русский'),
+			array(false, false, 'de', 'German'),
+			array(true, true, 'ru', 'Русский'),
 		);
-
-		foreach ($cases as $index => $case) {
-			$this->ext->setShowForeignLanguageNames($case['showForeignLanguageNames']);
-			$this->ext->setShowFirstUppercase($case['showFirstUppercase']);
-
-			$this->assertSame($case['result'],
-					$this->getTwig()->render('IntegrationTestBundle:ChangeLanguage:languageName.html.twig', array(
-						'locale' => $case['locale'],
-					)),
-					'test case with index '.$index);
-		}
 	}
 
 }

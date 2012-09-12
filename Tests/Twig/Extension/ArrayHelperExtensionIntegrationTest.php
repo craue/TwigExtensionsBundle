@@ -20,99 +20,105 @@ class ArrayHelperExtensionIntegrationTest extends TwigBasedTestCase {
 		self::$kernel->getContainer()->get('translator')->setLocale('de');
 	}
 
-	public function testTranslateArray() {
-		$cases = array(
-			array(
-				'entries' => array(),
-				'parameters' => array(),
-				'domain' => null,
-				'locale' => null,
-				'result' => '',
-			),
-			array(
-				'entries' => array('red', 'green', 'yellow'),
-				'parameters' => array(),
-				'domain' => null,
-				'locale' => null,
-				'result' => 'red, green, yellow',
-			),
-			array(
-				'entries' => array('red', 'green', 'yellow'),
-				'parameters' => array(),
-				'domain' => 'messages',
-				'locale' => 'de',
-				'result' => 'rot, grün, gelb',
-			),
-			array(
-				'entries' => array('thing.red', 'thing.green', 'thing.yellow'),
-				'parameters' => array('%thing%' => 'Haus'),
-				'domain' => 'messages',
-				'locale' => 'de',
-				'result' => 'ein rotes Haus, ein grünes Haus, ein gelbes Haus',
-			),
-		);
-
-		foreach ($cases as $index => $case) {
-			$this->assertSame($case['result'],
-					$this->getTwig()->render('IntegrationTestBundle:ArrayHelper:translateArray.html.twig', array(
-						'entries' => $case['entries'],
-						'parameters' => $case['parameters'],
-						'domain' => $case['domain'],
-						'locale' => $case['locale'],
-					)),
-					'test case with index '.$index);
-		}
+	/**
+	 * @dataProvider dataTranslateArray
+	 */
+	public function testTranslateArray(array $entries, array $parameters, $domain, $locale, $result) {
+		$this->assertSame($result,
+				$this->getTwig()->render('IntegrationTestBundle:ArrayHelper:translateArray.html.twig', array(
+					'entries' => $entries,
+					'parameters' => $parameters,
+					'domain' => $domain,
+					'locale' => $locale,
+				)));
 	}
 
-	public function testWithout() {
-		$cases = array(
+	public function dataTranslateArray() {
+		return array(
 			array(
-				'entries' => array('red', 'green', 'yellow', 'blue'),
-				'without' => 'yellow',
-				'result' => 'red, green, blue',
+				array(),
+				array(),
+				null,
+				null,
+				'',
 			),
 			array(
-				'entries' => array('red', 'green', 'yellow', 'blue'),
-				'without' => array('yellow', 'black', 'red'),
-				'result' => 'green, blue',
+				array('red', 'green', 'yellow'),
+				array(),
+				null,
+				null,
+				'red, green, yellow',
+			),
+			array(
+				array('red', 'green', 'yellow'),
+				array(),
+				'messages',
+				'de',
+				'rot, grün, gelb',
+			),
+			array(
+				array('thing.red', 'thing.green', 'thing.yellow'),
+				array('%thing%' => 'Haus'),
+				'messages',
+				'de',
+				'ein rotes Haus, ein grünes Haus, ein gelbes Haus',
 			),
 		);
-
-		foreach ($cases as $index => $case) {
-			$this->assertSame($case['result'],
-					$this->getTwig()->render('IntegrationTestBundle:ArrayHelper:without.html.twig', array(
-						'entries' => $case['entries'],
-						'without' => $case['without'],
-					)),
-					'test case with index '.$index);
-		}
 	}
 
-	public function testReplaceKey() {
-		$cases = array(
+	/**
+	 * @dataProvider dataWithout
+	 */
+	public function testWithout($entries, $without, $result) {
+		$this->assertSame($result,
+				$this->getTwig()->render('IntegrationTestBundle:ArrayHelper:without.html.twig', array(
+					'entries' => $entries,
+					'without' => $without,
+				)));
+	}
+
+	public function dataWithout() {
+		return array(
 			array(
-				'entries' => array('key1' => 'value1', 'key2' => 'value2'),
-				'key' => 'key3',
-				'value' => 'value3',
-				'result' => 'value1, value2, value3',
+				array('red', 'green', 'yellow', 'blue'),
+				'yellow',
+				'red, green, blue',
 			),
 			array(
-				'entries' => array('key1' => 'value1', 'key2' => 'value2'),
-				'key' => 'key1',
-				'value' => 'value3',
-				'result' => 'value3, value2',
+				array('red', 'green', 'yellow', 'blue'),
+				array('yellow', 'black', 'red'),
+				'green, blue',
 			),
 		);
+	}
 
-		foreach ($cases as $index => $case) {
-			$this->assertSame($case['result'],
-					$this->getTwig()->render('IntegrationTestBundle:ArrayHelper:replaceKey.html.twig', array(
-						'entries' => $case['entries'],
-						'key' => $case['key'],
-						'value' => $case['value'],
-					)),
-					'test case with index '.$index);
-		}
+	/**
+	 * @dataProvider dataReplaceKey
+	 */
+	public function testReplaceKey($entries, $key, $value, $result) {
+		$this->assertSame($result,
+				$this->getTwig()->render('IntegrationTestBundle:ArrayHelper:replaceKey.html.twig', array(
+					'entries' => $entries,
+					'key' => $key,
+					'value' => $value,
+				)));
+	}
+
+	public function dataReplaceKey() {
+		return array(
+			array(
+				array('key1' => 'value1', 'key2' => 'value2'),
+				'key3',
+				'value3',
+				'value1, value2, value3',
+			),
+			array(
+				array('key1' => 'value1', 'key2' => 'value2'),
+				'key1',
+				'value3',
+				'value3, value2',
+			),
+		);
 	}
 
 }

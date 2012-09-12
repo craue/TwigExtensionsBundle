@@ -13,53 +13,27 @@ use Craue\TwigExtensionsBundle\Tests\TwigBasedTestCase;
  */
 class DecorateEmptyValueExtensionIntegrationTest extends TwigBasedTestCase {
 
-	public function testDecorateEmptyValue() {
-		$cases = array(
-			array(
-				'value' => null,
-				'placeholder' => null,
-				'result' => '&mdash;',
-			),
-			array(
-				'value' => null,
-				'placeholder' => '&ndash;',
-				'result' => '&ndash;',
-			),
-			array(
-				'value' => null,
-				'placeholder' => '-',
-				'result' => '-',
-			),
-			array(
-				'value' => null,
-				'placeholder' => 0,
-				'result' => '0',
-			),
-			array(
-				'value' => false,
-				'placeholder' => '-',
-				'result' => '-',
-			),
-			array(
-				'value' => 0,
-				'placeholder' => '-',
-				'result' => '0',
-			),
-			array(
-				'value' => 'a value',
-				'placeholder' => null,
-				'result' => 'a value',
-			),
-		);
+	/**
+	 * @dataProvider dataDecorateEmptyValue
+	 */
+	public function testDecorateEmptyValue($value, $placeholder, $result) {
+		$this->assertSame($result,
+				$this->getTwig()->render('IntegrationTestBundle:DecorateEmptyValue:default.html.twig', array(
+					'value' => $value,
+					'placeholder' => $placeholder,
+				)));
+	}
 
-		foreach ($cases as $index => $case) {
-			$this->assertSame($case['result'],
-					$this->getTwig()->render('IntegrationTestBundle:DecorateEmptyValue:default.html.twig', array(
-						'value' => $case['value'],
-						'placeholder' => $case['placeholder'],
-					)),
-					'test case with index '.$index);
-		}
+	public function dataDecorateEmptyValue() {
+		return array(
+			array(null, null, '&mdash;'),
+			array(null, '&ndash;', '&ndash;'),
+			array(null, '-', '-'),
+			array(null, 0, '0'),
+			array(false, '-', '-'),
+			array(0, '-', '0'),
+			array('a value', null, 'a value'),
+		);
 	}
 
 }

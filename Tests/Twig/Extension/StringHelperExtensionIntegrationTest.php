@@ -13,25 +13,21 @@ use Craue\TwigExtensionsBundle\Tests\TwigBasedTestCase;
  */
 class StringHelperExtensionIntegrationTest extends TwigBasedTestCase {
 
-	public function testAddTrailingDot() {
-		$cases = array(
-			array(
-				'value' => 'This text should end with a dot',
-				'result' => 'This text should end with a dot.',
-			),
-			array(
-				'value' => 'This text should end with exactly one dot.',
-				'result' => 'This text should end with exactly one dot.',
-			),
-		);
+	/**
+	 * @dataProvider dataAddTrailingDot
+	 */
+	public function testAddTrailingDot($value, $result) {
+		$this->assertSame($result,
+				$this->getTwig()->render('IntegrationTestBundle:StringHelper:trailingDot.html.twig', array(
+					'value' => $value,
+				)));
+	}
 
-		foreach ($cases as $index => $case) {
-			$this->assertSame($case['result'],
-					$this->getTwig()->render('IntegrationTestBundle:StringHelper:trailingDot.html.twig', array(
-						'value' => $case['value'],
-					)),
-					'test case with index '.$index);
-		}
+	public function dataAddTrailingDot() {
+		return array(
+			array('This text should end with a dot', 'This text should end with a dot.'),
+			array('This text should end with a dot.', 'This text should end with a dot.'),
+		);
 	}
 
 }
