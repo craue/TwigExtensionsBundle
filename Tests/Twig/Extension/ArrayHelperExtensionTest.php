@@ -46,6 +46,21 @@ class ArrayHelperExtensionTest extends \PHPUnit_Framework_TestCase {
 		$this->ext->translateArray($case['entries']);
 	}
 
+	/**
+	 * @dataProvider dataTranslateArray_invalidArguments
+	 * @expectedException \InvalidArgumentException
+	 */
+	public function testTranslateArray_invalidArguments($entries, array $parameters, $domain, $locale, $result) {
+		$this->ext->setTranslator($this->getMockedTranslator());
+		$this->ext->translateArray($entries, $parameters, $domain, $locale, $result);
+	}
+
+	public function dataTranslateArray_invalidArguments() {
+		return array(
+			array(null, array(), null, null, ''),
+		);
+	}
+
 	public function testWithout_withoutArray() {
 		$case = array(
 			'entries' => array('red', 'green', 'yellow', 'blue'),
@@ -76,13 +91,16 @@ class ArrayHelperExtensionTest extends \PHPUnit_Framework_TestCase {
 		$this->assertNotSame($case['wrongResult'], $this->ext->without($case['entries'], $case['without']));
 	}
 
-	protected function getMockedTranslator(array $case) {
+	protected function getMockedTranslator(array $case = array()) {
 		$translator = $this->getMock('Symfony\Component\Translation\TranslatorInterface');
-		$translator
-			->expects($this->exactly(count($case['entries'])))
-			->method('trans')
-			->with($this->anything(), $case['parameters'], $case['domain'], $case['locale'])
-		;
+
+		if (!empty($case)) {
+			$translator
+				->expects($this->exactly(count($case['entries'])))
+				->method('trans')
+				->with($this->anything(), $case['parameters'], $case['domain'], $case['locale'])
+			;
+		}
 
 		return $translator;
 	}

@@ -136,7 +136,7 @@ class ArrayHelperExtension extends \Twig_Extension {
 	/**
 	 * Tries to convert {@code $source} to an array.
 	 * @param array|Traversable $source Variable to be converted.
-	 * @throws \Twig_Error_Runtime If no array representation is available.
+	 * @throws \InvalidArgumentException If no array representation is available.
 	 */
 	protected function convertToArray($source) {
 		if (is_array($source)) {
@@ -147,7 +147,7 @@ class ArrayHelperExtension extends \Twig_Extension {
 			return iterator_to_array($source, true);
 		}
 
-		throw new \Twig_Error_Runtime('The filter can be applied to arrays only.');
+		throw new \InvalidArgumentException('The filter can be applied to arrays only.');
 	}
 
 }
