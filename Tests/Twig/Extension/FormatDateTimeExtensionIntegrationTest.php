@@ -13,13 +13,15 @@ use Craue\TwigExtensionsBundle\Tests\TwigBasedTestCase;
  */
 class FormatDateTimeExtensionIntegrationTest extends TwigBasedTestCase {
 
+	const DEFAULT_TIME_ZONE = 'Europe/Berlin';
+
 	private $currentTimezone;
 
 	protected function setUp() {
 		parent::setUp();
 
 		$this->currentTimezone = date_default_timezone_get();
-		date_default_timezone_set('Europe/Berlin');
+		date_default_timezone_set(self::DEFAULT_TIME_ZONE);
 	}
 
 	protected function tearDown() {
@@ -42,7 +44,11 @@ class FormatDateTimeExtensionIntegrationTest extends TwigBasedTestCase {
 	}
 
 	public function dataFormatDate() {
-		return array(
+		$currentTimezone = date_default_timezone_get();
+
+		date_default_timezone_set(self::DEFAULT_TIME_ZONE);
+
+		$testdata = array(
 			array(null, null, null, null, ''),
 			array(0, null, null, null, 'Jan 1, 1970'),
 			array('0', null, null, null, 'Jan 1, 1970'),
@@ -74,6 +80,10 @@ class FormatDateTimeExtensionIntegrationTest extends TwigBasedTestCase {
 			// time zone
 			array(44417974000, null, null, 'US/Hawaii', 'Jul 19, 3377'),
 		);
+
+		date_default_timezone_set($currentTimezone);
+
+		return $testdata;
 	}
 
 	/**
@@ -89,7 +99,11 @@ class FormatDateTimeExtensionIntegrationTest extends TwigBasedTestCase {
 	}
 
 	public function dataFormatTime() {
-		return array(
+		$currentTimezone = date_default_timezone_get();
+
+		date_default_timezone_set(self::DEFAULT_TIME_ZONE);
+
+		$testdata = array(
 			array(null, null, null, ''),
 			array(0, null, null, '1:00:00 AM'),
 			array('0', null, null, '1:00:00 AM'),
@@ -107,6 +121,10 @@ class FormatDateTimeExtensionIntegrationTest extends TwigBasedTestCase {
 			array(new \DateTime('2000-01-01 12:34:56'), 'en-US', 'long', '12:34:56 PM GMT+01:00'),
 			array(new \DateTime('2000-01-01 12:34:56'), 'en-US', 'full', '12:34:56 PM Central European Time'),
 		);
+
+		date_default_timezone_set($currentTimezone);
+
+		return $testdata;
 	}
 
 	/**
@@ -131,17 +149,25 @@ class FormatDateTimeExtensionIntegrationTest extends TwigBasedTestCase {
 	}
 
 	public function dataFormatTime_timeZone() {
+		$currentTimezone = date_default_timezone_get();
+
+		date_default_timezone_set(self::DEFAULT_TIME_ZONE);
+
 		/*
 		 * don't use a time type of 'long' or 'full' here as its output seems to be system-dependend,
 		 * see http://travis-ci.org/#!/craue/TwigExtensionsBundle/jobs/2410874
 		 * and http://travis-ci.org/#!/craue/TwigExtensionsBundle/jobs/2411373
 		 */
-		return array(
+		$testdata = array(
 			array(new \DateTime('2124-11-22 12:34:56'), 'de-DE', 'medium', null, 'Europe/Berlin', '12:34:56'),
 			array(new \DateTime('2124-11-22 12:34:56'), 'de-DE', 'medium', null, 'US/Hawaii', '01:34:56'),
 			array(new \DateTime('2124-11-22 12:34:56'), 'de-DE', 'medium', 'US/Hawaii', null, '01:34:56'),
 			array(new \DateTime('2124-11-22 12:34:56'), 'de-DE', 'medium', 'Europe/Berlin', 'UTC', '11:34:56'),
 		);
+
+		date_default_timezone_set($currentTimezone);
+
+		return $testdata;
 	}
 
 	/**
@@ -159,7 +185,11 @@ class FormatDateTimeExtensionIntegrationTest extends TwigBasedTestCase {
 	}
 
 	public function dataFormatDateTime() {
-		return array(
+		$currentTimezone = date_default_timezone_get();
+
+		date_default_timezone_set(self::DEFAULT_TIME_ZONE);
+
+		$testdata = array(
 			array(null, null, null, null, null, ''),
 			array(0, null, null, null, null, 'Jan 1, 1970 1:00:00 AM'),
 			array('0', null, null, null, null, 'Jan 1, 1970 1:00:00 AM'),
@@ -178,6 +208,10 @@ class FormatDateTimeExtensionIntegrationTest extends TwigBasedTestCase {
 			// time zone
 			array(44417974000, null, 'full', 'full', 'US/Hawaii', 'Saturday, July 19, 3377 12:06:40 PM Hawaii-Aleutian Standard Time'),
 		);
+
+		date_default_timezone_set($currentTimezone);
+
+		return $testdata;
 	}
 
 }
