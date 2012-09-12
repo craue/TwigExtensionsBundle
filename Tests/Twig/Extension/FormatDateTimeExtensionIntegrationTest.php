@@ -51,6 +51,31 @@ class FormatDateTimeExtensionIntegrationTest extends TwigBasedTestCase {
 				'timeZone' => null,
 				'result' => 'Jan 1, 1970',
 			),
+			
+			// strtotime tests
+			array(
+				'value' => '1970-01-01',
+				'locale' => null,
+				'dateType' => null,
+				'timeZone' => null,
+				'result' => 'Jan 1, 1970',
+			),
+			array(
+				'value' => 'January 1, 1970',
+				'locale' => null,
+				'dateType' => null,
+				'timeZone' => null,
+				'result' => 'Jan 1, 1970',
+			),
+			array(
+				'value' => 'today +1day',
+				'locale' => null,
+				'dateType' => null,
+				'timeZone' => null,
+				'result' => defined('PHP_WINDOWS_VERSION_BUILD')
+						? strftime('%b %#d, %Y', strtotime('today +1day'))
+						: strftime('%b %e, %Y', strtotime('today +1day'))
+			),
 
 			// German format in all variations
 			array(
@@ -179,6 +204,20 @@ class FormatDateTimeExtensionIntegrationTest extends TwigBasedTestCase {
 				'locale' => null,
 				'timeType' => null,
 				'result' => '1:00:00 AM',
+			),
+			
+			// strtotime tests
+			array(
+				'value' => '01:00 AM',
+				'locale' => null,
+				'timeType' => null,
+				'result' => '1:00:00 AM',
+			),
+			array(
+				'value' => 'today +1day',
+				'locale' => null,
+				'timeType' => null,
+				'result' => strftime('%I:%M:%S %p', strtotime('today +1day'))
 			),
 
 			// German format in all variations
@@ -326,6 +365,34 @@ class FormatDateTimeExtensionIntegrationTest extends TwigBasedTestCase {
 				'timeType' => null,
 				'timeZone' => null,
 				'result' => 'Jan 1, 1970 1:00:00 AM',
+			),
+			
+			// strtotime tests
+			array(
+				'value' => '1970-01-01 01:00 AM',
+				'locale' => null,
+				'dateType' => null,
+				'timeType' => null,
+				'timeZone' => null,
+				'result' => 'Jan 1, 1970 1:00:00 AM',
+			),
+			array(
+				'value' => 'January 1, 1970 01:00 AM',
+				'locale' => null,
+				'dateType' => null,
+				'timeType' => null,
+				'timeZone' => null,
+				'result' => 'Jan 1, 1970 1:00:00 AM',
+			),
+			array(
+				'value' => 'today +1day',
+				'locale' => null,
+				'dateType' => null,
+				'timeType' => null,
+				'timeZone' => null,
+				'result' => defined('PHP_WINDOWS_VERSION_BUILD')
+						? strftime('%b %#d, %Y %I:%M:%S %p', strtotime('today +1day'))
+						: strftime('%b %e, %Y %l:%M:%S %p', strtotime('today +1day'))
 			),
 
 			// short+short/full+full variations
