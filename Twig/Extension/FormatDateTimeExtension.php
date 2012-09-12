@@ -190,8 +190,15 @@ class FormatDateTimeExtension extends AbstractLocaleAwareExtension {
 			$valueToUse = floatval($valueToUse->format('U'));
 		} elseif (is_string($valueToUse) && is_numeric($valueToUse)) {
 			$valueToUse = floatval($valueToUse);
-		} elseif (is_string($valueToUse) && ($tmpValue = strtotime($valueToUse)) !== false) {
-			$valueToUse = $tmpValue;
+		} elseif (is_string($valueToUse) && !is_numeric($valueToUse)) {
+			$asString = (string)$valueToUse;
+			if (ctype_digit($asString) || (!empty($asString) && '-' === $asString[0] && ctype_digit(substr($asString, 1)))) {
+				$date = new \DateTime('@'.$valueToUse);
+			} else {
+				$date = new \DateTime($valueToUse);
+			}
+			$date->setTimezone(new \DateTimeZone($this->getEffectiveTimeZone(null)));
+			$valueToUse = floatval($date->format('U'));
 		}
 
 		$localeToUse = !empty($locale) ? $locale : $this->getLocale();
