@@ -4,14 +4,11 @@ php:
   - 5.3
   - 5.4
 env:
-  - SYMFONY_VERSION=2.0.*
-  - SYMFONY_VERSION=2.1.*
-  - SYMFONY_VERSION=dev-master
+  - SYMFONY_VERSION="2.0.*" MIN_STABILITY="stable"
+  - SYMFONY_VERSION="2.1.*" MIN_STABILITY="stable"
+  - SYMFONY_VERSION="2.2.*" MIN_STABILITY="dev"
 before_script:
-  - wget http://getcomposer.org/composer.phar
-  - php composer.phar --no-interaction --no-update require symfony/symfony:${SYMFONY_VERSION} symfony/twig-bundle:${SYMFONY_VERSION}
-  - php composer.phar --no-interaction --no-update require --dev symfony/symfony:${SYMFONY_VERSION}
-  - php composer.phar --no-interaction update --dev
+  - sh travis_before_build.sh
 notifications:
   email:
     - christian.raue@gmail.com
