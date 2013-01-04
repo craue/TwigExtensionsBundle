@@ -81,7 +81,6 @@ in a shell.
 ## Enable the bundle
 
 ```php
-<?php
 // in app/AppKernel.php
 public function registerBundles() {
 	$bundles = array(
