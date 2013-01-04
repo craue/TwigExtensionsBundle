@@ -11,7 +11,7 @@ use Symfony\Component\Form\FormView;
  * Twig extension for form handling.
  *
  * @author Christian Raue <christian.raue@gmail.com>
- * @copyright 2011-2012 Christian Raue
+ * @copyright 2011-2013 Christian Raue
  * @license http://www.opensource.org/licenses/mit-license.php MIT License
  */
 class FormExtension extends \Twig_Extension {
