@@ -1,5 +1,9 @@
 # Changelog
 
+## master
+
+* fixed test config
+
 ## 1.0.0 (2013-02-28)
 
 * first stable release

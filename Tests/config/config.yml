@@ -1,6 +1,7 @@
 craue_twig_extensions: ~
 
 framework:
+  csrf_protection: false
   form: ~
   router:
     resource: ~
