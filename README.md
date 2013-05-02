@@ -65,7 +65,7 @@ Let Composer download and install the bundle by first adding it to your composer
 ```json
 {
 	"require": {
-		"craue/twigextensions-bundle": "dev-master"
+		"craue/twigextensions-bundle": "~1.0.0"
 	}
 }
 ```
