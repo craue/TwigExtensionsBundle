@@ -3,6 +3,7 @@
 namespace Craue\TwigExtensionsBundle\Tests;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\HttpKernel\Kernel;
 
 /**
  * @author Christian Raue <christian.raue@gmail.com>
@@ -17,7 +18,14 @@ abstract class TwigBasedTestCase extends WebTestCase {
 	protected $twig;
 
 	protected static function createKernel(array $options = array()) {
-		return new AppKernel(isset($options['config']) ? $options['config'] : 'config.yml');
+		$configFile = 'config.yml';
+
+		// https://github.com/symfony/symfony/issues/9429
+		if (version_compare(Kernel::VERSION, '2.4', '>=')) {
+			$configFile = 'config_symfony_2.4.yml';
+		}
+
+		return new AppKernel(isset($options['config']) ? $options['config'] : $configFile);
 	}
 
 	protected function setUp() {
