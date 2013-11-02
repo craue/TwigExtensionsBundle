@@ -85,6 +85,16 @@ class ArrayHelperExtensionIntegrationTest extends TwigBasedTestCase {
 				'red, green, blue',
 			),
 			array(
+				array('red', 'green', 'yellow' => 'bumblebee', 'blue'),
+				'bumblebee',
+				'red, green, blue',
+			),
+			array(
+				array('red', 'green', 'yellow' => 'bumblebee', 'blue'),
+				'yellow',
+				'red, green, bumblebee, blue',
+			),
+			array(
 				array('red', 'green', 'yellow', 'blue'),
 				array('yellow', 'black', 'red'),
 				'green, blue',
@@ -117,6 +127,40 @@ class ArrayHelperExtensionIntegrationTest extends TwigBasedTestCase {
 				'key1',
 				'value3',
 				'value3, value2',
+			),
+		);
+	}
+
+	/**
+	 * @dataProvider dataRemoveKey
+	 */
+	public function testRemoveKey($entries, $key, $result) {
+		$this->assertSame($result,
+				$this->getTwig()->render('IntegrationTestBundle:ArrayHelper:removeKey.html.twig', array(
+					'entries' => $entries,
+					'key' => $key,
+				)));
+	}
+
+	public function dataRemoveKey() {
+		return array(
+			// string key
+			array(
+				array('key1' => 'value1', 'key2' => 'value2'),
+				'key1',
+				'value2',
+			),
+			// integer key
+			array(
+				array('value1', 'value2'),
+				0,
+				'value2',
+			),
+			// nonexistent key
+			array(
+				array('value1', 'value2'),
+				2,
+				'value1, value2',
 			),
 		);
 	}

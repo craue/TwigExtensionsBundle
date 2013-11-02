@@ -29,7 +29,8 @@ instead.
 Provides the filters
 
 - `craue_without` wrapping PHP's `array_diff` function,
-- `craue_replaceKey` which adds/replaces an array entry (whereupon the key can be a variable), and
+- `craue_replaceKey` which adds/replaces an array entry (whereupon the key can be a variable),
+- `craue_removeKey` which removes an array entry by key (whereupon the key can be a variable), and
 - `craue_translateArray` which translates all entries in an array.
 
 ## FormExtension
@@ -121,6 +122,9 @@ craue_twig_extensions: ~
 {{ anArray | craue_replaceKey(key, value) | join(', ') }}<br />
 {% set newKey = 'key3' %}
 {{ {'key1': 'value1', 'key2': 'value2'} | craue_replaceKey(newKey, 'value3') | join(', ') }} will print "value1, value2, value3"
+
+{{ anArray | craue_removeKey(key) | join(', ') }}<br />
+{{ {'key1': 'value1', 'key2': 'value2'} | craue_removeKey('key1') | join(', ') }} will print "value2"
 
 {{ anArray | craue_translateArray() | join(', ') }}<br />
 ```

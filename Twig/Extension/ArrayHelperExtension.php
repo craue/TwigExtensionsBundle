@@ -31,6 +31,11 @@ class ArrayHelperExtension extends \Twig_Extension {
 	/**
 	 * @var string
 	 */
+	protected $removeKeyAlias = null;
+
+	/**
+	 * @var string
+	 */
 	protected $translateArrayAlias = null;
 
 	public function setTranslator(TranslatorInterface $translator) {
@@ -40,14 +45,18 @@ class ArrayHelperExtension extends \Twig_Extension {
 	/**
 	 * @param string $withoutAlias Alias for the without filter.
 	 * @param string $replaceKeyAlias Alias for the replaceKey filter.
+	 * @param string $removeKeyAlias Alias for the removeKey filter.
 	 * @param string $translateArrayAlias Alias for the translateArray filter.
 	 */
-	public function setAliases($withoutAlias = null, $replaceKeyAlias = null, $translateArrayAlias = null) {
+	public function setAliases($withoutAlias = null, $replaceKeyAlias = null, $removeKeyAlias = null, $translateArrayAlias = null) {
 		if (!empty($withoutAlias)) {
 			$this->withoutAlias = $withoutAlias;
 		}
 		if (!empty($replaceKeyAlias)) {
 			$this->replaceKeyAlias = $replaceKeyAlias;
+		}
+		if (!empty($removeKeyAlias)) {
+			$this->removeKeyAlias = $removeKeyAlias;
 		}
 		if (!empty($translateArrayAlias)) {
 			$this->translateArrayAlias = $translateArrayAlias;
@@ -77,6 +86,12 @@ class ArrayHelperExtension extends \Twig_Extension {
 		$filters['craue_replaceKey'] = $replaceKeyMethod;
 		if (!empty($this->replaceKeyAlias)) {
 			$filters[$this->replaceKeyAlias] = $replaceKeyMethod;
+		}
+
+		$removeKeyMethod = new \Twig_Filter_Method($this, 'removeKey');
+		$filters['craue_removeKey'] = $removeKeyMethod;
+		if (!empty($this->removeKeyAlias)) {
+			$filters[$this->removeKeyAlias] = $removeKeyMethod;
 		}
 
 		$translateArrayMethod = new \Twig_Filter_Method($this, 'translateArray');
@@ -109,6 +124,19 @@ class ArrayHelperExtension extends \Twig_Extension {
 	 */
 	public function replaceKey($entries, $key, $value) {
 		return array_merge($this->convertToArray($entries), array($key => $value));
+	}
+
+	/**
+	 * @param mixed $entries All entries.
+	 * @param mixed $key Key of the entry to be removed.
+	 * @return array Entries of {@code $entries} without the entry with key {@code $key}.
+	 */
+	public function removeKey($entries, $key) {
+		$result = $this->convertToArray($entries);
+
+		unset($result[$key]);
+
+		return $result;
 	}
 
 	/**
