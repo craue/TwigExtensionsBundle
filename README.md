@@ -63,20 +63,10 @@ language change mechanism.
 
 ## Get the bundle
 
-Let Composer download and install the bundle by first adding it to your composer.json
-
-```json
-{
-	"require": {
-		"craue/twigextensions-bundle": "~1.0.0"
-	}
-}
-```
-
-and then running
+Let Composer download and install the bundle by running
 
 ```sh
-php composer.phar update craue/twigextensions-bundle
+php composer.phar require craue/twigextensions-bundle:~1.0
 ```
 
 in a shell.
