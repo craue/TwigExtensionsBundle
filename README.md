@@ -266,6 +266,7 @@ can do it intentionally.
 # in app/config/parameters.yml
   craue_twig_extensions.arrayHelper.withoutAlias: without
   craue_twig_extensions.arrayHelper.replaceKeyAlias: replaceKey
+  craue_twig_extensions.arrayHelper.removeKeyAlias: removeKey
   craue_twig_extensions.arrayHelper.translateArrayAlias: translateArray
 ```
 
