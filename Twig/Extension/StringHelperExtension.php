@@ -7,7 +7,7 @@ namespace Craue\TwigExtensionsBundle\Twig\Extension;
  *
  * @author Christian Raue <christian.raue@gmail.com>
  * @copyright 2011-2014 Christian Raue
- * @license http://www.opensource.org/licenses/mit-license.php MIT License
+ * @license http://opensource.org/licenses/mit-license.php MIT License
  */
 class StringHelperExtension extends \Twig_Extension {
 
