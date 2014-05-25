@@ -5,7 +5,7 @@ namespace Craue\TwigExtensionsBundle\Twig\Extension;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormTypeInterface;
-use Symfony\Component\Form\FormView;
+use Symfony\Component\Form\FormView; // don't use FormViewInterface for Symfony 2.0 compatibility
 
 /**
  * Twig extension for form handling.
@@ -68,11 +68,6 @@ class FormExtension extends \Twig_Extension {
 	 * @throws \InvalidArgumentException
 	 */
 	public function cloneForm($value, array $formOptions = array()) {
-		if ($value instanceof FormView) { // don't use FormViewInterface for Symfony 2.0 compatibility
-			// doesn't work: return clone $value;
-			return unserialize(serialize($value));
-		}
-
 		if ($value instanceof FormInterface) {
 			return $value->createView();
 		}
@@ -84,10 +79,9 @@ class FormExtension extends \Twig_Extension {
 			return $this->formFactory->create($value, null, $formOptions)->createView();
 		}
 
-		throw new \InvalidArgumentException(sprintf('Expected argument of either type "%s", "%s", or "%s", but "%s" given.',
+		throw new \InvalidArgumentException(sprintf('Expected argument of either type "%s" or "%s", but "%s" given.',
 				'Symfony\Component\Form\FormTypeInterface',
 				'Symfony\Component\Form\FormInterface',
-				'Symfony\Component\Form\FormView',
 				is_object($value) ? get_class($value) : gettype($value)
 		));
 	}
