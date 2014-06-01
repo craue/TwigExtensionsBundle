@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.1 (2014-06-01)
+
+- updated version constraint for installation instructions
+
 ## 2.0.0 (2014-06-01)
 
 - BC break (follow `UPGRADE-2.0.md` to upgrade):
