@@ -46,18 +46,6 @@ class FormExtensionIntegrationTest extends TwigBasedTestCase {
 		$this->assertEquals($form->createView(), $clonedFormView);
 	}
 
-	public function testCloneForm_formView() {
-		$formView = $this->formFactory->createBuilder('form')
-			->add('note', 'text')
-			->getForm()
-			->createView()
-		;
-
-		$clonedFormView = $this->ext->cloneForm($formView);
-
-		$this->assertEquals($formView, $clonedFormView);
-	}
-
 	public function testCloneForm_formType() {
 		if (version_compare(Kernel::VERSION, '2.1.0-DEV', '<')) {
 			$formType = new OldCommentFormType();
@@ -68,6 +56,19 @@ class FormExtensionIntegrationTest extends TwigBasedTestCase {
 		$clonedFormView = $this->ext->cloneForm($formType);
 
 		$this->assertEquals($this->formFactory->create($formType)->createView(), $clonedFormView);
+	}
+
+	/**
+	 * @expectedException \InvalidArgumentException
+	 * @expectedExceptionMessage Expected argument of either type "Symfony\Component\Form\FormTypeInterface" or "Symfony\Component\Form\FormInterface", but "Symfony\Component\Form\FormView" given.
+	 */
+	public function testCloneForm_formView() {
+		$formView = $this->formFactory->createBuilder('form')
+			->getForm()
+			->createView()
+		;
+
+		$this->ext->cloneForm($formView);
 	}
 
 }
