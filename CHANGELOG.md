@@ -1,5 +1,12 @@
 # Changelog
 
+## master
+
+- BC breaks (follow `UPGRADE-2.0.md` to upgrade):
+  - [#10]: dropped support for passing a `FormView` instance to the `craue_cloneForm` function
+
+[#10]: https://github.com/craue/TwigExtensionsBundle/issues/10
+
 ## 1.0.2 (2013-12-03)
 
 - added filter `craue_removeKey`
