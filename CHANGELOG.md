@@ -2,7 +2,7 @@
 
 ## 2.0.0 (2014-06-01)
 
-- BC breaks (follow `UPGRADE-2.0.md` to upgrade):
+- BC break (follow `UPGRADE-2.0.md` to upgrade):
   - [#10]: dropped support for passing a `FormView` instance to the `craue_cloneForm` function
 
 [#10]: https://github.com/craue/TwigExtensionsBundle/issues/10
