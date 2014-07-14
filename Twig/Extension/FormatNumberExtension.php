@@ -125,7 +125,7 @@ class FormatNumberExtension extends AbstractLocaleAwareExtension {
 	 */
 	protected function getFormattedNumber($value, $locale, $style) {
 		if ($value === null) {
-			return null;
+			return;
 		}
 
 		$localeToUse = !empty($locale) ? $locale : $this->getLocale();
@@ -149,7 +149,7 @@ class FormatNumberExtension extends AbstractLocaleAwareExtension {
 	 */
 	protected function getFormattedCurrency($value, $locale = null, $currency = null) {
 		if ($value === null) {
-			return null;
+			return;
 		}
 
 		$localeToUse = !empty($locale) ? $locale : $this->getLocale();

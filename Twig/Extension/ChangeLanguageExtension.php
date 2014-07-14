@@ -119,7 +119,7 @@ class ChangeLanguageExtension extends AbstractLocaleAwareExtension {
 	 */
 	public function getLanguageName($locale, $forceLocaleForDisplay = null) {
 		if (empty($locale)) {
-			return null;
+			return;
 		}
 
 		$localeToUse = !empty($forceLocaleForDisplay) ? $forceLocaleForDisplay :
