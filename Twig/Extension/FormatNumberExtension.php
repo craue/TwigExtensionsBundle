@@ -121,7 +121,8 @@ class FormatNumberExtension extends AbstractLocaleAwareExtension {
 	 * @param mixed $value Number to be formatted using {@link http://php.net/manual/class.numberformatter.php}.
 	 * @param string $locale Locale to be used with {@link http://php.net/manual/class.numberformatter.php}.
 	 * @param string $style Formatting style. See {@link http://php.net/manual/numberformatter.create.php}.
-	 * @return string Formatted number.
+	 * @return string|null Formatted number.
+	 * @throws \InvalidArgumentException If {@code $value} cannot be formatted.
 	 */
 	protected function getFormattedNumber($value, $locale, $style) {
 		if ($value === null) {
@@ -145,7 +146,8 @@ class FormatNumberExtension extends AbstractLocaleAwareExtension {
 	 * @param mixed $value Currency to be formatted using {@link http://php.net/manual/numberformatter.formatcurrency.php}.
 	 * @param string $locale Locale to be used with {@link http://php.net/manual/class.numberformatter.php}.
 	 * @param string $currency Currency. See {@link http://php.net/manual/numberformatter.formatcurrency.php}.
-	 * @return string Formatted currency.
+	 * @return string|null Formatted currency.
+	 * @throws \InvalidArgumentException If {@code $value} cannot be formatted.
 	 */
 	protected function getFormattedCurrency($value, $locale = null, $currency = null) {
 		if ($value === null) {

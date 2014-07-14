@@ -146,6 +146,7 @@ class ArrayHelperExtension extends \Twig_Extension {
 	 * @param string $domain Message domain used for translation.
 	 * @param string $locale Locale used for translation.
 	 * @return array Translated entries.
+	 * @throws \RuntimeException If the translator is not available.
 	 */
 	public function translateArray($entries, array $parameters = array(), $domain = 'messages', $locale = null) {
 		if ($this->translator === null) {

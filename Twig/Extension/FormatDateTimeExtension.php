@@ -174,8 +174,8 @@ class FormatDateTimeExtension extends AbstractLocaleAwareExtension {
 	 * @param string $dateType Date format. Valid values are "none", "full", "long", "medium", or "short" (case insensitive).
 	 * @param string $timeType Time format. Valid values are "none", "full", "long", "medium", or "short" (case insensitive).
 	 * @param string $timeZone Time zone from {@link http://php.net/manual/timezones.php}.
-	 * @return string Formatted date/time.
-	 * @throws \InvalidArgumentException
+	 * @return string|null Formatted date/time.
+	 * @throws \InvalidArgumentException If {@code $value} cannot be formatted.
 	 */
 	protected function getFormattedDateTime($value, $locale, $dateType, $timeType, $timeZone = null) {
 		if ($value === null) {
@@ -243,7 +243,7 @@ class FormatDateTimeExtension extends AbstractLocaleAwareExtension {
 	/**
 	 * @param string $timeZone Time zone from {@link http://php.net/manual/timezones.php}.
 	 * @return string
-	 * @throws \InvalidArgumentException
+	 * @throws \InvalidArgumentException If {@code $timeZone} is an invalid time zone.
 	 */
 	protected function getEffectiveTimeZone($timeZone = null) {
 		if ($timeZone !== null) {
@@ -260,7 +260,7 @@ class FormatDateTimeExtension extends AbstractLocaleAwareExtension {
 	/**
 	 * @param string $timeZone Name of a time zone to be validated.
 	 * @return string Valid name of that time zone.
-	 * @throws \InvalidArgumentException
+	 * @throws \InvalidArgumentException If {@code $timeZone} is an invalid time zone.
 	 */
 	protected function validateTimeZone($timeZone) {
 		try {
