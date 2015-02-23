@@ -17,7 +17,13 @@ abstract class TwigBasedTestCase extends WebTestCase {
 	protected $twig;
 
 	protected static function createKernel(array $options = array()) {
-		return new AppKernel(isset($options['config']) ? $options['config'] : 'config.yml');
+		$configFile = isset($options['config']) ? $options['config'] : 'config.yml';
+
+		if (class_exists('Craue\TwigExtensionsBundle\Tests\LocalAppKernel')) {
+			return new LocalAppKernel($configFile);
+		}
+
+		return new AppKernel($configFile);
 	}
 
 	protected function setUp() {
