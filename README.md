@@ -12,13 +12,13 @@ HTML.
 Usually, if you want to use HTML, e.g. the HTML entity `&mdash;`, as value for the default filter in an HTML Twig
 template you have to do cumbersome
 
-```html+jinja
+```twig
 {{ somevalue | e | default('&mdash;') | raw }}
 ```
 
 to make it render properly. With this extension you can write
 
-```html+jinja
+```twig
 {{ somevalue | craue_default }}
 ```
 
@@ -95,7 +95,7 @@ craue_twig_extensions: ~
 
 ## DecorateEmptyValueExtension
 
-```html+jinja
+```twig
 {{ someValueWhichMayBeEmpty | craue_default }}<br />
 {{ someValueWhichMayBeEmpty | craue_default('no value') }}<br />
 {{ someValueWhichMayBeEmpty | craue_default('&ndash;') }}<br />
@@ -104,7 +104,7 @@ craue_twig_extensions: ~
 
 ## ArrayHelperExtension
 
-```html+jinja
+```twig
 {{ anArray | craue_without(aValueOrAnArray) | join(', ') }}<br />
 {{ ['red', 'green', 'yellow', 'blue'] | craue_without('yellow') | join(', ') }} will print "red, green, blue"<br />
 {{ ['red', 'green', 'yellow', 'blue'] | craue_without(['yellow', 'black', 'red']) | join(', ') }} will print "green, blue"
@@ -121,7 +121,7 @@ craue_twig_extensions: ~
 
 ## FormExtension
 
-```html+jinja
+```twig
 {% for myEntity in myEntities %}
 	{% set myFormInstance = craue_cloneForm(myForm) %}
 	<form action="{{ path('my_route', {'id': myEntity.getId()}) }}" method="post" {{ form_enctype(myFormInstance) }}>
@@ -133,7 +133,7 @@ craue_twig_extensions: ~
 
 ## StringHelperExtension
 
-```html+jinja
+```twig
 {{ aString | craue_trailingDot }}<br />
 {{ 'This text should end with a dot' | craue_trailingDot }}<br />
 {{ 'This text should end with exactly one dot.' | craue_trailingDot }}
@@ -141,7 +141,7 @@ craue_twig_extensions: ~
 
 ## FormatDateTimeExtension
 
-```html+jinja
+```twig
 <h2>with the current locale</h2>
 date: {{ someDateTimeValue | craue_date }}<br />
 time: {{ someDateTimeValue | craue_time }}<br />
@@ -155,7 +155,7 @@ both: {{ someDateTimeValue | craue_datetime('en-GB') }}
 
 ## FormatNumberExtension
 
-```html+jinja
+```twig
 <h2>with the current locale</h2>
 thousands separator: {{ someNumber | craue_number }}<br />
 default currency: {{ someNumber | craue_currency }}<br />
@@ -173,7 +173,7 @@ spelled out number: {{ someNumber | craue_spellout('de-DE') }}
 
 There's a Twig template provided which you can use to render a "change language" menu like this:
 
-```html+jinja
+```twig
 {% include 'CraueTwigExtensionsBundle:ChangeLanguage:changeLanguage.html.twig' %}
 ```
 
@@ -240,13 +240,13 @@ You can also set the keys to be more specific about the locales:
 Optionally, you can define aliases for all provided filters/functions/globals to be used within your project.
 This allows you to use names you prefer instead of the pre-defined ones. E.g., if you don't like to write
 
-```html+jinja
+```twig
 {{ somevalue | craue_default }}
 ```
 
 all the time, you may define an alias like `d` for the `craue_default` filter which allows you to write
 
-```html+jinja
+```twig
 {{ somevalue | d }}
 ```
 
