@@ -1,16 +1,17 @@
 #!/bin/sh
 
-composer config -g preferred-install source
+export COMPOSER_NO_INTERACTION=1
+composer self-update
 
 if [ -n "${MIN_STABILITY:-}" ]; then
 	sed -i -e "s/\"minimum-stability\": \"stable\"/\"minimum-stability\": \"${MIN_STABILITY}\"/" composer.json
 fi
 
-composer --no-interaction require --no-update symfony/symfony:${SYMFONY_VERSION} symfony/twig-bundle:${SYMFONY_VERSION}
-composer --no-interaction require --no-update --dev symfony/symfony:${SYMFONY_VERSION}
+composer remove --no-update symfony/twig-bundle
+composer require --no-update --dev symfony/symfony:${SYMFONY_VERSION}
 
 if [ "${PHPUNIT_BRIDGE:-}" = true ]; then
-	composer --no-interaction require --no-update --dev symfony/phpunit-bridge:"${SYMFONY_VERSION}"
+	composer require --no-update --dev symfony/phpunit-bridge:"${SYMFONY_VERSION}"
 fi
 
-composer --no-interaction update
+composer update
