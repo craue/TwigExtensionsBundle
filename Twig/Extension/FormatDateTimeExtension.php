@@ -2,6 +2,9 @@
 
 namespace Craue\TwigExtensionsBundle\Twig\Extension;
 
+use Craue\TwigExtensionsBundle\Util\TwigFeatureDefinition;
+use Craue\TwigExtensionsBundle\Util\TwigFeatureUtil;
+
 /**
  * Twig extension providing filters for locale-aware formatting of date, time, and date/time values.
  *
@@ -91,27 +94,11 @@ class FormatDateTimeExtension extends AbstractLocaleAwareExtension {
 	 * {@inheritDoc}
 	 */
 	public function getFilters() {
-		$filters = array();
-
-		$formatDateMethod = new \Twig_Filter_Method($this, 'formatDate');
-		$filters['craue_date'] = $formatDateMethod;
-		if (!empty($this->dateFilterAlias)) {
-			$filters[$this->dateFilterAlias] = $formatDateMethod;
-		}
-
-		$formatTimeMethod = new \Twig_Filter_Method($this, 'formatTime');
-		$filters['craue_time'] = $formatTimeMethod;
-		if (!empty($this->timeFilterAlias)) {
-			$filters[$this->timeFilterAlias] = $formatTimeMethod;
-		}
-
-		$formatDateTimeMethod = new \Twig_Filter_Method($this, 'formatDateTime');
-		$filters['craue_datetime'] = $formatDateTimeMethod;
-		if (!empty($this->dateTimeFilterAlias)) {
-			$filters[$this->dateTimeFilterAlias] = $formatDateTimeMethod;
-		}
-
-		return $filters;
+		return TwigFeatureUtil::getTwigFilters($this, array(
+			new TwigFeatureDefinition('craue_date', 'formatDate', $this->dateFilterAlias),
+			new TwigFeatureDefinition('craue_time', 'formatTime', $this->timeFilterAlias),
+			new TwigFeatureDefinition('craue_datetime', 'formatDateTime', $this->dateTimeFilterAlias),
+		));
 	}
 
 	/**

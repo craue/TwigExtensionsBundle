@@ -2,6 +2,8 @@
 
 namespace Craue\TwigExtensionsBundle\Twig\Extension;
 
+use Craue\TwigExtensionsBundle\Util\TwigFeatureDefinition;
+use Craue\TwigExtensionsBundle\Util\TwigFeatureUtil;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormTypeInterface;
@@ -50,15 +52,9 @@ class FormExtension extends \Twig_Extension {
 	 * {@inheritDoc}
 	 */
 	public function getFunctions() {
-		$functions = array();
-
-		$getCloneFormMethod = new \Twig_Function_Method($this, 'cloneForm');
-		$functions['craue_cloneForm'] = $getCloneFormMethod;
-		if (!empty($this->cloneFormAlias)) {
-			$functions[$this->cloneFormAlias] = $getCloneFormMethod;
-		}
-
-		return $functions;
+		return TwigFeatureUtil::getTwigFunctions($this, array(
+			new TwigFeatureDefinition('craue_cloneForm', 'cloneForm', $this->cloneFormAlias),
+		));
 	}
 
 	/**

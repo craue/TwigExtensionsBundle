@@ -2,6 +2,9 @@
 
 namespace Craue\TwigExtensionsBundle\Twig\Extension;
 
+use Craue\TwigExtensionsBundle\Util\TwigFeatureDefinition;
+use Craue\TwigExtensionsBundle\Util\TwigFeatureUtil;
+
 /**
  * Twig extension providing useful string handling filters.
  *
@@ -41,15 +44,9 @@ class StringHelperExtension extends \Twig_Extension {
 	 * {@inheritDoc}
 	 */
 	public function getFilters() {
-		$filters = array();
-
-		$trailingDotMethod = new \Twig_Filter_Method($this, 'addTrailingDot');
-		$filters['craue_trailingDot'] = $trailingDotMethod;
-		if (!empty($this->trailingDotAlias)) {
-			$filters[$this->trailingDotAlias] = $trailingDotMethod;
-		}
-
-		return $filters;
+		return TwigFeatureUtil::getTwigFilters($this, array(
+			new TwigFeatureDefinition('craue_trailingDot', 'addTrailingDot', $this->trailingDotAlias),
+		));
 	}
 
 	/**

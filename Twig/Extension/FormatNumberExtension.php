@@ -2,6 +2,9 @@
 
 namespace Craue\TwigExtensionsBundle\Twig\Extension;
 
+use Craue\TwigExtensionsBundle\Util\TwigFeatureDefinition;
+use Craue\TwigExtensionsBundle\Util\TwigFeatureUtil;
+
 /**
  * Twig extension providing filters for locale-aware formatting of numbers and currencies.
  *
@@ -68,27 +71,11 @@ class FormatNumberExtension extends AbstractLocaleAwareExtension {
 	 * {@inheritDoc}
 	 */
 	public function getFilters() {
-		$filters = array();
-
-		$formatNumberMethod = new \Twig_Filter_Method($this, 'formatNumber');
-		$filters['craue_number'] = $formatNumberMethod;
-		if (!empty($this->numberFilterAlias)) {
-			$filters[$this->numberFilterAlias] = $formatNumberMethod;
-		}
-
-		$formatCurrencyMethod = new \Twig_Filter_Method($this, 'formatCurrency');
-		$filters['craue_currency'] = $formatCurrencyMethod;
-		if (!empty($this->currencyFilterAlias)) {
-			$filters[$this->currencyFilterAlias] = $formatCurrencyMethod;
-		}
-
-		$formatSpelledOutNumberMethod = new \Twig_Filter_Method($this, 'formatSpelledOutNumber');
-		$filters['craue_spellout'] = $formatSpelledOutNumberMethod;
-		if (!empty($this->spelloutFilterAlias)) {
-			$filters[$this->spelloutFilterAlias] = $formatSpelledOutNumberMethod;
-		}
-
-		return $filters;
+		return TwigFeatureUtil::getTwigFilters($this, array(
+			new TwigFeatureDefinition('craue_number', 'formatNumber', $this->numberFilterAlias),
+			new TwigFeatureDefinition('craue_currency', 'formatCurrency', $this->currencyFilterAlias),
+			new TwigFeatureDefinition('craue_spellout', 'formatSpelledOutNumber', $this->spelloutFilterAlias),
+		));
 	}
 
 	/**

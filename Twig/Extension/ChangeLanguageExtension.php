@@ -2,6 +2,9 @@
 
 namespace Craue\TwigExtensionsBundle\Twig\Extension;
 
+use Craue\TwigExtensionsBundle\Util\TwigFeatureDefinition;
+use Craue\TwigExtensionsBundle\Util\TwigFeatureUtil;
+
 /**
  * Twig extension providing helpers for implementing a language change mechanism.
  *
@@ -78,15 +81,9 @@ class ChangeLanguageExtension extends AbstractLocaleAwareExtension {
 	 * {@inheritDoc}
 	 */
 	public function getFunctions() {
-		$functions = array();
-
-		$getLanguageNameMethod = new \Twig_Function_Method($this, 'getLanguageName');
-		$functions['craue_languageName'] = $getLanguageNameMethod;
-		if (!empty($this->languageNameAlias)) {
-			$functions[$this->languageNameAlias] = $getLanguageNameMethod;
-		}
-
-		return $functions;
+		return TwigFeatureUtil::getTwigFunctions($this, array(
+			new TwigFeatureDefinition('craue_languageName', 'getLanguageName', $this->languageNameAlias),
+		));
 	}
 
 	/**

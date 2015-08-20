@@ -2,6 +2,8 @@
 
 namespace Craue\TwigExtensionsBundle\Twig\Extension;
 
+use Craue\TwigExtensionsBundle\Util\TwigFeatureDefinition;
+use Craue\TwigExtensionsBundle\Util\TwigFeatureUtil;
 use Symfony\Component\Translation\TranslatorInterface;
 
 /**
@@ -74,33 +76,12 @@ class ArrayHelperExtension extends \Twig_Extension {
 	 * {@inheritDoc}
 	 */
 	public function getFilters() {
-		$filters = array();
-
-		$withoutMethod = new \Twig_Filter_Method($this, 'without');
-		$filters['craue_without'] = $withoutMethod;
-		if (!empty($this->withoutAlias)) {
-			$filters[$this->withoutAlias] = $withoutMethod;
-		}
-
-		$replaceKeyMethod = new \Twig_Filter_Method($this, 'replaceKey');
-		$filters['craue_replaceKey'] = $replaceKeyMethod;
-		if (!empty($this->replaceKeyAlias)) {
-			$filters[$this->replaceKeyAlias] = $replaceKeyMethod;
-		}
-
-		$removeKeyMethod = new \Twig_Filter_Method($this, 'removeKey');
-		$filters['craue_removeKey'] = $removeKeyMethod;
-		if (!empty($this->removeKeyAlias)) {
-			$filters[$this->removeKeyAlias] = $removeKeyMethod;
-		}
-
-		$translateArrayMethod = new \Twig_Filter_Method($this, 'translateArray');
-		$filters['craue_translateArray'] = $translateArrayMethod;
-		if (!empty($this->translateArrayAlias)) {
-			$filters[$this->translateArrayAlias] = $translateArrayMethod;
-		}
-
-		return $filters;
+		return TwigFeatureUtil::getTwigFilters($this, array(
+			new TwigFeatureDefinition('craue_without', 'without', $this->withoutAlias),
+			new TwigFeatureDefinition('craue_replaceKey', 'replaceKey', $this->replaceKeyAlias),
+			new TwigFeatureDefinition('craue_removeKey', 'removeKey', $this->removeKeyAlias),
+			new TwigFeatureDefinition('craue_translateArray', 'translateArray', $this->translateArrayAlias),
+		));
 	}
 
 	/**
