@@ -26,9 +26,8 @@
 	"minimum-stability": "stable",
 	"prefer-stable": true,
 	"autoload": {
-		"psr-0": {
+		"psr-4": {
 			"Craue\\TwigExtensionsBundle\\": ""
 		}
-	},
-	"target-dir": "Craue/TwigExtensionsBundle"
+	}
 }
