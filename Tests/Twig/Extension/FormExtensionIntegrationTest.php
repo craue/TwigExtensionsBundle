@@ -3,11 +3,9 @@
 namespace Craue\TwigExtensionsBundle\Tests\Twig\Extension;
 
 use Craue\TwigExtensionsBundle\Tests\IntegrationTestBundle\Form\CommentFormType;
-use Craue\TwigExtensionsBundle\Tests\IntegrationTestBundle\Form\OldCommentFormType;
 use Craue\TwigExtensionsBundle\Tests\TwigBasedTestCase;
 use Craue\TwigExtensionsBundle\Twig\Extension\FormExtension;
 use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\HttpKernel\Kernel;
 
 /**
  * @group integration
@@ -47,11 +45,7 @@ class FormExtensionIntegrationTest extends TwigBasedTestCase {
 	}
 
 	public function testCloneForm_formType() {
-		if (version_compare(Kernel::VERSION, '2.1.0-DEV', '<')) {
-			$formType = new OldCommentFormType();
-		} else {
-			$formType = new CommentFormType();
-		}
+		$formType = new CommentFormType();
 
 		$clonedFormView = $this->ext->cloneForm($formType);
 
