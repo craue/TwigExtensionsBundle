@@ -6,8 +6,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Form type compatible with Symfony >= 2.1-dev.
- *
  * @author Christian Raue <christian.raue@gmail.com>
  * @copyright 2011-2015 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
@@ -18,13 +16,21 @@ class CommentFormType extends AbstractType {
 	 * {@inheritDoc}
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
-		$builder->add('note', 'text');
+		$useFqcn = method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix');
+
+		$builder->add('note', $useFqcn ? 'Symfony\Component\Form\Extension\Core\Type\TextType' : 'text');
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	public function getName() {
+		return $this->getBlockPrefix();
+	}
+	/**
+	 * {@inheritDoc}
+	 */
+	public function getBlockPrefix() {
 		return 'comment';
 	}
 

@@ -7,7 +7,7 @@ use Craue\TwigExtensionsBundle\Util\TwigFeatureUtil;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormTypeInterface;
-use Symfony\Component\Form\FormView; // don't use FormViewInterface for Symfony 2.0 compatibility
+use Symfony\Component\Form\FormView;
 
 /**
  * Twig extension for form handling.
@@ -58,7 +58,7 @@ class FormExtension extends \Twig_Extension {
 	}
 
 	/**
-	 * @param mixed $value
+	 * @param mixed $value A FormInterface or a FormTypeInterface.
 	 * @param array $formOptions Options to pass to the form type (only valid if $value is a FormTypeInterface, ignored otherwise).
 	 * @return FormView
 	 * @throws \InvalidArgumentException
@@ -72,7 +72,10 @@ class FormExtension extends \Twig_Extension {
 			if ($this->formFactory === null) {
 				throw new \RuntimeException('No form factory available.');
 			}
-			return $this->formFactory->create($value, null, $formOptions)->createView();
+
+			$valueToUse = method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix') ? get_class($value) : $value;
+
+			return $this->formFactory->create($valueToUse, null, $formOptions)->createView();
 		}
 
 		throw new \InvalidArgumentException(sprintf('Expected argument of either type "%s" or "%s", but "%s" given.',
