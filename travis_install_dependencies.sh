@@ -8,10 +8,17 @@ if [ -n "${MIN_STABILITY:-}" ]; then
 fi
 
 composer remove --no-update symfony/twig-bundle
-composer require --no-update --dev symfony/symfony:${SYMFONY_VERSION}
+
+if [ -n "${SYMFONY_VERSION:-}" ]; then
+	composer require --no-update --dev symfony/symfony:${SYMFONY_VERSION}
+fi
 
 if [ "${PHPUNIT_BRIDGE:-}" = true ]; then
 	composer require --no-update --dev symfony/phpunit-bridge:"${SYMFONY_VERSION}"
 fi
 
-composer update
+if [ "${USE_DEPS:-}" = "lowest" ]; then
+	COMPOSER_UPDATE_ARGS="--prefer-lowest"
+fi
+
+composer update ${COMPOSER_UPDATE_ARGS:-}
