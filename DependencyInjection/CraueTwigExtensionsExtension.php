@@ -51,6 +51,10 @@ class CraueTwigExtensionsExtension extends Extension {
 		foreach ($loadExtensions as $ext) {
 			$loader->load(sprintf('twig/%s.xml', $ext));
 		}
+
+		if ($container->hasDefinition('twig.extension.craue_changeLanguage') && version_compare(\Twig_Environment::VERSION, '1.23', '>=')) {
+			$container->getDefinition('twig.extension.craue_changeLanguage')->setClass('Craue\TwigExtensionsBundle\Twig\Extension\CurrentChangeLanguageExtension');
+		}
 	}
 
 }
