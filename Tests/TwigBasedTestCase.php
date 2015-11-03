@@ -4,6 +4,7 @@ namespace Craue\TwigExtensionsBundle\Tests;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Kernel;
 
 /**
  * @author Christian Raue <christian.raue@gmail.com>
@@ -18,7 +19,8 @@ abstract class TwigBasedTestCase extends WebTestCase {
 	protected $twig;
 
 	protected static function createKernel(array $options = array()) {
-		$configFile = isset($options['config']) ? $options['config'] : 'config.yml';
+		$defaultConfigFile = Kernel::VERSION_ID < 20400 ? 'legacy_config.yml' : 'current_config.yml';
+		$configFile = isset($options['config']) ? $options['config'] : $defaultConfigFile;
 
 		return new AppKernel($configFile);
 	}
