@@ -56,7 +56,7 @@ currencies.
 
 ## ChangeLanguageExtension
 
-Provides helpers (function `craue_languageName`, global `craue_availableLocales`) and templates for implementing a
+Provides the functions `craue_languageName` and `craue_availableLocales` as well as a template for implementing a
 language change mechanism.
 
 # Installation
