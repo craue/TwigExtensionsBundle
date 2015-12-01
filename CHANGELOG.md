@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.1.0 (2015-12-01)
+
+- added forward compatibility for Twig 2.0
+- added conditional code updates to avoid deprecation notices with Symfony 2.8
+- added support for Symfony 3.*
+- dropped support for Symfony 2.0, 2.1, 2.2
+
 ## 2.0.1 (2014-06-01)
 
 - updated version constraint for installation instructions
