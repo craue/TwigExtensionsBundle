@@ -17,10 +17,6 @@ if [ -n "${TWIG_VERSION:-}" ]; then
 	composer require --no-update --dev twig/twig:${TWIG_VERSION}
 fi
 
-if [ "${PHPUNIT_BRIDGE:-}" = true ]; then
-	composer require --no-update --dev symfony/phpunit-bridge:"${SYMFONY_VERSION}"
-fi
-
 if [ "${USE_DEPS:-}" = "lowest" ]; then
 	COMPOSER_UPDATE_ARGS="--prefer-lowest"
 fi
