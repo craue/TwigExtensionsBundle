@@ -1,6 +1,6 @@
 # Information
 
-TwigExtensionsBundle is a collection of useful Twig extensions for your Symfony2 project.
+TwigExtensionsBundle is a collection of useful Twig extensions for your Symfony project.
 
 A live demo with code examples can is available at http://craue.de/sf2playground/en/CraueTwigExtensions/.
 
