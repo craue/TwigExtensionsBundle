@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.1 (2015-12-29)
+
+- added support for PHP 7.0 and HHVM
+
 ## 2.1.0 (2015-12-01)
 
 - added forward compatibility for Twig 2.0
