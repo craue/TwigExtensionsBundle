@@ -2,7 +2,7 @@
 
 TwigExtensionsBundle is a collection of useful Twig extensions for your Symfony project.
 
-A live demo with code examples can is available at http://craue.de/sf2playground/en/CraueTwigExtensions/.
+A live demo with code examples can is available at http://craue.de/symfony-playground/en/CraueTwigExtensions/.
 
 ## DecorateEmptyValueExtension
 
