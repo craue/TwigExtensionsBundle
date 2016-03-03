@@ -6,11 +6,12 @@ framework:
     resource: ~
   secret: whatever
   templating:
-    engines: ['twig']
+    engines:
+      - twig
   test: ~
   translator:
     fallback: en
 
 twig:
-  debug: "%kernel.debug%"
-  strict_variables: "%kernel.debug%"
+  debug: '%kernel.debug%'
+  strict_variables: '%kernel.debug%'
