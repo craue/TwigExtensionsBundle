@@ -166,7 +166,7 @@ class FormatDateTimeExtension extends AbstractLocaleAwareExtension {
 	 */
 	protected function getFormattedDateTime($value, $locale, $dateType, $timeType, $timeZone = null) {
 		if ($value === null) {
-			return;
+			return null;
 		}
 
 		$valueToUse = $value;
