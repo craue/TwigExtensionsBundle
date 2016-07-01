@@ -27,6 +27,7 @@ matrix:
       env: SYMFONY_VERSION='3.2.*' TWIG_VERSION='2.0.*' MIN_STABILITY='dev'
   allow_failures:
     - env: SYMFONY_VERSION='3.2.*' TWIG_VERSION='2.0.*' MIN_STABILITY='dev'
+  fast_finish: true
 
 install:
   - if [ "${TRAVIS_PHP_VERSION}" != 'hhvm' ]; then phpenv config-rm xdebug.ini; fi;
