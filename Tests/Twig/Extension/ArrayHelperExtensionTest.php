@@ -111,7 +111,8 @@ class ArrayHelperExtensionTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	protected function getMockedTranslator(array $case = array()) {
-		$translator = $this->getMock('Symfony\Component\Translation\TranslatorInterface');
+		// TODO replace by `$this->createMock('Symfony\Component\Translation\TranslatorInterface')` as soon as PHPUnit >= 5.4 is required
+		$translator = $this->getMockBuilder('Symfony\Component\Translation\TranslatorInterface')->getMock();
 
 		if (!empty($case)) {
 			$translator
