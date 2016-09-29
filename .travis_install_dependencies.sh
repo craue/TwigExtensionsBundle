@@ -11,22 +11,27 @@ fi
 
 composer self-update
 
-if [ -n "${MIN_STABILITY:-}" ]; then
-	sed -i -e "s/\"minimum-stability\": \"stable\"/\"minimum-stability\": \"${MIN_STABILITY}\"/" composer.json
-fi
+case "${DEPS:-}" in
+	'lowest')
+		COMPOSER_UPDATE_ARGS='--prefer-lowest'
+		;;
+	'unmodified')
+		# don't modify dependencies, install them as defined
+		;;
+	*)
+		if [ -n "${MIN_STABILITY:-}" ]; then
+			sed -i -e "s/\"minimum-stability\": \"stable\"/\"minimum-stability\": \"${MIN_STABILITY}\"/" composer.json
+		fi
 
-composer remove --no-update symfony/twig-bundle
+		composer remove --no-update symfony/twig-bundle
 
-if [ -n "${SYMFONY_VERSION:-}" ]; then
-	composer require --no-update --dev symfony/symfony:"${SYMFONY_VERSION}"
-fi
+		if [ -n "${SYMFONY_VERSION:-}" ]; then
+			composer require --no-update --dev symfony/symfony:"${SYMFONY_VERSION}"
+		fi
 
-if [ -n "${TWIG_VERSION:-}" ]; then
-	composer require --no-update --dev twig/twig:"${TWIG_VERSION}"
-fi
-
-if [ "${USE_DEPS:-}" = 'lowest' ]; then
-	COMPOSER_UPDATE_ARGS='--prefer-lowest'
-fi
+		if [ -n "${TWIG_VERSION:-}" ]; then
+			composer require --no-update --dev twig/twig:"${TWIG_VERSION}"
+		fi
+esac
 
 composer update ${COMPOSER_UPDATE_ARGS:-}
