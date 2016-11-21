@@ -24,9 +24,9 @@ matrix:
     - php: 5.6
       env: SYMFONY_VERSION='3.1.*'
     - php: 5.6
-      env: SYMFONY_VERSION='3.2.*' TWIG_VERSION='2.0.*' MIN_STABILITY='dev'
+      env: SYMFONY_VERSION='3.2.*' TWIG_VERSION='~2.0' MIN_STABILITY='dev'
   allow_failures:
-    - env: SYMFONY_VERSION='3.2.*' TWIG_VERSION='2.0.*' MIN_STABILITY='dev'
+    - env: SYMFONY_VERSION='3.2.*' TWIG_VERSION='~2.0' MIN_STABILITY='dev'
   fast_finish: true
 
 install:
