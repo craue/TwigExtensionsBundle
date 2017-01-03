@@ -10,7 +10,7 @@ use Symfony\Component\Translation\TranslatorInterface;
  * Twig extension providing useful array handling filters.
  *
  * @author Christian Raue <christian.raue@gmail.com>
- * @copyright 2011-2016 Christian Raue
+ * @copyright 2011-2017 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
 class ArrayHelperExtension extends \Twig_Extension {
