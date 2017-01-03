@@ -33,7 +33,7 @@ class ChangeLanguageExtensionIntegrationTest extends TwigBasedTestCase {
 		$this->ext->setShowFirstUppercase($showFirstUppercase);
 
 		$this->assertSame($result,
-				$this->getTwig()->render('IntegrationTestBundle:ChangeLanguage:languageName.html.twig', array(
+				$this->getTwig()->render('@IntegrationTest/ChangeLanguage/languageName.html.twig', array(
 					'locale' => $locale,
 				)));
 	}

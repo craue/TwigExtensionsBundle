@@ -35,7 +35,7 @@ class FormatDateTimeExtensionIntegrationTest extends TwigBasedTestCase {
 	 */
 	public function testFormatDate($value, $locale, $dateType, $timeZone, $result) {
 		$this->assertSame($result,
-				$this->getTwig()->render('IntegrationTestBundle:FormatDateTime:date.html.twig', array(
+				$this->getTwig()->render('@IntegrationTest/FormatDateTime/date.html.twig', array(
 					'value' => $value,
 					'locale' => $locale,
 					'dateType' => $dateType,
@@ -91,7 +91,7 @@ class FormatDateTimeExtensionIntegrationTest extends TwigBasedTestCase {
 	 */
 	public function testFormatTime($value, $locale, $timeType, $result) {
 		$this->assertSame($result,
-				$this->getTwig()->render('IntegrationTestBundle:FormatDateTime:time.html.twig', array(
+				$this->getTwig()->render('@IntegrationTest/FormatDateTime/time.html.twig', array(
 					'value' => $value,
 					'locale' => $locale,
 					'timeType' => $timeType,
@@ -138,7 +138,7 @@ class FormatDateTimeExtensionIntegrationTest extends TwigBasedTestCase {
 		}
 
 		$this->assertSame($result,
-				$this->getTwig()->render('IntegrationTestBundle:FormatDateTime:time.html.twig', array(
+				$this->getTwig()->render('@IntegrationTest/FormatDateTime/time.html.twig', array(
 					'value' => $value,
 					'locale' => $locale,
 					'timeType' => $timeType,
@@ -175,7 +175,7 @@ class FormatDateTimeExtensionIntegrationTest extends TwigBasedTestCase {
 	 */
 	public function testFormatDateTime($value, $locale, $dateType, $timeType, $timeZone, $result) {
 		$this->assertSame($result,
-				$this->getTwig()->render('IntegrationTestBundle:FormatDateTime:dateTime.html.twig', array(
+				$this->getTwig()->render('@IntegrationTest/FormatDateTime/dateTime.html.twig', array(
 					'value' => $value,
 					'locale' => $locale,
 					'dateType' => $dateType,

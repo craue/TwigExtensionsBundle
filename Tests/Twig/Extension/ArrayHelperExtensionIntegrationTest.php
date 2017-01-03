@@ -25,7 +25,7 @@ class ArrayHelperExtensionIntegrationTest extends TwigBasedTestCase {
 	 */
 	public function testTranslateArray(array $entries, array $parameters, $domain, $locale, $result) {
 		$this->assertSame($result,
-				$this->getTwig()->render('IntegrationTestBundle:ArrayHelper:translateArray.html.twig', array(
+				$this->getTwig()->render('@IntegrationTest/ArrayHelper/translateArray.html.twig', array(
 					'entries' => $entries,
 					'parameters' => $parameters,
 					'domain' => $domain,
@@ -64,7 +64,7 @@ class ArrayHelperExtensionIntegrationTest extends TwigBasedTestCase {
 	 */
 	public function testWithout($entries, $without, $result) {
 		$this->assertSame($result,
-				$this->getTwig()->render('IntegrationTestBundle:ArrayHelper:without.html.twig', array(
+				$this->getTwig()->render('@IntegrationTest/ArrayHelper/without.html.twig', array(
 					'entries' => $entries,
 					'without' => $without,
 				)));
@@ -100,7 +100,7 @@ class ArrayHelperExtensionIntegrationTest extends TwigBasedTestCase {
 	 */
 	public function testReplaceKey($entries, $key, $value, $result) {
 		$this->assertSame($result,
-				$this->getTwig()->render('IntegrationTestBundle:ArrayHelper:replaceKey.html.twig', array(
+				$this->getTwig()->render('@IntegrationTest/ArrayHelper/replaceKey.html.twig', array(
 					'entries' => $entries,
 					'key' => $key,
 					'value' => $value,
@@ -129,7 +129,7 @@ class ArrayHelperExtensionIntegrationTest extends TwigBasedTestCase {
 	 */
 	public function testRemoveKey($entries, $key, $result) {
 		$this->assertSame($result,
-				$this->getTwig()->render('IntegrationTestBundle:ArrayHelper:removeKey.html.twig', array(
+				$this->getTwig()->render('@IntegrationTest/ArrayHelper/removeKey.html.twig', array(
 					'entries' => $entries,
 					'key' => $key,
 				)));

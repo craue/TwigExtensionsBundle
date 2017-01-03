@@ -18,7 +18,7 @@ class DecorateEmptyValueExtensionIntegrationTest extends TwigBasedTestCase {
 	 */
 	public function testDecorateEmptyValue($value, $placeholder, $result) {
 		$this->assertSame($result,
-				$this->getTwig()->render('IntegrationTestBundle:DecorateEmptyValue:default.html.twig', array(
+				$this->getTwig()->render('@IntegrationTest/DecorateEmptyValue/default.html.twig', array(
 					'value' => $value,
 					'placeholder' => $placeholder,
 				)));

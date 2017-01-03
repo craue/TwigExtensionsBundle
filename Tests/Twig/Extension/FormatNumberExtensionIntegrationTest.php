@@ -18,7 +18,7 @@ class FormatNumberExtensionIntegrationTest extends TwigBasedTestCase {
 	 */
 	public function testFormatNumber($value, $locale, $result) {
 		$this->assertSame($result,
-				$this->getTwig()->render('IntegrationTestBundle:FormatNumber:number.html.twig', array(
+				$this->getTwig()->render('@IntegrationTest/FormatNumber/number.html.twig', array(
 					'value' => $value,
 					'locale' => $locale,
 				)));
@@ -39,7 +39,7 @@ class FormatNumberExtensionIntegrationTest extends TwigBasedTestCase {
 	 */
 	public function testFormatCurrency($value, $currency, $locale, $result) {
 		$this->assertSame($result,
-				$this->getTwig()->render('IntegrationTestBundle:FormatNumber:currency.html.twig', array(
+				$this->getTwig()->render('@IntegrationTest/FormatNumber/currency.html.twig', array(
 					'value' => $value,
 					'currency' => $currency,
 					'locale' => $locale,
@@ -73,7 +73,7 @@ class FormatNumberExtensionIntegrationTest extends TwigBasedTestCase {
 
 		foreach ($cases as $index => $case) {
 			$this->assertSame($case['result'],
-					$this->getTwig()->render('IntegrationTestBundle:FormatNumber:currency.html.twig', array(
+					$this->getTwig()->render('@IntegrationTest/FormatNumber/currency.html.twig', array(
 						'value' => $case['value'],
 						'currency' => $case['currency'],
 						'locale' => $case['locale'],
@@ -87,7 +87,7 @@ class FormatNumberExtensionIntegrationTest extends TwigBasedTestCase {
 	 */
 	public function testFormatSpelledOutNumber($value, $locale, $result) {
 		$this->assertSame($result,
-				$this->getTwig()->render('IntegrationTestBundle:FormatNumber:spellout.html.twig', array(
+				$this->getTwig()->render('@IntegrationTest/FormatNumber/spellout.html.twig', array(
 					'value' => $value,
 					'locale' => $locale,
 				)));

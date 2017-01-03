@@ -174,7 +174,7 @@ spelled out number: {{ someNumber | craue_spellout('de-DE') }}
 There's a Twig template provided which you can use to render a "change language" menu like this:
 
 ```twig
-{% include 'CraueTwigExtensionsBundle:ChangeLanguage:changeLanguage.html.twig' %}
+{% include '@CraueTwigExtensions/ChangeLanguage/changeLanguage.html.twig' %}
 ```
 
 This will render a list of links to the current route in all defined languages. Wrap it in a div to style it via CSS.

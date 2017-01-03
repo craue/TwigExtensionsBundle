@@ -18,7 +18,7 @@ class StringHelperExtensionIntegrationTest extends TwigBasedTestCase {
 	 */
 	public function testAddTrailingDot($value, $result) {
 		$this->assertSame($result,
-				$this->getTwig()->render('IntegrationTestBundle:StringHelper:trailingDot.html.twig', array(
+				$this->getTwig()->render('@IntegrationTest/StringHelper/trailingDot.html.twig', array(
 					'value' => $value,
 				)));
 	}
