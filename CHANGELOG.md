@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.2.0 (2017-01-09)
+
+- added support for DateTimeInterface in FormatDateTimeExtension
+- use namespaced template names in ChangeLanguageExtension (available since Twig 1.10) 
+
 ## 2.1.1 (2015-12-29)
 
 - added support for PHP 7.0 and HHVM
