@@ -81,6 +81,11 @@ class FormatDateTimeExtensionIntegrationTest extends TwigBasedTestCase {
 			array(44417974000, null, null, 'US/Hawaii', 'Jul 19, 3377'),
 		);
 
+		// TODO remove check as soon as PHP >= 5.5 is required
+		if (class_exists('DateTimeImmutable')) {
+			$testdata[] = array(new \DateTimeImmutable('2000-01-01'), 'de-DE', 'medium', null, '01.01.2000');
+		}
+
 		date_default_timezone_set($currentTimezone);
 
 		return $testdata;
@@ -121,6 +126,11 @@ class FormatDateTimeExtensionIntegrationTest extends TwigBasedTestCase {
 			array(new \DateTime('2000-01-01 12:34:56'), 'en-US', 'long', '12:34:56 PM GMT+01:00'),
 			array(new \DateTime('2000-01-01 12:34:56'), 'en-US', 'full', '12:34:56 PM Central European Time'),
 		);
+
+		// TODO remove check as soon as PHP >= 5.5 is required
+		if (class_exists('DateTimeImmutable')) {
+			$testdata[] = array(new \DateTimeImmutable('2000-01-01 12:34:56'), 'de-DE', 'medium', '12:34:56');
+		}
 
 		date_default_timezone_set($currentTimezone);
 
@@ -208,6 +218,11 @@ class FormatDateTimeExtensionIntegrationTest extends TwigBasedTestCase {
 			// time zone
 			array(44417974000, null, 'full', 'full', 'US/Hawaii', 'Saturday, July 19, 3377 12:06:40 PM Hawaii-Aleutian Standard Time'),
 		);
+
+		// TODO remove check as soon as PHP >= 5.5 is required
+		if (class_exists('DateTimeImmutable')) {
+			$testdata[] = array(new \DateTimeImmutable('2000-01-01 12:34:56'), 'de-DE', 'medium', 'medium', null, '01.01.2000 12:34:56');
+		}
 
 		date_default_timezone_set($currentTimezone);
 
