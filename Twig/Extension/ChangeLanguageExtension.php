@@ -22,12 +22,12 @@ class ChangeLanguageExtension extends AbstractLocaleAwareExtension {
 	protected $availableLocales = array();
 
 	/**
-	 * @var boolean
+	 * @var bool
 	 */
 	protected $showForeignLanguageNames = true;
 
 	/**
-	 * @var boolean
+	 * @var bool
 	 */
 	protected $showFirstUppercase = false;
 
@@ -51,19 +51,19 @@ class ChangeLanguageExtension extends AbstractLocaleAwareExtension {
 
 	/**
 	 * Sets whether each language's name will be shown in its foreign language.
-	 * @param boolean $showForeignLanguageNames
+	 * @param bool $showForeignLanguageNames
 	 */
 	public function setShowForeignLanguageNames($showForeignLanguageNames) {
-		$this->showForeignLanguageNames = (boolean) $showForeignLanguageNames;
+		$this->showForeignLanguageNames = (bool) $showForeignLanguageNames;
 	}
 
 	/**
 	 * Sets whether all language names will be shown with a leading uppercase character.
 	 * This requires the mbstring extension {@link http://php.net/manual/book.mbstring.php} to be loaded.
-	 * @param boolean $showFirstUppercase
+	 * @param bool $showFirstUppercase
 	 */
 	public function setShowFirstUppercase($showFirstUppercase) {
-		$this->showFirstUppercase = (boolean) $showFirstUppercase;
+		$this->showFirstUppercase = (bool) $showFirstUppercase;
 	}
 
 	/**

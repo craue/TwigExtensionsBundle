@@ -15,12 +15,12 @@ use Craue\TwigExtensionsBundle\Util\TwigFeatureUtil;
 class FormatDateTimeExtension extends AbstractLocaleAwareExtension {
 
 	/**
-	 * @var integer
+	 * @var int
 	 */
 	protected $dateType = \IntlDateFormatter::MEDIUM;
 
 	/**
-	 * @var integer
+	 * @var int
 	 */
 	protected $timeType = \IntlDateFormatter::MEDIUM;
 
@@ -209,7 +209,7 @@ class FormatDateTimeExtension extends AbstractLocaleAwareExtension {
 
 	/**
 	 * @param string $format Date/time format. Valid values are "none", "full", "long", "medium", or "short" (case insensitive).
-	 * @return integer Appropriate value of {@link http://php.net/manual/class.intldateformatter.php#intl.intldateformatter-constants}.
+	 * @return int Appropriate value of {@link http://php.net/manual/class.intldateformatter.php#intl.intldateformatter-constants}.
 	 * @throws \InvalidArgumentException
 	 */
 	protected function getDateFormatterFormat($format) {
