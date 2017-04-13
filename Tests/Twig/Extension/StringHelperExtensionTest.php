@@ -3,6 +3,7 @@
 namespace Craue\TwigExtensionsBundle\Tests\Twig\Extension;
 
 use Craue\TwigExtensionsBundle\Twig\Extension\StringHelperExtension;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @group unit
@@ -11,7 +12,7 @@ use Craue\TwigExtensionsBundle\Twig\Extension\StringHelperExtension;
  * @copyright 2011-2017 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class StringHelperExtensionTest extends \PHPUnit_Framework_TestCase {
+class StringHelperExtensionTest extends TestCase {
 
 	/**
 	 * @var ArrayHelperExtension
