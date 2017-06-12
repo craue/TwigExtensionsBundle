@@ -95,7 +95,7 @@ class FormatDateTimeExtensionIntegrationTest extends TwigBasedTestCase {
 	 * @dataProvider dataFormatTime
 	 */
 	public function testFormatTime($value, $locale, $timeType, $result) {
-		$this->assertSame($result,
+		$this->assertRegExp($result,
 				$this->getTwig()->render('@IntegrationTest/FormatDateTime/time.html.twig', array(
 					'value' => $value,
 					'locale' => $locale,
@@ -109,27 +109,27 @@ class FormatDateTimeExtensionIntegrationTest extends TwigBasedTestCase {
 		date_default_timezone_set(self::DEFAULT_TIME_ZONE);
 
 		$testdata = array(
-			array(null, null, null, ''),
-			array(0, null, null, '1:00:00 AM'),
-			array('0', null, null, '1:00:00 AM'),
+			array(null, null, null, '//'),
+			array(0, null, null, '/1:00:00 AM/'),
+			array('0', null, null, '/1:00:00 AM/'),
 			// descriptive format
-			array('01:00 AM', null, null, '1:00:00 AM'),
-			array('01:00 AM + 1hour', null, null, '2:00:00 AM'),
+			array('01:00 AM', null, null, '/1:00:00 AM/'),
+			array('01:00 AM + 1hour', null, null, '/2:00:00 AM/'),
 			// German format in all variations
-			array(new \DateTime('2000-01-01 12:34:56'), 'de-DE', 'short', '12:34'),
-			array(new \DateTime('2000-01-01 12:34:56'), 'de-DE', 'medium', '12:34:56'),
-			array(new \DateTime('2000-01-01 12:34:56'), 'de-DE', 'long', '12:34:56 MEZ'),
-			array(new \DateTime('2000-01-01 12:34:56'), 'de-DE', 'full', '12:34:56 Mitteleuropäische Zeit'),
+			array(new \DateTime('2000-01-01 12:34:56'), 'de-DE', 'short', '/12:34/'),
+			array(new \DateTime('2000-01-01 12:34:56'), 'de-DE', 'medium', '/12:34:56/'),
+			array(new \DateTime('2000-01-01 12:34:56'), 'de-DE', 'long', '/12:34:56 MEZ/'),
+			array(new \DateTime('2000-01-01 12:34:56'), 'de-DE', 'full', '/12:34:56 Mitteleuropäische (Zeit|Normalzeit)/'),
 			// US format in all variations
-			array(new \DateTime('2000-01-01 12:34:56'), 'en-US', 'short', '12:34 PM'),
-			array(new \DateTime('2000-01-01 12:34:56'), 'en-US', 'medium', '12:34:56 PM'),
-			array(new \DateTime('2000-01-01 12:34:56'), 'en-US', 'long', '12:34:56 PM GMT+01:00'),
-			array(new \DateTime('2000-01-01 12:34:56'), 'en-US', 'full', '12:34:56 PM Central European Time'),
+			array(new \DateTime('2000-01-01 12:34:56'), 'en-US', 'short', '/12:34 PM/'),
+			array(new \DateTime('2000-01-01 12:34:56'), 'en-US', 'medium', '/12:34:56 PM/'),
+			array(new \DateTime('2000-01-01 12:34:56'), 'en-US', 'long', '/12:34:56 PM GMT\+(1|01:00)/'),
+			array(new \DateTime('2000-01-01 12:34:56'), 'en-US', 'full', '/12:34:56 PM Central European( Standard)? Time/'),
 		);
 
 		// TODO remove check as soon as PHP >= 5.5 is required
 		if (class_exists('DateTimeImmutable')) {
-			$testdata[] = array(new \DateTimeImmutable('2000-01-01 12:34:56'), 'de-DE', 'medium', '12:34:56');
+			$testdata[] = array(new \DateTimeImmutable('2000-01-01 12:34:56'), 'de-DE', 'medium', '/12:34:56/');
 		}
 
 		date_default_timezone_set($currentTimezone);
@@ -184,7 +184,7 @@ class FormatDateTimeExtensionIntegrationTest extends TwigBasedTestCase {
 	 * @dataProvider dataFormatDateTime
 	 */
 	public function testFormatDateTime($value, $locale, $dateType, $timeType, $timeZone, $result) {
-		$this->assertSame($result,
+		$this->assertRegExp($result,
 				$this->getTwig()->render('@IntegrationTest/FormatDateTime/dateTime.html.twig', array(
 					'value' => $value,
 					'locale' => $locale,
@@ -200,28 +200,28 @@ class FormatDateTimeExtensionIntegrationTest extends TwigBasedTestCase {
 		date_default_timezone_set(self::DEFAULT_TIME_ZONE);
 
 		$testdata = array(
-			array(null, null, null, null, null, ''),
-			array(0, null, null, null, null, 'Jan 1, 1970 1:00:00 AM'),
-			array('0', null, null, null, null, 'Jan 1, 1970 1:00:00 AM'),
+			array(null, null, null, null, null, '//'),
+			array(0, null, null, null, null, '/Jan 1, 1970,? 1:00:00 AM/'),
+			array('0', null, null, null, null, '/Jan 1, 1970,? 1:00:00 AM/'),
 			// descriptive format
-			array('1970-01-01 01:00 AM', null, null, null, null, 'Jan 1, 1970 1:00:00 AM'),
-			array('January 1, 1970 01:00 AM', null, null, null, null, 'Jan 1, 1970 1:00:00 AM'),
-			array('January 1, 1970 01:00 AM - 50years', null, null, null, null, 'Jan 1, 1920 1:00:00 AM'),
+			array('1970-01-01 01:00 AM', null, null, null, null, '/Jan 1, 1970,? 1:00:00 AM/'),
+			array('January 1, 1970 01:00 AM', null, null, null, null, '/Jan 1, 1970,? 1:00:00 AM/'),
+			array('January 1, 1970 01:00 AM - 50years', null, null, null, null, '/Jan 1, 1920,? 1:00:00 AM/'),
 			// far future date in descriptive format
-			array('January 1, 1970 01:00 AM + 1000years', null, null, null, null, 'Jan 1, 2970 1:00:00 AM'),
+			array('January 1, 1970 01:00 AM + 1000years', null, null, null, null, '/Jan 1, 2970,? 1:00:00 AM/'),
 			// short+short/full+full variations
-			array(new \DateTime('2124-11-22 12:34:56'), 'de-DE', 'short', 'short', null, '22.11.24 12:34'),
-			array(new \DateTime('2124-11-22 12:34:56'), 'de-DE', 'full', 'full', null, 'Mittwoch, 22. November 2124 12:34:56 Mitteleuropäische Zeit'),
+			array(new \DateTime('2124-11-22 12:34:56'), 'de-DE', 'short', 'short', null, '/22.11.24,? 12:34/'),
+			array(new \DateTime('2124-11-22 12:34:56'), 'de-DE', 'full', 'full', null, '/Mittwoch, 22. November 2124( um)? 12:34:56 Mitteleuropäische (Zeit|Normalzeit)/'),
 			// variations with "none"
-			array(new \DateTime('2124-11-22 12:34:56'), 'de-DE', 'none', 'medium', null, '12:34:56'),
-			array(new \DateTime('2124-11-22 12:34:56'), 'de-DE', 'medium', 'none', null, '22.11.2124'),
+			array(new \DateTime('2124-11-22 12:34:56'), 'de-DE', 'none', 'medium', null, '/12:34:56/'),
+			array(new \DateTime('2124-11-22 12:34:56'), 'de-DE', 'medium', 'none', null, '/22.11.2124/'),
 			// time zone
-			array(44417974000, null, 'full', 'full', 'US/Hawaii', 'Saturday, July 19, 3377 12:06:40 PM Hawaii-Aleutian Standard Time'),
+			array(44417974000, null, 'full', 'full', 'US/Hawaii', '/Saturday, July 19, 3377( at)? 12:06:40 PM Hawaii-Aleutian Standard Time/'),
 		);
 
 		// TODO remove check as soon as PHP >= 5.5 is required
 		if (class_exists('DateTimeImmutable')) {
-			$testdata[] = array(new \DateTimeImmutable('2000-01-01 12:34:56'), 'de-DE', 'medium', 'medium', null, '01.01.2000 12:34:56');
+			$testdata[] = array(new \DateTimeImmutable('2000-01-01 12:34:56'), 'de-DE', 'medium', 'medium', null, '/01.01.2000,? 12:34:56/');
 		}
 
 		date_default_timezone_set($currentTimezone);
