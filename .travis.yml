@@ -44,7 +44,11 @@ install:
   # show installed dependencies
   - composer show
 
-script: vendor/bin/phpunit -v
+script:
+  # validate composer.json
+  - composer validate --strict --no-check-lock
+  # run PHPUnit
+  - vendor/bin/phpunit -v
 
 notifications:
   email:
