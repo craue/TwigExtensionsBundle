@@ -15,6 +15,7 @@
 
 	<services>
 		<service id="twig.extension.craue_form" class="%craue_twig_extensions.form.class%">
+                        <defaults public="true" />
 			<tag name="twig.extension" />
 			<call method="setFormFactory">
 				<argument type="service" id="form.factory" on-invalid="ignore" />
