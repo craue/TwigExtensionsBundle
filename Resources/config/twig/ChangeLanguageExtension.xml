@@ -18,8 +18,7 @@
 	</parameters>
 
 	<services>
-		<service id="twig.extension.craue_changeLanguage" class="%craue_twig_extensions.changeLanguage.class%">
-                        <defaults public="true" />
+		<service id="twig.extension.craue_changeLanguage" class="%craue_twig_extensions.changeLanguage.class%" public="true">
 			<tag name="twig.extension" />
 			<call method="setAvailableLocales">
 				<argument>%craue_twig_extensions.changeLanguage.availableLocales%</argument>
