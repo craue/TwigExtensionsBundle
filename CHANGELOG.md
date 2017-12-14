@@ -1,9 +1,17 @@
 # Changelog
 
+## [2.3.0] – 2017-12-14
+
+- [#12]: added support for Symfony 4.*
+- bumped Symfony dependency to 2.7
+
+[#12]: https://github.com/craue/TwigExtensionsBundle/issues/12
+[2.3.0]: https://github.com/craue/TwigExtensionsBundle/compare/2.2.0...2.3.0
+
 ## [2.2.0] – 2017-01-09
 
 - added support for DateTimeInterface in FormatDateTimeExtension
-- use namespaced template names in ChangeLanguageExtension (available since Twig 1.10) 
+- use namespaced template names in ChangeLanguageExtension (available since Twig 1.10)
 
 [2.2.0]: https://github.com/craue/TwigExtensionsBundle/compare/2.1.1...2.2.0
 
