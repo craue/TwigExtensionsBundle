@@ -4,6 +4,7 @@ namespace Craue\TwigExtensionsBundle\Util;
 
 /**
  * for internal use only
+ * @internal
  *
  * @author Christian Raue <christian.raue@gmail.com>
  * @copyright 2011-2017 Christian Raue
