@@ -2,7 +2,7 @@
 	"name": "craue/twigextensions-bundle",
 	"type": "symfony-bundle",
 	"description": "Useful Twig extensions for your Symfony project.",
-	"keywords": ["twig", "extensions", "symfony2", "symfony3"],
+	"keywords": ["twig", "extensions", "symfony2", "symfony3", "symfony4"],
 	"homepage": "https://github.com/craue/TwigExtensionsBundle",
 	"license": "MIT",
 	"authors": [
