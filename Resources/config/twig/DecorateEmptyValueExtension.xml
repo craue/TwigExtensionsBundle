@@ -15,7 +15,7 @@
 	</parameters>
 
 	<services>
-		<service id="twig.extension.craue_decorateEmptyValue" class="%craue_twig_extensions.decorateEmptyValue.class%">
+		<service id="twig.extension.craue_decorateEmptyValue" class="%craue_twig_extensions.decorateEmptyValue.class%" public="true">
 			<tag name="twig.extension" />
 			<call method="setPlaceholder">
 				<argument>%craue_twig_extensions.decorateEmptyValue.placeholder%</argument>

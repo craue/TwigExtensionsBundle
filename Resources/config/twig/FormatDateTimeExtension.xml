@@ -19,7 +19,7 @@
 	</parameters>
 
 	<services>
-		<service id="twig.extension.craue_formatDateTime" class="%craue_twig_extensions.formatDateTime.class%">
+		<service id="twig.extension.craue_formatDateTime" class="%craue_twig_extensions.formatDateTime.class%" public="true">
 			<tag name="twig.extension" />
 			<call method="setDateTimeTypes">
 				<argument>%craue_twig_extensions.formatDateTime.datetype%</argument>

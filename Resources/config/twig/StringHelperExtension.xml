@@ -14,7 +14,7 @@
 	</parameters>
 
 	<services>
-		<service id="twig.extension.craue_stringHelper" class="%craue_twig_extensions.stringHelper.class%">
+		<service id="twig.extension.craue_stringHelper" class="%craue_twig_extensions.stringHelper.class%" public="true">
 			<tag name="twig.extension" />
 			<call method="setAliases">
 				<argument>%craue_twig_extensions.stringHelper.trailingDotAlias%</argument>
