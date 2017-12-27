@@ -11,7 +11,7 @@ class AppKernel extends Kernel {
 	private $config;
 
 	public function __construct($config) {
-		parent::__construct('test', false);
+		parent::__construct('test', true);
 
 		$fs = new Filesystem();
 		if (!$fs->isAbsolutePath($config)) {
