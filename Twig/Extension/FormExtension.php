@@ -13,7 +13,7 @@ use Symfony\Component\Form\FormView;
  * Twig extension for form handling.
  *
  * @author Christian Raue <christian.raue@gmail.com>
- * @copyright 2011-2017 Christian Raue
+ * @copyright 2011-2018 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
 class FormExtension extends \Twig_Extension {
