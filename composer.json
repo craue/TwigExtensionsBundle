@@ -28,7 +28,10 @@
 	"autoload": {
 		"psr-4": {
 			"Craue\\TwigExtensionsBundle\\": ""
-		}
+		},
+		"exclude-from-classmap": [
+			"/Tests/"
+		]
 	},
 	"extra": {
 		"branch-alias": {
