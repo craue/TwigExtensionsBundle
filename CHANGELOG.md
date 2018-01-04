@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.3.1] – 2018-01-05
+
+- fixed support for Traversable in ArrayHelperExtension
+
+[2.3.1]: https://github.com/craue/TwigExtensionsBundle/compare/2.3.0...2.3.1
+
 ## [2.3.0] – 2017-12-14
 
 - [#12]: added support for Symfony 4.*
