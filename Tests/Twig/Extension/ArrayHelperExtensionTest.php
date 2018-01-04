@@ -59,6 +59,7 @@ class ArrayHelperExtensionTest extends TestCase {
 	public function dataTranslateArray_invalidArguments() {
 		return array(
 			array(null, array(), null, null, ''),
+			array(new \stdClass(), array(), null, null, ''),
 		);
 	}
 

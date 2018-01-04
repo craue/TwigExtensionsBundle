@@ -145,7 +145,7 @@ class ArrayHelperExtension extends \Twig_Extension {
 
 	/**
 	 * Tries to convert {@code $source} to an array.
-	 * @param array|Traversable $source Variable to be converted.
+	 * @param array|\Traversable $source Variable to be converted.
 	 * @throws \InvalidArgumentException If no array representation is available.
 	 */
 	protected function convertToArray($source) {
@@ -153,7 +153,7 @@ class ArrayHelperExtension extends \Twig_Extension {
 			return $source;
 		}
 
-		if ($source instanceof Traversable) {
+		if ($source instanceof \Traversable) {
 			return iterator_to_array($source, true);
 		}
 
