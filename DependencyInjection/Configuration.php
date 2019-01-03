@@ -18,8 +18,14 @@ class Configuration implements ConfigurationInterface {
 	 * {@inheritDoc}
 	 */
 	public function getConfigTreeBuilder() {
-		$treeBuilder = new TreeBuilder();
-		$rootNode = $treeBuilder->root('craue_twig_extensions');
+		$treeBuilder = new TreeBuilder('craue_twig_extensions');
+
+		if (!method_exists($treeBuilder, 'getRootNode')) {
+			// TODO remove as soon as Symfony >= 4.2 is required
+			$rootNode = $treeBuilder->root('craue_twig_extensions');
+		} else {
+			$rootNode = $treeBuilder->getRootNode();
+		}
 
 		$rootNode
 			->children()
