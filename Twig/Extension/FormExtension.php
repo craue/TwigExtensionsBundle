@@ -73,14 +73,12 @@ class FormExtension extends \Twig_Extension {
 				throw new \RuntimeException('No form factory available.');
 			}
 
-			$valueToUse = method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix') ? get_class($value) : $value;
-
-			return $this->formFactory->create($valueToUse, null, $formOptions)->createView();
+			return $this->formFactory->create(get_class($value), null, $formOptions)->createView();
 		}
 
 		throw new \InvalidArgumentException(sprintf('Expected argument of either type "%s" or "%s", but "%s" given.',
-				'Symfony\Component\Form\FormTypeInterface',
-				'Symfony\Component\Form\FormInterface',
+				FormTypeInterface::class,
+				FormInterface::class,
 				is_object($value) ? get_class($value) : gettype($value)
 		));
 	}

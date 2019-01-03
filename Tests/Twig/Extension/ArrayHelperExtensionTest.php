@@ -4,6 +4,7 @@ namespace Craue\TwigExtensionsBundle\Tests\Twig\Extension;
 
 use Craue\TwigExtensionsBundle\Twig\Extension\ArrayHelperExtension;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * @group unit
@@ -113,8 +114,7 @@ class ArrayHelperExtensionTest extends TestCase {
 	}
 
 	protected function getMockedTranslator(array $case = array()) {
-		// TODO replace by `$this->createMock('Symfony\Component\Translation\TranslatorInterface')` as soon as PHPUnit >= 5.4 is required
-		$translator = $this->getMockBuilder('Symfony\Component\Translation\TranslatorInterface')->getMock();
+		$translator = $this->createMock(TranslatorInterface::class);
 
 		if (!empty($case)) {
 			$translator

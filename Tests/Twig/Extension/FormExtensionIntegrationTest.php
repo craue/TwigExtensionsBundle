@@ -5,6 +5,8 @@ namespace Craue\TwigExtensionsBundle\Tests\Twig\Extension;
 use Craue\TwigExtensionsBundle\Tests\IntegrationTestBundle\Form\CommentFormType;
 use Craue\TwigExtensionsBundle\Tests\TwigBasedTestCase;
 use Craue\TwigExtensionsBundle\Twig\Extension\FormExtension;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormFactoryInterface;
 
 /**
@@ -26,19 +28,16 @@ class FormExtensionIntegrationTest extends TwigBasedTestCase {
 	 */
 	protected $formFactory;
 
-	private $useFqcn;
-
 	protected function setUp() {
 		parent::setUp();
 		$container = self::$kernel->getContainer();
 		$this->ext = $container->get('twig.extension.craue_form');
 		$this->formFactory = $container->get('form.factory');
-		$this->useFqcn = method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix');
 	}
 
 	public function testCloneForm_form() {
-		$form = $this->formFactory->createBuilder($this->useFqcn ? 'Symfony\Component\Form\Extension\Core\Type\FormType' : 'form')
-			->add('note', $this->useFqcn ? 'Symfony\Component\Form\Extension\Core\Type\TextType' : 'text')
+		$form = $this->formFactory->createBuilder(FormType::class)
+			->add('note', TextType::class)
 			->getForm()
 		;
 
@@ -52,7 +51,7 @@ class FormExtensionIntegrationTest extends TwigBasedTestCase {
 
 		$clonedFormView = $this->ext->cloneForm($formType);
 
-		$this->assertEquals($this->formFactory->create($this->useFqcn ? get_class($formType) : $formType)->createView(), $clonedFormView);
+		$this->assertEquals($this->formFactory->create(get_class($formType))->createView(), $clonedFormView);
 	}
 
 	/**
@@ -60,7 +59,7 @@ class FormExtensionIntegrationTest extends TwigBasedTestCase {
 	 * @expectedExceptionMessage Expected argument of either type "Symfony\Component\Form\FormTypeInterface" or "Symfony\Component\Form\FormInterface", but "Symfony\Component\Form\FormView" given.
 	 */
 	public function testCloneForm_formView() {
-		$formView = $this->formFactory->createBuilder($this->useFqcn ? 'Symfony\Component\Form\Extension\Core\Type\FormType' : 'form')
+		$formView = $this->formFactory->createBuilder(FormType::class)
 			->getForm()
 			->createView()
 		;

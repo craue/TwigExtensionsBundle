@@ -8,13 +8,11 @@ use Craue\TwigExtensionsBundle\Util\TwigFeatureUtil;
 /**
  * Twig extension providing helpers for implementing a language change mechanism.
  *
- * Variant for Twig < 1.23.
- *
  * @author Christian Raue <christian.raue@gmail.com>
  * @copyright 2011-2018 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class ChangeLanguageExtension extends AbstractLocaleAwareExtension {
+class ChangeLanguageExtension extends AbstractLocaleAwareExtension implements \Twig_Extension_GlobalsInterface {
 
 	/**
 	 * @var string[]

@@ -3,6 +3,7 @@
 namespace Craue\TwigExtensionsBundle\Tests\IntegrationTestBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -16,17 +17,9 @@ class CommentFormType extends AbstractType {
 	 * {@inheritDoc}
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
-		$useFqcn = method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix');
-
-		$builder->add('note', $useFqcn ? 'Symfony\Component\Form\Extension\Core\Type\TextType' : 'text');
+		$builder->add('note', TextType::class);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public function getName() {
-		return $this->getBlockPrefix();
-	}
 	/**
 	 * {@inheritDoc}
 	 */

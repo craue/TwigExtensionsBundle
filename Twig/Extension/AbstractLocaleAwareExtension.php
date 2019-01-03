@@ -44,7 +44,7 @@ abstract class AbstractLocaleAwareExtension extends \Twig_Extension {
 
 		throw new \InvalidArgumentException(sprintf(
 				'Expected argument of either type "string" or "%s", but "%s" given.',
-				'Symfony\Component\DependencyInjection\ContainerInterface',
+				ContainerInterface::class,
 				is_object($value) ? get_class($value) : gettype($value)
 		));
 	}

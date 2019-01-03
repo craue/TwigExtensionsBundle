@@ -79,12 +79,9 @@ class FormatDateTimeExtensionIntegrationTest extends TwigBasedTestCase {
 			array(-16417974000, null, null, null, 'Sep 17, 1449'),
 			// time zone
 			array(44417974000, null, null, 'US/Hawaii', 'Jul 19, 3377'),
+			// others
+			array(new \DateTimeImmutable('2000-01-01'), 'de-DE', 'medium', null, '01.01.2000'),
 		);
-
-		// TODO remove check as soon as PHP >= 5.5 is required
-		if (class_exists('DateTimeImmutable')) {
-			$testdata[] = array(new \DateTimeImmutable('2000-01-01'), 'de-DE', 'medium', null, '01.01.2000');
-		}
 
 		date_default_timezone_set($currentTimezone);
 
@@ -125,12 +122,9 @@ class FormatDateTimeExtensionIntegrationTest extends TwigBasedTestCase {
 			array(new \DateTime('2000-01-01 12:34:56'), 'en-US', 'medium', '/12:34:56 PM/'),
 			array(new \DateTime('2000-01-01 12:34:56'), 'en-US', 'long', '/12:34:56 PM GMT\+(1|01:00)/'),
 			array(new \DateTime('2000-01-01 12:34:56'), 'en-US', 'full', '/12:34:56 PM Central European( Standard)? Time/'),
+			// others
+			array(new \DateTimeImmutable('2000-01-01 12:34:56'), 'de-DE', 'medium', '/12:34:56/'),
 		);
-
-		// TODO remove check as soon as PHP >= 5.5 is required
-		if (class_exists('DateTimeImmutable')) {
-			$testdata[] = array(new \DateTimeImmutable('2000-01-01 12:34:56'), 'de-DE', 'medium', '/12:34:56/');
-		}
 
 		date_default_timezone_set($currentTimezone);
 
@@ -217,12 +211,9 @@ class FormatDateTimeExtensionIntegrationTest extends TwigBasedTestCase {
 			array(new \DateTime('2124-11-22 12:34:56'), 'de-DE', 'medium', 'none', null, '/22.11.2124/'),
 			// time zone
 			array(44417974000, null, 'full', 'full', 'US/Hawaii', '/Saturday, July 19, 3377( at)? 12:06:40 PM Hawaii-Aleutian Standard Time/'),
+			// others
+			array(new \DateTimeImmutable('2000-01-01 12:34:56'), 'de-DE', 'medium', 'medium', null, '/01.01.2000,? 12:34:56/'),
 		);
-
-		// TODO remove check as soon as PHP >= 5.5 is required
-		if (class_exists('DateTimeImmutable')) {
-			$testdata[] = array(new \DateTimeImmutable('2000-01-01 12:34:56'), 'de-DE', 'medium', 'medium', null, '/01.01.2000,? 12:34:56/');
-		}
 
 		date_default_timezone_set($currentTimezone);
 
