@@ -39,7 +39,7 @@ class CraueTwigExtensionsExtension extends Extension {
 		if (!empty($config['enable_only'])) {
 			$loadExtensions = array();
 			foreach ($config['enable_only'] as $ext) {
-				if (!in_array($ext, $availableExtensions)) {
+				if (!in_array($ext, $availableExtensions, true)) {
 					throw new \InvalidArgumentException(sprintf('Extension with name "%s" is invalid.', $ext));
 				}
 				$loadExtensions[] = $ext;
