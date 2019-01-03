@@ -24,6 +24,14 @@ class ArrayHelperExtensionTest extends TestCase {
 		$this->ext = new ArrayHelperExtension();
 	}
 
+	/**
+	 * @expectedException \LogicException
+	 * @expectedExceptionMessage The Symfony Translation component is not available. Try running "composer require symfony/translation".
+	 */
+	public function testTranslateArray_noTranslator() {
+		$this->ext->translateArray([]);
+	}
+
 	public function testTranslateArray_passedArgument() {
 		$case = [
 			'entries' => ['red', 'green', 'yellow'],

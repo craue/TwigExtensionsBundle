@@ -24,9 +24,19 @@ class FormExtensionTest extends TestCase {
 	}
 
 	/**
+	 * @expectedException \LogicException
+	 * @expectedExceptionMessage The Symfony Form component is not available. Try running "composer require symfony/form".
+	 */
+	public function testCloneForm_noFormFactory() {
+		$this->ext->cloneForm($this->getMockForAbstractClass('Symfony\Component\Form\FormInterface'));
+	}
+
+	/**
 	 * @expectedException \InvalidArgumentException
+	 * @expectedExceptionMessage Expected argument of either type "Symfony\Component\Form\FormTypeInterface" or "Symfony\Component\Form\FormInterface", but "NULL" given.
 	 */
 	public function testCloneForm_nullValue() {
+		$this->ext->setFormFactory($this->getMockForAbstractClass('Symfony\Component\Form\FormFactoryInterface'));
 		$this->ext->cloneForm(null);
 	}
 

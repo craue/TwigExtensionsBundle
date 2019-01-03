@@ -17,7 +17,7 @@ use Twig\Extension\AbstractExtension;
 class ArrayHelperExtension extends AbstractExtension {
 
 	/**
-	 * @var TranslatorInterface
+	 * @var TranslatorInterface|null
 	 */
 	protected $translator;
 
@@ -128,11 +128,11 @@ class ArrayHelperExtension extends AbstractExtension {
 	 * @param string $domain Message domain used for translation.
 	 * @param string $locale Locale used for translation.
 	 * @return array Translated entries.
-	 * @throws \RuntimeException If the translator is not available.
+	 * @throws \LogicException If the translator is not available.
 	 */
 	public function translateArray($entries, array $parameters = [], $domain = 'messages', $locale = null) {
 		if ($this->translator === null) {
-			throw new \RuntimeException('No translator available.');
+			throw new \LogicException('The Symfony Translation component is not available. Try running "composer require symfony/translation".');
 		}
 
 		$translatedEntries = [];

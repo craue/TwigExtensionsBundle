@@ -20,7 +20,7 @@ use Twig\Extension\AbstractExtension;
 class FormExtension extends AbstractExtension {
 
 	/**
-	 * @var FormFactoryInterface
+	 * @var FormFactoryInterface|null
 	 */
 	protected $formFactory;
 
@@ -63,17 +63,18 @@ class FormExtension extends AbstractExtension {
 	 * @param array $formOptions Options to pass to the form type (only valid if $value is a FormTypeInterface, ignored otherwise).
 	 * @return FormView
 	 * @throws \InvalidArgumentException
+	 * @throws \LogicException
 	 */
 	public function cloneForm($value, array $formOptions = []) {
+		if ($this->formFactory === null) {
+			throw new \LogicException('The Symfony Form component is not available. Try running "composer require symfony/form".');
+		}
+
 		if ($value instanceof FormInterface) {
 			return $value->createView();
 		}
 
 		if ($value instanceof FormTypeInterface) {
-			if ($this->formFactory === null) {
-				throw new \RuntimeException('No form factory available.');
-			}
-
 			return $this->formFactory->create(get_class($value), null, $formOptions)->createView();
 		}
 
