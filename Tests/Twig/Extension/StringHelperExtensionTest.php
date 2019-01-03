@@ -15,7 +15,7 @@ use PHPUnit\Framework\TestCase;
 class StringHelperExtensionTest extends TestCase {
 
 	/**
-	 * @var ArrayHelperExtension
+	 * @var StringHelperExtension
 	 */
 	protected $ext;
 
