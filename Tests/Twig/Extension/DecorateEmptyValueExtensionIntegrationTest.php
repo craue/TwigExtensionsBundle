@@ -30,6 +30,7 @@ class DecorateEmptyValueExtensionIntegrationTest extends TwigBasedTestCase {
 			[null, '&ndash;', '&ndash;'],
 			[null, '-', '-'],
 			[null, 0, '0'],
+			[null, '', ''],
 			[false, '-', '-'],
 			[0, '-', '0'],
 			['a value', null, 'a value'],

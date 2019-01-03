@@ -68,7 +68,7 @@ class DecorateEmptyValueExtension extends \Twig_Extension {
 	 * @return string {@code $value} or, if it's empty, {@code $placeholder}.
 	 */
 	public function decorateEmptyValue($value, $placeholder = null) {
-		$placeholderToUse = $placeholder !== null ? $placeholder : $this->placeholder;
+		$placeholderToUse = $placeholder ?? $this->placeholder;
 		return twig_test_empty($value) ? $placeholderToUse : $value;
 	}
 
