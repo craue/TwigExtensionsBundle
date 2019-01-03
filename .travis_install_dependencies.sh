@@ -17,7 +17,7 @@ case "${DEPS:-}" in
 			composer config minimum-stability "${MIN_STABILITY}"
 		fi
 
-		composer remove --no-update symfony/twig-bundle
+		composer remove --no-update symfony/config symfony/dependency-injection symfony/twig-bundle
 
 		if [ -n "${SYMFONY_VERSION:-}" ]; then
 			composer require --no-update --dev symfony/symfony:"${SYMFONY_VERSION}"
