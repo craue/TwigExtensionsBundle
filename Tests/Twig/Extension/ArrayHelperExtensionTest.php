@@ -25,24 +25,24 @@ class ArrayHelperExtensionTest extends TestCase {
 	}
 
 	public function testTranslateArray_passedArgument() {
-		$case = array(
-			'entries' => array('red', 'green', 'yellow'),
-			'parameters' => array('%thing%' => 'Haus'),
+		$case = [
+			'entries' => ['red', 'green', 'yellow'],
+			'parameters' => ['%thing%' => 'Haus'],
 			'domain' => 'messages',
 			'locale' => 'de',
-		);
+		];
 
 		$this->ext->setTranslator($this->getMockedTranslator($case));
 		$this->ext->translateArray($case['entries'], $case['parameters'], $case['domain'], $case['locale']);
 	}
 
 	public function testTranslateArray_defaultArguments() {
-		$case = array(
-			'entries' => array('red', 'green', 'yellow'),
-			'parameters' => array(),
+		$case = [
+			'entries' => ['red', 'green', 'yellow'],
+			'parameters' => [],
 			'domain' => 'messages',
 			'locale' => null,
-		);
+		];
 
 		$this->ext->setTranslator($this->getMockedTranslator($case));
 		$this->ext->translateArray($case['entries']);
@@ -58,38 +58,38 @@ class ArrayHelperExtensionTest extends TestCase {
 	}
 
 	public function dataTranslateArray_invalidArguments() {
-		return array(
-			array(null, array(), null, null, ''),
-			array(new \stdClass(), array(), null, null, ''),
-		);
+		return [
+			[null, [], null, null, ''],
+			[new \stdClass(), [], null, null, ''],
+		];
 	}
 
 	public function testWithout_withoutArray() {
-		$case = array(
-			'entries' => array('red', 'green', 'yellow', 'blue'),
-			'without' => array('yellow', 'black', 'red'),
-		);
+		$case = [
+			'entries' => ['red', 'green', 'yellow', 'blue'],
+			'without' => ['yellow', 'black', 'red'],
+		];
 
 		$this->assertSame(array_diff($case['entries'], $case['without']),
 				$this->ext->without($case['entries'], $case['without']));
 	}
 
 	public function testWithout_withoutScalar() {
-		$case = array(
-			'entries' => array('red', 'green', 'yellow', 'blue'),
+		$case = [
+			'entries' => ['red', 'green', 'yellow', 'blue'],
 			'without' => 'yellow',
-		);
+		];
 
-		$this->assertSame(array_diff($case['entries'], array($case['without'])),
+		$this->assertSame(array_diff($case['entries'], [$case['without']]),
 				$this->ext->without($case['entries'], $case['without']));
 	}
 
 	public function testWithout_keepIndexes() {
-		$case = array(
-			'entries' => array('red', 'green', 'yellow', 'blue'),
+		$case = [
+			'entries' => ['red', 'green', 'yellow', 'blue'],
 			'without' => 'yellow',
-			'wrongResult' => array('red', 'green', 'blue'),
-		);
+			'wrongResult' => ['red', 'green', 'blue'],
+		];
 
 		$this->assertNotSame($case['wrongResult'], $this->ext->without($case['entries'], $case['without']));
 	}
@@ -103,17 +103,17 @@ class ArrayHelperExtensionTest extends TestCase {
 	}
 
 	public function dataWithout_invalidArguments() {
-		return array(
-			array(null, null),
-			array('', null),
-			array(null, ''),
-			array('', ''),
-			array(null, array()),
-			array('', array()),
-		);
+		return [
+			[null, null],
+			['', null],
+			[null, ''],
+			['', ''],
+			[null, []],
+			['', []],
+		];
 	}
 
-	protected function getMockedTranslator(array $case = array()) {
+	protected function getMockedTranslator(array $case = []) {
 		$translator = $this->createMock(TranslatorInterface::class);
 
 		if (!empty($case)) {

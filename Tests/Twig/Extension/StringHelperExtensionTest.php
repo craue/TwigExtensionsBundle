@@ -32,11 +32,11 @@ class StringHelperExtensionTest extends TestCase {
 	}
 
 	public function dataAddTrailingDot_invalidArguments() {
-		return array(
-			array(null),
-			array(0),
-			array(array()),
-		);
+		return [
+			[null],
+			[0],
+			[[]],
+		];
 	}
 
 }

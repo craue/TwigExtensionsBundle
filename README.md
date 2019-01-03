@@ -76,10 +76,10 @@ in a shell.
 ```php
 // in app/AppKernel.php
 public function registerBundles() {
-	$bundles = array(
+	$bundles = [
 		// ...
 		new Craue\TwigExtensionsBundle\CraueTwigExtensionsBundle(),
-	);
+	];
 	// ...
 }
 ```

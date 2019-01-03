@@ -39,16 +39,16 @@ abstract class TwigFeatureUtil {
 	 * @return $featureClass[]
 	 */
 	private static function getTwigFeatures($extension, array $definitions, $featureClass) {
-		$features = array();
+		$features = [];
 
 		foreach ($definitions as $definition) {
-			$names = array($definition->name);
+			$names = [$definition->name];
 			if (!empty($definition->alias)) {
 				$names[] = $definition->alias;
 			}
 
 			foreach ($names as $name) {
-				$features[] = new $featureClass($name, array($extension, $definition->methodName), $definition->options);
+				$features[] = new $featureClass($name, [$extension, $definition->methodName], $definition->options);
 			}
 		}
 

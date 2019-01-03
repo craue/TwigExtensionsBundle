@@ -25,7 +25,7 @@ class Configuration implements ConfigurationInterface {
 			->children()
 				->arrayNode('enable_only')
 					->prototype('scalar')->end()
-					->defaultValue(array())
+					->defaultValue([])
 				->end()
 			->end()
 		;

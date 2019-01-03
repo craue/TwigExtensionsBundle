@@ -54,12 +54,12 @@ class DecorateEmptyValueExtension extends \Twig_Extension {
 	 * {@inheritDoc}
 	 */
 	public function getFilters() {
-		return TwigFeatureUtil::getTwigFilters($this, array(
-			new TwigFeatureDefinition('craue_default', 'decorateEmptyValue', $this->filterAlias, array(
+		return TwigFeatureUtil::getTwigFilters($this, [
+			new TwigFeatureDefinition('craue_default', 'decorateEmptyValue', $this->filterAlias, [
 				'pre_escape' => 'html',
-				'is_safe' => array('html'),
-			)),
-		));
+				'is_safe' => ['html'],
+			]),
+		]);
 	}
 
 	/**

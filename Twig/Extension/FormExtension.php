@@ -52,9 +52,9 @@ class FormExtension extends \Twig_Extension {
 	 * {@inheritDoc}
 	 */
 	public function getFunctions() {
-		return TwigFeatureUtil::getTwigFunctions($this, array(
+		return TwigFeatureUtil::getTwigFunctions($this, [
 			new TwigFeatureDefinition('craue_cloneForm', 'cloneForm', $this->cloneFormAlias),
-		));
+		]);
 	}
 
 	/**
@@ -63,7 +63,7 @@ class FormExtension extends \Twig_Extension {
 	 * @return FormView
 	 * @throws \InvalidArgumentException
 	 */
-	public function cloneForm($value, array $formOptions = array()) {
+	public function cloneForm($value, array $formOptions = []) {
 		if ($value instanceof FormInterface) {
 			return $value->createView();
 		}

@@ -44,9 +44,9 @@ class StringHelperExtension extends \Twig_Extension {
 	 * {@inheritDoc}
 	 */
 	public function getFilters() {
-		return TwigFeatureUtil::getTwigFilters($this, array(
+		return TwigFeatureUtil::getTwigFilters($this, [
 			new TwigFeatureDefinition('craue_trailingDot', 'addTrailingDot', $this->trailingDotAlias),
-		));
+		]);
 	}
 
 	/**

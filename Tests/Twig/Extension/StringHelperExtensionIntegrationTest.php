@@ -18,16 +18,16 @@ class StringHelperExtensionIntegrationTest extends TwigBasedTestCase {
 	 */
 	public function testAddTrailingDot($value, $result) {
 		$this->assertSame($result,
-				$this->getTwig()->render('@IntegrationTest/StringHelper/trailingDot.html.twig', array(
+				$this->getTwig()->render('@IntegrationTest/StringHelper/trailingDot.html.twig', [
 					'value' => $value,
-				)));
+				]));
 	}
 
 	public function dataAddTrailingDot() {
-		return array(
-			array('This text should end with a dot', 'This text should end with a dot.'),
-			array('This text should end with a dot.', 'This text should end with a dot.'),
-		);
+		return [
+			['This text should end with a dot', 'This text should end with a dot.'],
+			['This text should end with a dot.', 'This text should end with a dot.'],
+		];
 	}
 
 }

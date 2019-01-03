@@ -76,12 +76,12 @@ class ArrayHelperExtension extends \Twig_Extension {
 	 * {@inheritDoc}
 	 */
 	public function getFilters() {
-		return TwigFeatureUtil::getTwigFilters($this, array(
+		return TwigFeatureUtil::getTwigFilters($this, [
 			new TwigFeatureDefinition('craue_without', 'without', $this->withoutAlias),
 			new TwigFeatureDefinition('craue_replaceKey', 'replaceKey', $this->replaceKeyAlias),
 			new TwigFeatureDefinition('craue_removeKey', 'removeKey', $this->removeKeyAlias),
 			new TwigFeatureDefinition('craue_translateArray', 'translateArray', $this->translateArrayAlias),
-		));
+		]);
 	}
 
 	/**
@@ -91,7 +91,7 @@ class ArrayHelperExtension extends \Twig_Extension {
 	 */
 	public function without($entries, $without) {
 		if (!is_array($without)) {
-			$without = array($without);
+			$without = [$without];
 		}
 
 		return array_diff($this->convertToArray($entries), $without);
@@ -104,7 +104,7 @@ class ArrayHelperExtension extends \Twig_Extension {
 	 * @return array Entries of {@code $entries} merged with an entry built from {@code $key} and {@code $value}.
 	 */
 	public function replaceKey($entries, $key, $value) {
-		return array_merge($this->convertToArray($entries), array($key => $value));
+		return array_merge($this->convertToArray($entries), [$key => $value]);
 	}
 
 	/**
@@ -129,12 +129,12 @@ class ArrayHelperExtension extends \Twig_Extension {
 	 * @return array Translated entries.
 	 * @throws \RuntimeException If the translator is not available.
 	 */
-	public function translateArray($entries, array $parameters = array(), $domain = 'messages', $locale = null) {
+	public function translateArray($entries, array $parameters = [], $domain = 'messages', $locale = null) {
 		if ($this->translator === null) {
 			throw new \RuntimeException('No translator available.');
 		}
 
-		$translatedEntries = array();
+		$translatedEntries = [];
 
 		foreach ($this->convertToArray($entries) as $entry) {
 			$translatedEntries[] = $this->translator->trans($entry, $parameters, $domain, $locale);

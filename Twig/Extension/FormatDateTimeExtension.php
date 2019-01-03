@@ -94,11 +94,11 @@ class FormatDateTimeExtension extends AbstractLocaleAwareExtension {
 	 * {@inheritDoc}
 	 */
 	public function getFilters() {
-		return TwigFeatureUtil::getTwigFilters($this, array(
+		return TwigFeatureUtil::getTwigFilters($this, [
 			new TwigFeatureDefinition('craue_date', 'formatDate', $this->dateFilterAlias),
 			new TwigFeatureDefinition('craue_time', 'formatTime', $this->timeFilterAlias),
 			new TwigFeatureDefinition('craue_datetime', 'formatDateTime', $this->dateTimeFilterAlias),
-		));
+		]);
 	}
 
 	/**

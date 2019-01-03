@@ -26,7 +26,7 @@ class CraueTwigExtensionsExtension extends Extension {
 
 		$loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
-		$availableExtensions = array(
+		$availableExtensions = [
 			'ArrayHelperExtension',
 			'ChangeLanguageExtension',
 			'DecorateEmptyValueExtension',
@@ -34,10 +34,10 @@ class CraueTwigExtensionsExtension extends Extension {
 			'FormatNumberExtension',
 			'FormExtension',
 			'StringHelperExtension',
-		);
+		];
 
 		if (!empty($config['enable_only'])) {
-			$loadExtensions = array();
+			$loadExtensions = [];
 			foreach ($config['enable_only'] as $ext) {
 				if (!in_array($ext, $availableExtensions, true)) {
 					throw new \InvalidArgumentException(sprintf('Extension with name "%s" is invalid.', $ext));

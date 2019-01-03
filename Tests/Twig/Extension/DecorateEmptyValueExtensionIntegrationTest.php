@@ -18,22 +18,22 @@ class DecorateEmptyValueExtensionIntegrationTest extends TwigBasedTestCase {
 	 */
 	public function testDecorateEmptyValue($value, $placeholder, $result) {
 		$this->assertSame($result,
-				$this->getTwig()->render('@IntegrationTest/DecorateEmptyValue/default.html.twig', array(
+				$this->getTwig()->render('@IntegrationTest/DecorateEmptyValue/default.html.twig', [
 					'value' => $value,
 					'placeholder' => $placeholder,
-				)));
+				]));
 	}
 
 	public function dataDecorateEmptyValue() {
-		return array(
-			array(null, null, '&mdash;'),
-			array(null, '&ndash;', '&ndash;'),
-			array(null, '-', '-'),
-			array(null, 0, '0'),
-			array(false, '-', '-'),
-			array(0, '-', '0'),
-			array('a value', null, 'a value'),
-		);
+		return [
+			[null, null, '&mdash;'],
+			[null, '&ndash;', '&ndash;'],
+			[null, '-', '-'],
+			[null, 0, '0'],
+			[false, '-', '-'],
+			[0, '-', '0'],
+			['a value', null, 'a value'],
+		];
 	}
 
 }

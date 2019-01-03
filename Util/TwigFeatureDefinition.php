@@ -17,7 +17,7 @@ class TwigFeatureDefinition {
 	public $alias;
 	public $options;
 
-	public function __construct($name, $methodName, $alias = null, $options = array()) {
+	public function __construct($name, $methodName, $alias = null, $options = []) {
 		$this->name = $name;
 		$this->methodName = $methodName;
 		$this->alias = $alias;

@@ -17,7 +17,7 @@ abstract class TwigBasedTestCase extends WebTestCase {
 	 */
 	protected $twig;
 
-	protected static function createKernel(array $options = array()) {
+	protected static function createKernel(array $options = []) {
 		$configFile = isset($options['config']) ? $options['config'] : 'config.yml';
 
 		return new AppKernel($configFile);

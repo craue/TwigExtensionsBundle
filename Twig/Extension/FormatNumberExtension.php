@@ -71,11 +71,11 @@ class FormatNumberExtension extends AbstractLocaleAwareExtension {
 	 * {@inheritDoc}
 	 */
 	public function getFilters() {
-		return TwigFeatureUtil::getTwigFilters($this, array(
+		return TwigFeatureUtil::getTwigFilters($this, [
 			new TwigFeatureDefinition('craue_number', 'formatNumber', $this->numberFilterAlias),
 			new TwigFeatureDefinition('craue_currency', 'formatCurrency', $this->currencyFilterAlias),
 			new TwigFeatureDefinition('craue_spellout', 'formatSpelledOutNumber', $this->spelloutFilterAlias),
-		));
+		]);
 	}
 
 	/**
