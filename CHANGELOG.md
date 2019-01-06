@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.4.0] – 2019-01-06
+
+- dropped support for Symfony 2.7, 2.8, 3.0, 3.1, 3.2, 3.3, 4.0
+- dropped support for PHP 5.3, 5.4, 5.5, 5.6
+- dropped support for HHVM
+
+[2.4.0]: https://github.com/craue/TwigExtensionsBundle/compare/2.3.1...2.4.0
+
 ## [2.3.1] – 2018-01-05
 
 - fixed support for Traversable in ArrayHelperExtension
