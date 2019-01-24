@@ -15,7 +15,7 @@ use PHPUnit\Framework\TestCase;
 class FormatDateTimeExtensionTest extends TestCase {
 
 	/**
-	 * @var FormatNumberExtension
+	 * @var FormatDateTimeExtension
 	 */
 	protected $ext;
 

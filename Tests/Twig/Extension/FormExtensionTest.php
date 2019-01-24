@@ -15,7 +15,7 @@ use PHPUnit\Framework\TestCase;
 class FormExtensionTest extends TestCase {
 
 	/**
-	 * @var FormatNumberExtension
+	 * @var FormExtension
 	 */
 	protected $ext;
 

@@ -157,10 +157,10 @@ class FormatDateTimeExtension extends AbstractLocaleAwareExtension {
 	 * Formats a date/time value.
 	 * If the value is null also null will be returned.
 	 * @param mixed $value Date/time value to be formatted using {@link http://php.net/manual/intldateformatter.format.php}.
-	 * @param string $locale Locale to be used with {@link http://php.net/manual/class.intldateformatter.php}.
-	 * @param string $dateType Date format. Valid values are "none", "full", "long", "medium", or "short" (case insensitive).
-	 * @param string $timeType Time format. Valid values are "none", "full", "long", "medium", or "short" (case insensitive).
-	 * @param string $timeZone Time zone from {@link http://php.net/manual/timezones.php}.
+	 * @param string|null $locale Locale to be used with {@link http://php.net/manual/class.intldateformatter.php}.
+	 * @param string|null $dateType Date format. Valid values are "none", "full", "long", "medium", or "short" (case insensitive).
+	 * @param string|null $timeType Time format. Valid values are "none", "full", "long", "medium", or "short" (case insensitive).
+	 * @param string|null $timeZone Time zone from {@link http://php.net/manual/timezones.php}.
 	 * @return string|null Formatted date/time.
 	 * @throws \InvalidArgumentException If {@code $value} cannot be formatted.
 	 */

@@ -36,7 +36,7 @@ abstract class TwigFeatureUtil {
 	 * @param \Twig_ExtensionInterface $extension The extension instance implementing the features.
 	 * @param TwigFeatureDefinition[] $definitions
 	 * @param string $featureClass FQCN
-	 * @return $featureClass[]
+	 * @return \Twig_SimpleFilter[]|\Twig_SimpleFunction[] Actually an array of objects of type {@code $featureClass}.
 	 */
 	private static function getTwigFeatures($extension, array $definitions, $featureClass) {
 		$features = [];

@@ -107,7 +107,7 @@ class FormatNumberExtension extends AbstractLocaleAwareExtension {
 	 * If the value is null also null will be returned.
 	 * @param mixed $value Number to be formatted using {@link http://php.net/manual/class.numberformatter.php}.
 	 * @param string $locale Locale to be used with {@link http://php.net/manual/class.numberformatter.php}.
-	 * @param string $style Formatting style. See {@link http://php.net/manual/numberformatter.create.php}.
+	 * @param int $style Formatting style. See {@link http://php.net/manual/numberformatter.create.php}.
 	 * @return string|null Formatted number.
 	 * @throws \InvalidArgumentException If {@code $value} cannot be formatted.
 	 */
