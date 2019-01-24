@@ -1,0 +1,17 @@
+parameters:
+	level: 5
+	paths:
+		- %currentWorkingDirectory%
+	autoload_files:
+		- %currentWorkingDirectory%/vendor/twig/twig/lib/Twig/Extension/Core.php
+	excludes_analyse:
+		- %currentWorkingDirectory%/Tests/*
+		- %currentWorkingDirectory%/vendor/*
+	ignoreErrors:
+		- '#^Call to an undefined method Symfony\\Component\\Config\\Definition\\Builder\\NodeDefinition::children\(\)\.$#'
+		-
+			message: '#^Strict comparison using === between string and false will always evaluate to false\.$#'
+			path: %currentWorkingDirectory%/Twig/Extension/FormatDateTimeExtension.php
+		-
+			message: '#^Strict comparison using === between string and false will always evaluate to false\.$#'
+			path: %currentWorkingDirectory%/Twig/Extension/FormatNumberExtension.php
