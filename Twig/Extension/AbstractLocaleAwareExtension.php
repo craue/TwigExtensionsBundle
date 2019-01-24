@@ -54,13 +54,7 @@ abstract class AbstractLocaleAwareExtension extends \Twig_Extension {
 	 */
 	public function getLocale() {
 		if ($this->container !== null) {
-			if ($this->container->has('request_stack')) {
-				return $this->container->get('request_stack')->getCurrentRequest()->getLocale();
-			}
-
-			if ($this->container->isScopeActive('request')) {
-				return $this->container->get('request')->getLocale();
-			}
+			return $this->container->get('request_stack')->getCurrentRequest()->getLocale();
 		}
 
 		return $this->locale;
