@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\Form\FormView;
+use Twig\Extension\AbstractExtension;
 
 /**
  * Twig extension for form handling.
@@ -16,7 +17,7 @@ use Symfony\Component\Form\FormView;
  * @copyright 2011-2019 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class FormExtension extends \Twig_Extension {
+class FormExtension extends AbstractExtension {
 
 	/**
 	 * @var FormFactoryInterface

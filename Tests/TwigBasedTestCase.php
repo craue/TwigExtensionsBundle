@@ -4,6 +4,7 @@ namespace Craue\TwigExtensionsBundle\Tests;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Request;
+use Twig\Environment;
 
 /**
  * @author Christian Raue <christian.raue@gmail.com>
@@ -13,7 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 abstract class TwigBasedTestCase extends WebTestCase {
 
 	/**
-	 * @var \Twig_Environment
+	 * @var Environment
 	 */
 	protected $twig;
 

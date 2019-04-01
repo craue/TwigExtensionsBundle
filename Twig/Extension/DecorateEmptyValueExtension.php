@@ -4,6 +4,7 @@ namespace Craue\TwigExtensionsBundle\Twig\Extension;
 
 use Craue\TwigExtensionsBundle\Util\TwigFeatureDefinition;
 use Craue\TwigExtensionsBundle\Util\TwigFeatureUtil;
+use Twig\Extension\AbstractExtension;
 
 /**
  * Twig extension providing an enhanced "default" filter to decorate empty values with a placeholder which can even be
@@ -13,7 +14,7 @@ use Craue\TwigExtensionsBundle\Util\TwigFeatureUtil;
  * @copyright 2011-2019 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class DecorateEmptyValueExtension extends \Twig_Extension {
+class DecorateEmptyValueExtension extends AbstractExtension {
 
 	/**
 	 * @var string

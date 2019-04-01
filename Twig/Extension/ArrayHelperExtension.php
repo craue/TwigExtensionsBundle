@@ -5,6 +5,7 @@ namespace Craue\TwigExtensionsBundle\Twig\Extension;
 use Craue\TwigExtensionsBundle\Util\TwigFeatureDefinition;
 use Craue\TwigExtensionsBundle\Util\TwigFeatureUtil;
 use Symfony\Component\Translation\TranslatorInterface;
+use Twig\Extension\AbstractExtension;
 
 /**
  * Twig extension providing useful array handling filters.
@@ -13,7 +14,7 @@ use Symfony\Component\Translation\TranslatorInterface;
  * @copyright 2011-2019 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class ArrayHelperExtension extends \Twig_Extension {
+class ArrayHelperExtension extends AbstractExtension {
 
 	/**
 	 * @var TranslatorInterface

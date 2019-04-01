@@ -3,6 +3,7 @@
 namespace Craue\TwigExtensionsBundle\Twig\Extension;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Twig\Extension\AbstractExtension;
 
 /**
  * Common base class for Twig extensions dealing with the current locale.
@@ -11,7 +12,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * @copyright 2011-2019 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-abstract class AbstractLocaleAwareExtension extends \Twig_Extension {
+abstract class AbstractLocaleAwareExtension extends AbstractExtension {
 
 	/**
 	 * @var string

@@ -4,6 +4,7 @@ namespace Craue\TwigExtensionsBundle\Twig\Extension;
 
 use Craue\TwigExtensionsBundle\Util\TwigFeatureDefinition;
 use Craue\TwigExtensionsBundle\Util\TwigFeatureUtil;
+use Twig\Extension\GlobalsInterface;
 
 /**
  * Twig extension providing helpers for implementing a language change mechanism.
@@ -12,7 +13,7 @@ use Craue\TwigExtensionsBundle\Util\TwigFeatureUtil;
  * @copyright 2011-2019 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class ChangeLanguageExtension extends AbstractLocaleAwareExtension implements \Twig_Extension_GlobalsInterface {
+class ChangeLanguageExtension extends AbstractLocaleAwareExtension implements GlobalsInterface {
 
 	/**
 	 * @var string[]

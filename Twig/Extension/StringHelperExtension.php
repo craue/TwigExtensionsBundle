@@ -4,6 +4,7 @@ namespace Craue\TwigExtensionsBundle\Twig\Extension;
 
 use Craue\TwigExtensionsBundle\Util\TwigFeatureDefinition;
 use Craue\TwigExtensionsBundle\Util\TwigFeatureUtil;
+use Twig\Extension\AbstractExtension;
 
 /**
  * Twig extension providing useful string handling filters.
@@ -12,7 +13,7 @@ use Craue\TwigExtensionsBundle\Util\TwigFeatureUtil;
  * @copyright 2011-2019 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class StringHelperExtension extends \Twig_Extension {
+class StringHelperExtension extends AbstractExtension {
 
 	/**
 	 * @var string

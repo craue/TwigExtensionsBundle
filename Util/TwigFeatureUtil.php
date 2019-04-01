@@ -2,6 +2,10 @@
 
 namespace Craue\TwigExtensionsBundle\Util;
 
+use Twig\Extension\ExtensionInterface;
+use Twig\TwigFilter;
+use Twig\TwigFunction;
+
 /**
  * for internal use only
  * @internal
@@ -15,28 +19,28 @@ abstract class TwigFeatureUtil {
 	private function __construct() {}
 
 	/**
-	 * @param \Twig_ExtensionInterface $extension The extension instance implementing the filters.
+	 * @param ExtensionInterface $extension The extension instance implementing the filters.
 	 * @param TwigFeatureDefinition[] $definitions
-	 * @return \Twig_SimpleFilter[]
+	 * @return TwigFilter[]
 	 */
 	public static function getTwigFilters($extension, array $definitions) {
-		return self::getTwigFeatures($extension, $definitions, 'Twig_SimpleFilter');
+		return self::getTwigFeatures($extension, $definitions, TwigFilter::class);
 	}
 
 	/**
-	 * @param \Twig_ExtensionInterface $extension The extension instance implementing the functions.
+	 * @param ExtensionInterface $extension The extension instance implementing the functions.
 	 * @param TwigFeatureDefinition[] $definitions
-	 * @return \Twig_SimpleFunction[]
+	 * @return TwigFunction[]
 	 */
 	public static function getTwigFunctions($extension, array $definitions) {
-		return self::getTwigFeatures($extension, $definitions, 'Twig_SimpleFunction');
+		return self::getTwigFeatures($extension, $definitions, TwigFunction::class);
 	}
 
 	/**
-	 * @param \Twig_ExtensionInterface $extension The extension instance implementing the features.
+	 * @param ExtensionInterface $extension The extension instance implementing the features.
 	 * @param TwigFeatureDefinition[] $definitions
 	 * @param string $featureClass FQCN
-	 * @return \Twig_SimpleFilter[]|\Twig_SimpleFunction[] Actually an array of objects of type {@code $featureClass}.
+	 * @return TwigFilter[]|TwigFunction[] Actually an array of objects of type {@code $featureClass}.
 	 */
 	private static function getTwigFeatures($extension, array $definitions, $featureClass) {
 		$features = [];

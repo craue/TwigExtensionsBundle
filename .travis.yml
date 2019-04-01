@@ -30,7 +30,7 @@ jobs:
       env: SYMFONY_VERSION='4.2.*' TWIG_VERSION='~1.0'
     -
       php: 7.3
-      env: SYMFONY_VERSION='3.4.*' TWIG_VERSION='~2.0'
+      env: SYMFONY_VERSION='3.4.*' TWIG_VERSION='~2.0' SYMFONY_DEPRECATIONS_HELPER='1'
     -
       php: 7.3
       env: SYMFONY_VERSION='4.3.*' TWIG_VERSION='~2.0' MIN_STABILITY='dev'
