@@ -9,13 +9,13 @@ use PHPUnit\Framework\TestCase;
  * @group unit
  *
  * @author Christian Raue <christian.raue@gmail.com>
- * @copyright 2011-2017 Christian Raue
+ * @copyright 2011-2019 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
 class StringHelperExtensionTest extends TestCase {
 
 	/**
-	 * @var ArrayHelperExtension
+	 * @var StringHelperExtension
 	 */
 	protected $ext;
 
@@ -32,11 +32,11 @@ class StringHelperExtensionTest extends TestCase {
 	}
 
 	public function dataAddTrailingDot_invalidArguments() {
-		return array(
-			array(null),
-			array(0),
-			array(array()),
-		);
+		return [
+			[null],
+			[0],
+			[[]],
+		];
 	}
 
 }

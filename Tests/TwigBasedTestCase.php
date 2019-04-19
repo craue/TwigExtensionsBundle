@@ -4,23 +4,22 @@ namespace Craue\TwigExtensionsBundle\Tests;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Kernel;
+use Twig\Environment;
 
 /**
  * @author Christian Raue <christian.raue@gmail.com>
- * @copyright 2011-2017 Christian Raue
+ * @copyright 2011-2019 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
 abstract class TwigBasedTestCase extends WebTestCase {
 
 	/**
-	 * @var \Twig_Environment
+	 * @var Environment
 	 */
 	protected $twig;
 
-	protected static function createKernel(array $options = array()) {
-		$defaultConfigFile = Kernel::VERSION_ID < 20400 ? 'legacy_config.yml' : 'current_config.yml';
-		$configFile = isset($options['config']) ? $options['config'] : $defaultConfigFile;
+	protected static function createKernel(array $options = []) {
+		$configFile = isset($options['config']) ? $options['config'] : 'config.yml';
 
 		return new AppKernel($configFile);
 	}
@@ -36,14 +35,7 @@ abstract class TwigBasedTestCase extends WebTestCase {
 	}
 
 	private function fakeRequest() {
-		$container = self::$kernel->getContainer();
-		$request = new Request();
-
-		if ($container->has('request_stack')) {
-			$container->get('request_stack')->push($request);
-		} else {
-			$container->set('request', $request); // for Symfony < 2.4
-		}
+		self::$kernel->getContainer()->get('request_stack')->push(new Request());
 	}
 
 }

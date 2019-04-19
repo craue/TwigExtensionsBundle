@@ -2,11 +2,16 @@
 
 namespace Craue\TwigExtensionsBundle\Util;
 
+use Twig\Extension\ExtensionInterface;
+use Twig\TwigFilter;
+use Twig\TwigFunction;
+
 /**
  * for internal use only
+ * @internal
  *
  * @author Christian Raue <christian.raue@gmail.com>
- * @copyright 2011-2017 Christian Raue
+ * @copyright 2011-2019 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
 abstract class TwigFeatureUtil {
@@ -14,46 +19,40 @@ abstract class TwigFeatureUtil {
 	private function __construct() {}
 
 	/**
-	 * @param \Twig_ExtensionInterface $extension The extension instance implementing the filters.
+	 * @param ExtensionInterface $extension The extension instance implementing the filters.
 	 * @param TwigFeatureDefinition[] $definitions
-	 * @return \Twig_SimpleFilter[]|\Twig_Filter_Method[]
+	 * @return TwigFilter[]
 	 */
 	public static function getTwigFilters($extension, array $definitions) {
-		return self::getTwigFeatures($extension, $definitions, 'Twig_SimpleFilter', 'Twig_Filter_Method');
+		return self::getTwigFeatures($extension, $definitions, TwigFilter::class);
 	}
 
 	/**
-	 * @param \Twig_ExtensionInterface $extension The extension instance implementing the functions.
+	 * @param ExtensionInterface $extension The extension instance implementing the functions.
 	 * @param TwigFeatureDefinition[] $definitions
-	 * @return \Twig_SimpleFunction[]|\Twig_Function_Method[]
+	 * @return TwigFunction[]
 	 */
 	public static function getTwigFunctions($extension, array $definitions) {
-		return self::getTwigFeatures($extension, $definitions, 'Twig_SimpleFunction', 'Twig_Function_Method');
+		return self::getTwigFeatures($extension, $definitions, TwigFunction::class);
 	}
 
 	/**
-	 * @param \Twig_ExtensionInterface $extension The extension instance implementing the features.
+	 * @param ExtensionInterface $extension The extension instance implementing the features.
 	 * @param TwigFeatureDefinition[] $definitions
 	 * @param string $featureClass FQCN
-	 * @param string $legacyFeatureClass FQCN
-	 * @return $featureClass[]|$legacyFeatureClass[]
+	 * @return TwigFilter[]|TwigFunction[] Actually an array of objects of type {@code $featureClass}.
 	 */
-	private static function getTwigFeatures($extension, array $definitions, $featureClass, $legacyFeatureClass) {
-		$features = array();
-		$isLegacyTwig = version_compare(\Twig_Environment::VERSION, '1.12', '<');
+	private static function getTwigFeatures($extension, array $definitions, $featureClass) {
+		$features = [];
 
 		foreach ($definitions as $definition) {
-			$names = array($definition->name);
+			$names = [$definition->name];
 			if (!empty($definition->alias)) {
 				$names[] = $definition->alias;
 			}
 
 			foreach ($names as $name) {
-				if ($isLegacyTwig) {
-					$features[$name] = new $legacyFeatureClass($extension, $definition->methodName, $definition->options);
-					continue;
-				}
-				$features[] = new $featureClass($name, array($extension, $definition->methodName), $definition->options);
+				$features[] = new $featureClass($name, [$extension, $definition->methodName], $definition->options);
 			}
 		}
 

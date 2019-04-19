@@ -1,13 +1,9 @@
-craue_twig_extensions: ~
-
 framework:
-  form: ~
+  form:
+    csrf_protection: false
   router:
     resource: ~
   secret: whatever
-  templating:
-    engines:
-      - twig
   test: ~
   translator:
     fallback: en

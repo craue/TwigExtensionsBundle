@@ -4,22 +4,21 @@ namespace Craue\TwigExtensionsBundle\Twig\Extension;
 
 use Craue\TwigExtensionsBundle\Util\TwigFeatureDefinition;
 use Craue\TwigExtensionsBundle\Util\TwigFeatureUtil;
+use Twig\Extension\GlobalsInterface;
 
 /**
  * Twig extension providing helpers for implementing a language change mechanism.
  *
- * Variant for Twig < 1.23.
- *
  * @author Christian Raue <christian.raue@gmail.com>
- * @copyright 2011-2017 Christian Raue
+ * @copyright 2011-2019 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class ChangeLanguageExtension extends AbstractLocaleAwareExtension {
+class ChangeLanguageExtension extends AbstractLocaleAwareExtension implements GlobalsInterface {
 
 	/**
 	 * @var string[]
 	 */
-	protected $availableLocales = array();
+	protected $availableLocales = [];
 
 	/**
 	 * @var bool
@@ -45,7 +44,7 @@ class ChangeLanguageExtension extends AbstractLocaleAwareExtension {
 	 * Sets the available locales.
 	 * @param string[] $availableLocales
 	 */
-	public function setAvailableLocales(array $availableLocales = array()) {
+	public function setAvailableLocales(array $availableLocales = []) {
 		$this->availableLocales = $availableLocales;
 	}
 
@@ -83,16 +82,16 @@ class ChangeLanguageExtension extends AbstractLocaleAwareExtension {
 	 * {@inheritDoc}
 	 */
 	public function getFunctions() {
-		return TwigFeatureUtil::getTwigFunctions($this, array(
+		return TwigFeatureUtil::getTwigFunctions($this, [
 			new TwigFeatureDefinition('craue_languageName', 'getLanguageName', $this->languageNameAlias),
-		));
+		]);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	public function getGlobals() {
-		$globals = array();
+		$globals = [];
 
 		$globals['craue_availableLocales'] = $this->availableLocales;
 		if (!empty($this->availableLocalesAlias)) {

@@ -3,15 +3,16 @@
 namespace Craue\TwigExtensionsBundle\Twig\Extension;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Twig\Extension\AbstractExtension;
 
 /**
  * Common base class for Twig extensions dealing with the current locale.
  *
  * @author Christian Raue <christian.raue@gmail.com>
- * @copyright 2011-2017 Christian Raue
+ * @copyright 2011-2019 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-abstract class AbstractLocaleAwareExtension extends \Twig_Extension {
+abstract class AbstractLocaleAwareExtension extends AbstractExtension {
 
 	/**
 	 * @var string
@@ -44,7 +45,7 @@ abstract class AbstractLocaleAwareExtension extends \Twig_Extension {
 
 		throw new \InvalidArgumentException(sprintf(
 				'Expected argument of either type "string" or "%s", but "%s" given.',
-				'Symfony\Component\DependencyInjection\ContainerInterface',
+				ContainerInterface::class,
 				is_object($value) ? get_class($value) : gettype($value)
 		));
 	}
@@ -54,13 +55,7 @@ abstract class AbstractLocaleAwareExtension extends \Twig_Extension {
 	 */
 	public function getLocale() {
 		if ($this->container !== null) {
-			if ($this->container->has('request_stack')) {
-				return $this->container->get('request_stack')->getCurrentRequest()->getLocale();
-			}
-
-			if ($this->container->isScopeActive('request')) {
-				return $this->container->get('request')->getLocale();
-			}
+			return $this->container->get('request_stack')->getCurrentRequest()->getLocale();
 		}
 
 		return $this->locale;

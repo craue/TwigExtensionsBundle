@@ -8,15 +8,16 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\Form\FormView;
+use Twig\Extension\AbstractExtension;
 
 /**
  * Twig extension for form handling.
  *
  * @author Christian Raue <christian.raue@gmail.com>
- * @copyright 2011-2017 Christian Raue
+ * @copyright 2011-2019 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class FormExtension extends \Twig_Extension {
+class FormExtension extends AbstractExtension {
 
 	/**
 	 * @var FormFactoryInterface
@@ -52,9 +53,9 @@ class FormExtension extends \Twig_Extension {
 	 * {@inheritDoc}
 	 */
 	public function getFunctions() {
-		return TwigFeatureUtil::getTwigFunctions($this, array(
+		return TwigFeatureUtil::getTwigFunctions($this, [
 			new TwigFeatureDefinition('craue_cloneForm', 'cloneForm', $this->cloneFormAlias),
-		));
+		]);
 	}
 
 	/**
@@ -63,7 +64,7 @@ class FormExtension extends \Twig_Extension {
 	 * @return FormView
 	 * @throws \InvalidArgumentException
 	 */
-	public function cloneForm($value, array $formOptions = array()) {
+	public function cloneForm($value, array $formOptions = []) {
 		if ($value instanceof FormInterface) {
 			return $value->createView();
 		}
@@ -73,14 +74,12 @@ class FormExtension extends \Twig_Extension {
 				throw new \RuntimeException('No form factory available.');
 			}
 
-			$valueToUse = method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix') ? get_class($value) : $value;
-
-			return $this->formFactory->create($valueToUse, null, $formOptions)->createView();
+			return $this->formFactory->create(get_class($value), null, $formOptions)->createView();
 		}
 
 		throw new \InvalidArgumentException(sprintf('Expected argument of either type "%s" or "%s", but "%s" given.',
-				'Symfony\Component\Form\FormTypeInterface',
-				'Symfony\Component\Form\FormInterface',
+				FormTypeInterface::class,
+				FormInterface::class,
 				is_object($value) ? get_class($value) : gettype($value)
 		));
 	}

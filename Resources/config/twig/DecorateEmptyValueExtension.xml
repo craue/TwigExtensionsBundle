@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!--
 	Author: Christian Raue <christian.raue@gmail.com>
-	Copyright: 2011-2017 Christian Raue
+	Copyright: 2011-2019 Christian Raue
 	License: http://opensource.org/licenses/mit-license.php MIT License
 -->
 <container
@@ -15,7 +15,7 @@
 	</parameters>
 
 	<services>
-		<service id="twig.extension.craue_decorateEmptyValue" class="%craue_twig_extensions.decorateEmptyValue.class%">
+		<service id="twig.extension.craue_decorateEmptyValue" class="%craue_twig_extensions.decorateEmptyValue.class%" public="true">
 			<tag name="twig.extension" />
 			<call method="setPlaceholder">
 				<argument>%craue_twig_extensions.decorateEmptyValue.placeholder%</argument>

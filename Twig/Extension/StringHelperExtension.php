@@ -4,15 +4,16 @@ namespace Craue\TwigExtensionsBundle\Twig\Extension;
 
 use Craue\TwigExtensionsBundle\Util\TwigFeatureDefinition;
 use Craue\TwigExtensionsBundle\Util\TwigFeatureUtil;
+use Twig\Extension\AbstractExtension;
 
 /**
  * Twig extension providing useful string handling filters.
  *
  * @author Christian Raue <christian.raue@gmail.com>
- * @copyright 2011-2017 Christian Raue
+ * @copyright 2011-2019 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class StringHelperExtension extends \Twig_Extension {
+class StringHelperExtension extends AbstractExtension {
 
 	/**
 	 * @var string
@@ -44,9 +45,9 @@ class StringHelperExtension extends \Twig_Extension {
 	 * {@inheritDoc}
 	 */
 	public function getFilters() {
-		return TwigFeatureUtil::getTwigFilters($this, array(
+		return TwigFeatureUtil::getTwigFilters($this, [
 			new TwigFeatureDefinition('craue_trailingDot', 'addTrailingDot', $this->trailingDotAlias),
-		));
+		]);
 	}
 
 	/**

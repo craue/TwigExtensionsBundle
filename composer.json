@@ -2,7 +2,7 @@
 	"name": "craue/twigextensions-bundle",
 	"type": "symfony-bundle",
 	"description": "Useful Twig extensions for your Symfony project.",
-	"keywords": ["twig", "extensions", "symfony2", "symfony3"],
+	"keywords": ["twig", "extensions", "symfony3", "symfony4"],
 	"homepage": "https://github.com/craue/TwigExtensionsBundle",
 	"license": "MIT",
 	"authors": [
@@ -16,23 +16,28 @@
 		}
 	],
 	"require": {
-		"php": "^5.3.9|~7.0",
-		"symfony/twig-bundle": "~2.7|~3.0"
+		"php": "~7.0",
+		"symfony/config": "~3.4|~4.1",
+		"symfony/dependency-injection": "~3.4|~4.1",
+		"symfony/twig-bundle": "~3.4|~4.1"
 	},
 	"require-dev": {
-		"phpunit/phpunit": "^4.8.35|~5.7|~6.0",
-		"symfony/phpunit-bridge": "~3.2",
-		"symfony/symfony": "~2.7|~3.0"
+		"phpunit/phpunit": "^6.5.13|^7.5.1",
+		"symfony/phpunit-bridge": "~3.4|~4.1",
+		"symfony/symfony": "~3.4|~4.1"
 	},
 	"minimum-stability": "stable",
 	"autoload": {
 		"psr-4": {
 			"Craue\\TwigExtensionsBundle\\": ""
-		}
+		},
+		"exclude-from-classmap": [
+			"/Tests/"
+		]
 	},
 	"extra": {
 		"branch-alias": {
-			"dev-master": "2.3.x-dev"
+			"dev-master": "2.4.x-dev"
 		}
 	}
 }

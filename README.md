@@ -66,7 +66,7 @@ language change mechanism.
 Let Composer download and install the bundle by running
 
 ```sh
-php composer.phar require craue/twigextensions-bundle:~2.1
+php composer.phar require craue/twigextensions-bundle:~2.4
 ```
 
 in a shell.
@@ -76,19 +76,12 @@ in a shell.
 ```php
 // in app/AppKernel.php
 public function registerBundles() {
-	$bundles = array(
+	$bundles = [
 		// ...
 		new Craue\TwigExtensionsBundle\CraueTwigExtensionsBundle(),
-	);
+	];
 	// ...
 }
-```
-
-## Make the Twig extensions available by updating your configuration
-
-```yaml
-# in app/config/config.yml
-craue_twig_extensions: ~
 ```
 
 # Examples to use the extensions in your Twig template
@@ -316,7 +309,7 @@ By default, all provided extensions are enabled. If you're using only one or som
 others. The following enables them all, so remove the ones you don't need:
 
 ```yaml
-# in app/config.yml
+# in app/config/config.yml
 craue_twig_extensions:
   enable_only:
     - ArrayHelperExtension

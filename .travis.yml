@@ -1,45 +1,49 @@
 language: php
 
 php:
-  - 5.4
-  - 5.5
-  - 5.6
   - 7.0
   - 7.1
-  - hhvm
+  - 7.2
+  - 7.3
 
 env:
-  - SYMFONY_VERSION='2.7.*' TWIG_VERSION='~1.0'
+  - SYMFONY_VERSION='3.4.*' TWIG_VERSION='~1.0'
 
-matrix:
+stages:
+  - smoke test 🕵️
+  - test
+
+jobs:
   include:
-    - php: 5.3
-      dist: precise
-    - php: 5.3
-      dist: precise
+    - stage: smoke test 🕵️
+      php: 7.0
       env: DEPS='lowest'
-    - php: 5.6
-      env: DEPS='unmodified'
-    - php: 7.1
-      env: DEPS='unmodified'
-    - php: 5.6
-      env: SYMFONY_VERSION='2.8.*' TWIG_VERSION='~1.0'
-    - php: 5.6
-      env: SYMFONY_VERSION='3.2.*' TWIG_VERSION='~1.0'
-    - php: 5.6
-      env: SYMFONY_VERSION='3.3.*' TWIG_VERSION='~1.0'
-    - php: 7.1
-      env: SYMFONY_VERSION='3.4.*' TWIG_VERSION='~2.0' MIN_STABILITY='dev'
+    -
+      php: 7.3
+      env: DEPS='unmodified' WITH_STATIC_ANALYSIS='yes'
+
+    - stage: test
+      php: 7.3
+      env: SYMFONY_VERSION='4.1.*' TWIG_VERSION='~1.0'
+    -
+      php: 7.3
+      env: SYMFONY_VERSION='4.2.*' TWIG_VERSION='~1.0'
+    -
+      php: 7.3
+      env: SYMFONY_VERSION='3.4.*' TWIG_VERSION='~2.0' SYMFONY_DEPRECATIONS_HELPER='1'
+    -
+      php: 7.3
+      env: SYMFONY_VERSION='4.3.*' TWIG_VERSION='~2.0' MIN_STABILITY='dev'
   allow_failures:
-    - env: SYMFONY_VERSION='3.4.*' TWIG_VERSION='~2.0' MIN_STABILITY='dev'
+    - env: SYMFONY_VERSION='4.3.*' TWIG_VERSION='~2.0' MIN_STABILITY='dev'
   fast_finish: true
 
 install:
-  # disable Xdebug for better Composer performance
-  - if [ "${TRAVIS_PHP_VERSION}" != 'hhvm' ]; then phpenv config-rm xdebug.ini; fi;
   # set unlimited memory_limit
-  - if [ "${TRAVIS_PHP_VERSION}" != 'hhvm' ]; then INI_FILE=~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini; else INI_FILE=/etc/hhvm/php.ini; fi;
+  - INI_FILE=~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
   - echo "memory_limit = -1" >> "${INI_FILE}"
+  # disable Xdebug for better Composer performance
+  - if php -v | grep -q 'Xdebug'; then phpenv config-rm xdebug.ini; fi;
   # install dependencies using Composer
   - bash .travis_install_dependencies.sh
   # show installed dependencies
@@ -47,7 +51,9 @@ install:
 
 script:
   # validate composer.json
-  - composer validate --strict --no-check-lock
+  - if [ -n "${WITH_STATIC_ANALYSIS:-}" ]; then composer validate --strict --no-check-lock; fi;
+  # run PHPStan
+  - if [ -n "${WITH_STATIC_ANALYSIS:-}" ]; then vendor/bin/phpstan analyse; fi;
   # run PHPUnit
   - vendor/bin/phpunit -v
 
@@ -55,9 +61,6 @@ notifications:
   email:
     on_success: always
     on_failure: always
-
-# use container-based infrastructure
-sudo: false
 
 # cache Composer's package cache
 cache:

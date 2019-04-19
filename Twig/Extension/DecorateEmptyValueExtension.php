@@ -4,16 +4,17 @@ namespace Craue\TwigExtensionsBundle\Twig\Extension;
 
 use Craue\TwigExtensionsBundle\Util\TwigFeatureDefinition;
 use Craue\TwigExtensionsBundle\Util\TwigFeatureUtil;
+use Twig\Extension\AbstractExtension;
 
 /**
  * Twig extension providing an enhanced "default" filter to decorate empty values with a placeholder which can even be
  * an HTML entity.
  *
  * @author Christian Raue <christian.raue@gmail.com>
- * @copyright 2011-2017 Christian Raue
+ * @copyright 2011-2019 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class DecorateEmptyValueExtension extends \Twig_Extension {
+class DecorateEmptyValueExtension extends AbstractExtension {
 
 	/**
 	 * @var string
@@ -54,12 +55,12 @@ class DecorateEmptyValueExtension extends \Twig_Extension {
 	 * {@inheritDoc}
 	 */
 	public function getFilters() {
-		return TwigFeatureUtil::getTwigFilters($this, array(
-			new TwigFeatureDefinition('craue_default', 'decorateEmptyValue', $this->filterAlias, array(
+		return TwigFeatureUtil::getTwigFilters($this, [
+			new TwigFeatureDefinition('craue_default', 'decorateEmptyValue', $this->filterAlias, [
 				'pre_escape' => 'html',
-				'is_safe' => array('html'),
-			)),
-		));
+				'is_safe' => ['html'],
+			]),
+		]);
 	}
 
 	/**
@@ -68,7 +69,7 @@ class DecorateEmptyValueExtension extends \Twig_Extension {
 	 * @return string {@code $value} or, if it's empty, {@code $placeholder}.
 	 */
 	public function decorateEmptyValue($value, $placeholder = null) {
-		$placeholderToUse = $placeholder !== null ? $placeholder : $this->placeholder;
+		$placeholderToUse = $placeholder ?? $this->placeholder;
 		return twig_test_empty($value) ? $placeholderToUse : $value;
 	}
 

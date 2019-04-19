@@ -5,15 +5,16 @@ namespace Craue\TwigExtensionsBundle\Twig\Extension;
 use Craue\TwigExtensionsBundle\Util\TwigFeatureDefinition;
 use Craue\TwigExtensionsBundle\Util\TwigFeatureUtil;
 use Symfony\Component\Translation\TranslatorInterface;
+use Twig\Extension\AbstractExtension;
 
 /**
  * Twig extension providing useful array handling filters.
  *
  * @author Christian Raue <christian.raue@gmail.com>
- * @copyright 2011-2017 Christian Raue
+ * @copyright 2011-2019 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class ArrayHelperExtension extends \Twig_Extension {
+class ArrayHelperExtension extends AbstractExtension {
 
 	/**
 	 * @var TranslatorInterface
@@ -76,12 +77,12 @@ class ArrayHelperExtension extends \Twig_Extension {
 	 * {@inheritDoc}
 	 */
 	public function getFilters() {
-		return TwigFeatureUtil::getTwigFilters($this, array(
+		return TwigFeatureUtil::getTwigFilters($this, [
 			new TwigFeatureDefinition('craue_without', 'without', $this->withoutAlias),
 			new TwigFeatureDefinition('craue_replaceKey', 'replaceKey', $this->replaceKeyAlias),
 			new TwigFeatureDefinition('craue_removeKey', 'removeKey', $this->removeKeyAlias),
 			new TwigFeatureDefinition('craue_translateArray', 'translateArray', $this->translateArrayAlias),
-		));
+		]);
 	}
 
 	/**
@@ -91,7 +92,7 @@ class ArrayHelperExtension extends \Twig_Extension {
 	 */
 	public function without($entries, $without) {
 		if (!is_array($without)) {
-			$without = array($without);
+			$without = [$without];
 		}
 
 		return array_diff($this->convertToArray($entries), $without);
@@ -104,7 +105,7 @@ class ArrayHelperExtension extends \Twig_Extension {
 	 * @return array Entries of {@code $entries} merged with an entry built from {@code $key} and {@code $value}.
 	 */
 	public function replaceKey($entries, $key, $value) {
-		return array_merge($this->convertToArray($entries), array($key => $value));
+		return array_merge($this->convertToArray($entries), [$key => $value]);
 	}
 
 	/**
@@ -129,12 +130,12 @@ class ArrayHelperExtension extends \Twig_Extension {
 	 * @return array Translated entries.
 	 * @throws \RuntimeException If the translator is not available.
 	 */
-	public function translateArray($entries, array $parameters = array(), $domain = 'messages', $locale = null) {
+	public function translateArray($entries, array $parameters = [], $domain = 'messages', $locale = null) {
 		if ($this->translator === null) {
 			throw new \RuntimeException('No translator available.');
 		}
 
-		$translatedEntries = array();
+		$translatedEntries = [];
 
 		foreach ($this->convertToArray($entries) as $entry) {
 			$translatedEntries[] = $this->translator->trans($entry, $parameters, $domain, $locale);
@@ -145,7 +146,7 @@ class ArrayHelperExtension extends \Twig_Extension {
 
 	/**
 	 * Tries to convert {@code $source} to an array.
-	 * @param array|Traversable $source Variable to be converted.
+	 * @param array|\Traversable $source Variable to be converted.
 	 * @throws \InvalidArgumentException If no array representation is available.
 	 */
 	protected function convertToArray($source) {
@@ -153,7 +154,7 @@ class ArrayHelperExtension extends \Twig_Extension {
 			return $source;
 		}
 
-		if ($source instanceof Traversable) {
+		if ($source instanceof \Traversable) {
 			return iterator_to_array($source, true);
 		}
 

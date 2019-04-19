@@ -8,7 +8,7 @@ use Craue\TwigExtensionsBundle\Tests\TwigBasedTestCase;
  * @group integration
  *
  * @author Christian Raue <christian.raue@gmail.com>
- * @copyright 2011-2017 Christian Raue
+ * @copyright 2011-2019 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
 class StringHelperExtensionIntegrationTest extends TwigBasedTestCase {
@@ -18,16 +18,16 @@ class StringHelperExtensionIntegrationTest extends TwigBasedTestCase {
 	 */
 	public function testAddTrailingDot($value, $result) {
 		$this->assertSame($result,
-				$this->getTwig()->render('@IntegrationTest/StringHelper/trailingDot.html.twig', array(
+				$this->getTwig()->render('@IntegrationTest/StringHelper/trailingDot.html.twig', [
 					'value' => $value,
-				)));
+				]));
 	}
 
 	public function dataAddTrailingDot() {
-		return array(
-			array('This text should end with a dot', 'This text should end with a dot.'),
-			array('This text should end with a dot.', 'This text should end with a dot.'),
-		);
+		return [
+			['This text should end with a dot', 'This text should end with a dot.'],
+			['This text should end with a dot.', 'This text should end with a dot.'],
+		];
 	}
 
 }

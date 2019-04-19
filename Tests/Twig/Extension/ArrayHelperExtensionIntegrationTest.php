@@ -8,7 +8,7 @@ use Craue\TwigExtensionsBundle\Tests\TwigBasedTestCase;
  * @group integration
  *
  * @author Christian Raue <christian.raue@gmail.com>
- * @copyright 2011-2017 Christian Raue
+ * @copyright 2011-2019 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
 class ArrayHelperExtensionIntegrationTest extends TwigBasedTestCase {
@@ -23,40 +23,48 @@ class ArrayHelperExtensionIntegrationTest extends TwigBasedTestCase {
 	/**
 	 * @dataProvider dataTranslateArray
 	 */
-	public function testTranslateArray(array $entries, array $parameters, $domain, $locale, $result) {
+	public function testTranslateArray($entries, array $parameters, $domain, $locale, $result) {
 		$this->assertSame($result,
-				$this->getTwig()->render('@IntegrationTest/ArrayHelper/translateArray.html.twig', array(
+				$this->getTwig()->render('@IntegrationTest/ArrayHelper/translateArray.html.twig', [
 					'entries' => $entries,
 					'parameters' => $parameters,
 					'domain' => $domain,
 					'locale' => $locale,
-				)));
+				]));
 	}
 
 	public function dataTranslateArray() {
-		return array(
-			array(
-				array(),
-				array(),
+		return [
+			[
+				[],
+				[],
 				null,
 				null,
 				'',
-			),
-			array(
-				array('red', 'green', 'yellow'),
-				array(),
+			],
+			[
+				['red', 'green', 'yellow'],
+				[],
 				'messages',
 				'de',
 				'rot, grün, gelb',
-			),
-			array(
-				array('thing.red', 'thing.green', 'thing.yellow'),
-				array('%thing%' => 'Haus'),
+			],
+			[
+				['thing.red', 'thing.green', 'thing.yellow'],
+				['%thing%' => 'Haus'],
 				'messages',
 				'de',
 				'ein rotes Haus, ein grünes Haus, ein gelbes Haus',
-			),
-		);
+			],
+			// \Traversable support
+			[
+				new \ArrayObject(['red', 'green', 'yellow']),
+				[],
+				'messages',
+				null,
+				'rot, grün, gelb',
+			],
+		];
 	}
 
 	/**
@@ -64,35 +72,41 @@ class ArrayHelperExtensionIntegrationTest extends TwigBasedTestCase {
 	 */
 	public function testWithout($entries, $without, $result) {
 		$this->assertSame($result,
-				$this->getTwig()->render('@IntegrationTest/ArrayHelper/without.html.twig', array(
+				$this->getTwig()->render('@IntegrationTest/ArrayHelper/without.html.twig', [
 					'entries' => $entries,
 					'without' => $without,
-				)));
+				]));
 	}
 
 	public function dataWithout() {
-		return array(
-			array(
-				array('red', 'green', 'yellow', 'blue'),
+		return [
+			[
+				['red', 'green', 'yellow', 'blue'],
 				'yellow',
 				'red, green, blue',
-			),
-			array(
-				array('red', 'green', 'yellow' => 'bumblebee', 'blue'),
+			],
+			[
+				['red', 'green', 'yellow' => 'bumblebee', 'blue'],
 				'bumblebee',
 				'red, green, blue',
-			),
-			array(
-				array('red', 'green', 'yellow' => 'bumblebee', 'blue'),
+			],
+			[
+				['red', 'green', 'yellow' => 'bumblebee', 'blue'],
 				'yellow',
 				'red, green, bumblebee, blue',
-			),
-			array(
-				array('red', 'green', 'yellow', 'blue'),
-				array('yellow', 'black', 'red'),
+			],
+			[
+				['red', 'green', 'yellow', 'blue'],
+				['yellow', 'black', 'red'],
 				'green, blue',
-			),
-		);
+			],
+			// \Traversable support
+			[
+				new \ArrayObject(['red', 'green', 'yellow', 'blue']),
+				'yellow',
+				'red, green, blue',
+			],
+		];
 	}
 
 	/**
@@ -100,28 +114,35 @@ class ArrayHelperExtensionIntegrationTest extends TwigBasedTestCase {
 	 */
 	public function testReplaceKey($entries, $key, $value, $result) {
 		$this->assertSame($result,
-				$this->getTwig()->render('@IntegrationTest/ArrayHelper/replaceKey.html.twig', array(
+				$this->getTwig()->render('@IntegrationTest/ArrayHelper/replaceKey.html.twig', [
 					'entries' => $entries,
 					'key' => $key,
 					'value' => $value,
-				)));
+				]));
 	}
 
 	public function dataReplaceKey() {
-		return array(
-			array(
-				array('key1' => 'value1', 'key2' => 'value2'),
+		return [
+			[
+				['key1' => 'value1', 'key2' => 'value2'],
 				'key3',
 				'value3',
 				'value1, value2, value3',
-			),
-			array(
-				array('key1' => 'value1', 'key2' => 'value2'),
+			],
+			[
+				['key1' => 'value1', 'key2' => 'value2'],
 				'key1',
 				'value3',
 				'value3, value2',
-			),
-		);
+			],
+			// \Traversable support
+			[
+				new \ArrayObject(['key1' => 'value1', 'key2' => 'value2']),
+				'key1',
+				'value3',
+				'value3, value2',
+			],
+		];
 	}
 
 	/**
@@ -129,33 +150,39 @@ class ArrayHelperExtensionIntegrationTest extends TwigBasedTestCase {
 	 */
 	public function testRemoveKey($entries, $key, $result) {
 		$this->assertSame($result,
-				$this->getTwig()->render('@IntegrationTest/ArrayHelper/removeKey.html.twig', array(
+				$this->getTwig()->render('@IntegrationTest/ArrayHelper/removeKey.html.twig', [
 					'entries' => $entries,
 					'key' => $key,
-				)));
+				]));
 	}
 
 	public function dataRemoveKey() {
-		return array(
+		return [
 			// string key
-			array(
-				array('key1' => 'value1', 'key2' => 'value2'),
+			[
+				['key1' => 'value1', 'key2' => 'value2'],
 				'key1',
 				'value2',
-			),
+			],
 			// integer key
-			array(
-				array('value1', 'value2'),
+			[
+				['value1', 'value2'],
 				0,
 				'value2',
-			),
+			],
 			// nonexistent key
-			array(
-				array('value1', 'value2'),
+			[
+				['value1', 'value2'],
 				2,
 				'value1, value2',
-			),
-		);
+			],
+			// \Traversable support
+			[
+				new \ArrayObject(['key1' => 'value1', 'key2' => 'value2']),
+				'key1',
+				'value2',
+			],
+		];
 	}
 
 }

@@ -9,7 +9,7 @@ use Craue\TwigExtensionsBundle\Util\TwigFeatureUtil;
  * Twig extension providing filters for locale-aware formatting of date, time, and date/time values.
  *
  * @author Christian Raue <christian.raue@gmail.com>
- * @copyright 2011-2017 Christian Raue
+ * @copyright 2011-2019 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
 class FormatDateTimeExtension extends AbstractLocaleAwareExtension {
@@ -94,11 +94,11 @@ class FormatDateTimeExtension extends AbstractLocaleAwareExtension {
 	 * {@inheritDoc}
 	 */
 	public function getFilters() {
-		return TwigFeatureUtil::getTwigFilters($this, array(
+		return TwigFeatureUtil::getTwigFilters($this, [
 			new TwigFeatureDefinition('craue_date', 'formatDate', $this->dateFilterAlias),
 			new TwigFeatureDefinition('craue_time', 'formatTime', $this->timeFilterAlias),
 			new TwigFeatureDefinition('craue_datetime', 'formatDateTime', $this->dateTimeFilterAlias),
-		));
+		]);
 	}
 
 	/**
@@ -157,10 +157,10 @@ class FormatDateTimeExtension extends AbstractLocaleAwareExtension {
 	 * Formats a date/time value.
 	 * If the value is null also null will be returned.
 	 * @param mixed $value Date/time value to be formatted using {@link http://php.net/manual/intldateformatter.format.php}.
-	 * @param string $locale Locale to be used with {@link http://php.net/manual/class.intldateformatter.php}.
-	 * @param string $dateType Date format. Valid values are "none", "full", "long", "medium", or "short" (case insensitive).
-	 * @param string $timeType Time format. Valid values are "none", "full", "long", "medium", or "short" (case insensitive).
-	 * @param string $timeZone Time zone from {@link http://php.net/manual/timezones.php}.
+	 * @param string|null $locale Locale to be used with {@link http://php.net/manual/class.intldateformatter.php}.
+	 * @param string|null $dateType Date format. Valid values are "none", "full", "long", "medium", or "short" (case insensitive).
+	 * @param string|null $timeType Time format. Valid values are "none", "full", "long", "medium", or "short" (case insensitive).
+	 * @param string|null $timeZone Time zone from {@link http://php.net/manual/timezones.php}.
 	 * @return string|null Formatted date/time.
 	 * @throws \InvalidArgumentException If {@code $value} cannot be formatted.
 	 */
@@ -186,8 +186,7 @@ class FormatDateTimeExtension extends AbstractLocaleAwareExtension {
 
 		// IntlDateFormatter#format() doesn't support \DateTime objects prior to PHP 5.3.4 (http://php.net/manual/intldateformatter.format.php)
 		// IntlDateFormatter#format() doesn't support \DateTimeInterface at all
-		// TODO remove additional (fallback) check for DateTime as soon as PHP >= 5.5 is required
-		if ($valueToUse instanceof \DateTimeInterface || $valueToUse instanceof \DateTime) {
+		if ($valueToUse instanceof \DateTimeInterface) {
 			// \DateTime::getTimestamp() would return false for far future dates on 32-bit systems (https://bugs.php.net/bug.php?id=50590)
 			$valueToUse = floatval($valueToUse->format('U'));
 		}

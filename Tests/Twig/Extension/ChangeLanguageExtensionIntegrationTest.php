@@ -9,7 +9,7 @@ use Craue\TwigExtensionsBundle\Twig\Extension\ChangeLanguageExtension;
  * @group integration
  *
  * @author Christian Raue <christian.raue@gmail.com>
- * @copyright 2011-2017 Christian Raue
+ * @copyright 2011-2019 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
 class ChangeLanguageExtensionIntegrationTest extends TwigBasedTestCase {
@@ -33,21 +33,21 @@ class ChangeLanguageExtensionIntegrationTest extends TwigBasedTestCase {
 		$this->ext->setShowFirstUppercase($showFirstUppercase);
 
 		$this->assertSame($result,
-				$this->getTwig()->render('@IntegrationTest/ChangeLanguage/languageName.html.twig', array(
+				$this->getTwig()->render('@IntegrationTest/ChangeLanguage/languageName.html.twig', [
 					'locale' => $locale,
-				)));
+				]));
 	}
 
 	public function dataGetLanguageName() {
-		return array(
-			array(true, false, null, ''),
-			array(true, false, '', ''),
-			array(true, false, 'de', 'Deutsch'),
-			array(true, false, 'de_DE', 'Deutsch (Deutschland)'),
-			array(true, false, 'ru', 'русский'),
-			array(false, false, 'de', 'German'),
-			array(true, true, 'ru', 'Русский'),
-		);
+		return [
+			[true, false, null, ''],
+			[true, false, '', ''],
+			[true, false, 'de', 'Deutsch'],
+			[true, false, 'de_DE', 'Deutsch (Deutschland)'],
+			[true, false, 'ru', 'русский'],
+			[false, false, 'de', 'German'],
+			[true, true, 'ru', 'Русский'],
+		];
 	}
 
 }

@@ -9,7 +9,7 @@ use Craue\TwigExtensionsBundle\Util\TwigFeatureUtil;
  * Twig extension providing filters for locale-aware formatting of numbers and currencies.
  *
  * @author Christian Raue <christian.raue@gmail.com>
- * @copyright 2011-2017 Christian Raue
+ * @copyright 2011-2019 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
 class FormatNumberExtension extends AbstractLocaleAwareExtension {
@@ -71,11 +71,11 @@ class FormatNumberExtension extends AbstractLocaleAwareExtension {
 	 * {@inheritDoc}
 	 */
 	public function getFilters() {
-		return TwigFeatureUtil::getTwigFilters($this, array(
+		return TwigFeatureUtil::getTwigFilters($this, [
 			new TwigFeatureDefinition('craue_number', 'formatNumber', $this->numberFilterAlias),
 			new TwigFeatureDefinition('craue_currency', 'formatCurrency', $this->currencyFilterAlias),
 			new TwigFeatureDefinition('craue_spellout', 'formatSpelledOutNumber', $this->spelloutFilterAlias),
-		));
+		]);
 	}
 
 	/**
@@ -107,7 +107,7 @@ class FormatNumberExtension extends AbstractLocaleAwareExtension {
 	 * If the value is null also null will be returned.
 	 * @param mixed $value Number to be formatted using {@link http://php.net/manual/class.numberformatter.php}.
 	 * @param string $locale Locale to be used with {@link http://php.net/manual/class.numberformatter.php}.
-	 * @param string $style Formatting style. See {@link http://php.net/manual/numberformatter.create.php}.
+	 * @param int $style Formatting style. See {@link http://php.net/manual/numberformatter.create.php}.
 	 * @return string|null Formatted number.
 	 * @throws \InvalidArgumentException If {@code $value} cannot be formatted.
 	 */

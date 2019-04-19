@@ -12,7 +12,7 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
  * Registration of the bundle via DI.
  *
  * @author Christian Raue <christian.raue@gmail.com>
- * @copyright 2011-2017 Christian Raue
+ * @copyright 2011-2019 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
 class CraueTwigExtensionsExtension extends Extension {
@@ -26,7 +26,7 @@ class CraueTwigExtensionsExtension extends Extension {
 
 		$loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
-		$availableExtensions = array(
+		$availableExtensions = [
 			'ArrayHelperExtension',
 			'ChangeLanguageExtension',
 			'DecorateEmptyValueExtension',
@@ -34,12 +34,12 @@ class CraueTwigExtensionsExtension extends Extension {
 			'FormatNumberExtension',
 			'FormExtension',
 			'StringHelperExtension',
-		);
+		];
 
 		if (!empty($config['enable_only'])) {
-			$loadExtensions = array();
+			$loadExtensions = [];
 			foreach ($config['enable_only'] as $ext) {
-				if (!in_array($ext, $availableExtensions)) {
+				if (!in_array($ext, $availableExtensions, true)) {
 					throw new \InvalidArgumentException(sprintf('Extension with name "%s" is invalid.', $ext));
 				}
 				$loadExtensions[] = $ext;
@@ -50,10 +50,6 @@ class CraueTwigExtensionsExtension extends Extension {
 
 		foreach ($loadExtensions as $ext) {
 			$loader->load(sprintf('twig/%s.xml', $ext));
-		}
-
-		if ($container->hasDefinition('twig.extension.craue_changeLanguage') && version_compare(\Twig_Environment::VERSION, '1.23', '>=')) {
-			$container->getDefinition('twig.extension.craue_changeLanguage')->setClass('Craue\TwigExtensionsBundle\Twig\Extension\CurrentChangeLanguageExtension');
 		}
 	}
 

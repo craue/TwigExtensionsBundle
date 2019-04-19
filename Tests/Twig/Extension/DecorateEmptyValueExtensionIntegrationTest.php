@@ -8,7 +8,7 @@ use Craue\TwigExtensionsBundle\Tests\TwigBasedTestCase;
  * @group integration
  *
  * @author Christian Raue <christian.raue@gmail.com>
- * @copyright 2011-2017 Christian Raue
+ * @copyright 2011-2019 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
 class DecorateEmptyValueExtensionIntegrationTest extends TwigBasedTestCase {
@@ -18,22 +18,23 @@ class DecorateEmptyValueExtensionIntegrationTest extends TwigBasedTestCase {
 	 */
 	public function testDecorateEmptyValue($value, $placeholder, $result) {
 		$this->assertSame($result,
-				$this->getTwig()->render('@IntegrationTest/DecorateEmptyValue/default.html.twig', array(
+				$this->getTwig()->render('@IntegrationTest/DecorateEmptyValue/default.html.twig', [
 					'value' => $value,
 					'placeholder' => $placeholder,
-				)));
+				]));
 	}
 
 	public function dataDecorateEmptyValue() {
-		return array(
-			array(null, null, '&mdash;'),
-			array(null, '&ndash;', '&ndash;'),
-			array(null, '-', '-'),
-			array(null, 0, '0'),
-			array(false, '-', '-'),
-			array(0, '-', '0'),
-			array('a value', null, 'a value'),
-		);
+		return [
+			[null, null, '&mdash;'],
+			[null, '&ndash;', '&ndash;'],
+			[null, '-', '-'],
+			[null, 0, '0'],
+			[null, '', ''],
+			[false, '-', '-'],
+			[0, '-', '0'],
+			['a value', null, 'a value'],
+		];
 	}
 
 }
