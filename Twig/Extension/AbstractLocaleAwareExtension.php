@@ -55,7 +55,10 @@ abstract class AbstractLocaleAwareExtension extends AbstractExtension {
 	 */
 	public function getLocale() {
 		if ($this->container !== null) {
-			return $this->container->get('request_stack')->getCurrentRequest()->getLocale();
+			$currentRequest = $this->container->get('request_stack')->getCurrentRequest();
+			if ($currentRequest !== null) {
+				return $currentRequest->getLocale();
+			}
 		}
 
 		return $this->locale;
