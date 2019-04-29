@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.4.1] – 2019-04-29
+
+- [#14]: fixed returning the locale in CLI
+
+[#14]: https://github.com/craue/TwigExtensionsBundle/issues/14
+[2.4.1]: https://github.com/craue/TwigExtensionsBundle/compare/2.4.0...2.4.1
+
 ## [2.4.0] – 2019-01-06
 
 - dropped support for Symfony 2.7, 2.8, 3.0, 3.1, 3.2, 3.3, 4.0
