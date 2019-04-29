@@ -3,7 +3,6 @@
 namespace Craue\TwigExtensionsBundle\Tests;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Component\HttpFoundation\Request;
 use Twig\Environment;
 
 /**
@@ -27,15 +26,10 @@ abstract class TwigBasedTestCase extends WebTestCase {
 	protected function setUp() {
 		static::createClient();
 		$this->twig = self::$kernel->getContainer()->get('twig');
-		$this->fakeRequest();
 	}
 
 	protected function getTwig() {
 		return $this->twig;
-	}
-
-	private function fakeRequest() {
-		self::$kernel->getContainer()->get('request_stack')->push(new Request());
 	}
 
 }
