@@ -33,9 +33,12 @@ jobs:
       env: SYMFONY_VERSION='3.4.*' TWIG_VERSION='~2.0'
     -
       php: 7.3
-      env: SYMFONY_VERSION='4.3.*' TWIG_VERSION='~2.0' MIN_STABILITY='dev'
+      env: SYMFONY_VERSION='4.3.*' TWIG_VERSION='~2.0'
+    -
+      php: 7.3
+      env: SYMFONY_VERSION='4.4.*' TWIG_VERSION='~2.0' MIN_STABILITY='dev'
   allow_failures:
-    - env: SYMFONY_VERSION='4.3.*' TWIG_VERSION='~2.0' MIN_STABILITY='dev'
+    - env: SYMFONY_VERSION='4.4.*' TWIG_VERSION='~2.0' MIN_STABILITY='dev'
   fast_finish: true
 
 install:
