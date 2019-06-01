@@ -66,7 +66,7 @@ language change mechanism.
 Let Composer download and install the bundle by running
 
 ```sh
-php composer.phar require craue/twigextensions-bundle:~2.4
+composer require craue/twigextensions-bundle
 ```
 
 in a shell.
