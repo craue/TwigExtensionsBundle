@@ -178,7 +178,7 @@ class FormatDateTimeExtension extends AbstractLocaleAwareExtension {
 				// strtotime() doesn't work well with far future dates on 32-bit systems, so use a work-around here
 				try {
 					$valueToUse = new \DateTime($valueToUse);
-				} catch (\Exception $e) {
+				} catch (\Throwable $e) {
 					throw new \InvalidArgumentException(sprintf('The value "%s" of type %s is invalid. Error: "%s".', $value, gettype($value), $e->getMessage()));
 				}
 			}
@@ -254,7 +254,7 @@ class FormatDateTimeExtension extends AbstractLocaleAwareExtension {
 		try {
 			$instance = new \DateTimeZone($timeZone);
 			return $instance->getName();
-		} catch (\Exception $e) {
+		} catch (\Throwable $e) {
 			throw new \InvalidArgumentException(sprintf('A value of "%s" is not a supported time zone.', $timeZone));
 		}
 	}
