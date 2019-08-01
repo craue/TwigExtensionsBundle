@@ -2,7 +2,6 @@
 
 namespace Craue\TwigExtensionsBundle\DependencyInjection;
 
-use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
@@ -20,9 +19,8 @@ class CraueTwigExtensionsExtension extends Extension {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function load(array $config, ContainerBuilder $container) {
-		$processor = new Processor();
-		$config = $processor->processConfiguration(new Configuration(), $config);
+	public function load(array $configs, ContainerBuilder $container) {
+		$config = $this->processConfiguration(new Configuration(), $configs);
 
 		$loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
