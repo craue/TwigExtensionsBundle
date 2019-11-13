@@ -24,7 +24,7 @@
 				<argument>%craue_twig_extensions.changeLanguage.availableLocales%</argument>
 			</call>
 			<call method="setLocale">
-				<argument type="service" id="service_container" />
+				<argument type="service" id="request_stack" />
 			</call>
 			<call method="setShowForeignLanguageNames">
 				<argument>%craue_twig_extensions.changeLanguage.showForeignLanguageNames%</argument>

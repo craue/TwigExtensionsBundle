@@ -15,3 +15,6 @@ parameters:
 		-
 			message: '#^Strict comparison using === between string and false will always evaluate to false\.$#'
 			path: %currentWorkingDirectory%/Twig/Extension/FormatNumberExtension.php
+		-
+			message: '#^Property Craue\\TwigExtensionsBundle\\Twig\\Extension\\AbstractLocaleAwareExtension::$requestStack (Symfony\\Component\\HttpFoundation\\RequestStack|null) does not accept object|null\.$#'
+			path: %currentWorkingDirectory%/Twig/Extension/AbstractLocaleAwareExtension.php

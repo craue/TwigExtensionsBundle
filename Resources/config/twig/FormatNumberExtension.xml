@@ -20,7 +20,7 @@
 		<service id="twig.extension.craue_formatNumber" class="%craue_twig_extensions.formatNumber.class%" public="true">
 			<tag name="twig.extension" />
 			<call method="setLocale">
-				<argument type="service" id="service_container" />
+				<argument type="service" id="request_stack" />
 			</call>
 			<call method="setCurrency">
 				<argument>%craue_twig_extensions.formatNumber.currency%</argument>

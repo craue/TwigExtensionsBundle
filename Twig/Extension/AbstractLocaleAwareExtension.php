@@ -3,6 +3,7 @@
 namespace Craue\TwigExtensionsBundle\Twig\Extension;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Twig\Extension\AbstractExtension;
 
 /**
@@ -20,12 +21,17 @@ abstract class AbstractLocaleAwareExtension extends AbstractExtension {
 	protected $locale = 'en-US';
 
 	/**
-	 * @var ContainerInterface
+	 * @var ContainerInterface|null
 	 */
 	protected $container;
 
 	/**
-	 * @param mixed $value The service container or a locale string.
+	 * @var RequestStack|null
+	 */
+	private $requestStack;
+
+	/**
+	 * @param mixed $value The request stack, the service container or a locale string.
 	 * @throws \InvalidArgumentException
 	 */
 	public function setLocale($value) {
@@ -38,13 +44,20 @@ abstract class AbstractLocaleAwareExtension extends AbstractExtension {
 			return;
 		}
 
+		if ($value instanceof RequestStack) {
+			$this->requestStack = $value;
+			return;
+		}
+
 		if ($value instanceof ContainerInterface) {
+			@trigger_error(sprintf('Passing the service container to "%s" is deprecated. Instead, pass either the request stack or a locale string.', __METHOD__), E_USER_DEPRECATED);
 			$this->container = $value;
 			return;
 		}
 
 		throw new \InvalidArgumentException(sprintf(
-				'Expected argument of either type "string" or "%s", but "%s" given.',
+				'Expected argument of either type "string", "%s", or "%s", but "%s" given.',
+				RequestStack::class,
 				ContainerInterface::class,
 				is_object($value) ? get_class($value) : gettype($value)
 		));
@@ -55,7 +68,11 @@ abstract class AbstractLocaleAwareExtension extends AbstractExtension {
 	 */
 	public function getLocale() {
 		if ($this->container !== null) {
-			$currentRequest = $this->container->get('request_stack')->getCurrentRequest();
+			$this->requestStack = $this->container->get('request_stack');
+		}
+
+		if ($this->requestStack !== null) {
+			$currentRequest = $this->requestStack->getCurrentRequest();
 			if ($currentRequest !== null) {
 				return $currentRequest->getLocale();
 			}
