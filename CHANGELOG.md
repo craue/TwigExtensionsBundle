@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.5.0] – 2019-11-13
+
+- [#11]: deprecated Twig global `craue_availableLocales`, added a function with the same name as replacement
+- throw helpful exceptions about missing components when using certain features
+
+[#11]: https://github.com/craue/TwigExtensionsBundle/issues/11
+[2.5.0]: https://github.com/craue/TwigExtensionsBundle/compare/2.4.1...2.5.0
+
 ## [2.4.1] – 2019-04-29
 
 - [#14]: fixed returning the locale in CLI

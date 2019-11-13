@@ -230,7 +230,7 @@ You can also set the keys to be more specific about the locales:
 
 ## Aliases
 
-Optionally, you can define aliases for all provided filters/functions/globals to be used within your project.
+Optionally, you can define aliases for all provided filters/functions to be used within your project.
 This allows you to use names you prefer instead of the pre-defined ones. E.g., if you don't like to write
 
 ```twig
@@ -243,7 +243,7 @@ all the time, you may define an alias like `d` for the `craue_default` filter wh
 {{ somevalue | d }}
 ```
 
-in your Twig templates. But pay attention to not accidentally override built-in filters/functions/globals, although you
+in your Twig templates. But pay attention to not accidentally override built-in filters/functions, although you
 can do it intentionally.
 
 ### DecorateEmptyValueExtension
