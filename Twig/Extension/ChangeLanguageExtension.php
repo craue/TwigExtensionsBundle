@@ -84,18 +84,20 @@ class ChangeLanguageExtension extends AbstractLocaleAwareExtension implements Gl
 	public function getFunctions() {
 		return TwigFeatureUtil::getTwigFunctions($this, [
 			new TwigFeatureDefinition('craue_languageName', 'getLanguageName', $this->languageNameAlias),
+			new TwigFeatureDefinition('craue_availableLocales', 'getAvailableLocales', $this->availableLocalesAlias),
 		]);
 	}
 
+	// TODO remove for 3.0
 	/**
 	 * {@inheritDoc}
 	 */
 	public function getGlobals() {
 		$globals = [];
 
-		$globals['craue_availableLocales'] = $this->availableLocales;
+		$globals['craue_availableLocales'] = new AvailableLocales('craue_availableLocales', $this->availableLocales);
 		if (!empty($this->availableLocalesAlias)) {
-			$globals[$this->availableLocalesAlias] = $this->availableLocales;
+			$globals[$this->availableLocalesAlias] = new AvailableLocales($this->availableLocalesAlias, $this->availableLocales);
 		}
 
 		return $globals;
@@ -136,6 +138,38 @@ class ChangeLanguageExtension extends AbstractLocaleAwareExtension implements Gl
 		}
 
 		return $languageName;
+	}
+
+	/**
+	 * @return string[]
+	 */
+	public function getAvailableLocales() {
+		return $this->availableLocales;
+	}
+
+}
+
+// TODO remove for 3.0
+/**
+ * @internal
+ */
+final class AvailableLocales implements \IteratorAggregate, \Countable {
+
+	private $name;
+	private $availableLocales;
+
+	public function __construct($name, array $availableLocales) {
+		$this->name = $name;
+		$this->availableLocales = $availableLocales;
+	}
+
+	public function getIterator() {
+		@trigger_error(sprintf('Twig global "%s" is deprecated. Use the function with the same name instead.', $this->name), E_USER_DEPRECATED);
+		return new \ArrayIterator($this->availableLocales);
+	}
+
+	public function count() {
+		return count($this->availableLocales);
 	}
 
 }
