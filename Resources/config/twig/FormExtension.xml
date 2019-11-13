@@ -9,12 +9,11 @@
 		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 	<parameters>
-		<parameter key="craue_twig_extensions.form.class">Craue\TwigExtensionsBundle\Twig\Extension\FormExtension</parameter>
 		<parameter key="craue_twig_extensions.form.cloneFormAlias" />
 	</parameters>
 
 	<services>
-		<service id="twig.extension.craue_form" class="%craue_twig_extensions.form.class%" public="true">
+		<service id="twig.extension.craue_form" class="Craue\TwigExtensionsBundle\Twig\Extension\FormExtension" public="true">
 			<tag name="twig.extension" />
 			<call method="setFormFactory">
 				<argument type="service" id="form.factory" on-invalid="ignore" />

@@ -9,12 +9,11 @@
 		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 	<parameters>
-		<parameter key="craue_twig_extensions.stringHelper.class">Craue\TwigExtensionsBundle\Twig\Extension\StringHelperExtension</parameter>
 		<parameter key="craue_twig_extensions.stringHelper.trailingDotAlias" />
 	</parameters>
 
 	<services>
-		<service id="twig.extension.craue_stringHelper" class="%craue_twig_extensions.stringHelper.class%" public="true">
+		<service id="twig.extension.craue_stringHelper" class="Craue\TwigExtensionsBundle\Twig\Extension\StringHelperExtension" public="true">
 			<tag name="twig.extension" />
 			<call method="setAliases">
 				<argument>%craue_twig_extensions.stringHelper.trailingDotAlias%</argument>

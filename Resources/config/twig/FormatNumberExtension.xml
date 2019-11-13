@@ -9,7 +9,6 @@
 		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 	<parameters>
-		<parameter key="craue_twig_extensions.formatNumber.class">Craue\TwigExtensionsBundle\Twig\Extension\FormatNumberExtension</parameter>
 		<parameter key="craue_twig_extensions.formatNumber.currency" />
 		<parameter key="craue_twig_extensions.formatNumber.numberFilterAlias" />
 		<parameter key="craue_twig_extensions.formatNumber.currencyFilterAlias" />
@@ -17,7 +16,7 @@
 	</parameters>
 
 	<services>
-		<service id="twig.extension.craue_formatNumber" class="%craue_twig_extensions.formatNumber.class%" public="true">
+		<service id="twig.extension.craue_formatNumber" class="Craue\TwigExtensionsBundle\Twig\Extension\FormatNumberExtension" public="true">
 			<tag name="twig.extension" />
 			<call method="setLocale">
 				<argument type="service" id="request_stack" />

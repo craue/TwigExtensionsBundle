@@ -2,8 +2,9 @@
 
 ## master
 
-- BC break (follow `UPGRADE-3.0.md` to upgrade):
+- BC breaks (follow `UPGRADE-3.0.md` to upgrade):
   - removed deprecated Twig global `craue_availableLocales`
+  - removed configurable class parameters
 
 ## [2.6.0] – 2019-11-14
 
