@@ -4,7 +4,6 @@ namespace Craue\TwigExtensionsBundle\Twig\Extension;
 
 use Craue\TwigExtensionsBundle\Util\TwigFeatureDefinition;
 use Craue\TwigExtensionsBundle\Util\TwigFeatureUtil;
-use Twig\Extension\GlobalsInterface;
 
 /**
  * Twig extension providing helpers for implementing a language change mechanism.
@@ -13,7 +12,7 @@ use Twig\Extension\GlobalsInterface;
  * @copyright 2011-2019 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class ChangeLanguageExtension extends AbstractLocaleAwareExtension implements GlobalsInterface {
+class ChangeLanguageExtension extends AbstractLocaleAwareExtension {
 
 	/**
 	 * @var string[]
@@ -88,21 +87,6 @@ class ChangeLanguageExtension extends AbstractLocaleAwareExtension implements Gl
 		]);
 	}
 
-	// TODO remove for 3.0
-	/**
-	 * {@inheritDoc}
-	 */
-	public function getGlobals() {
-		$globals = [];
-
-		$globals['craue_availableLocales'] = new AvailableLocales('craue_availableLocales', $this->availableLocales);
-		if (!empty($this->availableLocalesAlias)) {
-			$globals[$this->availableLocalesAlias] = new AvailableLocales($this->availableLocalesAlias, $this->availableLocales);
-		}
-
-		return $globals;
-	}
-
 	/**
 	 * {@inheritDoc}
 	 */
@@ -145,31 +129,6 @@ class ChangeLanguageExtension extends AbstractLocaleAwareExtension implements Gl
 	 */
 	public function getAvailableLocales() {
 		return $this->availableLocales;
-	}
-
-}
-
-// TODO remove for 3.0
-/**
- * @internal
- */
-final class AvailableLocales implements \IteratorAggregate, \Countable {
-
-	private $name;
-	private $availableLocales;
-
-	public function __construct($name, array $availableLocales) {
-		$this->name = $name;
-		$this->availableLocales = $availableLocales;
-	}
-
-	public function getIterator() {
-		@trigger_error(sprintf('Twig global "%s" is deprecated. Use the function with the same name instead.', $this->name), E_USER_DEPRECATED);
-		return new \ArrayIterator($this->availableLocales);
-	}
-
-	public function count() {
-		return count($this->availableLocales);
 	}
 
 }

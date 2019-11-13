@@ -1,6 +1,0 @@
-{% for locale in craue_availableLocales() %}
-	{{- locale }}
-	{%- if not loop.last -%}
-		{{ ', ' -}}
-	{%- endif -%}
-{% endfor %}

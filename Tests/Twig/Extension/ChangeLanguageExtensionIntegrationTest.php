@@ -53,19 +53,10 @@ class ChangeLanguageExtensionIntegrationTest extends TwigBasedTestCase {
 	/**
 	 * @dataProvider dataGetAvailableLocales
 	 */
-	public function testGetAvailableLocales_join($availableLocales, $result) {
+	public function testGetAvailableLocales($availableLocales, $result) {
 		$this->ext->setAvailableLocales($availableLocales);
 
-		$this->assertSame($result, $this->getTwig()->render('@IntegrationTest/ChangeLanguage/availableLocales_join.html.twig'));
-	}
-
-	/**
-	 * @dataProvider dataGetAvailableLocales
-	 */
-	public function testGetAvailableLocales_loop($availableLocales, $result) {
-		$this->ext->setAvailableLocales($availableLocales);
-
-		$this->assertSame($result, $this->getTwig()->render('@IntegrationTest/ChangeLanguage/availableLocales_loop.html.twig'));
+		$this->assertSame($result, $this->getTwig()->render('@IntegrationTest/ChangeLanguage/availableLocales.html.twig'));
 	}
 
 	public function dataGetAvailableLocales() {
@@ -75,40 +66,6 @@ class ChangeLanguageExtensionIntegrationTest extends TwigBasedTestCase {
 			[['de', 'en'], 'de, en'],
 			[['de_DE', 'en', 'ru'], 'de_DE, en, ru'],
 		];
-	}
-
-	/**
-	 * @dataProvider dataGetAvailableLocales
-	 * @group legacy
-	 * @expectedDeprecation Twig global "craue_availableLocales" is deprecated. Use the function with the same name instead.
-	 */
-	public function testGetAvailableLocales_twigGlobal_join($availableLocales, $result) {
-		$this->ext->setAvailableLocales($availableLocales);
-
-		$this->assertSame($result, $this->getTwig()->render('@IntegrationTest/ChangeLanguage/availableLocales_twigGlobal_join.html.twig'));
-	}
-
-	/**
-	 * @dataProvider dataGetAvailableLocales
-	 * @group legacy
-	 * @expectedDeprecation Twig global "craue_availableLocales" is deprecated. Use the function with the same name instead.
-	 */
-	public function testGetAvailableLocales_twigGlobal_loop($availableLocales, $result) {
-		$this->ext->setAvailableLocales($availableLocales);
-
-		$this->assertSame($result, $this->getTwig()->render('@IntegrationTest/ChangeLanguage/availableLocales_twigGlobal_loop.html.twig'));
-	}
-
-	/**
-	 * @dataProvider dataGetAvailableLocales
-	 * @group legacy
-	 * @expectedDeprecation Twig global "myAppLocales" is deprecated. Use the function with the same name instead.
-	 */
-	public function testGetAvailableLocales_twigGlobal_join_customAlias($availableLocales, $result) {
-		$this->ext->setAliases(null, 'myAppLocales');
-		$this->ext->setAvailableLocales($availableLocales);
-
-		$this->assertSame($result, $this->getTwig()->render('@IntegrationTest/ChangeLanguage/availableLocales_twigGlobal_join_customAlias.html.twig'));
 	}
 
 }

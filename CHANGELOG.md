@@ -1,5 +1,10 @@
 # Changelog
 
+## master
+
+- BC break (follow `UPGRADE-3.0.md` to upgrade):
+  - removed deprecated Twig global `craue_availableLocales`
+
 ## [2.6.0] – 2019-11-14
 
 - deprecated passing the service container to `setLocale`, pass the request stack instead
