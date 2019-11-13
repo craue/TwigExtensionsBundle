@@ -4,6 +4,8 @@ namespace Craue\TwigExtensionsBundle\Tests\Twig\Extension;
 
 use Craue\TwigExtensionsBundle\Twig\Extension\FormExtension;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Form\FormInterface;
 
 /**
  * @group unit
@@ -28,7 +30,7 @@ class FormExtensionTest extends TestCase {
 	 * @expectedExceptionMessage The Symfony Form component is not available. Try running "composer require symfony/form".
 	 */
 	public function testCloneForm_noFormFactory() {
-		$this->ext->cloneForm($this->getMockForAbstractClass('Symfony\Component\Form\FormInterface'));
+		$this->ext->cloneForm($this->getMockForAbstractClass(FormInterface::class));
 	}
 
 	/**
@@ -36,7 +38,7 @@ class FormExtensionTest extends TestCase {
 	 * @expectedExceptionMessage Expected argument of either type "Symfony\Component\Form\FormTypeInterface" or "Symfony\Component\Form\FormInterface", but "NULL" given.
 	 */
 	public function testCloneForm_nullValue() {
-		$this->ext->setFormFactory($this->getMockForAbstractClass('Symfony\Component\Form\FormFactoryInterface'));
+		$this->ext->setFormFactory($this->getMockForAbstractClass(FormFactoryInterface::class));
 		$this->ext->cloneForm(null);
 	}
 
