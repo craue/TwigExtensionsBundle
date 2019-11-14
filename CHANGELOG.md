@@ -4,6 +4,7 @@
 
 - BC breaks (follow `UPGRADE-3.0.md` to upgrade):
   - removed deprecated Twig global `craue_availableLocales`
+  - removed support for passing the service container to `setLocale`
   - removed configurable class parameters
 
 ## [2.6.0] – 2019-11-14

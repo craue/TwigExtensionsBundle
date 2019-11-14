@@ -4,7 +4,6 @@ namespace Craue\TwigExtensionsBundle\Tests\Twig\Extension;
 
 use Craue\TwigExtensionsBundle\Twig\Extension\AbstractLocaleAwareExtension;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
@@ -28,7 +27,7 @@ class AbstractLocaleAwareExtensionTest extends TestCase {
 
 	/**
 	 * @expectedException \InvalidArgumentException
-	 * @expectedExceptionMessage Expected argument of either type "string", "Symfony\Component\HttpFoundation\RequestStack", or "Symfony\Component\DependencyInjection\ContainerInterface", but "stdClass" given.
+	 * @expectedExceptionMessage Expected argument of either type "string" or "Symfony\Component\HttpFoundation\RequestStack", but "stdClass" given.
 	 */
 	public function testSetLocale_invalidArgument() {
 		$this->ext->setLocale(new \stdClass());
@@ -45,20 +44,6 @@ class AbstractLocaleAwareExtensionTest extends TestCase {
 		$locale = 'de';
 
 		$this->ext->setLocale($this->getRequestStack($locale));
-		$this->assertSame($locale, $this->ext->getLocale());
-	}
-
-	/**
-	 * @group legacy
-	 * @expectedDeprecation Passing the service container to "Craue\TwigExtensionsBundle\Twig\Extension\AbstractLocaleAwareExtension::setLocale" is deprecated. Instead, pass either the request stack or a locale string.
-	 */
-	public function testSetGetLocale_container() {
-		$locale = 'de';
-
-		$container = new Container();
-		$container->set('request_stack', $this->getRequestStack($locale));
-
-		$this->ext->setLocale($container);
 		$this->assertSame($locale, $this->ext->getLocale());
 	}
 
