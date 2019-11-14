@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.6.0] – 2019-11-14
+
+- deprecated passing the service container to `setLocale`, pass the request stack instead
+
+[2.6.0]: https://github.com/craue/TwigExtensionsBundle/compare/2.5.0...2.6.0
+
 ## [2.5.0] – 2019-11-13
 
 - [#11]: deprecated Twig global `craue_availableLocales`, added a function with the same name as replacement
