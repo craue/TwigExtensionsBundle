@@ -4,7 +4,8 @@ namespace Craue\TwigExtensionsBundle\Tests\Twig\Extension;
 
 use Craue\TwigExtensionsBundle\Twig\Extension\ArrayHelperExtension;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Component\Translation\TranslatorInterface as LegacyTranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @group unit
@@ -122,7 +123,8 @@ class ArrayHelperExtensionTest extends TestCase {
 	}
 
 	protected function getMockedTranslator(array $case = []) {
-		$translator = $this->createMock(TranslatorInterface::class);
+		// TODO remove LegacyTranslatorInterface as soon as Symfony >= 4.2 is required
+		$translator = $this->createMock(interface_exists(TranslatorInterface::class) ? TranslatorInterface::class : LegacyTranslatorInterface::class);
 
 		if (!empty($case)) {
 			$translator

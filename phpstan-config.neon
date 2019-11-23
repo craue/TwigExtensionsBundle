@@ -3,12 +3,16 @@ parameters:
 	paths:
 		- %currentWorkingDirectory%
 	autoload_files:
-		- %currentWorkingDirectory%/vendor/twig/twig/lib/Twig/Extension/Core.php
+		- %currentWorkingDirectory%/vendor/twig/twig/src/Extension/CoreExtension.php
+		# TODO remove as soon as Symfony >= 4.2 is required
+		- %currentWorkingDirectory%/Twig/Extension/ArrayHelperExtension.php
+		# TODO remove for 3.0
+		- %currentWorkingDirectory%/Twig/Extension/ChangeLanguageExtension.php
 	excludes_analyse:
 		- %currentWorkingDirectory%/Tests/*
 		- %currentWorkingDirectory%/vendor/*
 	ignoreErrors:
-		- '#^Call to an undefined method Symfony\\Component\\Config\\Definition\\Builder\\NodeDefinition::children\(\)\.$#'
+		- '#^Call to an undefined method Symfony\\Component\\Config\\Definition\\Builder\\TreeBuilder::root\(\)\.$#'
 		-
 			message: '#^Strict comparison using === between string and false will always evaluate to false\.$#'
 			path: %currentWorkingDirectory%/Twig/Extension/FormatDateTimeExtension.php
@@ -16,5 +20,17 @@ parameters:
 			message: '#^Strict comparison using === between string and false will always evaluate to false\.$#'
 			path: %currentWorkingDirectory%/Twig/Extension/FormatNumberExtension.php
 		-
-			message: '#^Property Craue\\TwigExtensionsBundle\\Twig\\Extension\\AbstractLocaleAwareExtension::$requestStack (Symfony\\Component\\HttpFoundation\\RequestStack|null) does not accept object|null\.$#'
+			message: '#^Property Craue\\TwigExtensionsBundle\\Twig\\Extension\\AbstractLocaleAwareExtension::\$requestStack (Symfony\\Component\\HttpFoundation\\RequestStack|null) does not accept object|null\.$#'
 			path: %currentWorkingDirectory%/Twig/Extension/AbstractLocaleAwareExtension.php
+		# TODO remove as soon as Symfony >= 4.2 is required
+		-
+			message: '#^Property Craue\\TwigExtensionsBundle\\Twig\\Extension\\BaseArrayHelperExtension::\$translator has unknown class Symfony\\Component\\Translation\\TranslatorInterface as its type\.$#'
+			path: %currentWorkingDirectory%/Twig/Extension/ArrayHelperExtension.php
+		# TODO remove as soon as Symfony >= 4.2 is required
+		-
+			message: '#^Parameter \$translator of method Craue\\TwigExtensionsBundle\\Twig\\Extension\\ArrayHelperExtension::setTranslator\(\) has invalid typehint type Symfony\\Component\\Translation\\TranslatorInterface\.$#'
+			path: %currentWorkingDirectory%/Twig/Extension/ArrayHelperExtension.php
+		# TODO remove as soon as Symfony >= 4.2 is required
+		-
+			message: '#^Call to method trans\(\) on an unknown class Symfony\\Component\\Translation\\TranslatorInterface\.$#'
+			path: %currentWorkingDirectory%/Twig/Extension/ArrayHelperExtension.php

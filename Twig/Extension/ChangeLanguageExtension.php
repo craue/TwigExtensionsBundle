@@ -4,16 +4,13 @@ namespace Craue\TwigExtensionsBundle\Twig\Extension;
 
 use Craue\TwigExtensionsBundle\Util\TwigFeatureDefinition;
 use Craue\TwigExtensionsBundle\Util\TwigFeatureUtil;
+use Twig\Environment;
 use Twig\Extension\GlobalsInterface;
 
 /**
- * Twig extension providing helpers for implementing a language change mechanism.
- *
- * @author Christian Raue <christian.raue@gmail.com>
- * @copyright 2011-2019 Christian Raue
- * @license http://opensource.org/licenses/mit-license.php MIT License
+ * @internal
  */
-class ChangeLanguageExtension extends AbstractLocaleAwareExtension implements GlobalsInterface {
+abstract class BaseChangeLanguageExtension extends AbstractLocaleAwareExtension implements GlobalsInterface {
 
 	/**
 	 * @var string[]
@@ -89,10 +86,7 @@ class ChangeLanguageExtension extends AbstractLocaleAwareExtension implements Gl
 	}
 
 	// TODO remove for 3.0
-	/**
-	 * {@inheritDoc}
-	 */
-	public function getGlobals() {
+	protected function _getGlobals() {
 		$globals = [];
 
 		$globals['craue_availableLocales'] = new AvailableLocales('craue_availableLocales', $this->availableLocales);
@@ -147,6 +141,35 @@ class ChangeLanguageExtension extends AbstractLocaleAwareExtension implements Gl
 		return $this->availableLocales;
 	}
 
+}
+
+// TODO revert to one clean class definition for 3.0
+if (Environment::VERSION_ID < 30000) {
+	/**
+	 * Twig extension providing helpers for implementing a language change mechanism.
+	 *
+	 * @author Christian Raue <christian.raue@gmail.com>
+	 * @copyright 2011-2019 Christian Raue
+	 * @license http://opensource.org/licenses/mit-license.php MIT License
+	 */
+	class ChangeLanguageExtension extends BaseChangeLanguageExtension {
+		public function getGlobals() {
+			return $this->_getGlobals();
+		}
+	}
+} else {
+	/**
+	 * Twig extension providing helpers for implementing a language change mechanism.
+	 *
+	 * @author Christian Raue <christian.raue@gmail.com>
+	 * @copyright 2011-2019 Christian Raue
+	 * @license http://opensource.org/licenses/mit-license.php MIT License
+	 */
+	class ChangeLanguageExtension extends BaseChangeLanguageExtension {
+		public function getGlobals() : array {
+			return $this->_getGlobals();
+		}
+	}
 }
 
 // TODO remove for 3.0

@@ -15,19 +15,19 @@ class FormatDateTimeExtensionIntegrationTest extends TwigBasedTestCase {
 
 	const DEFAULT_TIME_ZONE = 'Europe/Berlin';
 
-	private $currentTimezone;
+	private static $currentTimezone;
 
-	protected function setUp() {
-		parent::setUp();
+	public static function setUpBeforeClass() {
+		parent::setUpBeforeClass();
 
-		$this->currentTimezone = date_default_timezone_get();
+		self::$currentTimezone = date_default_timezone_get();
 		date_default_timezone_set(self::DEFAULT_TIME_ZONE);
 	}
 
-	protected function tearDown() {
-		date_default_timezone_set($this->currentTimezone);
+	public static function tearDownAfterClass() {
+		date_default_timezone_set(self::$currentTimezone);
 
-		parent::tearDown();
+		parent::tearDownAfterClass();
 	}
 
 	/**
