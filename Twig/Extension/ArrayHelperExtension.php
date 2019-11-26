@@ -157,7 +157,7 @@ abstract class BaseArrayHelperExtension extends AbstractExtension {
 }
 
 // TODO revert to one clean class definition as soon as Symfony >= 4.2 is required
-if (interface_exists(TranslatorInterface::class)) {
+if (!interface_exists(LegacyTranslatorInterface::class)) {
 	/**
 	 * Twig extension providing useful array handling filters.
 	 *

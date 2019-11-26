@@ -124,7 +124,7 @@ class ArrayHelperExtensionTest extends TestCase {
 
 	protected function getMockedTranslator(array $case = []) {
 		// TODO remove LegacyTranslatorInterface as soon as Symfony >= 4.2 is required
-		$translator = $this->createMock(interface_exists(TranslatorInterface::class) ? TranslatorInterface::class : LegacyTranslatorInterface::class);
+		$translator = $this->createMock(interface_exists(LegacyTranslatorInterface::class) ? LegacyTranslatorInterface::class : TranslatorInterface::class);
 
 		if (!empty($case)) {
 			$translator
