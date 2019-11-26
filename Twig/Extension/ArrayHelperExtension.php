@@ -4,20 +4,17 @@ namespace Craue\TwigExtensionsBundle\Twig\Extension;
 
 use Craue\TwigExtensionsBundle\Util\TwigFeatureDefinition;
 use Craue\TwigExtensionsBundle\Util\TwigFeatureUtil;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Component\Translation\TranslatorInterface as LegacyTranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Extension\AbstractExtension;
 
 /**
- * Twig extension providing useful array handling filters.
- *
- * @author Christian Raue <christian.raue@gmail.com>
- * @copyright 2011-2019 Christian Raue
- * @license http://opensource.org/licenses/mit-license.php MIT License
+ * @internal
  */
-class ArrayHelperExtension extends AbstractExtension {
+abstract class BaseArrayHelperExtension extends AbstractExtension {
 
 	/**
-	 * @var TranslatorInterface|null
+	 * @var TranslatorInterface|LegacyTranslatorInterface|null
 	 */
 	protected $translator;
 
@@ -40,10 +37,6 @@ class ArrayHelperExtension extends AbstractExtension {
 	 * @var string
 	 */
 	protected $translateArrayAlias = null;
-
-	public function setTranslator(TranslatorInterface $translator) {
-		$this->translator = $translator;
-	}
 
 	/**
 	 * @param string $withoutAlias Alias for the without filter.
@@ -161,4 +154,33 @@ class ArrayHelperExtension extends AbstractExtension {
 		throw new \InvalidArgumentException('The filter can be applied to arrays only.');
 	}
 
+}
+
+// TODO revert to one clean class definition as soon as Symfony >= 4.2 is required
+if (!interface_exists(LegacyTranslatorInterface::class)) {
+	/**
+	 * Twig extension providing useful array handling filters.
+	 *
+	 * @author Christian Raue <christian.raue@gmail.com>
+	 * @copyright 2011-2019 Christian Raue
+	 * @license http://opensource.org/licenses/mit-license.php MIT License
+	 */
+	class ArrayHelperExtension extends BaseArrayHelperExtension {
+		public function setTranslator(TranslatorInterface $translator) {
+			$this->translator = $translator;
+		}
+	}
+} else {
+	/**
+	 * Twig extension providing useful array handling filters.
+	 *
+	 * @author Christian Raue <christian.raue@gmail.com>
+	 * @copyright 2011-2019 Christian Raue
+	 * @license http://opensource.org/licenses/mit-license.php MIT License
+	 */
+	class ArrayHelperExtension extends BaseArrayHelperExtension {
+		public function setTranslator(LegacyTranslatorInterface $translator) {
+			$this->translator = $translator;
+		}
+	}
 }
