@@ -7,6 +7,13 @@
   - removed support for passing the service container to `setLocale`
   - removed configurable class parameters
 
+## [2.7.0] – 2019-12-03
+
+- added support for Symfony 5.*
+- dropped support for Symfony 4.1
+
+[2.7.0]: https://github.com/craue/TwigExtensionsBundle/compare/2.6.0...2.7.0
+
 ## [2.6.0] – 2019-11-14
 
 - deprecated passing the service container to `setLocale`, pass the request stack instead
