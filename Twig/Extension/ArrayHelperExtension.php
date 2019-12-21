@@ -139,7 +139,7 @@ abstract class BaseArrayHelperExtension extends AbstractExtension {
 
 	/**
 	 * Tries to convert {@code $source} to an array.
-	 * @param array|\Traversable $source Variable to be converted.
+	 * @param mixed $source Variable to be converted.
 	 * @throws \InvalidArgumentException If no array representation is available.
 	 */
 	protected function convertToArray($source) {
