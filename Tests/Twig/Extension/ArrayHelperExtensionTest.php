@@ -122,6 +122,45 @@ class ArrayHelperExtensionTest extends TestCase {
 		];
 	}
 
+	/**
+	 * @dataProvider dataConvertToArray
+	 */
+	public function testConvertToArray($argument, array $expectedResult) {
+		$method = new \ReflectionMethod($this->ext, 'convertToArray');
+		$method->setAccessible(true);
+		$this->assertEquals($expectedResult, $method->invoke($this->ext, $argument));
+	}
+
+	public function dataConvertToArray() {
+		$array = [1 => 'A', 3 => 'C'];
+		$traversable = new \ArrayObject($array);
+
+		return [
+			[[], []],
+			[$array, $array],
+			[$traversable, $array],
+		];
+	}
+
+	/**
+	 * @dataProvider dataConvertToArray_invalidArgument
+	 * @expectedException \InvalidArgumentException
+	 * @expectedExceptionMessage The filter can be applied to arrays only.
+	 */
+	public function testConvertToArray_invalidArgument($argument) {
+		$method = new \ReflectionMethod($this->ext, 'convertToArray');
+		$method->setAccessible(true);
+		$method->invoke($this->ext, $argument);
+	}
+
+	public function dataConvertToArray_invalidArgument() {
+		return [
+			[null],
+			[''],
+			[new \stdClass()],
+		];
+	}
+
 	protected function getMockedTranslator(array $case = []) {
 		// TODO remove LegacyTranslatorInterface as soon as Symfony >= 4.2 is required
 		$translator = $this->createMock(interface_exists(LegacyTranslatorInterface::class) ? LegacyTranslatorInterface::class : TranslatorInterface::class);
