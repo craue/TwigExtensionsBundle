@@ -139,7 +139,7 @@ abstract class BaseArrayHelperExtension extends AbstractExtension {
 
 	/**
 	 * Tries to convert {@code $source} to an array.
-	 * @param array|\Traversable $source Variable to be converted.
+	 * @param mixed $source Variable to be converted.
 	 * @throws \InvalidArgumentException If no array representation is available.
 	 */
 	protected function convertToArray($source) {
@@ -162,7 +162,7 @@ if (!interface_exists(LegacyTranslatorInterface::class)) {
 	 * Twig extension providing useful array handling filters.
 	 *
 	 * @author Christian Raue <christian.raue@gmail.com>
-	 * @copyright 2011-2019 Christian Raue
+	 * @copyright 2011-2020 Christian Raue
 	 * @license http://opensource.org/licenses/mit-license.php MIT License
 	 */
 	class ArrayHelperExtension extends BaseArrayHelperExtension {
@@ -175,7 +175,7 @@ if (!interface_exists(LegacyTranslatorInterface::class)) {
 	 * Twig extension providing useful array handling filters.
 	 *
 	 * @author Christian Raue <christian.raue@gmail.com>
-	 * @copyright 2011-2019 Christian Raue
+	 * @copyright 2011-2020 Christian Raue
 	 * @license http://opensource.org/licenses/mit-license.php MIT License
 	 */
 	class ArrayHelperExtension extends BaseArrayHelperExtension {

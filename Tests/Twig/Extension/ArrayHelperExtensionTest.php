@@ -11,7 +11,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  * @group unit
  *
  * @author Christian Raue <christian.raue@gmail.com>
- * @copyright 2011-2019 Christian Raue
+ * @copyright 2011-2020 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
 class ArrayHelperExtensionTest extends TestCase {
@@ -119,6 +119,45 @@ class ArrayHelperExtensionTest extends TestCase {
 			['', ''],
 			[null, []],
 			['', []],
+		];
+	}
+
+	/**
+	 * @dataProvider dataConvertToArray
+	 */
+	public function testConvertToArray($argument, array $expectedResult) {
+		$method = new \ReflectionMethod($this->ext, 'convertToArray');
+		$method->setAccessible(true);
+		$this->assertEquals($expectedResult, $method->invoke($this->ext, $argument));
+	}
+
+	public function dataConvertToArray() {
+		$array = [1 => 'A', 3 => 'C'];
+		$traversable = new \ArrayObject($array);
+
+		return [
+			[[], []],
+			[$array, $array],
+			[$traversable, $array],
+		];
+	}
+
+	/**
+	 * @dataProvider dataConvertToArray_invalidArgument
+	 * @expectedException \InvalidArgumentException
+	 * @expectedExceptionMessage The filter can be applied to arrays only.
+	 */
+	public function testConvertToArray_invalidArgument($argument) {
+		$method = new \ReflectionMethod($this->ext, 'convertToArray');
+		$method->setAccessible(true);
+		$method->invoke($this->ext, $argument);
+	}
+
+	public function dataConvertToArray_invalidArgument() {
+		return [
+			[null],
+			[''],
+			[new \stdClass()],
 		];
 	}
 
