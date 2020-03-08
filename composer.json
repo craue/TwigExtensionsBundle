@@ -1,5 +1,6 @@
 {
 	"name": "craue/twigextensions-bundle",
+	"type": "symfony-bundle",
 	"description": "Useful Twig extensions for your Symfony project.",
 	"keywords": ["twig", "extensions", "symfony"],
 	"homepage": "https://github.com/craue/TwigExtensionsBundle",
