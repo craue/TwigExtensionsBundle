@@ -25,9 +25,25 @@ abstract class TwigBasedTestCase extends WebTestCase {
 
 	protected function setUp() {
 		static::createClient();
-		$this->twig = self::$kernel->getContainer()->get('twig');
+		$this->twig = $this->getService('twig.test');
 	}
 
+	/**
+	 * @param string $id The service identifier.
+	 * @return object The associated service.
+	 */
+	protected function getService($id) {
+		// TODO remove as soon as Symfony >= 4.3 is required
+		if (!property_exists($this, 'container')) {
+			return static::$kernel->getContainer()->get($id);
+		}
+
+		return self::$container->get($id);
+	}
+
+	/**
+	 * @return Environment
+	 */
 	protected function getTwig() {
 		return $this->twig;
 	}
