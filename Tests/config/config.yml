@@ -1,8 +1,6 @@
 framework:
   form:
     csrf_protection: false
-  router:
-    resource: ~
   secret: whatever
   test: ~
   translator:
