@@ -2,10 +2,8 @@ parameters:
 	level: 5
 	paths:
 		- .
-	autoload_files:
+	scanFiles:
 		- vendor/twig/twig/src/Extension/CoreExtension.php
-		# TODO remove as soon as Symfony >= 4.2 is required
-		- Twig/Extension/ArrayHelperExtension.php
 	excludes_analyse:
 		- Tests/*
 		- vendor/*
