@@ -1,5 +1,7 @@
 # Information
 
+[![Build Status](https://travis-ci.org/craue/TwigExtensionsBundle.svg?branch=master)](https://travis-ci.org/craue/TwigExtensionsBundle)
+
 TwigExtensionsBundle is a collection of useful Twig extensions for your Symfony project.
 
 A live demo with code examples can is available at http://craue.de/symfony-playground/en/CraueTwigExtensions/.
