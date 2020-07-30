@@ -20,10 +20,6 @@ parameters:
 				- Twig/Extension/FormatNumberExtension.php
 		# TODO remove as soon as Symfony >= 4.2 is required
 		-
-			message: '#^Class Symfony\\Component\\Translation\\TranslatorInterface not found\.$#'
-			path: Twig/Extension/ArrayHelperExtension.php
-		# TODO remove as soon as Symfony >= 4.2 is required
-		-
 			message: '#^Property Craue\\TwigExtensionsBundle\\Twig\\Extension\\BaseArrayHelperExtension::\$translator has unknown class Symfony\\Component\\Translation\\TranslatorInterface as its type\.$#'
 			path: Twig/Extension/ArrayHelperExtension.php
 		# TODO remove as soon as Symfony >= 4.2 is required

@@ -73,6 +73,18 @@ in a shell.
 
 ## Enable the bundle
 
+If you don't use Symfony Flex, register the bundle manually:
+
+```php
+// in config/bundles.php
+return [
+	// ...
+	Craue\TwigExtensionsBundle\CraueTwigExtensionsBundle::class => ['all' => true],
+];
+```
+
+Or, for Symfony 3.4:
+
 ```php
 // in app/AppKernel.php
 public function registerBundles() {
