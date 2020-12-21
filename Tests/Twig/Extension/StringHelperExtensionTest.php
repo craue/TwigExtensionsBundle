@@ -19,15 +19,16 @@ class StringHelperExtensionTest extends TestCase {
 	 */
 	protected $ext;
 
-	protected function setUp() {
+	protected function setUp() : void {
 		$this->ext = new StringHelperExtension();
 	}
 
 	/**
 	 * @dataProvider dataAddTrailingDot_invalidArguments
-	 * @expectedException \InvalidArgumentException
 	 */
 	public function testAddTrailingDot_invalidArguments($value) {
+		$this->expectException(\InvalidArgumentException::class);
+
 		$this->ext->addTrailingDot($value);
 	}
 

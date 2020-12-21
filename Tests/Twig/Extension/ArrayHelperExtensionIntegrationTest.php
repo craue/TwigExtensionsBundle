@@ -13,7 +13,7 @@ use Craue\TwigExtensionsBundle\Tests\TwigBasedTestCase;
  */
 class ArrayHelperExtensionIntegrationTest extends TwigBasedTestCase {
 
-	protected function setUp() {
+	protected function setUp() : void {
 		parent::setUp();
 
 		// to avoid complaining about inactive "request" scope
