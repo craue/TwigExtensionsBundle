@@ -23,7 +23,7 @@ abstract class TwigBasedTestCase extends WebTestCase {
 		return new AppKernel($configFile);
 	}
 
-	protected function setUp() {
+	protected function setUp() : void {
 		static::createClient();
 		$this->twig = $this->getService('twig.test');
 	}

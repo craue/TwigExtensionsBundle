@@ -22,15 +22,14 @@ class AbstractLocaleAwareExtensionTest extends TestCase {
 	 */
 	protected $ext;
 
-	protected function setUp() {
+	protected function setUp() : void {
 		$this->ext = $this->getMockForAbstractClass(AbstractLocaleAwareExtension::class);
 	}
 
-	/**
-	 * @expectedException \InvalidArgumentException
-	 * @expectedExceptionMessage Expected argument of either type "string", "Symfony\Component\HttpFoundation\RequestStack", or "Symfony\Component\DependencyInjection\ContainerInterface", but "stdClass" given.
-	 */
 	public function testSetLocale_invalidArgument() {
+		$this->expectException(\InvalidArgumentException::class);
+		$this->expectExceptionMessage('Expected argument of either type "string", "Symfony\Component\HttpFoundation\RequestStack", or "Symfony\Component\DependencyInjection\ContainerInterface", but "stdClass" given.');
+
 		$this->ext->setLocale(new \stdClass());
 	}
 

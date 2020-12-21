@@ -19,77 +19,67 @@ class FormatDateTimeExtensionTest extends TestCase {
 	 */
 	protected $ext;
 
-	protected function setUp() {
+	protected function setUp() : void {
 		$this->ext = new FormatDateTimeExtension();
 	}
 
-	/**
-	 * @expectedException \InvalidArgumentException
-	 */
 	public function testFormatDate_dateTypeNone() {
+		$this->expectException(\InvalidArgumentException::class);
+
 		$this->ext->formatDate(0, null, 'none');
 	}
 
-	/**
-	 * @expectedException \InvalidArgumentException
-	 */
 	public function testFormatDate_dateTypeInvalid() {
+		$this->expectException(\InvalidArgumentException::class);
+
 		$this->ext->formatDate(0, null, 'blah');
 	}
 
-	/**
-	 * @expectedException \InvalidArgumentException
-	 */
 	public function testFormatDate_valueInvalid() {
+		$this->expectException(\InvalidArgumentException::class);
+
 		$this->ext->formatDate('blah');
 	}
 
-	/**
-	 * @expectedException \InvalidArgumentException
-	 */
 	public function testFormatTime_timeTypeNone() {
+		$this->expectException(\InvalidArgumentException::class);
+
 		$this->ext->formatTime(0, null, 'none');
 	}
 
-	/**
-	 * @expectedException \InvalidArgumentException
-	 */
 	public function testFormatTime_timeTypeInvalid() {
+		$this->expectException(\InvalidArgumentException::class);
+
 		$this->ext->formatTime(0, null, 'blah');
 	}
 
-	/**
-	 * @expectedException \InvalidArgumentException
-	 */
 	public function testFormatDateTime_dateTypeAndTimeTypeNone() {
+		$this->expectException(\InvalidArgumentException::class);
+
 		$this->ext->formatDateTime(0, null, 'none', 'none');
 	}
 
-	/**
-	 * @expectedException \InvalidArgumentException
-	 */
 	public function testFormatDateTime_dateTypeInvalid() {
+		$this->expectException(\InvalidArgumentException::class);
+
 		$this->ext->formatDateTime(0, null, 'blah', null);
 	}
 
-	/**
-	 * @expectedException \InvalidArgumentException
-	 */
 	public function testFormatDateTime_timeTypeInvalid() {
+		$this->expectException(\InvalidArgumentException::class);
+
 		$this->ext->formatDateTime(0, null, null, 'blah');
 	}
 
-	/**
-	 * @expectedException \InvalidArgumentException
-	 */
 	public function testFormatDateTime_dateTypeAndTimeTypeInvalid() {
+		$this->expectException(\InvalidArgumentException::class);
+
 		$this->ext->formatDateTime(0, null, 'blah', 'blah');
 	}
 
-	/**
-	 * @expectedException \InvalidArgumentException
-	 */
 	public function testFormatDateTime_timeZoneInvalid() {
+		$this->expectException(\InvalidArgumentException::class);
+
 		$this->ext->formatDateTime(0, null, null, null, 'blah');
 	}
 

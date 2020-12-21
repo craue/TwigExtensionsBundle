@@ -19,14 +19,13 @@ class FormatNumberExtensionTest extends TestCase {
 	 */
 	protected $ext;
 
-	protected function setUp() {
+	protected function setUp() : void {
 		$this->ext = new FormatNumberExtension();
 	}
 
-	/**
-	 * @expectedException \InvalidArgumentException
-	 */
 	public function testFormatCurrency_noCurrencySet() {
+		$this->expectException(\InvalidArgumentException::class);
+
 		$this->ext->formatCurrency(0, null, null);
 	}
 

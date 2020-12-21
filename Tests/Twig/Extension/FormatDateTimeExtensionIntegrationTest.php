@@ -17,14 +17,14 @@ class FormatDateTimeExtensionIntegrationTest extends TwigBasedTestCase {
 
 	private static $currentTimezone;
 
-	public static function setUpBeforeClass() {
+	public static function setUpBeforeClass() : void {
 		parent::setUpBeforeClass();
 
 		self::$currentTimezone = date_default_timezone_get();
 		date_default_timezone_set(self::DEFAULT_TIME_ZONE);
 	}
 
-	public static function tearDownAfterClass() {
+	public static function tearDownAfterClass() : void {
 		date_default_timezone_set(self::$currentTimezone);
 
 		parent::tearDownAfterClass();
@@ -92,7 +92,7 @@ class FormatDateTimeExtensionIntegrationTest extends TwigBasedTestCase {
 	 * @dataProvider dataFormatTime
 	 */
 	public function testFormatTime($value, $locale, $timeType, $result) {
-		$this->assertRegExp($result,
+		$this->assertMatchesRegularExpression($result,
 				$this->getTwig()->render('@IntegrationTest/FormatDateTime/time.html.twig', [
 					'value' => $value,
 					'locale' => $locale,
@@ -178,7 +178,7 @@ class FormatDateTimeExtensionIntegrationTest extends TwigBasedTestCase {
 	 * @dataProvider dataFormatDateTime
 	 */
 	public function testFormatDateTime($value, $locale, $dateType, $timeType, $timeZone, $result) {
-		$this->assertRegExp($result,
+		$this->assertMatchesRegularExpression($result,
 				$this->getTwig()->render('@IntegrationTest/FormatDateTime/dateTime.html.twig', [
 					'value' => $value,
 					'locale' => $locale,

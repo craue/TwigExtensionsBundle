@@ -28,7 +28,7 @@ class FormExtensionIntegrationTest extends TwigBasedTestCase {
 	 */
 	protected $formFactory;
 
-	protected function setUp() {
+	protected function setUp() : void {
 		parent::setUp();
 		$container = self::$kernel->getContainer();
 		$this->ext = $container->get('twig.extension.craue_form');
@@ -54,15 +54,14 @@ class FormExtensionIntegrationTest extends TwigBasedTestCase {
 		$this->assertEquals($this->formFactory->create(get_class($formType))->createView(), $clonedFormView);
 	}
 
-	/**
-	 * @expectedException \InvalidArgumentException
-	 * @expectedExceptionMessage Expected argument of either type "Symfony\Component\Form\FormTypeInterface" or "Symfony\Component\Form\FormInterface", but "Symfony\Component\Form\FormView" given.
-	 */
 	public function testCloneForm_formView() {
 		$formView = $this->formFactory->createBuilder(FormType::class)
 			->getForm()
 			->createView()
 		;
+
+		$this->expectException(\InvalidArgumentException::class);
+		$this->expectExceptionMessage('Expected argument of either type "Symfony\Component\Form\FormTypeInterface" or "Symfony\Component\Form\FormInterface", but "Symfony\Component\Form\FormView" given.');
 
 		$this->ext->cloneForm($formView);
 	}

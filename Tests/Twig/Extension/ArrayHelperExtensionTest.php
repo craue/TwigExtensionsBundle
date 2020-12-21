@@ -21,15 +21,14 @@ class ArrayHelperExtensionTest extends TestCase {
 	 */
 	protected $ext;
 
-	protected function setUp() {
+	protected function setUp() : void {
 		$this->ext = new ArrayHelperExtension();
 	}
 
-	/**
-	 * @expectedException \LogicException
-	 * @expectedExceptionMessage The Symfony Translation component is not available. Try running "composer require symfony/translation".
-	 */
 	public function testTranslateArray_noTranslator() {
+		$this->expectException(\LogicException::class);
+		$this->expectExceptionMessage('The Symfony Translation component is not available. Try running "composer require symfony/translation".');
+
 		$this->ext->translateArray([]);
 	}
 
@@ -59,10 +58,12 @@ class ArrayHelperExtensionTest extends TestCase {
 
 	/**
 	 * @dataProvider dataTranslateArray_invalidArguments
-	 * @expectedException \InvalidArgumentException
 	 */
 	public function testTranslateArray_invalidArguments($entries, array $parameters, $domain, $locale) {
 		$this->ext->setTranslator($this->getMockedTranslator());
+
+		$this->expectException(\InvalidArgumentException::class);
+
 		$this->ext->translateArray($entries, $parameters, $domain, $locale);
 	}
 
@@ -105,9 +106,10 @@ class ArrayHelperExtensionTest extends TestCase {
 
 	/**
 	 * @dataProvider dataWithout_invalidArguments
-	 * @expectedException \InvalidArgumentException
 	 */
 	public function testWithout_invalidArguments($entries, $without) {
+		$this->expectException(\InvalidArgumentException::class);
+
 		$this->ext->without($entries, $without);
 	}
 
@@ -144,12 +146,14 @@ class ArrayHelperExtensionTest extends TestCase {
 
 	/**
 	 * @dataProvider dataConvertToArray_invalidArgument
-	 * @expectedException \InvalidArgumentException
-	 * @expectedExceptionMessage The filter can be applied to arrays only.
 	 */
 	public function testConvertToArray_invalidArgument($argument) {
 		$method = new \ReflectionMethod($this->ext, 'convertToArray');
 		$method->setAccessible(true);
+
+		$this->expectException(\InvalidArgumentException::class);
+		$this->expectExceptionMessage('The filter can be applied to arrays only.');
+
 		$method->invoke($this->ext, $argument);
 	}
 
