@@ -11,7 +11,7 @@ jobs:
       env: DEPS='lowest'
     -
       php: 8.0
-      env: DEPS='unmodified' SYMFONY_DEPRECATIONS_HELPER='max[self]=3'
+      env: DEPS='unmodified'
 
     # TODO remove as soon as Symfony >= 4.2 is required
     - stage: test
@@ -31,7 +31,7 @@ jobs:
       env: SYMFONY_VERSION='5.1.*' TWIG_VERSION='~3.0' WITH_STATIC_ANALYSIS='yes'
     -
       php: 7.4
-      env: SYMFONY_VERSION='5.2.*' TWIG_VERSION='~3.0' SYMFONY_DEPRECATIONS_HELPER='max[self]=3'
+      env: SYMFONY_VERSION='5.2.*' TWIG_VERSION='~3.0'
     -
       php: 7.4
       env: SYMFONY_VERSION='5.x' MIN_STABILITY='dev'
