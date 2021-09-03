@@ -3,6 +3,7 @@
 namespace Craue\TwigExtensionsBundle\Tests;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\HttpKernel\KernelInterface;
 use Twig\Environment;
 
 /**
@@ -17,7 +18,7 @@ abstract class TwigBasedTestCase extends WebTestCase {
 	 */
 	private $twig;
 
-	protected static function createKernel(array $options = []) {
+	protected static function createKernel(array $options = []) : KernelInterface {
 		$configFile = $options['config'] ?? 'config.yml';
 
 		return new AppKernel($configFile);

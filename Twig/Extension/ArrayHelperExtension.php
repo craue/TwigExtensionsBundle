@@ -69,7 +69,7 @@ abstract class BaseArrayHelperExtension extends AbstractExtension {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getFilters() {
+	public function getFilters() : array {
 		return TwigFeatureUtil::getTwigFilters($this, [
 			new TwigFeatureDefinition('craue_without', 'without', $this->withoutAlias),
 			new TwigFeatureDefinition('craue_replaceKey', 'replaceKey', $this->replaceKeyAlias),

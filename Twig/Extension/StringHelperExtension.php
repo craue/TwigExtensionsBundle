@@ -44,7 +44,7 @@ class StringHelperExtension extends AbstractExtension {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getFilters() {
+	public function getFilters() : array {
 		return TwigFeatureUtil::getTwigFilters($this, [
 			new TwigFeatureDefinition('craue_trailingDot', 'addTrailingDot', $this->trailingDotAlias),
 		]);

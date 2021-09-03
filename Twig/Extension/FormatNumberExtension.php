@@ -70,7 +70,7 @@ class FormatNumberExtension extends AbstractLocaleAwareExtension {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getFilters() {
+	public function getFilters() : array {
 		return TwigFeatureUtil::getTwigFilters($this, [
 			new TwigFeatureDefinition('craue_number', 'formatNumber', $this->numberFilterAlias),
 			new TwigFeatureDefinition('craue_currency', 'formatCurrency', $this->currencyFilterAlias),

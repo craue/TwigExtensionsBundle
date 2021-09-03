@@ -78,7 +78,7 @@ abstract class BaseChangeLanguageExtension extends AbstractLocaleAwareExtension 
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getFunctions() {
+	public function getFunctions() : array {
 		return TwigFeatureUtil::getTwigFunctions($this, [
 			new TwigFeatureDefinition('craue_languageName', 'getLanguageName', $this->languageNameAlias),
 			new TwigFeatureDefinition('craue_availableLocales', 'getAvailableLocales', $this->availableLocalesAlias),
@@ -186,12 +186,12 @@ final class AvailableLocales implements \IteratorAggregate, \Countable {
 		$this->availableLocales = $availableLocales;
 	}
 
-	public function getIterator() {
+	public function getIterator() : \Traversable {
 		@trigger_error(sprintf('Twig global "%s" is deprecated. Use the function with the same name instead.', $this->name), E_USER_DEPRECATED);
 		return new \ArrayIterator($this->availableLocales);
 	}
 
-	public function count() {
+	public function count() : int {
 		return count($this->availableLocales);
 	}
 

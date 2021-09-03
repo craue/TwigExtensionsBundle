@@ -52,7 +52,7 @@ class FormExtension extends AbstractExtension {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getFunctions() {
+	public function getFunctions() : array {
 		return TwigFeatureUtil::getTwigFunctions($this, [
 			new TwigFeatureDefinition('craue_cloneForm', 'cloneForm', $this->cloneFormAlias),
 		]);
