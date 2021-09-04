@@ -15,3 +15,7 @@ services:
   twig.test:
     alias: twig
     public: true
+
+# workaround for symfony/twig-bundle not loading its form config when symfony/form is installed only as a dev dependency resulting in non-existent service "twig.extension.form"
+imports:
+  - { resource: '@TwigBundle/Resources/config/form.*' }
