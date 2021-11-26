@@ -32,7 +32,13 @@ class FormExtensionIntegrationTest extends TwigBasedTestCase {
 		parent::setUp();
 		$container = self::$kernel->getContainer();
 		$this->ext = $container->get('twig.extension.craue_form');
-		$this->formFactory = (property_exists($this, 'container') ? self::$container : $container)->get('form.factory');
+
+		if (\method_exists($this, 'getContainer')) {
+			$this->formFactory = $this->getContainer()->get('form.factory');
+		} else {
+			// TODO remove as soon as Symfony >= 5.3 is required
+			$this->formFactory = (property_exists($this, 'container') ? self::$container : $container)->get('form.factory');
+		}
 	}
 
 	public function testCloneForm_form() {
