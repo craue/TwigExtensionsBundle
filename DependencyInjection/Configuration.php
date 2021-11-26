@@ -20,14 +20,7 @@ class Configuration implements ConfigurationInterface {
 	public function getConfigTreeBuilder() : TreeBuilder {
 		$treeBuilder = new TreeBuilder('craue_twig_extensions');
 
-		if (!method_exists($treeBuilder, 'getRootNode')) {
-			// TODO remove as soon as Symfony >= 4.2 is required
-			$rootNode = $treeBuilder->root('craue_twig_extensions');
-		} else {
-			$rootNode = $treeBuilder->getRootNode();
-		}
-
-		$rootNode
+		$treeBuilder->getRootNode()
 			->children()
 				->arrayNode('enable_only')
 					->prototype('scalar')->end()

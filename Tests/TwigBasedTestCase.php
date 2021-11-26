@@ -33,13 +33,13 @@ abstract class TwigBasedTestCase extends WebTestCase {
 	 * @param string $id The service identifier.
 	 * @return object The associated service.
 	 */
-	protected function getService($id) {
-		// TODO remove as soon as Symfony >= 4.3 is required
-		if (!property_exists($this, 'container')) {
-			return static::$kernel->getContainer()->get($id);
+	protected function getService(string $id) : object {
+		if (\method_exists($this, 'getContainer')) {
+			return $this->getContainer()->get($id);
+		} else {
+			// TODO remove as soon as Symfony >= 5.3 is required
+			return self::$container->get($id);
 		}
-
-		return self::$container->get($id);
 	}
 
 	/**
