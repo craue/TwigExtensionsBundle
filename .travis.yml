@@ -11,7 +11,7 @@ jobs:
       php: 7.3
       env: DEPS='lowest'
     -
-      php: 8.0
+      php: 8.1.0
       env: DEPS='unmodified'
 
     - stage: test
@@ -24,17 +24,16 @@ jobs:
       php: 7.4
       env: SYMFONY_VERSION='5.3.*' TWIG_VERSION='~3.0' WITH_STATIC_ANALYSIS='yes'
     -
-      php: 7.4
-      env: SYMFONY_VERSION='5.4.*' MIN_STABILITY='dev'
+      php: 8.0
+      env: SYMFONY_VERSION='5.4.*'
     -
       php: 8.0
-      env: SYMFONY_VERSION='5.4.*' MIN_STABILITY='dev'
+      env: SYMFONY_VERSION='6.0.*'
     -
-      php: 8.0
-      env: SYMFONY_VERSION='6.0.*' MIN_STABILITY='dev'
+      php: 8.1.0
+      env: SYMFONY_VERSION='6.1.*' MIN_STABILITY='dev'
   allow_failures:
-    - env: SYMFONY_VERSION='5.4.*' MIN_STABILITY='dev'
-    - env: SYMFONY_VERSION='6.0.*' MIN_STABILITY='dev'
+    - env: SYMFONY_VERSION='6.1.*' MIN_STABILITY='dev'
   fast_finish: true
 
 install:
