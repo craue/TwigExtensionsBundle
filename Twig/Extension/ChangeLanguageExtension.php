@@ -149,7 +149,7 @@ if (Environment::VERSION_ID < 30000) {
 	 * Twig extension providing helpers for implementing a language change mechanism.
 	 *
 	 * @author Christian Raue <christian.raue@gmail.com>
-	 * @copyright 2011-2021 Christian Raue
+	 * @copyright 2011-2022 Christian Raue
 	 * @license http://opensource.org/licenses/mit-license.php MIT License
 	 */
 	class ChangeLanguageExtension extends BaseChangeLanguageExtension {
@@ -162,7 +162,7 @@ if (Environment::VERSION_ID < 30000) {
 	 * Twig extension providing helpers for implementing a language change mechanism.
 	 *
 	 * @author Christian Raue <christian.raue@gmail.com>
-	 * @copyright 2011-2021 Christian Raue
+	 * @copyright 2011-2022 Christian Raue
 	 * @license http://opensource.org/licenses/mit-license.php MIT License
 	 */
 	class ChangeLanguageExtension extends BaseChangeLanguageExtension {
