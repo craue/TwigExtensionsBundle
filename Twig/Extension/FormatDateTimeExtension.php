@@ -9,7 +9,7 @@ use Craue\TwigExtensionsBundle\Util\TwigFeatureUtil;
  * Twig extension providing filters for locale-aware formatting of date, time, and date/time values.
  *
  * @author Christian Raue <christian.raue@gmail.com>
- * @copyright 2011-2021 Christian Raue
+ * @copyright 2011-2022 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
 class FormatDateTimeExtension extends AbstractLocaleAwareExtension {
@@ -93,7 +93,7 @@ class FormatDateTimeExtension extends AbstractLocaleAwareExtension {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getFilters() {
+	public function getFilters() : array {
 		return TwigFeatureUtil::getTwigFilters($this, [
 			new TwigFeatureDefinition('craue_date', 'formatDate', $this->dateFilterAlias),
 			new TwigFeatureDefinition('craue_time', 'formatTime', $this->timeFilterAlias),

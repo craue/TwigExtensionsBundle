@@ -1,4 +1,5 @@
 language: php
+dist: bionic # https://docs.travis-ci.com/user/reference/overview/#which-one-do-i-use
 
 stages:
   - smoke test 🕵️
@@ -10,33 +11,29 @@ jobs:
       php: 7.3
       env: DEPS='lowest'
     -
-      php: 8.0
-      env: DEPS='unmodified' SYMFONY_DEPRECATIONS_HELPER='max[self]=3'
+      php: 8.1.0
+      env: DEPS='unmodified'
 
-    # TODO remove as soon as Symfony >= 4.2 is required
     - stage: test
-      php: 7.3
-      env: SYMFONY_VERSION='3.4.*' WITH_TRANSLATION_CONTRACTS='yes'
-    -
-      php: 7.3
-      env: SYMFONY_VERSION='3.4.*' TWIG_VERSION='~1.0'
-    -
-      php: 7.3
-      env: SYMFONY_VERSION='3.4.*' TWIG_VERSION='~2.0'
-    -
       php: 7.3
       env: SYMFONY_VERSION='4.4.*' TWIG_VERSION='~2.0'
     -
-      php: 7.4
-      env: SYMFONY_VERSION='5.1.*' TWIG_VERSION='~3.0' WITH_STATIC_ANALYSIS='yes'
+      php: 7.3
+      env: SYMFONY_VERSION='4.4.*' TWIG_VERSION='~3.0'
     -
       php: 7.4
-      env: SYMFONY_VERSION='5.2.*' TWIG_VERSION='~3.0' SYMFONY_DEPRECATIONS_HELPER='max[self]=3'
+      env: SYMFONY_VERSION='5.3.*' TWIG_VERSION='~3.0' WITH_STATIC_ANALYSIS='yes'
     -
-      php: 7.4
-      env: SYMFONY_VERSION='5.x' MIN_STABILITY='dev'
+      php: 8.0
+      env: SYMFONY_VERSION='5.4.*'
+    -
+      php: 8.0
+      env: SYMFONY_VERSION='6.0.*'
+    -
+      php: 8.1.0
+      env: SYMFONY_VERSION='6.1.*' MIN_STABILITY='dev'
   allow_failures:
-    - env: SYMFONY_VERSION='5.x' MIN_STABILITY='dev'
+    - env: SYMFONY_VERSION='6.1.*' MIN_STABILITY='dev'
   fast_finish: true
 
 install:
@@ -67,4 +64,3 @@ notifications:
 cache:
   directories:
     - $HOME/.composer/cache/files
-    - vendor

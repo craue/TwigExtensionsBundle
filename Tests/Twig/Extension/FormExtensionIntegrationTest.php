@@ -13,7 +13,7 @@ use Symfony\Component\Form\FormFactoryInterface;
  * @group integration
  *
  * @author Christian Raue <christian.raue@gmail.com>
- * @copyright 2011-2021 Christian Raue
+ * @copyright 2011-2022 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
 class FormExtensionIntegrationTest extends TwigBasedTestCase {
@@ -30,9 +30,8 @@ class FormExtensionIntegrationTest extends TwigBasedTestCase {
 
 	protected function setUp() : void {
 		parent::setUp();
-		$container = self::$kernel->getContainer();
-		$this->ext = $container->get('twig.extension.craue_form');
-		$this->formFactory = $container->get('form.factory');
+		$this->ext = $this->getService('twig.extension.craue_form');
+		$this->formFactory = $this->getService('form.factory');
 	}
 
 	public function testCloneForm_form() {

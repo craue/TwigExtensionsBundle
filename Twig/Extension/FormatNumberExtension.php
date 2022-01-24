@@ -9,7 +9,7 @@ use Craue\TwigExtensionsBundle\Util\TwigFeatureUtil;
  * Twig extension providing filters for locale-aware formatting of numbers and currencies.
  *
  * @author Christian Raue <christian.raue@gmail.com>
- * @copyright 2011-2021 Christian Raue
+ * @copyright 2011-2022 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
 class FormatNumberExtension extends AbstractLocaleAwareExtension {
@@ -70,7 +70,7 @@ class FormatNumberExtension extends AbstractLocaleAwareExtension {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getFilters() {
+	public function getFilters() : array {
 		return TwigFeatureUtil::getTwigFilters($this, [
 			new TwigFeatureDefinition('craue_number', 'formatNumber', $this->numberFilterAlias),
 			new TwigFeatureDefinition('craue_currency', 'formatCurrency', $this->currencyFilterAlias),

@@ -11,7 +11,7 @@ use Twig\Extension\AbstractExtension;
  * an HTML entity.
  *
  * @author Christian Raue <christian.raue@gmail.com>
- * @copyright 2011-2021 Christian Raue
+ * @copyright 2011-2022 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
 class DecorateEmptyValueExtension extends AbstractExtension {
@@ -54,7 +54,7 @@ class DecorateEmptyValueExtension extends AbstractExtension {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getFilters() {
+	public function getFilters() : array {
 		return TwigFeatureUtil::getTwigFilters($this, [
 			new TwigFeatureDefinition('craue_default', 'decorateEmptyValue', $this->filterAlias, [
 				'pre_escape' => 'html',

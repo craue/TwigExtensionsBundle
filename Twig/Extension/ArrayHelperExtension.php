@@ -4,17 +4,20 @@ namespace Craue\TwigExtensionsBundle\Twig\Extension;
 
 use Craue\TwigExtensionsBundle\Util\TwigFeatureDefinition;
 use Craue\TwigExtensionsBundle\Util\TwigFeatureUtil;
-use Symfony\Component\Translation\TranslatorInterface as LegacyTranslatorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Extension\AbstractExtension;
 
 /**
- * @internal
+ * Twig extension providing useful array handling filters.
+ *
+ * @author Christian Raue <christian.raue@gmail.com>
+ * @copyright 2011-2022 Christian Raue
+ * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-abstract class BaseArrayHelperExtension extends AbstractExtension {
+class ArrayHelperExtension extends AbstractExtension {
 
 	/**
-	 * @var TranslatorInterface|LegacyTranslatorInterface|null
+	 * @var TranslatorInterface|null
 	 */
 	protected $translator;
 
@@ -59,6 +62,10 @@ abstract class BaseArrayHelperExtension extends AbstractExtension {
 		}
 	}
 
+	public function setTranslator(TranslatorInterface $translator) {
+		$this->translator = $translator;
+	}
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -69,7 +76,7 @@ abstract class BaseArrayHelperExtension extends AbstractExtension {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getFilters() {
+	public function getFilters() : array {
 		return TwigFeatureUtil::getTwigFilters($this, [
 			new TwigFeatureDefinition('craue_without', 'without', $this->withoutAlias),
 			new TwigFeatureDefinition('craue_replaceKey', 'replaceKey', $this->replaceKeyAlias),
@@ -154,33 +161,4 @@ abstract class BaseArrayHelperExtension extends AbstractExtension {
 		throw new \InvalidArgumentException('The filter can be applied to arrays only.');
 	}
 
-}
-
-// TODO revert to one clean class definition as soon as Symfony >= 4.2 is required
-if (!interface_exists(LegacyTranslatorInterface::class)) {
-	/**
-	 * Twig extension providing useful array handling filters.
-	 *
-	 * @author Christian Raue <christian.raue@gmail.com>
-	 * @copyright 2011-2021 Christian Raue
-	 * @license http://opensource.org/licenses/mit-license.php MIT License
-	 */
-	class ArrayHelperExtension extends BaseArrayHelperExtension {
-		public function setTranslator(TranslatorInterface $translator) {
-			$this->translator = $translator;
-		}
-	}
-} else {
-	/**
-	 * Twig extension providing useful array handling filters.
-	 *
-	 * @author Christian Raue <christian.raue@gmail.com>
-	 * @copyright 2011-2021 Christian Raue
-	 * @license http://opensource.org/licenses/mit-license.php MIT License
-	 */
-	class ArrayHelperExtension extends BaseArrayHelperExtension {
-		public function setTranslator(LegacyTranslatorInterface $translator) {
-			$this->translator = $translator;
-		}
-	}
 }

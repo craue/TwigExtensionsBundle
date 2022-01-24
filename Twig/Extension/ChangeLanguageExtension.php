@@ -9,7 +9,7 @@ use Craue\TwigExtensionsBundle\Util\TwigFeatureUtil;
  * Twig extension providing helpers for implementing a language change mechanism.
  *
  * @author Christian Raue <christian.raue@gmail.com>
- * @copyright 2011-2021 Christian Raue
+ * @copyright 2011-2022 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
 class ChangeLanguageExtension extends AbstractLocaleAwareExtension {
@@ -80,7 +80,7 @@ class ChangeLanguageExtension extends AbstractLocaleAwareExtension {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getFunctions() {
+	public function getFunctions() : array {
 		return TwigFeatureUtil::getTwigFunctions($this, [
 			new TwigFeatureDefinition('craue_languageName', 'getLanguageName', $this->languageNameAlias),
 			new TwigFeatureDefinition('craue_availableLocales', 'getAvailableLocales', $this->availableLocalesAlias),

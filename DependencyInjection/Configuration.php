@@ -9,7 +9,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  * Semantic bundle configuration.
  *
  * @author Christian Raue <christian.raue@gmail.com>
- * @copyright 2011-2021 Christian Raue
+ * @copyright 2011-2022 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
 class Configuration implements ConfigurationInterface {
@@ -17,17 +17,10 @@ class Configuration implements ConfigurationInterface {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getConfigTreeBuilder() {
+	public function getConfigTreeBuilder() : TreeBuilder {
 		$treeBuilder = new TreeBuilder('craue_twig_extensions');
 
-		if (!method_exists($treeBuilder, 'getRootNode')) {
-			// TODO remove as soon as Symfony >= 4.2 is required
-			$rootNode = $treeBuilder->root('craue_twig_extensions');
-		} else {
-			$rootNode = $treeBuilder->getRootNode();
-		}
-
-		$rootNode
+		$treeBuilder->getRootNode()
 			->children()
 				->arrayNode('enable_only')
 					->prototype('scalar')->end()

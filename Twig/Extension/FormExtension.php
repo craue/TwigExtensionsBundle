@@ -14,7 +14,7 @@ use Twig\Extension\AbstractExtension;
  * Twig extension for form handling.
  *
  * @author Christian Raue <christian.raue@gmail.com>
- * @copyright 2011-2021 Christian Raue
+ * @copyright 2011-2022 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
 class FormExtension extends AbstractExtension {
@@ -52,7 +52,7 @@ class FormExtension extends AbstractExtension {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getFunctions() {
+	public function getFunctions() : array {
 		return TwigFeatureUtil::getTwigFunctions($this, [
 			new TwigFeatureDefinition('craue_cloneForm', 'cloneForm', $this->cloneFormAlias),
 		]);
