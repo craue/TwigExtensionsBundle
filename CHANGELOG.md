@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.9.0] – 2022-01-24
+
+- added support for Symfony 6
+- dropped support for Symfony 3.4, 5.1, 5.2
+
+[2.9.0]: https://github.com/craue/TwigExtensionsBundle/compare/2.8.0...2.9.0
+
 ## [2.8.0] – 2020-12-21
 
 - added support for PHP 8.0
