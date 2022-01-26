@@ -4,7 +4,7 @@ parameters:
 		- .
 	scanFiles:
 		- vendor/twig/twig/src/Extension/CoreExtension.php
-	excludes_analyse:
+	excludePaths:
 		- Tests/*
 		- vendor/*
 	ignoreErrors:
