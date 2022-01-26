@@ -22,7 +22,7 @@ class ChangeLanguageExtensionIntegrationTest extends TwigBasedTestCase {
 	protected function setUp() : void {
 		parent::setUp();
 
-		$this->ext = self::$kernel->getContainer()->get('twig.extension.craue_changeLanguage');
+		$this->ext = $this->getService(ChangeLanguageExtension::class);
 	}
 
 	/**

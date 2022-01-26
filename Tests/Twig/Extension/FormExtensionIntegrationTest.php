@@ -30,7 +30,8 @@ class FormExtensionIntegrationTest extends TwigBasedTestCase {
 
 	protected function setUp() : void {
 		parent::setUp();
-		$this->ext = $this->getService('twig.extension.craue_form');
+
+		$this->ext = $this->getService(FormExtension::class);
 		$this->formFactory = $this->getService('form.factory');
 	}
 

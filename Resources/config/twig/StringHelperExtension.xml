@@ -13,7 +13,7 @@
 	</parameters>
 
 	<services>
-		<service id="twig.extension.craue_stringHelper" class="Craue\TwigExtensionsBundle\Twig\Extension\StringHelperExtension" public="true">
+		<service id="Craue\TwigExtensionsBundle\Twig\Extension\StringHelperExtension">
 			<tag name="twig.extension" />
 			<call method="setAliases">
 				<argument>%craue_twig_extensions.stringHelper.trailingDotAlias%</argument>

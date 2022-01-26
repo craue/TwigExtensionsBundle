@@ -16,7 +16,7 @@
 	</parameters>
 
 	<services>
-		<service id="twig.extension.craue_formatNumber" class="Craue\TwigExtensionsBundle\Twig\Extension\FormatNumberExtension" public="true">
+		<service id="Craue\TwigExtensionsBundle\Twig\Extension\FormatNumberExtension">
 			<tag name="twig.extension" />
 			<call method="setLocale">
 				<argument type="service" id="request_stack" />

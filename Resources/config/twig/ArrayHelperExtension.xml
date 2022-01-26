@@ -16,7 +16,7 @@
 	</parameters>
 
 	<services>
-		<service id="twig.extension.craue_arrayHelper" class="Craue\TwigExtensionsBundle\Twig\Extension\ArrayHelperExtension" public="true">
+		<service id="Craue\TwigExtensionsBundle\Twig\Extension\ArrayHelperExtension">
 			<tag name="twig.extension" />
 			<call method="setTranslator">
 				<argument type="service" id="translator" on-invalid="ignore" />

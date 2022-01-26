@@ -6,6 +6,7 @@
   - removed deprecated Twig global `craue_availableLocales`
   - removed support for passing the service container to `setLocale`
   - removed configurable class parameters
+  - made Twig extension services private
 
 ## [2.9.0] – 2022-01-24
 

@@ -13,7 +13,7 @@
 	</parameters>
 
 	<services>
-		<service id="twig.extension.craue_form" class="Craue\TwigExtensionsBundle\Twig\Extension\FormExtension" public="true">
+		<service id="Craue\TwigExtensionsBundle\Twig\Extension\FormExtension">
 			<tag name="twig.extension" />
 			<call method="setFormFactory">
 				<argument type="service" id="form.factory" on-invalid="ignore" />
